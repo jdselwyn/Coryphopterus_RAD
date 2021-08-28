@@ -6,7 +6,7 @@ existence# Coryphopterus_RADseq
 - NovaSeq - fastp2
 
 ## dDocent Tracking
-- MiSeq only - mkREF
+- MiSeq only - Genotyped
 - MiSeq Assembly, NovaSeq Mapping -
 - NovaSeq only -
 
@@ -45,13 +45,13 @@ sbatch scripts/runFASTP_2nd_trim.sbatch NovaSeq/fq_fp1 NovaSeq/fq_fp1_fp2 140
 ```
 #Arguments are inDir, outDir, simultanious array jobs, node type, time limit
 bash scripts/runFQSCRN_array.bash MiSeq/fq_fp1_fp2 MiSeq/fq_fp1_fp2_fqscrn 10
-bash -p normal,cbirdq -t 4-00:00:00 scripts/runFQSCRN_array.bash NovaSeq/fq_fp1_fp2 NovaSeq/fq_fp1_fp2_fqscrn 20
+bash scripts/runFQSCRN_array.bash NovaSeq/fq_fp1_fp2 NovaSeq/fq_fp1_fp2_fqscrn 15
 ```
 
 ## Step 6. repair fastq_screen paired end files
 ```
 sbatch scripts/runREPAIR.sbatch MiSeq/fq_fp1_fp2_fqscrn MiSeq/fq_fp1_fp2_fqscrn_repaired
-sbatch scripts/runREPAIR.sbatch NovaSeq/fq_fp1_fp2_fqscrn NovaSeq/fq_fp1_fp2_fqscrn_repaired
+sbatch --dependency=afterany:41963 scripts/runREPAIR.sbatch NovaSeq/fq_fp1_fp2_fqscrn NovaSeq/fq_fp1_fp2_fqscrn_repaired
 ```
 
 ## Step 7. Make naming convention work for dDocent
@@ -267,23 +267,20 @@ cp mkBAM_MiSeq/*gz mkBAM_NovaSeq
 ```
 mkdir fltrBAM_test
 mv mkBAM_test/*RAW* fltrBAM_test
-mv mkBAM_test/reference.*.fasta fltrBAM_test
 
 sbatch scripts/fltrBAM.sbatch \
   fltrBAM_test \
-  config_files/fltrBAM_MiSeq.config
+  config_files/fltrBAM_MiSeq.config \
+  mkREF_MiSeq/reference.10.1.fasta
 
-sbatch -o SLURM_out/bam_summary-%j.out \
-  scripts/runRscript.sbatch \
-  scripts/checkBAM.R \
-  fltrBAM_test RG
+Rscript scripts/checkBAM.R fltrBAM_test RG
 ```
 
 Mapping Stats
 | Metric | Value |
 | --- | ----- |
-| Mean Reads Mapped |  ±  SD |
-| Range Reads Mapped |  -  |
+| Mean Reads Mapped | 1,479,872 ± 922,700 SD |
+| Range Reads Mapped | 194,095 - 2,647,685 |
 
 ### Filter reads mapped to MiSeq reference
 ```
@@ -318,35 +315,28 @@ mv fltrBAM_test/*RG* mkVCF_test
 sbatch scripts/mkVCF.sbatch \
   mkVCF_test \
   config_files/mkVCF_MiSeq.config \
-  mkREF_MiSeq/reference.5.1.fasta
+  mkREF_MiSeq/reference.10.1.fasta
 
 #Run on Head Node
-module load R/gcc/64/3.5.1
-Rscript scripts/summarizeVCF.R  mkVCF_test/TotalRawSNPs.5.1.vcf
-
-#Run on Node
-sbatch -o SLURM_out/vcf_summary-%j.out \
-  scripts/runRscript.sbatch \
-  scripts/summarizeVCF.R \
-  mkVCF_test/TotalRawSNPs.5.1.vcf
+Rscript scripts/summarizeVCF.R  mkVCF_test/TotalRawSNPs.10.1.vcf
 ```
 
 Genotyping Stats
 | Metric | Unfiltered VCF |
 | --- | ----- |
-| Number Individuals |  |
-| Number SNPs |  |
-| Number Contigs |  |
-| Mean SNPs/Contig |  ±  SD |
-| Range SNPs/Contig |  -  |
-| Mean Coverage |  ±  SD |
-| Range Coverage |  -  |
-| Mean PHRED |  ±  SD |
-| Range PHRED |  -  |
-| Mean Missing (Ind) | % ± % |
-| Range Missing (Ind) | % - % |
-| Mean Missing (Loci) | % ± % |
-| Range Missing (Loci) | % - % |
+| Number Individuals | 7 |
+| Number SNPs | 185,312 |
+| Number Contigs | 15,690 |
+| Mean SNPs/Contig | 11.8 ± 9.4 SD |
+| Range SNPs/Contig | 1 - 67 |
+| Mean Coverage | 360 ± 316 SD |
+| Range Coverage | 20 - 4,049 |
+| Mean PHRED | 2,824 ± 3,960 SD |
+| Range PHRED | 0 - 117,327 |
+| Mean Missing (Ind) | 18.5% ± 8.7% |
+| Range Missing (Ind) | 9.6% - 30.8% |
+| Mean Missing (Loci) | 18.5% ± 22.3% |
+| Range Missing (Loci) | 0% - 85.7% |
 
 ### Genotype reads mapped to MiSeq reference
 ```
