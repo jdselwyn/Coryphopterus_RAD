@@ -204,8 +204,9 @@ NovaSeq Reference Stats
 ## Step 11. Map reads to *de novo* reference genomes
 ### Choose Reference Genomes to use
 1. MiSeq - mkREF/reference.10.1.fasta
-  - Balance confidence in existence of locus with not removing too many. 
+  - Balance confidence in existence of locus with not removing too many.
   - Discuss with others to see about choice
+  - 33,685 contigs
 2. NovaSeq -
 
 ### Test scripts by mapping MiSeq reads to MiSeq reference Genome
@@ -220,19 +221,15 @@ rename .r2.fq.gz .R2.fq.gz ./mkBAM_test/*gz
 sbatch scripts/mkBAM.sbatch \
   mkBAM_test \
   config_files/mkBAM_MiSeq.config \
-  mkREF_MiSeq/reference.5.1.fasta
+  mkREF_MiSeq/reference.10.1.fasta
 
-sbatch -o SLURM_out/bam_summary-%j.out \
-  scripts/runRscript.sbatch \
-  scripts/checkBAM.R \
-  mkBAM_test RAW
+Rscript scripts/checkBAM.R mkBAM_test RAW
 ```
-
 Mapping Stats
-| Metric | # Reads Mapped |
+| Metric | # Reads Mapped / individual |
 | --- | ----- |
-| Mean |  ±  SD |
-| Range |  -  |
+| Mean | 2,485,075 ± 1,286,427 SD |
+| Range | 484,360 - 3,960,753 |
 
 ### Map NovaSeq reads to MiSeq reference Genome
 ```
@@ -253,12 +250,12 @@ sbatch -o SLURM_out/bam_summary-%j.out \
   scripts/checkBAM.R \
   mkBAM_MiSeq RAW
 ```
-
 Mapping Stats
-| Metric | # Reads Mapped / individual |
+| Metric | # Reads Mapped |
 | --- | ----- |
 | Mean |  ±  SD |
 | Range |  -  |
+
 
 ### Map NovaSeq reads to NovaSeq reference Genome
 ```
