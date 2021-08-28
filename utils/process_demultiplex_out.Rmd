@@ -1,0 +1,85 @@
+---
+title: "Process Demultiplex"
+author: "Jason Selwyn"
+date: "8/11/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(magrittr)
+```
+
+
+```{r data, echo = FALSE}
+demulti_data <- list.files(path = '..', pattern = 'radtags.*csv$', recursive = TRUE, full.names = TRUE) %>%
+  str_subset('/_', negate = TRUE) %>%
+  tibble(file = .) %>%
+  rowwise %>%
+  summarise(sequencing_type = str_extract(file, 'MiSeq|NovaSeq'),
+            read_csv(file, col_names = c('Barcode', 'Individual', 'Total', 'NoRadTag', 'LowQuality', 'Retained'),
+                     col_types = cols(.default = col_integer(),
+                                      Barcode = col_character(),
+                                      Individual = col_character())),
+            .groups = 'drop')
+
+demulti_data %>%
+  nest_by(sequencing_type) %>%
+  ungroup %$%
+  walk2(data, sequencing_type, ~write_csv(.x, str_c('../', .y, '/demultiplexed_seqs/demulti_summary.csv')))
+```
+
+
+```{r Overall Mean, echo=FALSE, warning = FALSE}
+demulti_data %>%
+  ggplot(aes(x = sequencing_type, y = Retained)) +
+  stat_summary(aes(colour = Barcode), position = position_dodge(width = 0.2), 
+               show.legend = FALSE, fun.data = 'mean_se') +
+  stat_summary(fun.data = 'mean_se', size = 1.5) +
+  scale_y_continuous(labels = scales::comma_format()) +
+  labs(x = NULL, 
+       y = '# Contigs') +
+  theme_classic() +
+  theme(axis.title = element_text(colour = 'black', size = 18),
+        axis.text = element_text(colour = 'black', size = 14))
+```
+
+
+
+```{r MiSeq Samples, echo=FALSE, warning = FALSE}
+demulti_data %>%
+  filter(sequencing_type == 'MiSeq') %>%
+  mutate(Individual = str_remove(Individual, 'COPE-'),
+         Individual = fct_reorder(Individual, Retained)) %>%
+  ggplot(aes(y = Individual, x = Retained, fill = Barcode)) +
+  geom_col(show.legend = FALSE) +
+  scale_x_continuous(labels = scales::comma_format(),
+                     trans = scales::log_trans(base = 10)) +
+  labs(x = NULL, 
+       y = '# Contigs') +
+  theme_classic() +
+  theme(axis.title = element_text(colour = 'black', size = 18),
+        axis.text = element_text(colour = 'black', size = 14))
+
+```
+
+
+```{r NovaSeq Samples, echo=FALSE, warning = FALSE, fig.height = 80, fig.width = 10}
+demulti_data %>%
+  filter(sequencing_type == 'NovaSeq') %>%
+  mutate(Individual = str_remove(Individual, 'COPE-'),
+         Individual = fct_reorder(Individual, Retained),
+         Barcode = fct_reorder(Barcode, Retained, .fun = 'mean')) %>%
+  ggplot(aes(y = Individual, x = Retained, fill = Barcode)) +
+  geom_col(show.legend = FALSE) +
+  scale_x_continuous(labels = scales::comma_format(), 
+                     trans = scales::log_trans(base = 10)) +
+  # facet_wrap(~Barcode) +
+  labs(x = NULL, 
+       y = '# Contigs') +
+  theme_classic() +
+  theme(axis.title = element_text(colour = 'black', size = 18),
+        axis.text = element_text(colour = 'black', size = 8))
+
+```

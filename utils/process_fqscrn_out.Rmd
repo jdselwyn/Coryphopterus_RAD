@@ -1,0 +1,109 @@
+---
+title: "Fastq Contaminent Screening"
+author: "Jason Selwyn"
+date: "8/11/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(magrittr)
+```
+
+
+```{r data, echo = FALSE}
+demulti_info <- list.files(path = '..', pattern = 'demulti_summary.csv', 
+                           recursive = TRUE, full.names = TRUE) %>%
+  tibble(file = .) %>%
+  rowwise %>%
+  summarise(sequencing_type = str_extract(file, 'MiSeq|NovaSeq'), 
+            read_csv(file, col_types = cols(.default = col_integer(), 
+                                            Barcode = col_character(),
+                                            Individual = col_character())),
+            .groups = 'drop')
+
+contaminent_check <- list.files(path = '..', pattern = "screen.txt$", recursive = TRUE, full.names = TRUE) %>%
+  str_subset('multiqc', negate = TRUE) %>%
+  tibble(file = .) %>%
+  rowwise %>%
+  summarise(sequencing_type = str_extract(file, 'MiSeq|NovaSeq'),
+            individual = str_extract(file, 'COPE-[0-9]+|Blank-[0-9]'),
+            direction = str_extract(file, 'r[12]'),
+            percent_no_genome = read_tsv(file, skip = 14, n_max = 1, col_names = 'no_hit', col_types = cols(no_hit = col_character())) %>%
+              pull(no_hit) %>%
+              str_extract('[0-9\\.]+') %>%
+              as.numeric() %>%
+              divide_by(100),
+            read_tsv(file, skip = 1, col_types = cols(.default = col_double(), Genome = col_character()), n_max = 12),
+            .groups = 'drop') %>%
+  left_join(select(demulti_info, sequencing_type, Individual, Barcode),
+            by = c('sequencing_type', 'individual' = 'Individual'))
+```
+
+
+```{r Overall Mean, echo=FALSE, warning = FALSE}
+contaminent_check %>%
+  select(sequencing_type:percent_no_genome, Barcode) %>%
+  distinct %>%
+  
+  ggplot(aes(x = sequencing_type, y = percent_no_genome)) +
+  stat_summary(aes(colour = Barcode), position = position_dodge(width = 0.2), 
+               show.legend = FALSE, fun.data = 'mean_se') +
+  stat_summary(fun.data = 'mean_se', size = 1.5) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 0.1)) +
+  labs(x = NULL, 
+       y = '% Contigs without any Genome Hits') +
+  theme_classic() +
+  theme(axis.title = element_text(colour = 'black', size = 18),
+        axis.text = element_text(colour = 'black', size = 14))
+```
+
+```{r MiSeq Samples, echo=FALSE, warning = FALSE, fig.height = 15, fig.width = 10}
+contaminent_check %>%
+  filter(sequencing_type == 'MiSeq') %>% 
+  mutate(individual = str_c(individual, scales::comma(`#Reads_processed`), sep = ' - '),
+         individual = fct_reorder(individual, `#Reads_processed`)) %>% 
+  select(individual, Barcode, Genome, starts_with('%'), -'%Unmapped') %>%
+  mutate(across(starts_with('%'), ~. / 100)) %>%
+  pivot_longer(cols = starts_with('%')) %>%
+  ggplot(aes(x = Genome, y = value, fill = name)) +
+  geom_col() +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 0.1)) +
+  # facet_grid(individual ~ Barcode) +
+  facet_wrap(~individual, ncol = 1) +
+  labs(x = NULL, 
+       y = '% Contigs hitting to contaminant genome',
+       fill = NULL) +
+  theme_classic() +
+  theme(axis.title = element_text(colour = 'black', size = 18),
+        axis.text = element_text(colour = 'black', size = 8),
+        legend.position = 'bottom',
+        legend.direction = 'horizontal')
+
+```
+
+
+```{r NovaSeq Samples, echo=FALSE, warning = FALSE, fig.height = 300, fig.width = 45}
+contaminent_check %>%
+  filter(sequencing_type == 'NovaSeq') %>% 
+  mutate(individual = str_c(individual, scales::comma(`#Reads_processed`), sep = ' - '),
+         individual = fct_reorder(individual, `#Reads_processed`)) %>% 
+  select(individual, Genome, starts_with('%'), -'%Unmapped') %>%
+  mutate(across(starts_with('%'), ~. / 100)) %>%
+  pivot_longer(cols = starts_with('%')) %>%
+  ggplot(aes(x = Genome, y = value, fill = name)) +
+  geom_col() +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 0.1)) +
+  # facet_grid(individual ~ Barcode) +
+  facet_wrap(~individual, ncol = 6) +
+  labs(x = NULL, 
+       y = '% Contigs hitting to contaminant genome',
+       fill = NULL) +
+  theme_classic() +
+  theme(axis.title = element_text(colour = 'black', size = 18),
+        axis.text = element_text(colour = 'black', size = 8),
+        legend.position = 'bottom',
+        legend.direction = 'horizontal')
+
+```

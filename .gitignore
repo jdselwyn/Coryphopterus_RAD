@@ -1,0 +1,30 @@
+*.fasta
+*.fasta.*
+*.fa
+*.fa.*
+*.fq
+*.fq.*
+*.fastq
+*.fastq.*
+*.bam
+*.bam.*
+*.sam
+dDocentHPC/
+fltrVCF*/
+*discards
+*json
+mkREF*/
+*screen.html
+*screen.png
+*raw*vcf
+*bed
+*Total*vcf*
+utils/process_fqscrn_out_files/figure-html/MiSeq Samples-1.png
+utils/process_fqscrn_out_files/figure-html/Overall Mean-1.png
+original_attempt/
+*uniq.seqs
+*fqscrn*out
+*screen.txt
+*uniqCperindv*
+*uniq.k.*seqs
+*preprocess_summary*out
