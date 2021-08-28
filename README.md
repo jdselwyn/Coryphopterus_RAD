@@ -2,7 +2,7 @@
  Process Coryphopterus NovaSeq samples with dDocent
 
 ## Preprocessing Tracking
-- MiSeq - fastq_screen
+- MiSeq - Finished
 - NovaSeq - fastp2
 
 ## dDocent Tracking
@@ -67,23 +67,25 @@ cd ../../
 cd NovaSeq/fq_fp1_clmp_fp2_fqscrn_repaired/
 rename _ . ./*gz
 rename - _ ./*gz
+rename r1.fq.gz R1.fq.gz ./*gz
+rename r2.fq.gz R2.fq.gz ./*gz
 cd ../../
 ```
 
 ## Step 8. Summarize post-preprocessing contigs
 ```
 #Repeat this with each preprocessing folder as desired
-sbatch -o SLURM_out/novaseq_preprocess_summary-%j.out \
+sbatch -o SLURM_out/miseqseq_preprocess_summary-%j.out \
   scripts/runRscript.sbatch \
   scripts/summarize_fqgz.R \
-  NovaSeq/fq_fp1_fp2_fqscrn_repaired
+  MiSeq/fq_fp1_fp2_fqscrn_repaired
 
 ```
 | Metric | MiSeq | NovaSeq |
 | --- | ----- | ----- |
-| Number Samples |  |  |
-| Mean Number Unique Reads |  ±  SD |  ±  SD |
-| Range Number Unique Reads |  -  |  -  |
+| Number Samples | 8 |  |
+| Mean Number Reads | 835,009 ± 613,265 SD |  ±  SD |
+| Range Number Reads | 6018 - 1,636,205 |  -  |
 
 ## Step 9. Get dDocent
 I copied [dDocentHPC](https://github.com/cbirdlab/dDocentHPC) to `/work/hobi/jselwyn/Coryphopterus_RAD/scripts`, and added it to `.gitignore`.
@@ -95,13 +97,11 @@ mkdir mkREF_MiSeq
 mv MiSeq/fq_fp1_fp2_fqscrn_repaired/*gz mkREF_MiSeq
 ```
 Move poorly sequenced samples back to the preprocessing area so they aren't used moving forward
-- COPE_ -  unique reads
-- COPE_ -  unique reads
-Keep all others since they have >100k unique reads
+- COPE_1033 - 6,018 reads
+Keep all others since they have >100k reads and seem reasonably in the ballpark of each other
 
 ```
 mv mkREF_MiSeq/COPE_1033* MiSeq/fq_fp1_fp2_fqscrn_repaired
-mv mkREF_MiSeq/COPE_0773* MiSeq/fq_fp1_fp2_fqscrn_repaired
 ```
 
 | Metric | Remaining Samples |

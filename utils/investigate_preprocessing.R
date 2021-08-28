@@ -16,7 +16,7 @@ preprocess_data <- list.files('..', pattern = 'sample_preprocess.csv$',
   summarise(read_csv(file, col_types = cols(.default = col_character(), 
                                             number_reads = col_integer())), 
             .groups = 'drop') %>%
-  mutate(preprocess_step = factor(preprocess_step, levels = c("demultiplexed_seqs", "fq_fp1", "fq_fp1_clmp", "fq_fp1_clmp_fp2", "fq_fp1_clmp_fp2_fqscrn_repaired"), ordered = TRUE)) %>%
+  mutate(preprocess_step = factor(preprocess_step, levels = c("demultiplexed_seqs", "fq_fp1", "fq_fp1_fp2", "fq_fp1_fp2_fqscrn_repaired"), ordered = TRUE)) %>%
   mutate(sample = str_replace(sample, '_', '-') %>% str_c(sequencing_type, sep = '_')) 
 
 contamination_data <- list.files(path = '..', pattern = "screen.txt$", recursive = TRUE, full.names = TRUE) %>%
@@ -122,6 +122,22 @@ emmeans(full_model, ~preprocess_step | sequencing_type, type = 'response') %>%
 
 #### Decide which Samples to toss ####
 ## - samples with too little sequencing effort or too much contamination
+
+## MiSeq ##
+library(outliers)
+
+preprocess_data %>%
+  select(-file) %>%
+  filter(preprocess_step == 'fq_fp1_fp2_fqscrn_repaired') %>%
+  
+  filter(!number_reads %in% c(6018)) %>%
+  
+  summarise(tidy(dixon.test(number_reads)))
+  
+
+
+
+
 
 preprocess_data %>%
   select(-file) %>%
