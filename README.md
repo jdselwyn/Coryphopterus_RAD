@@ -138,6 +138,8 @@ Rscript scripts/checkContigs.R  mkREF_MiSeq/reference.1.1.fasta
 Rscript scripts/checkContigs.R  mkREF_MiSeq/reference.2.2.fasta
 Rscript scripts/checkContigs.R  mkREF_MiSeq/reference.10.1.fasta
 Rscript scripts/checkContigs.R  mkREF_MiSeq/reference.5.1.fasta
+Rscript scripts/checkContigs.R  mkREF_MiSeq/reference.5.2.fasta
+Rscript scripts/checkContigs.R  mkREF_MiSeq/reference.10.2.fasta
 ```
 MiSeq Reference Stats
 | Metric | 1.1 | 2.2 | 10.1 | 5.1 | 5.2 | 10.2 |
