@@ -125,6 +125,7 @@ Cutoff2 is the minimum number of individuals a contig must be present in to keep
 4. Cutoff1 = 5, Cutoff2 = 1
 5. Cutoff1 = 5, Cutoff2 = 2
 6. Cutoff1 = 10, Cutoff2 = 2
+6. Cutoff1 = 15, Cutoff2 = 1
 
 Must edit config file each time and then run below line
 ```
@@ -140,15 +141,16 @@ Rscript scripts/checkContigs.R  mkREF_MiSeq/reference.10.1.fasta
 Rscript scripts/checkContigs.R  mkREF_MiSeq/reference.5.1.fasta
 Rscript scripts/checkContigs.R  mkREF_MiSeq/reference.5.2.fasta
 Rscript scripts/checkContigs.R  mkREF_MiSeq/reference.10.2.fasta
+Rscript scripts/checkContigs.R  mkREF_MiSeq/reference.15.1.fasta
 ```
 MiSeq Reference Stats
-| Metric | 1.1 | 2.2 | 10.1 | 5.1 | 5.2 | 10.2 |
-| --- | ----- | ----- | ----- | ----- | ----- | ----- |
-| Number Contigs | 88,540 | 13,330 | 33,685 |  |  |  |
-| Mean Length | 470 ± 65 SD | 476 ± 56 SD | 497 ± 27 SD |  ±  SD |  ±  SD |  ±  SD |
-| Range Length | 282 - 586 | 282 - 585 | 285 - 575 |  -  |  -  |  -  |
-| Total Length | 41,644,725 | 6,339,890 | 16,733,979 |  |  |  |
-| Contigs with Central Ns | 0 | 0 | 0 |  |  |  |
+| Metric | 1.1 | 2.2 | 10.1 | 5.1 | 5.2 | 10.2 | 15.1 |
+| --- | ----- | ----- | ----- | ----- | ----- | ----- | ----- |
+| Number Contigs | 88,540 | 13,330 | 33,685 | 47,443 | 8,097 | 5,459 |  |
+| Mean Length | 470 ± 65 SD | 476 ± 56 SD | 497 ± 27 SD | 493 ± 33 SD | 492 ± 29 SD | 496 ± 25 SD |  ±  SD |
+| Range Length | 282 - 586 | 282 - 585 | 285 - 575 | 282 - 581 | 284 - 575 | 285 - 575 |  -  |
+| Total Length | 41,644,725 | 6,339,890 | 16,733,979 | 23,379,362 | 3,986,179 | 2,706,419 |  |
+| Contigs with Central Ns | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 
 ### NovaSeq
 ```
