@@ -1,0 +1,82 @@
+process_radtags v2.41, executed 2021-08-10 13:27:44 (zlib-1.2.11)
+process_radtags -1 MiSeq/fastq/Selwyn_P2P1_S6_1.fq.gz -2 MiSeq/fastq/Selwyn_P2P1_S6_2.fq.gz -i gzfastq -b MiSeq/fastq/20190909-Selwyn_Plate2Pool1_MiSeq_demultiplex.txt -r -e ecoRI -o MiSeq/demultiplexed_seqs/P2P1 -D
+File	Retained Reads	Low Quality	Barcode Not Found	RAD cutsite Not Found	Total
+Selwyn_P2P1_S6_1.fq.gz	82149	0	670	121	82940
+
+Total Sequences	82940
+Barcode Not Found	670
+Low Quality	0
+RAD Cutsite Not Found	121
+Retained Reads	82149
+
+Barcode	Filename	Total	NoRadTag	LowQuality	Retained
+CAACC	COPE-1033	82270	121	0	82149
+
+Sequences not recorded
+Barcode	Total
+AACCA	150
+CCCCC	114
+CACCA	78
+AAAAA	26
+GTCGA	24
+NNNNN	22
+AAGGA	20
+ACCAA	18
+TCAAC	18
+AAAGA	14
+TACGT	14
+CAAAA	12
+CACGC	10
+GGGGG	8
+CAAGA	6
+CAATA	6
+GAAAA	6
+CCCAA	6
+CGGCT	6
+CACGT	4
+CGATC	4
+CACCT	4
+CCAAT	4
+CCCCG	4
+CGGAG	4
+AAAAC	4
+AAACA	4
+AACCC	4
+CGGTC	2
+TTATC	2
+CGCTC	2
+CGGAA	2
+TGGCC	2
+TGCTG	2
+CGGGA	2
+CGGGT	2
+TCCAC	2
+CGGTA	2
+GGACT	2
+CGGTG	2
+CTCCC	2
+TATTA	2
+GAAAC	2
+GAAGA	2
+TACCC	2
+TAATC	2
+GTGAG	2
+GACGG	2
+GTCGT	2
+GATTG	2
+CACAC	2
+AAAAG	2
+AAAGC	2
+AACTC	2
+ACCCA	2
+ACCGC	2
+CAAAT	2
+CACAG	2
+CACTC	2
+CCTGC	2
+CCCGG	2
+CCCCA	2
+CATCT	2
+CCAGA	2
+CATTA	2
+CCAAC	2

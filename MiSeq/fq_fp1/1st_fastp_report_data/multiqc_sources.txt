@@ -1,0 +1,9 @@
+Module	Section	Sample Name	Source
+fastp	all_sections	COPE-1033	/work/hobi/jselwyn/Coryphopterus_RAD/MiSeq/fq_fp1/COPE-1033.fastp.json
+fastp	all_sections	COPE-0697	/work/hobi/jselwyn/Coryphopterus_RAD/MiSeq/fq_fp1/COPE-0697.fastp.json
+fastp	all_sections	COPE-0942	/work/hobi/jselwyn/Coryphopterus_RAD/MiSeq/fq_fp1/COPE-0942.fastp.json
+fastp	all_sections	COPE-0922	/work/hobi/jselwyn/Coryphopterus_RAD/MiSeq/fq_fp1/COPE-0922.fastp.json
+fastp	all_sections	COPE-0773	/work/hobi/jselwyn/Coryphopterus_RAD/MiSeq/fq_fp1/COPE-0773.fastp.json
+fastp	all_sections	COPE-1188	/work/hobi/jselwyn/Coryphopterus_RAD/MiSeq/fq_fp1/COPE-1188.fastp.json
+fastp	all_sections	COPE-0694	/work/hobi/jselwyn/Coryphopterus_RAD/MiSeq/fq_fp1/COPE-0694.fastp.json
+fastp	all_sections	COPE-1030	/work/hobi/jselwyn/Coryphopterus_RAD/MiSeq/fq_fp1/COPE-1030.fastp.json
