@@ -45,7 +45,7 @@ sbatch scripts/runFASTP_2nd_trim.sbatch NovaSeq/fq_fp1 NovaSeq/fq_fp1_fp2 140
 ```
 #Arguments are inDir, outDir, simultanious array jobs, node type, time limit
 bash scripts/runFQSCRN_array.bash MiSeq/fq_fp1_fp2 MiSeq/fq_fp1_fp2_fqscrn 10
-bash -p normal -t 4-00:00:00 scripts/runFQSCRN_array.bash NovaSeq/fq_fp1_fp2 NovaSeq/fq_fp1_fp2_fqscrn 20
+bash -p normal,cbirdq -t 4-00:00:00 scripts/runFQSCRN_array.bash NovaSeq/fq_fp1_fp2 NovaSeq/fq_fp1_fp2_fqscrn 20
 ```
 
 ## Step 6. repair fastq_screen paired end files

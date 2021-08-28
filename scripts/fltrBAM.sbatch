@@ -10,9 +10,12 @@ module load ddocent
 
 directory=${1}
 configFile=${2}
+refGenome=${3}
 
 dDocent="$(pwd)/scripts/dDocentHPC/dDocentHPC.bash"
+
 cp ${configFile} ${directory}/fltrBAM.config
+cp ${refGenome} ${directory}
 
 #this will use dDocent fltrBAM to filter the BAM files
 cd ${directory}
