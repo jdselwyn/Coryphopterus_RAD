@@ -28,3 +28,6 @@ original_attempt/
 *uniqCperindv*
 *uniq.k.*seqs
 *preprocess_summary*out
+*html
+*json
+!*report.html
