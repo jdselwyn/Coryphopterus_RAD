@@ -8,7 +8,7 @@
 ## dDocent Tracking
 - MiSeq only - mkREF
 - MiSeq Assembly, NovaSeq Mapping -
-- NovaSeq only - 
+- NovaSeq only -
 
 ## ToDo
 -
@@ -139,11 +139,11 @@ Rscript scripts/checkContigs.R  mkREF_MiSeq/reference.2.2.fasta
 MiSeq Reference Stats
 | Metric | 1.1 | 2.2 |  |  |  |
 | --- | ----- | ----- | ----- | ----- | ----- |
-| Number Contigs |  |  |  |  |  |
-| Mean Length |  ±  SD |  ±  SD |  ±  SD |  ±  SD |  ±  SD |
-| Range Length |  -  |  -  |  -  |  -  |  -  |
-| Total Length |  |  |  |  |  |
-| Contigs with Central Ns |  |  |  |  |  |
+| Number Contigs | 88,540 |  |  |  |  |
+| Mean Length | 470 ± 65 SD |  ±  SD |  ±  SD |  ±  SD |  ±  SD |
+| Range Length | 282 - 586 |  -  |  -  |  -  |  -  |
+| Total Length | 41,644,725 |  |  |  |  |
+| Contigs with Central Ns | 0 |  |  |  |  |
 
 ### NovaSeq
 ```
