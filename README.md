@@ -1,4 +1,4 @@
-# Coryphopterus_RADseq
+existence# Coryphopterus_RADseq
  Process Coryphopterus NovaSeq samples with dDocent
 
 ## Preprocessing Tracking
@@ -203,7 +203,9 @@ NovaSeq Reference Stats
 
 ## Step 11. Map reads to *de novo* reference genomes
 ### Choose Reference Genomes to use
-1. MiSeq -
+1. MiSeq - mkREF/reference.10.1.fasta
+  - Balance confidence in existence of locus with not removing too many. 
+  - Discuss with others to see about choice
 2. NovaSeq -
 
 ### Test scripts by mapping MiSeq reads to MiSeq reference Genome
