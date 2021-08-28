@@ -6,9 +6,9 @@
 - NovaSeq - fastp2
 
 ## dDocent Tracking
-- MiSeq only -
+- MiSeq only - mkREF
 - MiSeq Assembly, NovaSeq Mapping -
-- NovaSeq only - Assembly -
+- NovaSeq only - 
 
 ## ToDo
 -
@@ -102,13 +102,18 @@ Keep all others since they have >100k reads and seem reasonably in the ballpark 
 
 ```
 mv mkREF_MiSeq/COPE_1033* MiSeq/fq_fp1_fp2_fqscrn_repaired
+
+sbatch -o SLURM_out/miseqseq_preprocess_summary-%j.out \
+  scripts/runRscript.sbatch \
+  scripts/summarize_fqgz.R \
+  mkREF_MiSeq
 ```
 
 | Metric | Remaining Samples |
 | --- | ----- |
-| Number Samples |  |
-| Mean Number Unique Reads |  ±  SD |
-| Range Number Unique Reads |  -  |
+| Number Samples | 7 |
+| Mean Number Unique Reads | 953,435 ± 554,866 SD |
+| Range Number Unique Reads | 149,273 - 1,636,205 |
 
 Run multiple times with different cutoffs
 Cutoff1 is the minimum coverage required to keep a contig
