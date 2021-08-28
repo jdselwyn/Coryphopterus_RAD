@@ -137,15 +137,16 @@ module load R/gcc/64/3.5.1
 Rscript scripts/checkContigs.R  mkREF_MiSeq/reference.1.1.fasta
 Rscript scripts/checkContigs.R  mkREF_MiSeq/reference.2.2.fasta
 Rscript scripts/checkContigs.R  mkREF_MiSeq/reference.10.1.fasta
+Rscript scripts/checkContigs.R  mkREF_MiSeq/reference.5.1.fasta
 ```
 MiSeq Reference Stats
-| Metric | 1.1 | 2.2 | 10.1 |  |  |
-| --- | ----- | ----- | ----- | ----- | ----- |
-| Number Contigs | 88,540 | 13,330 | 33,685 |  |  |
-| Mean Length | 470 ± 65 SD | 476 ± 56 SD | 497 ± 27 SD |  ±  SD |  ±  SD |
-| Range Length | 282 - 586 | 282 - 585 | 285 - 575 |  -  |  -  |
-| Total Length | 41,644,725 | 6,339,890 | 16,733,979 |  |  |
-| Contigs with Central Ns | 0 | 0 | 0 |  |  |
+| Metric | 1.1 | 2.2 | 10.1 | 5.1 | 5.2 | 10.2 |
+| --- | ----- | ----- | ----- | ----- | ----- | ----- |
+| Number Contigs | 88,540 | 13,330 | 33,685 |  |  |  |
+| Mean Length | 470 ± 65 SD | 476 ± 56 SD | 497 ± 27 SD |  ±  SD |  ±  SD |  ±  SD |
+| Range Length | 282 - 586 | 282 - 585 | 285 - 575 |  -  |  -  |  -  |
+| Total Length | 41,644,725 | 6,339,890 | 16,733,979 |  |  |  |
+| Contigs with Central Ns | 0 | 0 | 0 |  |  |  |
 
 ### NovaSeq
 ```
