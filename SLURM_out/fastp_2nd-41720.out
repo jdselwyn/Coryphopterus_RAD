@@ -1,0 +1,400 @@
+Detecting adapter sequence for read1...
+AATTCACCAAGCGTTGGATTGTTCACCCACTAATAGGGAACGTGAGCTGGGTTTAGACCG
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 10949
+total bases: 3212740
+Q20 bases: 3162520(98.4368%)
+Q30 bases: 3068381(95.5067%)
+
+Read2 before filtering:
+total reads: 10949
+total bases: 3242343
+Q20 bases: 3069099(94.6568%)
+Q30 bases: 2831951(87.3427%)
+
+Read1 after filtering:
+total reads: 6266
+total bases: 1838780
+Q20 bases: 1834489(99.7666%)
+Q30 bases: 1814822(98.6971%)
+
+Read2 aftering filtering:
+total reads: 6266
+total bases: 1848550
+Q20 bases: 1820373(98.4757%)
+Q30 bases: 1741163(94.1907%)
+
+Filtering result:
+reads passed filter: 12532
+reads failed due to low quality: 0
+reads failed due to too many N: 0
+reads failed due to too short: 9366
+reads with adapter trimmed: 1283
+bases trimmed due to adapters: 371004
+reads corrected by overlap analysis: 3206
+bases corrected by overlap analysis: 4223
+
+Duplication rate: 22.4613%
+
+Insert size peak (evaluated by paired-end reads): 299
+
+JSON report: MiSeq/fq_fp1_fp2/COPE-1033.r1r2_fastp.json
+HTML report: MiSeq/fq_fp1_fp2/COPE-1033.r1r2_fastp.html
+
+fastp --in1 MiSeq/fq_fp1/COPE-1033.r1.fq.gz --in2 MiSeq/fq_fp1/COPE-1033.r2.fq.gz --out1 MiSeq/fq_fp1_fp2/COPE-1033.fp2_r1.fq.gz --out2 MiSeq/fq_fp1_fp2/COPE-1033.fp2_r2.fq.gz --unpaired1 MiSeq/fq_fp1_fp2/COPE-1033.fp2_unprd.fq.gz --unpaired2 MiSeq/fq_fp1_fp2/COPE-1033.fp2_unprd.fq.gz --failed_out MiSeq/fq_fp1_fp2/failed/COPE-1033.fp2_fail.fq.gz -h MiSeq/fq_fp1_fp2/COPE-1033.r1r2_fastp.html -j MiSeq/fq_fp1_fp2/COPE-1033.r1r2_fastp.json --detect_adapter_for_pe --length_required 280 --cut_front --cut_front_window_size 1 --cut_front_mean_quality 20 --cut_right --cut_right_window_size 10 --cut_right_mean_quality 20 --disable_trim_poly_g --correction --disable_quality_filtering --unqualified_percent_limit 40 --report_title Second Trim 4 De Novo R1R2 
+fastp v0.20.1, time used: 39 seconds
+Detecting adapter sequence for read1...
+AATTCACACATTATTTACAAAGCGTGTGCCCAGGGTCCACACAAGTCACTCAAGGGCTAC
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 564058
+total bases: 165946742
+Q20 bases: 163084220(98.275%)
+Q30 bases: 157816593(95.1007%)
+
+Read2 before filtering:
+total reads: 564058
+total bases: 167980525
+Q20 bases: 157948817(94.0281%)
+Q30 bases: 144397162(85.9607%)
+
+Read1 after filtering:
+total reads: 333049
+total bases: 98013351
+Q20 bases: 97765719(99.7473%)
+Q30 bases: 96692626(98.6525%)
+
+Read2 aftering filtering:
+total reads: 333049
+total bases: 98750336
+Q20 bases: 97126127(98.3552%)
+Q30 bases: 92573511(93.745%)
+
+Filtering result:
+reads passed filter: 666098
+reads failed due to low quality: 0
+reads failed due to too many N: 0
+reads failed due to too short: 462018
+reads with adapter trimmed: 32859
+bases trimmed due to adapters: 9085234
+reads corrected by overlap analysis: 138141
+bases corrected by overlap analysis: 174216
+
+Duplication rate: 65.8226%
+
+Insert size peak (evaluated by paired-end reads): 491
+
+JSON report: MiSeq/fq_fp1_fp2/COPE-0922.r1r2_fastp.json
+HTML report: MiSeq/fq_fp1_fp2/COPE-0922.r1r2_fastp.html
+
+fastp --in1 MiSeq/fq_fp1/COPE-0922.r1.fq.gz --in2 MiSeq/fq_fp1/COPE-0922.r2.fq.gz --out1 MiSeq/fq_fp1_fp2/COPE-0922.fp2_r1.fq.gz --out2 MiSeq/fq_fp1_fp2/COPE-0922.fp2_r2.fq.gz --unpaired1 MiSeq/fq_fp1_fp2/COPE-0922.fp2_unprd.fq.gz --unpaired2 MiSeq/fq_fp1_fp2/COPE-0922.fp2_unprd.fq.gz --failed_out MiSeq/fq_fp1_fp2/failed/COPE-0922.fp2_fail.fq.gz -h MiSeq/fq_fp1_fp2/COPE-0922.r1r2_fastp.html -j MiSeq/fq_fp1_fp2/COPE-0922.r1r2_fastp.json --detect_adapter_for_pe --length_required 280 --cut_front --cut_front_window_size 1 --cut_front_mean_quality 20 --cut_right --cut_right_window_size 10 --cut_right_mean_quality 20 --disable_trim_poly_g --correction --disable_quality_filtering --unqualified_percent_limit 40 --report_title Second Trim 4 De Novo R1R2 
+fastp v0.20.1, time used: 118 seconds
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 1368930
+total bases: 402763652
+Q20 bases: 395308925(98.1491%)
+Q30 bases: 381609964(94.7479%)
+
+Read2 before filtering:
+total reads: 1368930
+total bases: 407518373
+Q20 bases: 380406298(93.347%)
+Q30 bases: 344850033(84.622%)
+
+Read1 after filtering:
+total reads: 806398
+total bases: 237379983
+Q20 bases: 236741666(99.7311%)
+Q30 bases: 234016206(98.583%)
+
+Read2 aftering filtering:
+total reads: 806398
+total bases: 238921004
+Q20 bases: 234720019(98.2417%)
+Q30 bases: 223068182(93.3648%)
+
+Filtering result:
+reads passed filter: 1612796
+reads failed due to low quality: 0
+reads failed due to too many N: 0
+reads failed due to too short: 1125064
+reads with adapter trimmed: 230
+bases trimmed due to adapters: 26387
+reads corrected by overlap analysis: 316214
+bases corrected by overlap analysis: 403445
+
+Duplication rate: 63.2742%
+
+Insert size peak (evaluated by paired-end reads): 491
+
+JSON report: MiSeq/fq_fp1_fp2/COPE-0697.r1r2_fastp.json
+HTML report: MiSeq/fq_fp1_fp2/COPE-0697.r1r2_fastp.html
+
+fastp --in1 MiSeq/fq_fp1/COPE-0697.r1.fq.gz --in2 MiSeq/fq_fp1/COPE-0697.r2.fq.gz --out1 MiSeq/fq_fp1_fp2/COPE-0697.fp2_r1.fq.gz --out2 MiSeq/fq_fp1_fp2/COPE-0697.fp2_r2.fq.gz --unpaired1 MiSeq/fq_fp1_fp2/COPE-0697.fp2_unprd.fq.gz --unpaired2 MiSeq/fq_fp1_fp2/COPE-0697.fp2_unprd.fq.gz --failed_out MiSeq/fq_fp1_fp2/failed/COPE-0697.fp2_fail.fq.gz -h MiSeq/fq_fp1_fp2/COPE-0697.r1r2_fastp.html -j MiSeq/fq_fp1_fp2/COPE-0697.r1r2_fastp.json --detect_adapter_for_pe --length_required 280 --cut_front --cut_front_window_size 1 --cut_front_mean_quality 20 --cut_right --cut_right_window_size 10 --cut_right_mean_quality 20 --disable_trim_poly_g --correction --disable_quality_filtering --unqualified_percent_limit 40 --report_title Second Trim 4 De Novo R1R2 
+fastp v0.20.1, time used: 165 seconds
+Detecting adapter sequence for read1...
+AATTCACACATTATTTACAAAGCGTGTGCCCAGGGTCCACACAAGTCACTCAAGGGCTAC
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 241371
+total bases: 71017128
+Q20 bases: 69821219(98.316%)
+Q30 bases: 67611055(95.2039%)
+
+Read2 before filtering:
+total reads: 241371
+total bases: 71912768
+Q20 bases: 67800443(94.2815%)
+Q30 bases: 62177164(86.4619%)
+
+Read1 after filtering:
+total reads: 151597
+total bases: 44620219
+Q20 bases: 44500925(99.7326%)
+Q30 bases: 43991995(98.5921%)
+
+Read2 aftering filtering:
+total reads: 151597
+total bases: 44980054
+Q20 bases: 44263060(98.406%)
+Q30 bases: 42250125(93.9308%)
+
+Filtering result:
+reads passed filter: 303194
+reads failed due to low quality: 0
+reads failed due to too many N: 0
+reads failed due to too short: 179548
+reads with adapter trimmed: 7103
+bases trimmed due to adapters: 1891600
+reads corrected by overlap analysis: 56049
+bases corrected by overlap analysis: 71125
+
+Duplication rate: 68.0784%
+
+Insert size peak (evaluated by paired-end reads): 491
+
+JSON report: MiSeq/fq_fp1_fp2/COPE-0773.r1r2_fastp.json
+HTML report: MiSeq/fq_fp1_fp2/COPE-0773.r1r2_fastp.html
+
+fastp --in1 MiSeq/fq_fp1/COPE-0773.r1.fq.gz --in2 MiSeq/fq_fp1/COPE-0773.r2.fq.gz --out1 MiSeq/fq_fp1_fp2/COPE-0773.fp2_r1.fq.gz --out2 MiSeq/fq_fp1_fp2/COPE-0773.fp2_r2.fq.gz --unpaired1 MiSeq/fq_fp1_fp2/COPE-0773.fp2_unprd.fq.gz --unpaired2 MiSeq/fq_fp1_fp2/COPE-0773.fp2_unprd.fq.gz --failed_out MiSeq/fq_fp1_fp2/failed/COPE-0773.fp2_fail.fq.gz -h MiSeq/fq_fp1_fp2/COPE-0773.r1r2_fastp.html -j MiSeq/fq_fp1_fp2/COPE-0773.r1r2_fastp.json --detect_adapter_for_pe --length_required 280 --cut_front --cut_front_window_size 1 --cut_front_mean_quality 20 --cut_right --cut_right_window_size 10 --cut_right_mean_quality 20 --disable_trim_poly_g --correction --disable_quality_filtering --unqualified_percent_limit 40 --report_title Second Trim 4 De Novo R1R2 
+fastp v0.20.1, time used: 189 seconds
+Detecting adapter sequence for read1...
+AATTCACACATTATTTACAAAGCGTGTGCCCAGGGTCCACACAAGTCACTCAAGGGCTAC
+
+Detecting adapter sequence for read2...
+CGGGGACAGACAGGTTTATTTGGGTATAATGATGACATCTTCCCCATCTAGTTCAGTGGA
+
+Read1 before filtering:
+total reads: 2782355
+total bases: 818508514
+Q20 bases: 800349876(97.7815%)
+Q30 bases: 768432632(93.8821%)
+
+Read2 before filtering:
+total reads: 2782355
+total bases: 828819388
+Q20 bases: 777577938(93.8175%)
+Q30 bases: 708814517(85.521%)
+
+Read1 after filtering:
+total reads: 1657042
+total bases: 487687821
+Q20 bases: 486064428(99.6671%)
+Q30 bases: 479466139(98.3142%)
+
+Read2 aftering filtering:
+total reads: 1657042
+total bases: 491627109
+Q20 bases: 483627293(98.3728%)
+Q30 bases: 461316189(93.8346%)
+
+Filtering result:
+reads passed filter: 3314084
+reads failed due to low quality: 0
+reads failed due to too many N: 0
+reads failed due to too short: 2250626
+reads with adapter trimmed: 211998
+bases trimmed due to adapters: 56675222
+reads corrected by overlap analysis: 580936
+bases corrected by overlap analysis: 720612
+
+Duplication rate: 64.5608%
+
+Insert size peak (evaluated by paired-end reads): 491
+
+JSON report: MiSeq/fq_fp1_fp2/COPE-0942.r1r2_fastp.json
+HTML report: MiSeq/fq_fp1_fp2/COPE-0942.r1r2_fastp.html
+
+fastp --in1 MiSeq/fq_fp1/COPE-0942.r1.fq.gz --in2 MiSeq/fq_fp1/COPE-0942.r2.fq.gz --out1 MiSeq/fq_fp1_fp2/COPE-0942.fp2_r1.fq.gz --out2 MiSeq/fq_fp1_fp2/COPE-0942.fp2_r2.fq.gz --unpaired1 MiSeq/fq_fp1_fp2/COPE-0942.fp2_unprd.fq.gz --unpaired2 MiSeq/fq_fp1_fp2/COPE-0942.fp2_unprd.fq.gz --failed_out MiSeq/fq_fp1_fp2/failed/COPE-0942.fp2_fail.fq.gz -h MiSeq/fq_fp1_fp2/COPE-0942.r1r2_fastp.html -j MiSeq/fq_fp1_fp2/COPE-0942.r1r2_fastp.json --detect_adapter_for_pe --length_required 280 --cut_front --cut_front_window_size 1 --cut_front_mean_quality 20 --cut_right --cut_right_window_size 10 --cut_right_mean_quality 20 --disable_trim_poly_g --correction --disable_quality_filtering --unqualified_percent_limit 40 --report_title Second Trim 4 De Novo R1R2 
+fastp v0.20.1, time used: 258 seconds
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 1954202
+total bases: 574910502
+Q20 bases: 563045766(97.9362%)
+Q30 bases: 541808891(94.2423%)
+
+Read2 before filtering:
+total reads: 1954202
+total bases: 582067080
+Q20 bases: 545220330(93.6697%)
+Q30 bases: 496069206(85.2254%)
+
+Read1 after filtering:
+total reads: 1202916
+total bases: 354080944
+Q20 bases: 353003381(99.6957%)
+Q30 bases: 348543351(98.4361%)
+
+Read2 aftering filtering:
+total reads: 1202916
+total bases: 356729626
+Q20 bases: 350756154(98.3255%)
+Q30 bases: 334129778(93.6647%)
+
+Filtering result:
+reads passed filter: 2405832
+reads failed due to low quality: 0
+reads failed due to too many N: 0
+reads failed due to too short: 1502572
+reads with adapter trimmed: 364
+bases trimmed due to adapters: 39114
+reads corrected by overlap analysis: 429381
+bases corrected by overlap analysis: 536269
+
+Duplication rate: 63.2356%
+
+Insert size peak (evaluated by paired-end reads): 491
+
+JSON report: MiSeq/fq_fp1_fp2/COPE-1188.r1r2_fastp.json
+HTML report: MiSeq/fq_fp1_fp2/COPE-1188.r1r2_fastp.html
+
+fastp --in1 MiSeq/fq_fp1/COPE-1188.r1.fq.gz --in2 MiSeq/fq_fp1/COPE-1188.r2.fq.gz --out1 MiSeq/fq_fp1_fp2/COPE-1188.fp2_r1.fq.gz --out2 MiSeq/fq_fp1_fp2/COPE-1188.fp2_r2.fq.gz --unpaired1 MiSeq/fq_fp1_fp2/COPE-1188.fp2_unprd.fq.gz --unpaired2 MiSeq/fq_fp1_fp2/COPE-1188.fp2_unprd.fq.gz --failed_out MiSeq/fq_fp1_fp2/failed/COPE-1188.fp2_fail.fq.gz -h MiSeq/fq_fp1_fp2/COPE-1188.r1r2_fastp.html -j MiSeq/fq_fp1_fp2/COPE-1188.r1r2_fastp.json --detect_adapter_for_pe --length_required 280 --cut_front --cut_front_window_size 1 --cut_front_mean_quality 20 --cut_right --cut_right_window_size 10 --cut_right_mean_quality 20 --disable_trim_poly_g --correction --disable_quality_filtering --unqualified_percent_limit 40 --report_title Second Trim 4 De Novo R1R2 
+fastp v0.20.1, time used: 260 seconds
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 2078836
+total bases: 611611511
+Q20 bases: 599098472(97.9541%)
+Q30 bases: 576353251(94.2352%)
+
+Read2 before filtering:
+total reads: 2078836
+total bases: 618768271
+Q20 bases: 575625947(93.0277%)
+Q30 bases: 519744379(83.9966%)
+
+Read1 after filtering:
+total reads: 1185121
+total bases: 348866394
+Q20 bases: 347853110(99.7095%)
+Q30 bases: 343594699(98.4889%)
+
+Read2 aftering filtering:
+total reads: 1185121
+total bases: 351027904
+Q20 bases: 344718090(98.2025%)
+Q30 bases: 327298593(93.24%)
+
+Filtering result:
+reads passed filter: 2370242
+reads failed due to low quality: 0
+reads failed due to too many N: 0
+reads failed due to too short: 1787430
+reads with adapter trimmed: 334
+bases trimmed due to adapters: 39535
+reads corrected by overlap analysis: 467262
+bases corrected by overlap analysis: 590762
+
+Duplication rate: 62.8951%
+
+Insert size peak (evaluated by paired-end reads): 491
+
+JSON report: MiSeq/fq_fp1_fp2/COPE-1030.r1r2_fastp.json
+HTML report: MiSeq/fq_fp1_fp2/COPE-1030.r1r2_fastp.html
+
+fastp --in1 MiSeq/fq_fp1/COPE-1030.r1.fq.gz --in2 MiSeq/fq_fp1/COPE-1030.r2.fq.gz --out1 MiSeq/fq_fp1_fp2/COPE-1030.fp2_r1.fq.gz --out2 MiSeq/fq_fp1_fp2/COPE-1030.fp2_r2.fq.gz --unpaired1 MiSeq/fq_fp1_fp2/COPE-1030.fp2_unprd.fq.gz --unpaired2 MiSeq/fq_fp1_fp2/COPE-1030.fp2_unprd.fq.gz --failed_out MiSeq/fq_fp1_fp2/failed/COPE-1030.fp2_fail.fq.gz -h MiSeq/fq_fp1_fp2/COPE-1030.r1r2_fastp.html -j MiSeq/fq_fp1_fp2/COPE-1030.r1r2_fastp.json --detect_adapter_for_pe --length_required 280 --cut_front --cut_front_window_size 1 --cut_front_mean_quality 20 --cut_right --cut_right_window_size 10 --cut_right_mean_quality 20 --disable_trim_poly_g --correction --disable_quality_filtering --unqualified_percent_limit 40 --report_title Second Trim 4 De Novo R1R2 
+fastp v0.20.1, time used: 261 seconds
+Detecting adapter sequence for read1...
+AATTCACACATTATTTACAAAGCGTGTGCCCAGGGTCCACACAAGTCACTCAAGGGCTAC
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 2540524
+total bases: 747430447
+Q20 bases: 731631801(97.8863%)
+Q30 bases: 703147857(94.0754%)
+
+Read2 before filtering:
+total reads: 2540524
+total bases: 756402635
+Q20 bases: 704969268(93.2003%)
+Q30 bases: 637723466(84.3101%)
+
+Read1 after filtering:
+total reads: 1439730
+total bases: 423753772
+Q20 bases: 422490044(99.7018%)
+Q30 bases: 417242946(98.4635%)
+
+Read2 aftering filtering:
+total reads: 1439730
+total bases: 426725433
+Q20 bases: 419311455(98.2626%)
+Q30 bases: 398746687(93.4434%)
+
+Filtering result:
+reads passed filter: 2879460
+reads failed due to low quality: 0
+reads failed due to too many N: 0
+reads failed due to too short: 2201588
+reads with adapter trimmed: 90255
+bases trimmed due to adapters: 23769400
+reads corrected by overlap analysis: 551583
+bases corrected by overlap analysis: 692117
+
+Duplication rate: 65.4013%
+
+Insert size peak (evaluated by paired-end reads): 491
+
+JSON report: MiSeq/fq_fp1_fp2/COPE-0694.r1r2_fastp.json
+HTML report: MiSeq/fq_fp1_fp2/COPE-0694.r1r2_fastp.html
+
+fastp --in1 MiSeq/fq_fp1/COPE-0694.r1.fq.gz --in2 MiSeq/fq_fp1/COPE-0694.r2.fq.gz --out1 MiSeq/fq_fp1_fp2/COPE-0694.fp2_r1.fq.gz --out2 MiSeq/fq_fp1_fp2/COPE-0694.fp2_r2.fq.gz --unpaired1 MiSeq/fq_fp1_fp2/COPE-0694.fp2_unprd.fq.gz --unpaired2 MiSeq/fq_fp1_fp2/COPE-0694.fp2_unprd.fq.gz --failed_out MiSeq/fq_fp1_fp2/failed/COPE-0694.fp2_fail.fq.gz -h MiSeq/fq_fp1_fp2/COPE-0694.r1r2_fastp.html -j MiSeq/fq_fp1_fp2/COPE-0694.r1r2_fastp.json --detect_adapter_for_pe --length_required 280 --cut_front --cut_front_window_size 1 --cut_front_mean_quality 20 --cut_right --cut_right_window_size 10 --cut_right_mean_quality 20 --disable_trim_poly_g --correction --disable_quality_filtering --unqualified_percent_limit 40 --report_title Second Trim 4 De Novo R1R2 
+fastp v0.20.1, time used: 263 seconds
+[INFO   ]         multiqc : This is MultiQC v1.9
+[INFO   ]         multiqc : Template    : default
+[INFO   ]         multiqc : Searching   : /work/hobi/jselwyn/Coryphopterus_RAD/MiSeq/fq_fp1_fp2
+[INFO   ]           fastp : Found 8 reports
+[INFO   ]         multiqc : Compressing plot data
+[INFO   ]         multiqc : Report      : MiSeq/fq_fp1_fp2/2nd_fastp_report.html
+[INFO   ]         multiqc : Data        : MiSeq/fq_fp1_fp2/2nd_fastp_report_data
+[INFO   ]         multiqc : MultiQC complete

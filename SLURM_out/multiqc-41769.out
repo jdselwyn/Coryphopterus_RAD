@@ -1,0 +1,8 @@
+[INFO   ]         multiqc : This is MultiQC v1.9
+[INFO   ]         multiqc : Template    : default
+[INFO   ]         multiqc : Searching   : /work/hobi/jselwyn/Coryphopterus_RAD/MiSeq/fq_fp1_fp2_fqscrn
+[INFO   ]    fastq_screen : Found 16 reports
+[INFO   ]         multiqc : Compressing plot data
+[INFO   ]         multiqc : Report      : MiSeq/fq_fp1_fp2_fqscrn/multiqc_report.html
+[INFO   ]         multiqc : Data        : MiSeq/fq_fp1_fp2_fqscrn/multiqc_report_data
+[INFO   ]         multiqc : MultiQC complete

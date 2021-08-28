@@ -1,0 +1,113 @@
+ERROR: Unable to locate a modulefile for 'java/1.8'
+java -ea -Xmx213631m -cp /home/apps/bbmap/38.90/bin/current/ jgi.SplitPairsAndSingles rp in1=MiSeq/fq_fp1_fp2_fqscrn/COPE-1033.fp2_r1.tagged_filter.fastq.gz in2=MiSeq/fq_fp1_fp2_fqscrn/COPE-1033.fp2_r2.tagged_filter.fastq.gz out1=MiSeq/fq_fp1_fp2_fqscrn_repaired/COPE-1033.fp2_repr.r1.TMP.fq.gz out2=MiSeq/fq_fp1_fp2_fqscrn_repaired/COPE-1033.fp2_repr.r2.TMP.fq.gz outs=MiSeq/fq_fp1_fp2_fqscrn_repaired/orphans/COPE-1033.fp2_repr.orph.fq.gz repair
+Executing jgi.SplitPairsAndSingles [rp, in1=MiSeq/fq_fp1_fp2_fqscrn/COPE-1033.fp2_r1.tagged_filter.fastq.gz, in2=MiSeq/fq_fp1_fp2_fqscrn/COPE-1033.fp2_r2.tagged_filter.fastq.gz, out1=MiSeq/fq_fp1_fp2_fqscrn_repaired/COPE-1033.fp2_repr.r1.TMP.fq.gz, out2=MiSeq/fq_fp1_fp2_fqscrn_repaired/COPE-1033.fp2_repr.r2.TMP.fq.gz, outs=MiSeq/fq_fp1_fp2_fqscrn_repaired/orphans/COPE-1033.fp2_repr.orph.fq.gz, repair]
+
+Set INTERLEAVED to false
+Started output stream.
+
+Input:                  	12120 reads 		3566427 bases.
+Result:                 	12120 reads (100.00%) 	3566427 bases (100.00%)
+Pairs:                  	12036 reads (99.31%) 	3541644 bases (99.31%)
+Singletons:             	84 reads (0.69%) 	24783 bases (0.69%)
+
+Time:                         	5.415 seconds.
+Reads Processed:       12120 	2.24k reads/sec
+Bases Processed:       3566k 	0.66m bases/sec
+java -ea -Xmx213631m -cp /home/apps/bbmap/38.90/bin/current/ jgi.SplitPairsAndSingles rp in1=MiSeq/fq_fp1_fp2_fqscrn/COPE-0773.fp2_r1.tagged_filter.fastq.gz in2=MiSeq/fq_fp1_fp2_fqscrn/COPE-0773.fp2_r2.tagged_filter.fastq.gz out1=MiSeq/fq_fp1_fp2_fqscrn_repaired/COPE-0773.fp2_repr.r1.TMP.fq.gz out2=MiSeq/fq_fp1_fp2_fqscrn_repaired/COPE-0773.fp2_repr.r2.TMP.fq.gz outs=MiSeq/fq_fp1_fp2_fqscrn_repaired/orphans/COPE-0773.fp2_repr.orph.fq.gz repair
+Executing jgi.SplitPairsAndSingles [rp, in1=MiSeq/fq_fp1_fp2_fqscrn/COPE-0773.fp2_r1.tagged_filter.fastq.gz, in2=MiSeq/fq_fp1_fp2_fqscrn/COPE-0773.fp2_r2.tagged_filter.fastq.gz, out1=MiSeq/fq_fp1_fp2_fqscrn_repaired/COPE-0773.fp2_repr.r1.TMP.fq.gz, out2=MiSeq/fq_fp1_fp2_fqscrn_repaired/COPE-0773.fp2_repr.r2.TMP.fq.gz, outs=MiSeq/fq_fp1_fp2_fqscrn_repaired/orphans/COPE-0773.fp2_repr.orph.fq.gz, repair]
+
+Set INTERLEAVED to false
+Started output stream.
+
+Input:                  	300311 reads 		88751614 bases.
+Result:                 	300311 reads (100.00%) 	88751614 bases (100.00%)
+Pairs:                  	298546 reads (99.41%) 	88230225 bases (99.41%)
+Singletons:             	1765 reads (0.59%) 	521389 bases (0.59%)
+
+Time:                         	11.723 seconds.
+Reads Processed:        300k 	25.62k reads/sec
+Bases Processed:      88751k 	7.57m bases/sec
+java -ea -Xmx213630m -cp /home/apps/bbmap/38.90/bin/current/ jgi.SplitPairsAndSingles rp in1=MiSeq/fq_fp1_fp2_fqscrn/COPE-0922.fp2_r1.tagged_filter.fastq.gz in2=MiSeq/fq_fp1_fp2_fqscrn/COPE-0922.fp2_r2.tagged_filter.fastq.gz out1=MiSeq/fq_fp1_fp2_fqscrn_repaired/COPE-0922.fp2_repr.r1.TMP.fq.gz out2=MiSeq/fq_fp1_fp2_fqscrn_repaired/COPE-0922.fp2_repr.r2.TMP.fq.gz outs=MiSeq/fq_fp1_fp2_fqscrn_repaired/orphans/COPE-0922.fp2_repr.orph.fq.gz repair
+Executing jgi.SplitPairsAndSingles [rp, in1=MiSeq/fq_fp1_fp2_fqscrn/COPE-0922.fp2_r1.tagged_filter.fastq.gz, in2=MiSeq/fq_fp1_fp2_fqscrn/COPE-0922.fp2_r2.tagged_filter.fastq.gz, out1=MiSeq/fq_fp1_fp2_fqscrn_repaired/COPE-0922.fp2_repr.r1.TMP.fq.gz, out2=MiSeq/fq_fp1_fp2_fqscrn_repaired/COPE-0922.fp2_repr.r2.TMP.fq.gz, outs=MiSeq/fq_fp1_fp2_fqscrn_repaired/orphans/COPE-0922.fp2_repr.orph.fq.gz, repair]
+
+Set INTERLEAVED to false
+Started output stream.
+
+Input:                  	657745 reads 		194301578 bases.
+Result:                 	657745 reads (100.00%) 	194301578 bases (100.00%)
+Pairs:                  	652390 reads (99.19%) 	192720560 bases (99.19%)
+Singletons:             	5355 reads (0.81%) 	1581018 bases (0.81%)
+
+Time:                         	15.380 seconds.
+Reads Processed:        657k 	42.77k reads/sec
+Bases Processed:        194m 	12.63m bases/sec
+java -ea -Xmx213631m -cp /home/apps/bbmap/38.90/bin/current/ jgi.SplitPairsAndSingles rp in1=MiSeq/fq_fp1_fp2_fqscrn/COPE-0697.fp2_r1.tagged_filter.fastq.gz in2=MiSeq/fq_fp1_fp2_fqscrn/COPE-0697.fp2_r2.tagged_filter.fastq.gz out1=MiSeq/fq_fp1_fp2_fqscrn_repaired/COPE-0697.fp2_repr.r1.TMP.fq.gz out2=MiSeq/fq_fp1_fp2_fqscrn_repaired/COPE-0697.fp2_repr.r2.TMP.fq.gz outs=MiSeq/fq_fp1_fp2_fqscrn_repaired/orphans/COPE-0697.fp2_repr.orph.fq.gz repair
+Executing jgi.SplitPairsAndSingles [rp, in1=MiSeq/fq_fp1_fp2_fqscrn/COPE-0697.fp2_r1.tagged_filter.fastq.gz, in2=MiSeq/fq_fp1_fp2_fqscrn/COPE-0697.fp2_r2.tagged_filter.fastq.gz, out1=MiSeq/fq_fp1_fp2_fqscrn_repaired/COPE-0697.fp2_repr.r1.TMP.fq.gz, out2=MiSeq/fq_fp1_fp2_fqscrn_repaired/COPE-0697.fp2_repr.r2.TMP.fq.gz, outs=MiSeq/fq_fp1_fp2_fqscrn_repaired/orphans/COPE-0697.fp2_repr.orph.fq.gz, repair]
+
+Set INTERLEAVED to false
+Started output stream.
+
+Input:                  	1596190 reads 		471410618 bases.
+Result:                 	1596190 reads (100.00%) 	471410618 bases (100.00%)
+Pairs:                  	1585444 reads (99.33%) 	468239920 bases (99.33%)
+Singletons:             	10746 reads (0.67%) 	3170698 bases (0.67%)
+
+Time:                         	17.803 seconds.
+Reads Processed:       1596k 	89.66k reads/sec
+Bases Processed:        471m 	26.48m bases/sec
+java -ea -Xmx213631m -cp /home/apps/bbmap/38.90/bin/current/ jgi.SplitPairsAndSingles rp in1=MiSeq/fq_fp1_fp2_fqscrn/COPE-1188.fp2_r1.tagged_filter.fastq.gz in2=MiSeq/fq_fp1_fp2_fqscrn/COPE-1188.fp2_r2.tagged_filter.fastq.gz out1=MiSeq/fq_fp1_fp2_fqscrn_repaired/COPE-1188.fp2_repr.r1.TMP.fq.gz out2=MiSeq/fq_fp1_fp2_fqscrn_repaired/COPE-1188.fp2_repr.r2.TMP.fq.gz outs=MiSeq/fq_fp1_fp2_fqscrn_repaired/orphans/COPE-1188.fp2_repr.orph.fq.gz repair
+Executing jgi.SplitPairsAndSingles [rp, in1=MiSeq/fq_fp1_fp2_fqscrn/COPE-1188.fp2_r1.tagged_filter.fastq.gz, in2=MiSeq/fq_fp1_fp2_fqscrn/COPE-1188.fp2_r2.tagged_filter.fastq.gz, out1=MiSeq/fq_fp1_fp2_fqscrn_repaired/COPE-1188.fp2_repr.r1.TMP.fq.gz, out2=MiSeq/fq_fp1_fp2_fqscrn_repaired/COPE-1188.fp2_repr.r2.TMP.fq.gz, outs=MiSeq/fq_fp1_fp2_fqscrn_repaired/orphans/COPE-1188.fp2_repr.orph.fq.gz, repair]
+
+Set INTERLEAVED to false
+Started output stream.
+
+Input:                  	2386117 reads 		704999331 bases.
+Result:                 	2386117 reads (100.00%) 	704999331 bases (100.00%)
+Pairs:                  	2372412 reads (99.43%) 	700952919 bases (99.43%)
+Singletons:             	13705 reads (0.57%) 	4046412 bases (0.57%)
+
+Time:                         	32.706 seconds.
+Reads Processed:       2386k 	72.96k reads/sec
+Bases Processed:        704m 	21.56m bases/sec
+java -ea -Xmx213630m -cp /home/apps/bbmap/38.90/bin/current/ jgi.SplitPairsAndSingles rp in1=MiSeq/fq_fp1_fp2_fqscrn/COPE-1030.fp2_r1.tagged_filter.fastq.gz in2=MiSeq/fq_fp1_fp2_fqscrn/COPE-1030.fp2_r2.tagged_filter.fastq.gz out1=MiSeq/fq_fp1_fp2_fqscrn_repaired/COPE-1030.fp2_repr.r1.TMP.fq.gz out2=MiSeq/fq_fp1_fp2_fqscrn_repaired/COPE-1030.fp2_repr.r2.TMP.fq.gz outs=MiSeq/fq_fp1_fp2_fqscrn_repaired/orphans/COPE-1030.fp2_repr.orph.fq.gz repair
+Executing jgi.SplitPairsAndSingles [rp, in1=MiSeq/fq_fp1_fp2_fqscrn/COPE-1030.fp2_r1.tagged_filter.fastq.gz, in2=MiSeq/fq_fp1_fp2_fqscrn/COPE-1030.fp2_r2.tagged_filter.fastq.gz, out1=MiSeq/fq_fp1_fp2_fqscrn_repaired/COPE-1030.fp2_repr.r1.TMP.fq.gz, out2=MiSeq/fq_fp1_fp2_fqscrn_repaired/COPE-1030.fp2_repr.r2.TMP.fq.gz, outs=MiSeq/fq_fp1_fp2_fqscrn_repaired/orphans/COPE-1030.fp2_repr.orph.fq.gz, repair]
+
+Set INTERLEAVED to false
+Started output stream.
+
+Input:                  	2346622 reads 		692938089 bases.
+Result:                 	2346622 reads (100.00%) 	692938089 bases (100.00%)
+Pairs:                  	2330130 reads (99.30%) 	688074323 bases (99.30%)
+Singletons:             	16492 reads (0.70%) 	4863766 bases (0.70%)
+
+Time:                         	35.148 seconds.
+Reads Processed:       2346k 	66.76k reads/sec
+Bases Processed:        692m 	19.71m bases/sec
+java -ea -Xmx213635m -cp /home/apps/bbmap/38.90/bin/current/ jgi.SplitPairsAndSingles rp in1=MiSeq/fq_fp1_fp2_fqscrn/COPE-0694.fp2_r1.tagged_filter.fastq.gz in2=MiSeq/fq_fp1_fp2_fqscrn/COPE-0694.fp2_r2.tagged_filter.fastq.gz out1=MiSeq/fq_fp1_fp2_fqscrn_repaired/COPE-0694.fp2_repr.r1.TMP.fq.gz out2=MiSeq/fq_fp1_fp2_fqscrn_repaired/COPE-0694.fp2_repr.r2.TMP.fq.gz outs=MiSeq/fq_fp1_fp2_fqscrn_repaired/orphans/COPE-0694.fp2_repr.orph.fq.gz repair
+Executing jgi.SplitPairsAndSingles [rp, in1=MiSeq/fq_fp1_fp2_fqscrn/COPE-0694.fp2_r1.tagged_filter.fastq.gz, in2=MiSeq/fq_fp1_fp2_fqscrn/COPE-0694.fp2_r2.tagged_filter.fastq.gz, out1=MiSeq/fq_fp1_fp2_fqscrn_repaired/COPE-0694.fp2_repr.r1.TMP.fq.gz, out2=MiSeq/fq_fp1_fp2_fqscrn_repaired/COPE-0694.fp2_repr.r2.TMP.fq.gz, outs=MiSeq/fq_fp1_fp2_fqscrn_repaired/orphans/COPE-0694.fp2_repr.orph.fq.gz, repair]
+
+Set INTERLEAVED to false
+Started output stream.
+
+Input:                  	2854278 reads 		843063929 bases.
+Result:                 	2854278 reads (100.00%) 	843063929 bases (100.00%)
+Pairs:                  	2836770 reads (99.39%) 	837894535 bases (99.39%)
+Singletons:             	17508 reads (0.61%) 	5169394 bases (0.61%)
+
+Time:                         	38.375 seconds.
+Reads Processed:       2854k 	74.38k reads/sec
+Bases Processed:        843m 	21.97m bases/sec
+java -ea -Xmx213631m -cp /home/apps/bbmap/38.90/bin/current/ jgi.SplitPairsAndSingles rp in1=MiSeq/fq_fp1_fp2_fqscrn/COPE-0942.fp2_r1.tagged_filter.fastq.gz in2=MiSeq/fq_fp1_fp2_fqscrn/COPE-0942.fp2_r2.tagged_filter.fastq.gz out1=MiSeq/fq_fp1_fp2_fqscrn_repaired/COPE-0942.fp2_repr.r1.TMP.fq.gz out2=MiSeq/fq_fp1_fp2_fqscrn_repaired/COPE-0942.fp2_repr.r2.TMP.fq.gz outs=MiSeq/fq_fp1_fp2_fqscrn_repaired/orphans/COPE-0942.fp2_repr.orph.fq.gz repair
+Executing jgi.SplitPairsAndSingles [rp, in1=MiSeq/fq_fp1_fp2_fqscrn/COPE-0942.fp2_r1.tagged_filter.fastq.gz, in2=MiSeq/fq_fp1_fp2_fqscrn/COPE-0942.fp2_r2.tagged_filter.fastq.gz, out1=MiSeq/fq_fp1_fp2_fqscrn_repaired/COPE-0942.fp2_repr.r1.TMP.fq.gz, out2=MiSeq/fq_fp1_fp2_fqscrn_repaired/COPE-0942.fp2_repr.r2.TMP.fq.gz, outs=MiSeq/fq_fp1_fp2_fqscrn_repaired/orphans/COPE-0942.fp2_repr.orph.fq.gz, repair]
+
+Set INTERLEAVED to false
+Started output stream.
+
+Input:                  	3290500 reads 		972362757 bases.
+Result:                 	3290500 reads (100.00%) 	972362757 bases (100.00%)
+Pairs:                  	3272410 reads (99.45%) 	967019251 bases (99.45%)
+Singletons:             	18090 reads (0.55%) 	5343506 bases (0.55%)
+
+Time:                         	38.963 seconds.
+Reads Processed:       3290k 	84.45k reads/sec
+Bases Processed:        972m 	24.96m bases/sec

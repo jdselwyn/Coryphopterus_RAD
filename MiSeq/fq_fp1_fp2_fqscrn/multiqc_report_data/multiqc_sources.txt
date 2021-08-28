@@ -1,0 +1,17 @@
+Module	Section	Sample Name	Source
+FastQ Screen	all_sections	COPE-0773.fp2_r2_screen	/work/hobi/jselwyn/Coryphopterus_RAD/MiSeq/fq_fp1_fp2_fqscrn/COPE-0773.fp2_r2_screen.txt
+FastQ Screen	all_sections	COPE-0922.fp2_r2_screen	/work/hobi/jselwyn/Coryphopterus_RAD/MiSeq/fq_fp1_fp2_fqscrn/COPE-0922.fp2_r2_screen.txt
+FastQ Screen	all_sections	COPE-0942.fp2_r1_screen	/work/hobi/jselwyn/Coryphopterus_RAD/MiSeq/fq_fp1_fp2_fqscrn/COPE-0942.fp2_r1_screen.txt
+FastQ Screen	all_sections	COPE-1033.fp2_r1_screen	/work/hobi/jselwyn/Coryphopterus_RAD/MiSeq/fq_fp1_fp2_fqscrn/COPE-1033.fp2_r1_screen.txt
+FastQ Screen	all_sections	COPE-1030.fp2_r2_screen	/work/hobi/jselwyn/Coryphopterus_RAD/MiSeq/fq_fp1_fp2_fqscrn/COPE-1030.fp2_r2_screen.txt
+FastQ Screen	all_sections	COPE-1030.fp2_r1_screen	/work/hobi/jselwyn/Coryphopterus_RAD/MiSeq/fq_fp1_fp2_fqscrn/COPE-1030.fp2_r1_screen.txt
+FastQ Screen	all_sections	COPE-1188.fp2_r2_screen	/work/hobi/jselwyn/Coryphopterus_RAD/MiSeq/fq_fp1_fp2_fqscrn/COPE-1188.fp2_r2_screen.txt
+FastQ Screen	all_sections	COPE-0773.fp2_r1_screen	/work/hobi/jselwyn/Coryphopterus_RAD/MiSeq/fq_fp1_fp2_fqscrn/COPE-0773.fp2_r1_screen.txt
+FastQ Screen	all_sections	COPE-0697.fp2_r2_screen	/work/hobi/jselwyn/Coryphopterus_RAD/MiSeq/fq_fp1_fp2_fqscrn/COPE-0697.fp2_r2_screen.txt
+FastQ Screen	all_sections	COPE-0922.fp2_r1_screen	/work/hobi/jselwyn/Coryphopterus_RAD/MiSeq/fq_fp1_fp2_fqscrn/COPE-0922.fp2_r1_screen.txt
+FastQ Screen	all_sections	COPE-0697.fp2_r1_screen	/work/hobi/jselwyn/Coryphopterus_RAD/MiSeq/fq_fp1_fp2_fqscrn/COPE-0697.fp2_r1_screen.txt
+FastQ Screen	all_sections	COPE-0694.fp2_r2_screen	/work/hobi/jselwyn/Coryphopterus_RAD/MiSeq/fq_fp1_fp2_fqscrn/COPE-0694.fp2_r2_screen.txt
+FastQ Screen	all_sections	COPE-0694.fp2_r1_screen	/work/hobi/jselwyn/Coryphopterus_RAD/MiSeq/fq_fp1_fp2_fqscrn/COPE-0694.fp2_r1_screen.txt
+FastQ Screen	all_sections	COPE-0942.fp2_r2_screen	/work/hobi/jselwyn/Coryphopterus_RAD/MiSeq/fq_fp1_fp2_fqscrn/COPE-0942.fp2_r2_screen.txt
+FastQ Screen	all_sections	COPE-1033.fp2_r2_screen	/work/hobi/jselwyn/Coryphopterus_RAD/MiSeq/fq_fp1_fp2_fqscrn/COPE-1033.fp2_r2_screen.txt
+FastQ Screen	all_sections	COPE-1188.fp2_r1_screen	/work/hobi/jselwyn/Coryphopterus_RAD/MiSeq/fq_fp1_fp2_fqscrn/COPE-1188.fp2_r1_screen.txt
