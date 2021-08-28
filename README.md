@@ -2,8 +2,8 @@
  Process Coryphopterus NovaSeq samples with dDocent
 
 ## Preprocessing Tracking
-- MiSeq - fastp1
-- NovaSeq - fastp1
+- MiSeq - fastq_screen
+- NovaSeq - fastp2
 
 ## dDocent Tracking
 - MiSeq only -
@@ -37,7 +37,7 @@ skip clumpify step here
 ## Step 3. Run fastp2
 ```
 #Arguments are inDir, outDir, minimum length
-sbatch -p gpu -t 1-00:00:00 scripts/runFASTP_2nd_trim.sbatch MiSeq/fq_fp1 MiSeq/fq_fp1_fp2 280
+sbatch scripts/runFASTP_2nd_trim.sbatch MiSeq/fq_fp1 MiSeq/fq_fp1_fp2 280
 sbatch scripts/runFASTP_2nd_trim.sbatch NovaSeq/fq_fp1 NovaSeq/fq_fp1_fp2 140
 ```
 
