@@ -7,7 +7,12 @@ suppressMessages(library(tidyverse))
 suppressMessages(library(magrittr))
 suppressMessages(library(furrr))
 
-plan('multisession')
+if(Sys.info()['nodename'] == 'hpcm1'){
+  plan('sequential')
+} else {
+  plan('multisession')
+}
+
 
 setwd(folder_to_check)
 
