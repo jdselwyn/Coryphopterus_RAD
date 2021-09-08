@@ -73,11 +73,10 @@ cd ../../
 ## Step 8. Summarize post-preprocessing contigs
 ```
 #Repeat this with each preprocessing folder as desired
-sbatch -o SLURM_out/miseqseq_preprocess_summary-%j.out \
+sbatch -o SLURM_out/novaseq_preprocess_summary-%j.out \
   scripts/runRscript.sbatch \
   scripts/summarize_fqgz.R \
-  MiSeq/fq_fp1_fp2_fqscrn_repaired
-
+  NovaSeq/fq_fp1_fp2_fqscrn_repaired
 ```
 | Metric | MiSeq | NovaSeq |
 | --- | ----- | ----- |
