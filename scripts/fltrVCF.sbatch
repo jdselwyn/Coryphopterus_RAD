@@ -7,7 +7,7 @@
 #SBATCH --nodes=1
 
 #to run use the following command:
-#sbatch scripts/fltrVCF.sbatch h_sp/fltVCF config.fltr.ind
+#sbatch scripts/fltrVCF.sbatch h_sp/fltVCF config.fltr.ind B
 
 module load ddocent
 module load perl/5.22.0
@@ -20,8 +20,9 @@ module load R/gcc7/3.5.3
 
 dir=$1
 configFile=$2
+prefixExtra=$3
 
-mkdir ${dir}
+mkdir -p ${dir}
 
 dDocent="$(pwd)/scripts/dDocentHPC/dDocentHPC.bash"
 fltrVCF="$(pwd)/scripts/fltrVCF/fltrVCF.bash"
@@ -30,12 +31,12 @@ HWE="$(pwd)/scripts/fltrVCF/filter_hwe_by_pop_HPC.pl"
 haplotyper="$(pwd)/scripts/rad_haplotyper/rad_haplotyper.pl"
 
 config="$(pwd)/${configFile}"
-BAMS="$(pwd)/$(echo ${dir} | sed "s/fltVCF/mkVCF/g")"
-BEDS="$(pwd)/$(echo ${dir} | sed "s/fltVCF/mkVCF/g")/mapped.2.2.bed"
-startVCFS="$(pwd)/$(echo ${dir} | sed "s/fltVCF/mkVCF/g")/TotalRawSNPs.2.2.vcf"
-reference="$(pwd)/$(echo ${dir} | sed "s/fltVCF/mkREF/g")/reference.2.2.fasta"
-POPMAP="$(pwd)/$(echo ${dir} | sed "s/fltVCF/mkVCF/g")/popmap.2.2"
-species="$(echo ${dir} | sed "s/\/fltVCF//g")_default"
+BAMS="$(pwd)/$(echo ${dir} | sed "s/fltVCF.*/mkVCF/g")"
+BEDS="$(pwd)/$(echo ${dir} | sed "s/fltVCF.*/mkVCF/g")/mapped.2.2.bed"
+startVCFS="$(pwd)/$(echo ${dir} | sed "s/fltVCF.*/mkVCF/g")/TotalRawSNPs.2.2.vcf"
+reference="$(pwd)/$(echo ${dir} | sed "s/fltVCF.*/mkREF/g")/reference.2.2.fasta"
+POPMAP="$(pwd)/$(echo ${dir} | sed "s/fltVCF.*/mkVCF/g")/popmap.2.2"
+species="$(echo ${dir} | sed "s/\/fltVCF.*//g")_${prefixExtra}"
 
 cd ${dir}
 
