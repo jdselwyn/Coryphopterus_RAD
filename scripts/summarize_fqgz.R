@@ -6,14 +6,13 @@ DIRECTORY <- args[1]
 # DIRECTORY <- 'NovaSeq/fq_fp1_clmp_fp2_fqscrn_repaired'
 
 print('libraries')
-# suppressWarnings(suppressMessages(library(tibble)))
-suppressWarnings(suppressMessages(library(dplyr)))
-suppressWarnings(suppressMessages(library(stringr)))
-suppressWarnings(suppressMessages(library(purrr)))
-suppressWarnings(suppressMessages(library(readr)))
-print('A')
-suppressWarnings(suppressMessages(library(magrittr)))
-suppressWarnings(suppressMessages(library(furrr)))
+# suppressWarnings(suppressMessages(library(tidyverse)))
+# suppressWarnings(suppressMessages(library(magrittr)))
+# suppressWarnings(suppressMessages(library(furrr)))
+
+library(tidyverse)
+library(magrittr)
+library(furrr)
 
 plan('multisession')
 
