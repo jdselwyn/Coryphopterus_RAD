@@ -1,9 +1,11 @@
-args <- commandArgs(trailingOnly=T)
+print('Start')
+args <- commandArgs(trailingOnly = TRUE)
 print(args)
 
 DIRECTORY <- args[1]
 # DIRECTORY <- 'NovaSeq/fq_fp1_clmp_fp2_fqscrn_repaired'
 
+print('libraries')
 suppressWarnings(suppressMessages(library(tidyverse)))
 print('A')
 suppressWarnings(suppressMessages(library(magrittr)))
