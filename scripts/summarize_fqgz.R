@@ -1,18 +1,12 @@
-print('Start')
 args <- commandArgs(trailingOnly = TRUE)
 print(args)
 
 DIRECTORY <- args[1]
 # DIRECTORY <- 'NovaSeq/fq_fp1_clmp_fp2_fqscrn_repaired'
 
-print('libraries')
-# suppressWarnings(suppressMessages(library(tidyverse)))
-# suppressWarnings(suppressMessages(library(magrittr)))
-# suppressWarnings(suppressMessages(library(furrr)))
-
-library(tidyverse)
-library(magrittr)
-library(furrr)
+suppressWarnings(suppressMessages(library(tidyverse)))
+suppressWarnings(suppressMessages(library(magrittr)))
+suppressWarnings(suppressMessages(library(furrr)))
 
 plan('multisession')
 
@@ -29,8 +23,6 @@ chunk_reader2 <- function(x, pos){
     parse_number() %>%
     sum
 }
-
-
 
 summarize_preprocessing <- list.files(full.names = FALSE, pattern = 'fq\\.gz$') %>%
   tibble(file = .) %>%
