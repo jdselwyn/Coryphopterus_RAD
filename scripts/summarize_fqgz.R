@@ -4,9 +4,10 @@ print(args)
 DIRECTORY <- args[1]
 # DIRECTORY <- 'NovaSeq/fq_fp1_clmp_fp2_fqscrn_repaired'
 
-suppressMessages(library(tidyverse))
-suppressMessages(library(magrittr))
-suppressMessages(library(furrr))
+suppressWarnings(suppressMessages(library(tidyverse)))
+print('A')
+suppressWarnings(suppressMessages(library(magrittr)))
+suppressWarnings(suppressMessages(library(furrr)))
 
 plan('multisession')
 

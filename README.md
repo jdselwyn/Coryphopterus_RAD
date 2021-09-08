@@ -64,11 +64,9 @@ rename _ . ./*gz
 rename - _ ./*gz
 cd ../../
 
-cd NovaSeq/fq_fp1_clmp_fp2_fqscrn_repaired/
+cd NovaSeq/fq_fp1_fp2_fqscrn_repaired/
 rename _ . ./*gz
 rename - _ ./*gz
-rename r1.fq.gz R1.fq.gz ./*gz
-rename r2.fq.gz R2.fq.gz ./*gz
 cd ../../
 ```
 
@@ -157,8 +155,7 @@ MiSeq Reference Stats
 mkdir mkREF_NovaSeq
 mv NovaSeq/fq_fp1_fp2_fqscrn_repaired/*gz mkREF_NovaSeq
 
-mkdir mkREF_NovaSeq_OL
-mv mkREF_NovaSeq/*gz mkREF_NovaSeq_OL
+
 ```
 Move poorly sequenced samples back to the preprocessing area so they aren't used moving forward
 
