@@ -80,9 +80,9 @@ sbatch -o SLURM_out/novaseq_preprocess_summary-%j.out \
 ```
 | Metric | MiSeq | NovaSeq |
 | --- | ----- | ----- |
-| Number Samples | 8 |  |
-| Mean Number Reads | 835,009 ± 613,265 SD |  ±  SD |
-| Range Number Reads | 6018 - 1,636,205 |  -  |
+| Number Samples | 8 | 800 |
+| Mean Number Reads | 835,009 ± 613,265 SD | 2,193,480 ± 2,653,565 SD |
+| Range Number Reads | 6018 - 1,636,205 | 202 - 31,430,472 |
 
 ## Step 9. Get dDocent
 I copied [dDocentHPC](https://github.com/cbirdlab/dDocentHPC) to `/work/hobi/jselwyn/Coryphopterus_RAD/scripts`, and added it to `.gitignore`.

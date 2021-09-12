@@ -81,6 +81,11 @@ preprocess_data %>%
   count(sequencing_type, preprocess_step, sample) %>%
   filter(n > 1)
 
+preprocess_data %>%
+  filter(sequencing_type == 'NovaSeq') %>%
+  count(sample) %>%
+  filter(n < 3)
+
 
 #### Complete Model ####
 full_model <- mixed(number_reads ~ sequencing_type * preprocess_step + (1 | sample),
@@ -136,41 +141,41 @@ preprocess_data %>%
   
 
 
-
-
-
+#NovaSeq
 preprocess_data %>%
-  select(-file) %>%
-  filter(preprocess_step == 'fq_fp1_clmp_fp2_fqscrn_repaired') %>%
-  mutate(sample = str_remove(sample, str_c('_', sequencing_type)))
+  filter(sequencing_type == 'NovaSeq',
+         preprocess_step == 'fq_fp1_fp2_fqscrn_repaired') %>%
+  filter(str_detect(sample, 'Blank', negate = TRUE)) %>%
+  arrange(number_reads) %>%
+  
+  filter(!(number_reads >= 10000))
 
-contamination_data %>%
-  select(sequencing_type, individual, direction, percent_no_genome) %>%
-  distinct %>%
-  group_by(sequencing_type, individual) %>%
-  summarise(percent_no_genome = mean(percent_no_genome),
-            .groups = 'drop') %>%
-  arrange(percent_no_genome)
 
 
 samples_to_exclude <- preprocess_data %>%
   select(-file) %>%
   mutate(sample = str_remove(sample, str_c('_', sequencing_type))) %>%
   filter(sequencing_type == 'NovaSeq') %>%
-  filter(preprocess_step == 'fq_fp1_clmp_fp2_fqscrn_repaired') %>%
+  filter(preprocess_step == 'fq_fp1_fp2_fqscrn_repaired') %>%
   arrange(number_reads) %>%
   filter(number_reads < 10000 | str_detect(sample, 'Blank')) 
 
-samples_to_exclude %>%
-  mutate(for_readme = str_c('- ', sample, ' - ', scales::comma(number_reads, accuracy = 1), 
-                            ' unique_reads')) %>%
-  pull(for_readme) %>%
-  str_c(collapse = ' \n ')
-  
+
 
 
 samples_to_exclude %>%
   mutate(sample = str_replace(sample, '-', '_')) %>%
-  mutate(command = str_c('mv mkREF_NovaSeq/', sample, '* NovaSeq/fq_fp1_clmp_fp2_fqscrn_repaired')) %>%
+  mutate(command = str_c('mv mkREF_NovaSeq/', sample, '* NovaSeq/fq_fp1_fp2_fqscrn_repaired')) %>%
   pull(command) %>%
   str_c(collapse = '; ')
+
+
+
+
+
+
+
+
+
+
+
