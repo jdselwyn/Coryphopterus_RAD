@@ -2,7 +2,7 @@ args <- commandArgs(trailingOnly = TRUE)
 print(args)
 
 DIRECTORY <- args[1]
-# DIRECTORY <- 'NovaSeq/fq_fp1_clmp_fp2_fqscrn_repaired'
+# DIRECTORY <- 'NovaSeq/fq_fp1_fp2_fqscrn_repaired'
 
 suppressWarnings(suppressMessages(library(tidyverse)))
 suppressWarnings(suppressMessages(library(magrittr)))
