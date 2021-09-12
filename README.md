@@ -1,12 +1,12 @@
-existence# Coryphopterus_RADseq
+# Coryphopterus_RADseq
  Process Coryphopterus NovaSeq samples with dDocent
 
 ## Preprocessing Tracking
 - MiSeq - Finished
-- NovaSeq - fastp2
+- NovaSeq - Finished
 
 ## dDocent Tracking
-- MiSeq only - Genotyped
+- MiSeq only - Finished
 - MiSeq Assembly, NovaSeq Mapping -
 - NovaSeq only -
 
