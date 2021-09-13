@@ -1,3 +1,5 @@
+#Use: git ls-files . --exclude-standard --others #before to check what will be added
+
 #!/bin/bash
 git pull
 git add --all

@@ -182,7 +182,8 @@ Cutoff2 is the minimum number of individuals a contig must be present in to keep
 
 Must edit config file each time and then run below line
 ```
-sbatch -p cbirdq -t 30-00:00:00 scripts/mkRef.sbatch mkREF_NovaSeq config_files/NovaSeq.config
+sbatch scripts/mkRef.sbatch mkREF_NovaSeq config_files/NovaSeq.config
+#took ~24 hours for 2,2
 ```
 
 Check Reference Genome Stats
@@ -191,13 +192,13 @@ module load R/gcc/64/3.5.1
 Rscript scripts/checkContigs.R  mkREF_NovaSeq/reference.2.2.fasta
 ```
 NovaSeq Reference Stats
-| Metric |  |  |  |  |  |
+| Metric | 2.2 |  |  |  |  |
 | --- | ----- | ----- | ----- | ----- | ----- |
-| Number Contigs |  |  |  |  |  |
-| Mean Length |  ±  SD |  ±  SD |  ±  SD |  ±  SD |  ±  SD |
-| Range Length |  -  |  -  |  -  |  -  |  -  |
-| Total Length |  |  |  |  |  |
-| Contigs with Central Ns |  |  |  |  |  |
+| Number Contigs | 361,609 |  |  |  |  |
+| Mean Length | 330 ± 49 SD |  ±  SD |  ±  SD |  ±  SD |  ±  SD |
+| Range Length | 142 - 914 |  -  |  -  |  -  |  -  |
+| Total Length | 119,462,309 |  |  |  |  |
+| Contigs with Central Ns | 316,160 |  |  |  |  |
 
 ## Step 11. Map reads to *de novo* reference genomes
 ### Choose Reference Genomes to use
@@ -251,8 +252,8 @@ sbatch -o SLURM_out/bam_summary-%j.out \
 Mapping Stats
 | Metric | # Reads Mapped |
 | --- | ----- |
-| Mean |  ±  SD |
-| Range |  -  |
+| Mean | 6,891,175 ± 8,686,655 SD |
+| Range | 31,687 - 119,213,337 |
 
 
 ### Map NovaSeq reads to NovaSeq reference Genome
