@@ -28,7 +28,7 @@ cd ${output_path}
 mkdir -p bamfiles
 mkdir -p fastqfiles
 
-bwa mem ${REFERENCE} ${read_path}/${prefix}.r1.fq.gz ${read_path}/${prefix}.r2.fq.gz -L 20,5 -t 20 -a -M -T 2 -A 1 -B 4 -O 6 -R "@RG\tID:${prefix}\tSM:${prefix}\tPL:Illumina" | mawk '!/\t[2-9].[SH].*/' | mawk '!/[2-9].[SH]\t/' | samtools view -@20 -q 1 -SbT ${REFERENCE} - > bamfiles/${prefix}.bam
+bwa mem ${REFERENCE} ${read_path}/${prefix}*.r1.fq.gz ${read_path}/${prefix}*.r2.fq.gz -L 20,5 -t 20 -a -M -T 2 -A 1 -B 4 -O 6 -R "@RG\tID:${prefix}\tSM:${prefix}\tPL:Illumina" | mawk '!/\t[2-9].[SH].*/' | mawk '!/[2-9].[SH]\t/' | samtools view -@20 -q 1 -SbT ${REFERENCE} - > bamfiles/${prefix}.bam
 samtools sort -@20 bamfiles/${prefix}.bam -o bamfiles/${prefix}.bam
 samtools index bamfiles/${prefix}.bam
 
