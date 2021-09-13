@@ -126,7 +126,7 @@ Cutoff2 is the minimum number of individuals a contig must be present in to keep
 
 Must edit config file each time and then run below line
 ```
-sbatch scripts/mkRef.sbatch mkREF_MiSeq config_files/mkREF_MiSeq.config
+sbatch scripts/mkRef.sbatch mkREF_MiSeq config_files/MiSeq.config
 ```
 
 Check Reference Genome Stats
@@ -182,7 +182,7 @@ Cutoff2 is the minimum number of individuals a contig must be present in to keep
 
 Must edit config file each time and then run below line
 ```
-sbatch -p cbirdq -t 30-00:00:00 scripts/mkRef.sbatch mkREF_NovaSeq config_files/mkREF_NovaSeq.config
+sbatch -p cbirdq -t 30-00:00:00 scripts/mkRef.sbatch mkREF_NovaSeq config_files/NovaSeq.config
 ```
 
 Check Reference Genome Stats
@@ -218,7 +218,7 @@ rename .r2.fq.gz .R2.fq.gz ./mkBAM_test/*gz
 
 sbatch scripts/mkBAM.sbatch \
   mkBAM_test \
-  config_files/mkBAM_MiSeq.config \
+  config_files/MiSeq.config \
   mkREF_MiSeq/reference.10.1.fasta
 
 Rscript scripts/checkBAM.R mkBAM_test RAW
@@ -240,7 +240,7 @@ rename .r2.fq.gz .R2.fq.gz ./mkBAM_MiSeq/*gz
 
 sbatch scripts/mkBAM.sbatch \
   mkBAM_MiSeq \
-  config_files/mkBAM_MiSeq.config \
+  config_files/MiSeq.config \
   mkREF_MiSeq/reference.10.1.fasta
 
 sbatch -o SLURM_out/bam_summary-%j.out \
@@ -268,7 +268,7 @@ mv mkBAM_test/*RAW* fltrBAM_test
 
 sbatch scripts/fltrBAM.sbatch \
   fltrBAM_test \
-  config_files/fltrBAM_MiSeq.config \
+  config_files/MiSeq.config \
   mkREF_MiSeq/reference.10.1.fasta
 
 Rscript scripts/checkBAM.R fltrBAM_test RG
@@ -287,7 +287,7 @@ mv mkBAM_MiSeq/*RAW* fltrBAM_MiSeq
 
 sbatch scripts/fltrBAM.sbatch \
   fltrBAM_MiSeq \
-  config_files/fltrBAM_MiSeq.config \
+  config_files/MiSeq.config \
   mkREF_MiSeq/reference.10.1.fasta
 
 sbatch -o SLURM_out/bam_summary-%j.out \
@@ -312,7 +312,7 @@ mv fltrBAM_test/*RG* mkVCF_test
 
 sbatch scripts/mkVCF.sbatch \
   mkVCF_test \
-  config_files/mkVCF_MiSeq.config \
+  config_files/MiSeq.config \
   mkREF_MiSeq/reference.10.1.fasta
 
 #Run on Head Node
@@ -343,7 +343,7 @@ mv fltrBAM_MiSeq/*RG* mkVCF_MiSeq
 
 sbatch scripts/mkVCF.sbatch \
   mkVCF_MiSeq \
-  config_files/mkVCF_MiSeq.config \
+  config_files/MiSeq.config \
   mkREF_MiSeq/reference.5.1.fasta
 
 #Run on Head Node
