@@ -1,7 +1,7 @@
 ## Download and write fasta all mitochondrial sequences of a coryphopterus fron Genbank
 
-library(tidyverse)
-library(rentrez)
+suppressMessages(library(tidyverse))
+suppressMessages(library(rentrez))
 
 all_cory_search <- 'Coryphopterus[Organism] AND mitochondrial'
 
