@@ -34,3 +34,5 @@ original_attempt/
 rad_haplotyper/
 *repr*log
 Reference_Sequence/
+*mito_map*out
+Mitochondrial_Mapping/tmp_prefix_file

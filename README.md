@@ -121,6 +121,8 @@ sbatch --array=0-$((${#all_prefix[@]}-1))%15 \
   scripts/runBLAST.sbatch \
   Reference_Sequence/CoryphopterusBlast \
   Mitochondrial_Mapping
+
+Rscript scripts/summarizeBLAST.R
 ```
 
 
