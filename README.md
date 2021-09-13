@@ -96,31 +96,26 @@ Index reference genome to be used - *Bathygobius cocosensis*
 sbatch scripts/index_ref.slurm \
   Reference_Sequence/bathygobius_cocosensis_complete_mitochondrion.fasta
 ```
-Map to Mitochondrial Genome
+Make BLAST Database with all the Coryphopterus Mitochondrial DNA on GenBank
 ```
+sbatch scripts/buildBlast.sbatch
+```
+
+Map to Mitochondrial Genome & BLAST Results
+```
+mkdir -p Mitochondrial_Mapping
 all_prefix=$(ls mkREF_NovaSeq/*.r1.fq.gz | sed 's/.*\///' | sed "s/\..*//")
 IFS=' ' read -ra all_prefix <<< $all_prefix
-
-mkdir -p Mitochondrial_Mapping
 printf "%s\n" "${all_prefix[@]}" > Mitochondrial_Mapping/tmp_prefix_file
 
 sbatch --array=0-$((${#all_prefix[@]}-1))%15 \
-  --output=SLURM_out/mito_map_%A_%a.out \
-  scripts/map_mito_to_reference.slurm \
+  --output=SLURM_out/mitoBLAST_%A_%a.out \
+  scripts/mitoBLAST.slurm \
   Reference_Sequence/bathygobius_cocosensis_complete_mitochondrion.fasta \
+  Reference_Sequence/CoryphopterusBlast \
   mkREF_NovaSeq \
   Mitochondrial_Mapping
-```
-Blast Mapped Reads
-```
-#Make BLAST Database with all the Coryphopterus Mitochondrial DNA on GenBank
-sbatch scripts/buildBlast.sbatch
 
-sbatch --array=0-$((${#all_prefix[@]}-1))%15 \
-  --output=SLURM_out/runBLAST_%A_%a.out \
-  scripts/runBLAST.sbatch \
-  Reference_Sequence/CoryphopterusBlast \
-  Mitochondrial_Mapping
 
 Rscript scripts/summarizeBLAST.R
 ```
