@@ -84,7 +84,13 @@ sbatch -o SLURM_out/novaseq_preprocess_summary-%j.out \
 | Mean Number Reads | 835,009 ± 613,265 SD | 2,193,480 ± 2,653,565 SD |
 | Range Number Reads | 6018 - 1,636,205 | 202 - 31,430,472 |
 
-## Step 9. Get dDocent
+## Step 9. Species Identification
+Index reference genome to be used - *Bathygobius cocosensis*
+```
+sbatch --output=SLURM_Out/index_ref_%j.out scripts/index_ref.slurm bathygobius_cocosensis_complete_mitochondrion.fasta
+```
+
+## Step 10. Get dDocent
 I copied [dDocentHPC](https://github.com/cbirdlab/dDocentHPC) to `/work/hobi/jselwyn/Coryphopterus_RAD/scripts`, and added it to `.gitignore`.
 
 ## Step 10. Assemble *de novo* reference genomes
