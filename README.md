@@ -176,8 +176,8 @@ Cutoff2 is the minimum number of individuals a contig must be present in to keep
 1. Cutoff1 = 2, Cutoff2 = 2
 2. Cutoff1 = 10, Cutoff2 = 10
 3. Cutoff1 = 20, Cutoff2 = 20
-4. Cutoff1 = , Cutoff2 =
-5. Cutoff1 = , Cutoff2 =
+4. Cutoff1 = 10, Cutoff2 = 20
+5. Cutoff1 = 20, Cutoff2 = 10
 
 
 Must edit config file each time and then run below line
@@ -191,15 +191,18 @@ Check Reference Genome Stats
 module load R/gcc/64/3.5.1
 Rscript scripts/checkContigs.R  mkREF_NovaSeq/reference.2.2.fasta
 Rscript scripts/checkContigs.R  mkREF_NovaSeq/reference.10.10.fasta
+Rscript scripts/checkContigs.R  mkREF_NovaSeq/reference.20.20.fasta
+Rscript scripts/checkContigs.R  mkREF_NovaSeq/reference.10.20.fasta
+Rscript scripts/checkContigs.R  mkREF_NovaSeq/reference.20.10.fasta
 ```
 NovaSeq Reference Stats
-| Metric | 2.2 | 10.10 | 20.20 |  |  |
+| Metric | 2.2 | 10.10 | 20.20 | 10.20 | 20.10 |
 | --- | ----- | ----- | ----- | ----- | ----- |
-| Number Contigs | 361,609 | 45,531 |  |  |  |
-| Mean Length | 330 ± 49 SD | 337 ± 23 SD |  ±  SD |  ±  SD |  ±  SD |
-| Range Length | 142 - 914 | 142 - 563 |  -  |  -  |  -  |
-| Total Length | 119,462,309 | 15,330,836 |  |  |  |
-| Contigs with Central Ns | 316,160 | 44,167 |  |  |  |
+| Number Contigs | 361,609 | 45,531 | 20,763 | 27,839 |  |
+| Mean Length | 330 ± 49 SD | 337 ± 23 SD | 338 ± 12 SD | 337 ± 17 SD |  ±  SD |
+| Range Length | 142 - 914 | 142 - 563 | 148 - 534 | 142 - 547 |  -  |
+| Total Length | 119,462,309 | 15,330,836 | 7,010,970 | 9,393,569 |  |
+| Contigs with Central Ns | 316,160 | 44,167 | 20,650 | 27,440 |  |
 
 ## Step 11. Map reads to *de novo* reference genomes
 ### Choose Reference Genomes to use
