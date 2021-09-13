@@ -110,12 +110,11 @@ printf "%s\n" "${all_prefix[@]}" > Mitochondrial_Mapping/tmp_prefix_file
 
 sbatch --array=0-$((${#all_prefix[@]}-1))%15 \
   --output=SLURM_out/mitoBLAST_%A_%a.out \
-  scripts/mitoBLAST.slurm \
+  scripts/mitoBLAST.sbatch \
   Reference_Sequence/bathygobius_cocosensis_complete_mitochondrion.fasta \
   Reference_Sequence/CoryphopterusBlast \
   mkREF_NovaSeq \
   Mitochondrial_Mapping
-
 
 Rscript scripts/summarizeBLAST.R
 ```
