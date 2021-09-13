@@ -175,7 +175,7 @@ Cutoff2 is the minimum number of individuals a contig must be present in to keep
 
 1. Cutoff1 = 2, Cutoff2 = 2
 2. Cutoff1 = 10, Cutoff2 = 10
-3. Cutoff1 = , Cutoff2 =
+3. Cutoff1 = 20, Cutoff2 = 20
 4. Cutoff1 = , Cutoff2 =
 5. Cutoff1 = , Cutoff2 =
 
@@ -346,17 +346,17 @@ mv fltrBAM_MiSeq/*RG* mkVCF_MiSeq
 sbatch scripts/mkVCF.sbatch \
   mkVCF_MiSeq \
   config_files/MiSeq.config \
-  mkREF_MiSeq/reference.5.1.fasta
+  mkREF_MiSeq/reference.10.1.fasta
 
 #Run on Head Node
 module load R/gcc/64/3.5.1
-Rscript scripts/summarizeVCF.R  mkVCF_MiSeq/TotalRawSNPs.5.1.vcf
+Rscript scripts/summarizeVCF.R  mkVCF_MiSeq/TotalRawSNPs.10.1.vcf
 
 #Run on Node
 sbatch -o SLURM_out/vcf_summary-%j.out \
   scripts/runRscript.sbatch \
   scripts/summarizeVCF.R \
-  mkVCF_MiSeq/TotalRawSNPs.5.1.vcf
+  mkVCF_MiSeq/TotalRawSNPs.10.1.vcf
 ```
 
 Genotyping Stats
