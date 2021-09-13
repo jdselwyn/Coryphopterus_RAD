@@ -87,13 +87,30 @@ sbatch -o SLURM_out/novaseq_preprocess_summary-%j.out \
 ## Step 9. Species Identification
 Index reference genome to be used - *Bathygobius cocosensis*
 ```
-sbatch --output=SLURM_Out/index_ref_%j.out scripts/index_ref.slurm bathygobius_cocosensis_complete_mitochondrion.fasta
+sbatch scripts/index_ref.slurm \
+  Reference_Sequence/bathygobius_cocosensis_complete_mitochondrion.fasta
 ```
+Map to Mitochondrial Genome
+```
+all_prefix=$(ls mkREF_NovaSeq/*.r1.fq.gz | sed 's/.*\///' | sed "s/\..*//")
+IFS=' ' read -ra all_prefix <<< $all_prefix
+
+mkdir -p Mitochondrial_Mapping
+printf "%s\n" "${all_prefix[@]}" > Mitochondrial_Mapping/tmp_prefix_file
+
+sbatch --array=0-$((${#all_prefix[@]}-1))%15 \
+  --output=SLURM_out/mito_map_%A_%a.out \
+  scripts/map_mito_to_reference.slurm \
+  Reference_Sequence/bathygobius_cocosensis_complete_mitochondrion.fasta \
+  mkREF_NovaSeq} \
+  Mitochondrial_Mapping
+```
+
 
 ## Step 10. Get dDocent
 I copied [dDocentHPC](https://github.com/cbirdlab/dDocentHPC) to `/work/hobi/jselwyn/Coryphopterus_RAD/scripts`, and added it to `.gitignore`.
 
-## Step 10. Assemble *de novo* reference genomes
+## Step 11. Assemble *de novo* reference genomes
 ### MiSeq
 ```
 mkdir mkREF_MiSeq
@@ -204,13 +221,13 @@ Rscript scripts/checkContigs.R  mkREF_NovaSeq/reference.20.10.fasta
 NovaSeq Reference Stats
 | Metric | 2.2 | 10.10 | 20.20 | 10.20 | 20.10 |
 | --- | ----- | ----- | ----- | ----- | ----- |
-| Number Contigs | 361,609 | 45,531 | 20,763 | 27,839 |  |
-| Mean Length | 330 ± 49 SD | 337 ± 23 SD | 338 ± 12 SD | 337 ± 17 SD |  ±  SD |
-| Range Length | 142 - 914 | 142 - 563 | 148 - 534 | 142 - 547 |  -  |
-| Total Length | 119,462,309 | 15,330,836 | 7,010,970 | 9,393,569 |  |
-| Contigs with Central Ns | 316,160 | 44,167 | 20,650 | 27,440 |  |
+| Number Contigs | 361,609 | 45,531 | 20,763 | 27,839 | 33,407 |
+| Mean Length | 330 ± 49 SD | 337 ± 23 SD | 338 ± 12 SD | 337 ± 17 SD | 338 ± 17 SD |
+| Range Length | 142 - 914 | 142 - 563 | 148 - 534 | 142 - 547 | 142 - 547 |
+| Total Length | 119,462,309 | 15,330,836 | 7,010,970 | 9,393,569 | 11,277,928 |
+| Contigs with Central Ns | 316,160 | 44,167 | 20,650 | 27,440 | 32,947 |
 
-## Step 11. Map reads to *de novo* reference genomes
+## Step 12. Map reads to *de novo* reference genomes
 ### Choose Reference Genomes to use
 1. MiSeq - mkREF/reference.10.1.fasta
   - Balance confidence in existence of locus with not removing too many.
@@ -271,7 +288,7 @@ Mapping Stats
 mkdir mkBAM_NovaSeq
 cp mkBAM_MiSeq/*gz mkBAM_NovaSeq
 ```
-## Step 12. Filter Mapped Reads
+## Step 13. Filter Mapped Reads
 ### Test scripts by filtering MiSeq reads mapped to MiSeq reference Genome
 ```
 mkdir fltrBAM_test
@@ -315,7 +332,7 @@ Mapping Stats
 
 ### Filter reads mapped to NovaSeq reference
 
-## Step 13. Genotyping
+## Step 14. Genotyping
 ### Test scripts by genotyping MiSeq reads mapped to MiSeq reference Genome
 ```
 mkdir mkVCF_test
