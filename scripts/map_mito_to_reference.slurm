@@ -10,7 +10,7 @@ module load mawk
 module load ddocent
 module load qualimap
 
-REFERENCE="$(pwd)$1" #First argument should be the filepath to the reference mitochondrial genome fasta file ex) /work/hobi/jselwyn/MitoMap/lottia_digitalis_mito_sequence.fasta
+REFERENCE="$(pwd)/$1" #First argument should be the filepath to the reference mitochondrial genome fasta file ex) /work/hobi/jselwyn/MitoMap/lottia_digitalis_mito_sequence.fasta
 read_path=$2 #Second argument should be the path to where the read files are stored (no "/" at the end)
 output_path=$3 #Third argument is the final location to put the output files
 
