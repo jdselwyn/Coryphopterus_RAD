@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#SBATCH --time=4-00:00:00
-#SBATCH -p normal
+#SBATCH --time=1-00:00:00
+#SBATCH -p gpu,normal,cbirdq
 #SBATCH --job-name=refIndex
 #SBATHC --output=SLURM_Out/index_ref_%j.out
 
