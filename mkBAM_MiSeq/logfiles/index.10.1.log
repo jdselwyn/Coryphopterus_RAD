@@ -1,0 +1,9 @@
+[bwa_index] Pack FASTA... 0.14 sec
+[bwa_index] Construct BWT for the packed sequence...
+[bwa_index] 3.92 seconds elapse.
+[bwa_index] Update BWT... 0.09 sec
+[bwa_index] Pack forward-only FASTA... 0.11 sec
+[bwa_index] Construct SA from BWT and Occ... 1.78 sec
+[main] Version: 0.7.17-r1198-dirty
+[main] CMD: bwa index reference.10.1.fasta
+[main] Real time: 9.466 sec; CPU: 6.047 sec
