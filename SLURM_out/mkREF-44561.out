@@ -1,0 +1,1285 @@
+
+
+* dDocentHPC v4.5 Forked by cbird@tamucc.edu * 
+
+
+Running dDocentHPC mkREF...
+ 
+Mon Sep 13 14:35:47 CDT 2021 Files output to:  /work/hobi/jselwyn/Coryphopterus_RAD/mkREF_NovaSeq
+
+Mon Sep 13 14:35:47 CDT 2021 Reading config file... 
+ 
+Settings for dDocentHPC
+#Made in notepad++, use for best viewing
+
+These default settings assume ddRAD, no overlapping 151 bp reads
+
+40		Number of Processors (Auto, 1, 2, 3, ..., n threads) cbirdq=40 normal=20
+230G	Maximum Memory (1G,2G,..., 256G)  G=gigabytes
+
+----------trimFQ: Settings for Trimming FASTQ Files---------------------------------------------------------------
+146		trimmomatic MINLEN (integer, mkREF only)						Drop the read if it is below a specified length. Set to the length of the Read1 reads.
+75		trimmomatic MINLEN (integer, mkBAM only)						Drop the read if it is below a specified length. Set to the minimum frag length you want mapped to the reference.
+20		trimmomatic LEADING:<quality> (integer, mkBAM only)				Specifies the minimum quality required to keep a base.
+15		trimmomatic TRAILING:<quality> (integer, mkREF only)			Specifies the minimum quality required to keep a base.
+20		trimmomatic TRAILING:<quality> (integer, mkBAM only)			Specifies the minimum quality required to keep a base.
+TruSeq3-PE-2.fa	trimmomatic ILLUMINACLIP:<fasta> (0, fasta file name)			Specifies the trimmomatic adapter file to use. entering a 0 (zero) will turn off adapter trimming. Options are: TruSeq3-PE-2.fa, TruSeq3-PE.fa, TruSeq3-SE.fa, TruSeq2-PE.fa, TruSeq2-SE.fa, any other files included with trimmomatic.  Entering a custom path here will break the script. If you want a customized file, you have to put it where the default trimmomatic files are located on your computer.  If you have trouble finding this location, run dDocentHPC trimREF and it will be included in the output.
+2		trimmomatic ILLUMINACLIP:<seed mismatches> (integer)			specifies the maximum mismatch count which will still allow a full match to be performed
+30		trimmomatic ILLUMINACLIP:<palindrome clip thresh> (integer)		specifies how accurate the match between the two 'adapter ligated' reads must be for PE palindrome read alignment
+10		trimmomatic ILLUMINACLIP:<simple clip thresh> (integer)			specifies how accurate the match between any adapter etc. sequence must be against a read.
+20		trimmomatic SLIDINGWINDOW:<windowSize> (integer)				specifies the number of bases to average across
+20		trimmomatic SLIDINGWINDOW:<windowQuality> (integer)				specifies the average quality required.
+0		trimmomatic CROP:<bp to keep> (integer, mkBAM only)    Trim read sequences down to this length. Enter 0 for no cropping
+0		trimmomatic HEADCROP:<length> (integer, only Read1 for ezRAD)	The number of bases to remove from the start of the read. 0 for ddRAD, 5 for ezRAD
+no		FixStacks (yes,no)   											Demultiplexing with stacks introduces anomolies.  This removes them.  
+------------------------------------------------------------------------------------------------------------------
+
+----------mkREF: Settings for de novo assembly of the reference genome--------------------------------------------
+PE		Type of reads for assembly (PE, SE, OL, RPE)					PE=ddRAD & ezRAD pairedend, non-overlapping reads; SE=singleend reads; OL=ddRAD & ezRAD overlapping reads, miseq; RPE=oregonRAD, restriction site + random shear
+0.9		cdhit Clustering_Similarity_Pct (0-1)							Use cdhit to cluster and collapse uniq reads by similarity threshold
+10		Cutoff1 (integer)												Use unique reads that have at least this much coverage for making the reference	genome
+20		Cutoff2 (integer)												Use unique reads that occur in at least this many individuals for making the reference genome
+0.05	rainbow merge -r <percentile> (decimal 0-1)						Percentile-based minimum number of seqs to assemble in a precluster
+0.95	rainbow merge -R <percentile> (decimal 0-1)						Percentile-based maximum number of seqs to assemble in a precluster
+------------------------------------------------------------------------------------------------------------------
+
+----------mkBAM: Settings for mapping the reads to the reference genome-------------------------------------------
+Make sure the cutoffs above match the reference*fasta!
+1		bwa mem -A Mapping_Match_Value (integer) 
+6		bwa mem -B Mapping_MisMatch_Value (integer) 
+10		bwa mem -O Mapping_GapOpen_Penalty (integer) 
+50		bwa mem -T Mapping_Minimum_Alignment_Score (integer) 			Remove reads that have an alignment score less than this. 
+30,5	bwa mem -L Mapping_Clipping_Penalty (integer,integer) 
+------------------------------------------------------------------------------------------------------------------
+
+----------fltrBAM: Settings for filtering mapping alignments in the *bam files---------------
+20		samtools view -q 		Mapping_Min_Quality (integer)    									Remove reads with mapping qual less than this value
+no		samtools view -F 4 		Remove_unmapped_reads? (yes,no)   									Since the reads aren't mapped, we generally don't need to filter them
+yes		samtools view -F 8 		Remove_read_pair_if_one_is_unmapped? (yes,no)    					If either read in a pair does not map, then the other is also removed
+yes		samtools view -F 256 	Remove_secondary_alignments? (yes,no)     							Secondary alignments are reads that also map to other contigs in the reference genome
+no		samtools view -F 512 	Remove_reads_not_passing_platform_vendor_filters (yes,no)     		We generally don't see any of these
+no		samtools view -F 1024 	Remove_PCR_or_optical_duplicates? (yes,no)     						You probably don't want to set this to yes
+no		samtools view -F 2048 	Remove_supplementary_alignments? (yes,no)     						We generally don't see any of these
+yes		samtools view -f 2 		Keep_only_properly_aligned_read_pairs? (yes,no)						Set to no if OL mode 
+0		samtools view -F 		Custom_samtools_view_F_bit_value? (integer)     					performed separately from the above, consult samtools man
+0		samtools view -f 		Custom_samtools_view_f_bit_value? (integer)     					performed separately from the above, consult samtools man
+20								Remove_reads_with_excessive_soft_clipping? (no, integers by 10s)	minimum number of soft clipped bases in a read that is unacceptable
+50								Remove_reads_with_alignment_score_below (integer)    		Should match bwa mem -T, which sometimes doesn't work
+yes								Remove_reads_orphaned_by_filters? (yes,no)
+------------------------------------------------------------------------------------------------------------------
+
+----------mkVCF: Settings for variant calling/ genotyping---------------------------------------------------------
+no		freebayes -J --pooled-discrete (yes|no) 						If yes, a pool of individuals is assumed to be the statistical unit of observation. 
+no		freebayes -A --cnv-map (filename.bed or no)						If the pools have different numbers of individuals, then you should provide a copy number variation (cnv) *.bed file with the "ploidy" of each pool. the bed file should be in the working directory and formatted as follows: popmap_column_1 ploidy_of_pool.  If that doesn't work, try the basenames of the files in popmap column 1.
+2		freebayes -p --ploidy (integer)									Whether pooled or not, if no cnv-map file is provided, then what is the ploidy of the samples? for pools, this number should be the number of individuals * ploidy
+no		freebayes -r --region (filename.bed or no)						Limit analysis to specified region.  Bed file format: <chrom>:<start_position>-<end_position>
+0		only genotype read 1 (integer)									Limit analysis to only Read 1 positions, integer is maximum Read1 bp position
+2		Minimum Mean Depth of Coverage Per Individual					Limit analysis to contigs with at least the specified mean depth of coverage per individual
+0		freebayes -n --use-best-n-alleles (integer)						reduce the number of alleles considered to n, zero means all, set to 2 or more if you run out of memory
+30		freebayes -m --min-mapping-quality (integer) 
+20		freebayes -q --min-base-quality (integer) 
+-1		freebayes -E --haplotype-length (-1, 3, or integer)    			Set to -1 to avoid multi nucleotide polymorphisms and force calling MNPs as SNPs.  Can be set up to half the read length, or more.
+0		freebayes    --min-repeat-entropy (0, 1, or integer) 			Set to 0 to avoid multi nucleotide polymorphisms and force calling MNPs as SNPs. To detect interrupted repeats, build across sequence until it has entropy > N bits per bp. 
+10		freebayes    --min-coverage (integer)       					Require at least this coverage to process a site
+0.375	freebayes -F --min-alternate-fraction (decimal 0-1)   			There must be at least 1 individual with this fraction of alt reads to evaluate the position. If your individuals are barcoded, then use 0.2. If your data is pooled, then set based upon ~ 1/(numIndivids * ploidy) and average depth of coverage
+20		freebayes -C --min-alternate-count (integer)					Require at least this count of observations supporting an alternate allele within a single individual in order to evaluate the position.  default: 2
+20		freebayes -G --min-alternate-total (integer)					Require at least this count of observations supporting an alternate allele within the total population in order to use the allele in analysis.  default: 1
+0.33	freebayes -z --read-max-mismatch-fraction (decimal 0-1)			Exclude reads with more than N [0,1] fraction of mismatches where each mismatch has base quality >= mismatch-base-quality-threshold default: 1.0
+20		freebayes -Q --mismatch-base-quality-threshold (integer)		Count mismatches toward --read-mismatch-limit if the base quality of the mismatch is >= Q.  default: 10
+30		freebayes -U --read-mismatch-limit (integer)					Exclude reads with more than N mismatches where each mismatch has base quality >= mismatch-base-quality-threshold. default: ~unbounded
+30		freebayes ~3 ~~min-alternate-qsum (integer)						This value is the mean base quality score for alternate reads and will be multiplied by -C to set -3. Description of -3: Require at least this count of observations supporting an alternate allele within a single individual in order to evaluate the position.  default: 2	
+30		freebayes -$ --read-snp-limit (integer)							Exclude reads with more than N base mismatches, ignoring gaps with quality >= mismatch-base-quality-threshold. default: ~unbounded
+20		freebayes -e --read-indel-limit	(integer)						Exclude reads with more than N separate gaps. default: ~unbounded
+no		freebayes -w --hwe-priors-off (no|yes)							Disable estimation of the probability of the combination arising under HWE given the allele frequency as estimated by observation frequency.
+no		freebayes -V --binomial-obs-priors-off (no|yes)					Disable incorporation of prior expectations about observations. Uses read placement probability, strand balance probability, and read position (5'-3') probability.
+no		freebayes -a --allele-balance-priors-off (no|yes)				Disable use of aggregate probability of observation balance between alleles as a component of the priors.
+no		freebayes    --no-partial-observations (no|yes)					Exclude observations which do not fully span the dynamically-determined detection window.  (default, use all observations, dividing partial support across matching haplotypes when generating haplotypes.)
+no		freebayes    --report-monomorphic (no|yes)						Report even loci which appear to be monomorphic, and report allconsidered alleles, even those which are not in called genotypes. Loci which do not have any potential alternates have '.' for ALT.
+
+------------------------------------------------------------------------------------------------------------------
+
+
+Email
+user@tamucc.edu
+
+
+Mon Sep 13 14:35:47 CDT 2021 Reading in variables from config file...
+
+Mon Sep 13 14:35:48 CDT 2021 Checking for all required dDocent software...
+
+ Running CheckDependencies Function...
+
+  The dependency trimmomatic is installed!
+
+  The dependency freebayes is installed!
+
+  The dependency mawk is installed!
+
+  The dependency bwa is installed!
+
+  The dependency samtools is installed!
+
+  The dependency vcftools is installed!
+
+  The dependency rainbow is installed!
+
+  The dependency gnuplot is installed!
+
+  The dependency gawk is installed!
+
+  The dependency seqtk is installed!
+
+  The dependency cd-hit-est is installed!
+
+  The dependency bamToBed is installed!
+
+  The dependency bedtools is installed!
+
+  The dependency coverageBed is installed!
+
+  The dependency parallel is installed!
+
+  The dependency vcfcombine is installed!
+
+  The dependency bamtools is installed!
+
+  The dependency pearRM is installed!
+
+ All dependencies are installed and up to date!
+
+
+Mon Sep 13 14:36:26 CDT 2021  Begin main ddocent function
+
+ The HPC version of dDocent will only digest files with particular extensions for particular tasks
+  untouched files for trimming must be *.F.fq.gz and *.R.fq.gz
+  files trimmed for assembly (mkREF) must be *r1.fq.gz *r2.fq.gz
+  files trimmed for mapping (mkBAM) must be *R1.fq.gz *R2.fq.gz
+
+  extensions selected: *.r1.fq.gz *.r2.fq.gz
+ 
+ The samples being processed are:
+  COPE_0469.fp2.repr
+  COPE_0470.fp2.repr
+  COPE_0471.fp2.repr
+  COPE_0472.fp2.repr
+  COPE_0473.fp2.repr
+  COPE_0474.fp2.repr
+  COPE_0475.fp2.repr
+  COPE_0476.fp2.repr
+  COPE_0477.fp2.repr
+  COPE_0478.fp2.repr
+  COPE_0480.fp2.repr
+  COPE_0479.fp2.repr
+  COPE_0481.fp2.repr
+  COPE_0482.fp2.repr
+  COPE_0483.fp2.repr
+  COPE_0484.fp2.repr
+  COPE_0485.fp2.repr
+  COPE_0486.fp2.repr
+  COPE_0487.fp2.repr
+  COPE_0488.fp2.repr
+  COPE_0489.fp2.repr
+  COPE_0490.fp2.repr
+  COPE_0491.fp2.repr
+  COPE_0492.fp2.repr
+  COPE_0493.fp2.repr
+  COPE_0494.fp2.repr
+  COPE_0495.fp2.repr
+  COPE_0496.fp2.repr
+  COPE_0497.fp2.repr
+  COPE_0498.fp2.repr
+  COPE_0499.fp2.repr
+  COPE_0500.fp2.repr
+  COPE_0501.fp2.repr
+  COPE_0502.fp2.repr
+  COPE_0503.fp2.repr
+  COPE_0504.fp2.repr
+  COPE_0505.fp2.repr
+  COPE_0506.fp2.repr
+  COPE_0507.fp2.repr
+  COPE_0508.fp2.repr
+  COPE_0509.fp2.repr
+  COPE_0510.fp2.repr
+  COPE_0511.fp2.repr
+  COPE_0512.fp2.repr
+  COPE_0514.fp2.repr
+  COPE_0515.fp2.repr
+  COPE_0517.fp2.repr
+  COPE_0518.fp2.repr
+  COPE_0519.fp2.repr
+  COPE_0520.fp2.repr
+  COPE_0521.fp2.repr
+  COPE_0522.fp2.repr
+  COPE_0523.fp2.repr
+  COPE_0524.fp2.repr
+  COPE_0525.fp2.repr
+  COPE_0526.fp2.repr
+  COPE_0527.fp2.repr
+  COPE_0528.fp2.repr
+  COPE_0529.fp2.repr
+  COPE_0530.fp2.repr
+  COPE_0531.fp2.repr
+  COPE_0532.fp2.repr
+  COPE_0534.fp2.repr
+  COPE_0535.fp2.repr
+  COPE_0536.fp2.repr
+  COPE_0537.fp2.repr
+  COPE_0538.fp2.repr
+  COPE_0539.fp2.repr
+  COPE_0540.fp2.repr
+  COPE_0541.fp2.repr
+  COPE_0542.fp2.repr
+  COPE_0543.fp2.repr
+  COPE_0544.fp2.repr
+  COPE_0545.fp2.repr
+  COPE_0546.fp2.repr
+  COPE_0547.fp2.repr
+  COPE_0548.fp2.repr
+  COPE_0549.fp2.repr
+  COPE_0550.fp2.repr
+  COPE_0551.fp2.repr
+  COPE_0552.fp2.repr
+  COPE_0553.fp2.repr
+  COPE_0554.fp2.repr
+  COPE_0555.fp2.repr
+  COPE_0556.fp2.repr
+  COPE_0557.fp2.repr
+  COPE_0558.fp2.repr
+  COPE_0559.fp2.repr
+  COPE_0560.fp2.repr
+  COPE_0561.fp2.repr
+  COPE_0562.fp2.repr
+  COPE_0563.fp2.repr
+  COPE_0565.fp2.repr
+  COPE_0566.fp2.repr
+  COPE_0567.fp2.repr
+  COPE_0568.fp2.repr
+  COPE_0569.fp2.repr
+  COPE_0570.fp2.repr
+  COPE_0571.fp2.repr
+  COPE_0572.fp2.repr
+  COPE_0573.fp2.repr
+  COPE_0575.fp2.repr
+  COPE_0576.fp2.repr
+  COPE_0577.fp2.repr
+  COPE_0578.fp2.repr
+  COPE_0579.fp2.repr
+  COPE_0580.fp2.repr
+  COPE_0582.fp2.repr
+  COPE_0583.fp2.repr
+  COPE_0584.fp2.repr
+  COPE_0585.fp2.repr
+  COPE_0586.fp2.repr
+  COPE_0587.fp2.repr
+  COPE_0588.fp2.repr
+  COPE_0589.fp2.repr
+  COPE_0591.fp2.repr
+  COPE_0592.fp2.repr
+  COPE_0593.fp2.repr
+  COPE_0594.fp2.repr
+  COPE_0595.fp2.repr
+  COPE_0596.fp2.repr
+  COPE_0597.fp2.repr
+  COPE_0598.fp2.repr
+  COPE_0599.fp2.repr
+  COPE_0600.fp2.repr
+  COPE_0601.fp2.repr
+  COPE_0602.fp2.repr
+  COPE_0603.fp2.repr
+  COPE_0604.fp2.repr
+  COPE_0605.fp2.repr
+  COPE_0606.fp2.repr
+  COPE_0607.fp2.repr
+  COPE_0608.fp2.repr
+  COPE_0610.fp2.repr
+  COPE_0611.fp2.repr
+  COPE_0612.fp2.repr
+  COPE_0613.fp2.repr
+  COPE_0614.fp2.repr
+  COPE_0615.fp2.repr
+  COPE_0616.fp2.repr
+  COPE_0617.fp2.repr
+  COPE_0618.fp2.repr
+  COPE_0619.fp2.repr
+  COPE_0620.fp2.repr
+  COPE_0621.fp2.repr
+  COPE_0622.fp2.repr
+  COPE_0623.fp2.repr
+  COPE_0624.fp2.repr
+  COPE_0625.fp2.repr
+  COPE_0626.fp2.repr
+  COPE_0627.fp2.repr
+  COPE_0628.fp2.repr
+  COPE_0629.fp2.repr
+  COPE_0630.fp2.repr
+  COPE_0631.fp2.repr
+  COPE_0632.fp2.repr
+  COPE_0633.fp2.repr
+  COPE_0634.fp2.repr
+  COPE_0635.fp2.repr
+  COPE_0636.fp2.repr
+  COPE_0637.fp2.repr
+  COPE_0638.fp2.repr
+  COPE_0639.fp2.repr
+  COPE_0640.fp2.repr
+  COPE_0641.fp2.repr
+  COPE_0642.fp2.repr
+  COPE_0643.fp2.repr
+  COPE_0644.fp2.repr
+  COPE_0645.fp2.repr
+  COPE_0646.fp2.repr
+  COPE_0647.fp2.repr
+  COPE_0648.fp2.repr
+  COPE_0649.fp2.repr
+  COPE_0650.fp2.repr
+  COPE_0651.fp2.repr
+  COPE_0652.fp2.repr
+  COPE_0653.fp2.repr
+  COPE_0654.fp2.repr
+  COPE_0655.fp2.repr
+  COPE_0656.fp2.repr
+  COPE_0657.fp2.repr
+  COPE_0658.fp2.repr
+  COPE_0659.fp2.repr
+  COPE_0660.fp2.repr
+  COPE_0661.fp2.repr
+  COPE_0662.fp2.repr
+  COPE_0663.fp2.repr
+  COPE_0664.fp2.repr
+  COPE_0665.fp2.repr
+  COPE_0666.fp2.repr
+  COPE_0667.fp2.repr
+  COPE_0668.fp2.repr
+  COPE_0669.fp2.repr
+  COPE_0670.fp2.repr
+  COPE_0671.fp2.repr
+  COPE_0672.fp2.repr
+  COPE_0673.fp2.repr
+  COPE_0674.fp2.repr
+  COPE_0675.fp2.repr
+  COPE_0676.fp2.repr
+  COPE_0677.fp2.repr
+  COPE_0678.fp2.repr
+  COPE_0679.fp2.repr
+  COPE_0680.fp2.repr
+  COPE_0681.fp2.repr
+  COPE_0682.fp2.repr
+  COPE_0683.fp2.repr
+  COPE_0684.fp2.repr
+  COPE_0685.fp2.repr
+  COPE_0686.fp2.repr
+  COPE_0687.fp2.repr
+  COPE_0688.fp2.repr
+  COPE_0690.fp2.repr
+  COPE_0692.fp2.repr
+  COPE_0693.fp2.repr
+  COPE_0694.fp2.repr
+  COPE_0695.fp2.repr
+  COPE_0696.fp2.repr
+  COPE_0697.fp2.repr
+  COPE_0698.fp2.repr
+  COPE_0699.fp2.repr
+  COPE_0700.fp2.repr
+  COPE_0701.fp2.repr
+  COPE_0702.fp2.repr
+  COPE_0703.fp2.repr
+  COPE_0704.fp2.repr
+  COPE_0705.fp2.repr
+  COPE_0706.fp2.repr
+  COPE_0707.fp2.repr
+  COPE_0708.fp2.repr
+  COPE_0709.fp2.repr
+  COPE_0710.fp2.repr
+  COPE_0711.fp2.repr
+  COPE_0712.fp2.repr
+  COPE_0713.fp2.repr
+  COPE_0715.fp2.repr
+  COPE_0716.fp2.repr
+  COPE_0717.fp2.repr
+  COPE_0718.fp2.repr
+  COPE_0719.fp2.repr
+  COPE_0720.fp2.repr
+  COPE_0721.fp2.repr
+  COPE_0722.fp2.repr
+  COPE_0723.fp2.repr
+  COPE_0724.fp2.repr
+  COPE_0725.fp2.repr
+  COPE_0726.fp2.repr
+  COPE_0727.fp2.repr
+  COPE_0728.fp2.repr
+  COPE_0729.fp2.repr
+  COPE_0730.fp2.repr
+  COPE_0731.fp2.repr
+  COPE_0732.fp2.repr
+  COPE_0734.fp2.repr
+  COPE_0735.fp2.repr
+  COPE_0736.fp2.repr
+  COPE_0737.fp2.repr
+  COPE_0738.fp2.repr
+  COPE_0739.fp2.repr
+  COPE_0740.fp2.repr
+  COPE_0741.fp2.repr
+  COPE_0742.fp2.repr
+  COPE_0743.fp2.repr
+  COPE_0744.fp2.repr
+  COPE_0745.fp2.repr
+  COPE_0746.fp2.repr
+  COPE_0747.fp2.repr
+  COPE_0748.fp2.repr
+  COPE_0749.fp2.repr
+  COPE_0750.fp2.repr
+  COPE_0751.fp2.repr
+  COPE_0752.fp2.repr
+  COPE_0753.fp2.repr
+  COPE_0754.fp2.repr
+  COPE_0755.fp2.repr
+  COPE_0756.fp2.repr
+  COPE_0757.fp2.repr
+  COPE_0758.fp2.repr
+  COPE_0759.fp2.repr
+  COPE_0760.fp2.repr
+  COPE_0761.fp2.repr
+  COPE_0762.fp2.repr
+  COPE_0763.fp2.repr
+  COPE_0764.fp2.repr
+  COPE_0765.fp2.repr
+  COPE_0766.fp2.repr
+  COPE_0767.fp2.repr
+  COPE_0768.fp2.repr
+  COPE_0769.fp2.repr
+  COPE_0770.fp2.repr
+  COPE_0771.fp2.repr
+  COPE_0772.fp2.repr
+  COPE_0773.fp2.repr
+  COPE_0774.fp2.repr
+  COPE_0775.fp2.repr
+  COPE_0776.fp2.repr
+  COPE_0777.fp2.repr
+  COPE_0778.fp2.repr
+  COPE_0779.fp2.repr
+  COPE_0780.fp2.repr
+  COPE_0781.fp2.repr
+  COPE_0782.fp2.repr
+  COPE_0783.fp2.repr
+  COPE_0784.fp2.repr
+  COPE_0785.fp2.repr
+  COPE_0786.fp2.repr
+  COPE_0787.fp2.repr
+  COPE_0788.fp2.repr
+  COPE_0789.fp2.repr
+  COPE_0790.fp2.repr
+  COPE_0791.fp2.repr
+  COPE_0792.fp2.repr
+  COPE_0793.fp2.repr
+  COPE_0794.fp2.repr
+  COPE_0795.fp2.repr
+  COPE_0796.fp2.repr
+  COPE_0797.fp2.repr
+  COPE_0798.fp2.repr
+  COPE_0799.fp2.repr
+  COPE_0800.fp2.repr
+  COPE_0801.fp2.repr
+  COPE_0802.fp2.repr
+  COPE_0803.fp2.repr
+  COPE_0804.fp2.repr
+  COPE_0805.fp2.repr
+  COPE_0806.fp2.repr
+  COPE_0807.fp2.repr
+  COPE_0808.fp2.repr
+  COPE_0809.fp2.repr
+  COPE_0810.fp2.repr
+  COPE_0811.fp2.repr
+  COPE_0812.fp2.repr
+  COPE_0813.fp2.repr
+  COPE_0814.fp2.repr
+  COPE_0815.fp2.repr
+  COPE_0816.fp2.repr
+  COPE_0817.fp2.repr
+  COPE_0818.fp2.repr
+  COPE_0819.fp2.repr
+  COPE_0820.fp2.repr
+  COPE_0821.fp2.repr
+  COPE_0822.fp2.repr
+  COPE_0823.fp2.repr
+  COPE_0824.fp2.repr
+  COPE_0825.fp2.repr
+  COPE_0826.fp2.repr
+  COPE_0827.fp2.repr
+  COPE_0828.fp2.repr
+  COPE_0829.fp2.repr
+  COPE_0830.fp2.repr
+  COPE_0831.fp2.repr
+  COPE_0832.fp2.repr
+  COPE_0833.fp2.repr
+  COPE_0834.fp2.repr
+  COPE_0835.fp2.repr
+  COPE_0836.fp2.repr
+  COPE_0837.fp2.repr
+  COPE_0838.fp2.repr
+  COPE_0839.fp2.repr
+  COPE_0840.fp2.repr
+  COPE_0841.fp2.repr
+  COPE_0842.fp2.repr
+  COPE_0843.fp2.repr
+  COPE_0845.fp2.repr
+  COPE_0846.fp2.repr
+  COPE_0847.fp2.repr
+  COPE_0848.fp2.repr
+  COPE_0849.fp2.repr
+  COPE_0850.fp2.repr
+  COPE_0851.fp2.repr
+  COPE_0852.fp2.repr
+  COPE_0853.fp2.repr
+  COPE_0854.fp2.repr
+  COPE_0855.fp2.repr
+  COPE_0856.fp2.repr
+  COPE_0857.fp2.repr
+  COPE_0858.fp2.repr
+  COPE_0859.fp2.repr
+  COPE_0860.fp2.repr
+  COPE_0861.fp2.repr
+  COPE_0862.fp2.repr
+  COPE_0863.fp2.repr
+  COPE_0864.fp2.repr
+  COPE_0865.fp2.repr
+  COPE_0866.fp2.repr
+  COPE_0867.fp2.repr
+  COPE_0868.fp2.repr
+  COPE_0869.fp2.repr
+  COPE_0870.fp2.repr
+  COPE_0871.fp2.repr
+  COPE_0872.fp2.repr
+  COPE_0873.fp2.repr
+  COPE_0874.fp2.repr
+  COPE_0875.fp2.repr
+  COPE_0876.fp2.repr
+  COPE_0877.fp2.repr
+  COPE_0878.fp2.repr
+  COPE_0879.fp2.repr
+  COPE_0880.fp2.repr
+  COPE_0882.fp2.repr
+  COPE_0883.fp2.repr
+  COPE_0884.fp2.repr
+  COPE_0885.fp2.repr
+  COPE_0886.fp2.repr
+  COPE_0887.fp2.repr
+  COPE_0888.fp2.repr
+  COPE_0889.fp2.repr
+  COPE_0890.fp2.repr
+  COPE_0891.fp2.repr
+  COPE_0892.fp2.repr
+  COPE_0893.fp2.repr
+  COPE_0894.fp2.repr
+  COPE_0895.fp2.repr
+  COPE_0896.fp2.repr
+  COPE_0897.fp2.repr
+  COPE_0898.fp2.repr
+  COPE_0899.fp2.repr
+  COPE_0900.fp2.repr
+  COPE_0901.fp2.repr
+  COPE_0902.fp2.repr
+  COPE_0903.fp2.repr
+  COPE_0904.fp2.repr
+  COPE_0905.fp2.repr
+  COPE_0906.fp2.repr
+  COPE_0907.fp2.repr
+  COPE_0908.fp2.repr
+  COPE_0909.fp2.repr
+  COPE_0910.fp2.repr
+  COPE_0911.fp2.repr
+  COPE_0912.fp2.repr
+  COPE_0913.fp2.repr
+  COPE_0914.fp2.repr
+  COPE_0915.fp2.repr
+  COPE_0916.fp2.repr
+  COPE_0917.fp2.repr
+  COPE_0918.fp2.repr
+  COPE_0919.fp2.repr
+  COPE_0920.fp2.repr
+  COPE_0921.fp2.repr
+  COPE_0922.fp2.repr
+  COPE_0923.fp2.repr
+  COPE_0924.fp2.repr
+  COPE_0925.fp2.repr
+  COPE_0926.fp2.repr
+  COPE_0927.fp2.repr
+  COPE_0928.fp2.repr
+  COPE_0929.fp2.repr
+  COPE_0930.fp2.repr
+  COPE_0931.fp2.repr
+  COPE_0932.fp2.repr
+  COPE_0933.fp2.repr
+  COPE_0934.fp2.repr
+  COPE_0935.fp2.repr
+  COPE_0936.fp2.repr
+  COPE_0937.fp2.repr
+  COPE_0938.fp2.repr
+  COPE_0939.fp2.repr
+  COPE_0940.fp2.repr
+  COPE_0941.fp2.repr
+  COPE_0942.fp2.repr
+  COPE_0943.fp2.repr
+  COPE_0944.fp2.repr
+  COPE_0945.fp2.repr
+  COPE_0946.fp2.repr
+  COPE_0947.fp2.repr
+  COPE_0948.fp2.repr
+  COPE_0949.fp2.repr
+  COPE_0950.fp2.repr
+  COPE_0951.fp2.repr
+  COPE_0952.fp2.repr
+  COPE_0953.fp2.repr
+  COPE_0954.fp2.repr
+  COPE_0955.fp2.repr
+  COPE_0956.fp2.repr
+  COPE_0957.fp2.repr
+  COPE_0958.fp2.repr
+  COPE_0960.fp2.repr
+  COPE_0961.fp2.repr
+  COPE_0962.fp2.repr
+  COPE_0963.fp2.repr
+  COPE_0964.fp2.repr
+  COPE_0965.fp2.repr
+  COPE_0966.fp2.repr
+  COPE_0967.fp2.repr
+  COPE_0968.fp2.repr
+  COPE_0969.fp2.repr
+  COPE_0970.fp2.repr
+  COPE_0971.fp2.repr
+  COPE_0972.fp2.repr
+  COPE_0973.fp2.repr
+  COPE_0974.fp2.repr
+  COPE_0975.fp2.repr
+  COPE_0976.fp2.repr
+  COPE_0977.fp2.repr
+  COPE_0978.fp2.repr
+  COPE_0979.fp2.repr
+  COPE_0980.fp2.repr
+  COPE_0981.fp2.repr
+  COPE_0982.fp2.repr
+  COPE_0983.fp2.repr
+  COPE_0984.fp2.repr
+  COPE_0985.fp2.repr
+  COPE_0986.fp2.repr
+  COPE_0987.fp2.repr
+  COPE_0988.fp2.repr
+  COPE_0989.fp2.repr
+  COPE_0990.fp2.repr
+  COPE_0991.fp2.repr
+  COPE_0992.fp2.repr
+  COPE_0993.fp2.repr
+  COPE_0994.fp2.repr
+  COPE_0995.fp2.repr
+  COPE_0996.fp2.repr
+  COPE_0997.fp2.repr
+  COPE_0998.fp2.repr
+  COPE_0999.fp2.repr
+  COPE_1000.fp2.repr
+  COPE_1001.fp2.repr
+  COPE_1002.fp2.repr
+  COPE_1003.fp2.repr
+  COPE_1004.fp2.repr
+  COPE_1005.fp2.repr
+  COPE_1006.fp2.repr
+  COPE_1007.fp2.repr
+  COPE_1008.fp2.repr
+  COPE_1009.fp2.repr
+  COPE_1010.fp2.repr
+  COPE_1011.fp2.repr
+  COPE_1012.fp2.repr
+  COPE_1013.fp2.repr
+  COPE_1014.fp2.repr
+  COPE_1015.fp2.repr
+  COPE_1016.fp2.repr
+  COPE_1017.fp2.repr
+  COPE_1018.fp2.repr
+  COPE_1019.fp2.repr
+  COPE_1020.fp2.repr
+  COPE_1021.fp2.repr
+  COPE_1023.fp2.repr
+  COPE_1024.fp2.repr
+  COPE_1025.fp2.repr
+  COPE_1026.fp2.repr
+  COPE_1027.fp2.repr
+  COPE_1028.fp2.repr
+  COPE_1029.fp2.repr
+  COPE_1030.fp2.repr
+  COPE_1031.fp2.repr
+  COPE_1032.fp2.repr
+  COPE_1033.fp2.repr
+  COPE_1034.fp2.repr
+  COPE_1035.fp2.repr
+  COPE_1036.fp2.repr
+  COPE_1037.fp2.repr
+  COPE_1038.fp2.repr
+  COPE_1039.fp2.repr
+  COPE_1040.fp2.repr
+  COPE_1041.fp2.repr
+  COPE_1042.fp2.repr
+  COPE_1043.fp2.repr
+  COPE_1044.fp2.repr
+  COPE_1045.fp2.repr
+  COPE_1046.fp2.repr
+  COPE_1047.fp2.repr
+  COPE_1048.fp2.repr
+  COPE_1049.fp2.repr
+  COPE_1050.fp2.repr
+  COPE_1051.fp2.repr
+  COPE_1052.fp2.repr
+  COPE_1053.fp2.repr
+  COPE_1054.fp2.repr
+  COPE_1055.fp2.repr
+  COPE_1056.fp2.repr
+  COPE_1058.fp2.repr
+  COPE_1059.fp2.repr
+  COPE_1060.fp2.repr
+  COPE_1061.fp2.repr
+  COPE_1062.fp2.repr
+  COPE_1063.fp2.repr
+  COPE_1064.fp2.repr
+  COPE_1065.fp2.repr
+  COPE_1066.fp2.repr
+  COPE_1067.fp2.repr
+  COPE_1068.fp2.repr
+  COPE_1069.fp2.repr
+  COPE_1070.fp2.repr
+  COPE_1071.fp2.repr
+  COPE_1072.fp2.repr
+  COPE_1073.fp2.repr
+  COPE_1074.fp2.repr
+  COPE_1075.fp2.repr
+  COPE_1076.fp2.repr
+  COPE_1077.fp2.repr
+  COPE_1078.fp2.repr
+  COPE_1079.fp2.repr
+  COPE_1080.fp2.repr
+  COPE_1081.fp2.repr
+  COPE_1082.fp2.repr
+  COPE_1084.fp2.repr
+  COPE_1085.fp2.repr
+  COPE_1086.fp2.repr
+  COPE_1087.fp2.repr
+  COPE_1088.fp2.repr
+  COPE_1089.fp2.repr
+  COPE_1090.fp2.repr
+  COPE_1091.fp2.repr
+  COPE_1092.fp2.repr
+  COPE_1093.fp2.repr
+  COPE_1094.fp2.repr
+  COPE_1095.fp2.repr
+  COPE_1096.fp2.repr
+  COPE_1097.fp2.repr
+  COPE_1098.fp2.repr
+  COPE_1099.fp2.repr
+  COPE_1100.fp2.repr
+  COPE_1101.fp2.repr
+  COPE_1102.fp2.repr
+  COPE_1103.fp2.repr
+  COPE_1104.fp2.repr
+  COPE_1105.fp2.repr
+  COPE_1106.fp2.repr
+  COPE_1107.fp2.repr
+  COPE_1108.fp2.repr
+  COPE_1109.fp2.repr
+  COPE_1110.fp2.repr
+  COPE_1111.fp2.repr
+  COPE_1112.fp2.repr
+  COPE_1113.fp2.repr
+  COPE_1114.fp2.repr
+  COPE_1115.fp2.repr
+  COPE_1116.fp2.repr
+  COPE_1117.fp2.repr
+  COPE_1118.fp2.repr
+  COPE_1119.fp2.repr
+  COPE_1120.fp2.repr
+  COPE_1121.fp2.repr
+  COPE_1122.fp2.repr
+  COPE_1123.fp2.repr
+  COPE_1124.fp2.repr
+  COPE_1125.fp2.repr
+  COPE_1126.fp2.repr
+  COPE_1127.fp2.repr
+  COPE_1128.fp2.repr
+  COPE_1129.fp2.repr
+  COPE_1130.fp2.repr
+  COPE_1131.fp2.repr
+  COPE_1132.fp2.repr
+  COPE_1134.fp2.repr
+  COPE_1135.fp2.repr
+  COPE_1136.fp2.repr
+  COPE_1137.fp2.repr
+  COPE_1138.fp2.repr
+  COPE_1139.fp2.repr
+  COPE_1140.fp2.repr
+  COPE_1141.fp2.repr
+  COPE_1142.fp2.repr
+  COPE_1143.fp2.repr
+  COPE_1144.fp2.repr
+  COPE_1145.fp2.repr
+  COPE_1146.fp2.repr
+  COPE_1147.fp2.repr
+  COPE_1148.fp2.repr
+  COPE_1149.fp2.repr
+  COPE_1150.fp2.repr
+  COPE_1151.fp2.repr
+  COPE_1152.fp2.repr
+  COPE_1153.fp2.repr
+  COPE_1154.fp2.repr
+  COPE_1155.fp2.repr
+  COPE_1156.fp2.repr
+  COPE_1157.fp2.repr
+  COPE_1158.fp2.repr
+  COPE_1159.fp2.repr
+  COPE_1160.fp2.repr
+  COPE_1161.fp2.repr
+  COPE_1162.fp2.repr
+  COPE_1163.fp2.repr
+  COPE_1164.fp2.repr
+  COPE_1165.fp2.repr
+  COPE_1166.fp2.repr
+  COPE_1167.fp2.repr
+  COPE_1168.fp2.repr
+  COPE_1169.fp2.repr
+  COPE_1170.fp2.repr
+  COPE_1171.fp2.repr
+  COPE_1172.fp2.repr
+  COPE_1173.fp2.repr
+  COPE_1174.fp2.repr
+  COPE_1175.fp2.repr
+  COPE_1176.fp2.repr
+  COPE_1177.fp2.repr
+  COPE_1178.fp2.repr
+  COPE_1179.fp2.repr
+  COPE_1180.fp2.repr
+  COPE_1181.fp2.repr
+  COPE_1182.fp2.repr
+  COPE_1183.fp2.repr
+  COPE_1184.fp2.repr
+  COPE_1185.fp2.repr
+  COPE_1186.fp2.repr
+  COPE_1187.fp2.repr
+  COPE_1188.fp2.repr
+  COPE_1189.fp2.repr
+  COPE_1190.fp2.repr
+  COPE_1191.fp2.repr
+  COPE_1192.fp2.repr
+  COPE_1193.fp2.repr
+  COPE_1194.fp2.repr
+  COPE_1195.fp2.repr
+  COPE_1196.fp2.repr
+  COPE_1197.fp2.repr
+  COPE_1198.fp2.repr
+  COPE_1199.fp2.repr
+  COPE_1200.fp2.repr
+  COPE_1201.fp2.repr
+  COPE_1202.fp2.repr
+  COPE_1203.fp2.repr
+  COPE_1204.fp2.repr
+  COPE_1205.fp2.repr
+  COPE_1206.fp2.repr
+  COPE_1207.fp2.repr
+  COPE_1208.fp2.repr
+  COPE_1209.fp2.repr
+  COPE_1210.fp2.repr
+  COPE_1211.fp2.repr
+  COPE_1212.fp2.repr
+  COPE_1213.fp2.repr
+  COPE_1214.fp2.repr
+  COPE_1215.fp2.repr
+  COPE_1216.fp2.repr
+  COPE_1217.fp2.repr
+  COPE_1218.fp2.repr
+  COPE_1219.fp2.repr
+  COPE_1220.fp2.repr
+  COPE_1221.fp2.repr
+  COPE_1222.fp2.repr
+  COPE_1223.fp2.repr
+  COPE_1224.fp2.repr
+  COPE_1225.fp2.repr
+  COPE_1226.fp2.repr
+  COPE_1227.fp2.repr
+  COPE_1228.fp2.repr
+  COPE_1229.fp2.repr
+  COPE_1230.fp2.repr
+  COPE_1231.fp2.repr
+  COPE_1232.fp2.repr
+  COPE_1233.fp2.repr
+  COPE_1234.fp2.repr
+  COPE_1235.fp2.repr
+  COPE_1236.fp2.repr
+  COPE_1237.fp2.repr
+  COPE_1238.fp2.repr
+  COPE_1239.fp2.repr
+  COPE_1240.fp2.repr
+  COPE_1241.fp2.repr
+  COPE_1242.fp2.repr
+  COPE_1243.fp2.repr
+  COPE_1244.fp2.repr
+  COPE_1245.fp2.repr
+  COPE_1246.fp2.repr
+  COPE_1247.fp2.repr
+  COPE_1248.fp2.repr
+  COPE_1249.fp2.repr
+  COPE_1250.fp2.repr
+  COPE_1251.fp2.repr
+  COPE_1252.fp2.repr
+  COPE_1253.fp2.repr
+  COPE_1254.fp2.repr
+  COPE_1255.fp2.repr
+  COPE_1256.fp2.repr
+  COPE_1257.fp2.repr
+  COPE_1258.fp2.repr
+  COPE_1259.fp2.repr
+  COPE_1260.fp2.repr
+  COPE_1261.fp2.repr
+  COPE_1263.fp2.repr
+  COPE_1264.fp2.repr
+  COPE_1265.fp2.repr
+  COPE_1266.fp2.repr
+
+ 
+Mon Sep 13 14:36:34 CDT 2021  Reference Genome Assembly Step 1, Select Cutoffs
+
+Mon Sep 13 14:36:34 CDT 2021  uniqseq.data exists and won't be overwritten. If you experience errors, try deleting uniqseq.data
+
+Mon Sep 13 14:36:34 CDT 2021  plot graph for cutoff 1
+
+                                                                                                                        
+                                    Number of Unique Sequences with More than X Coverage (Counted within individuals)   
+                                                                                                                        
+                            1.2e+08 +-------------------------------------------------------------------------------+   
+                                    |   +        +       +       +        +       +        +       +        +       |   
+                                    |                                                                               |   
+                                    |   *                                                                           |   
+                              1e+08 |-+  *                                                                        +-|   
+                                    |    *                                                                          |   
+                                    |     *                                                                         |   
+                                    |     *                                                                         |   
+                              8e+07 |-+    *                                                                      +-|   
+                                    |      *                                                                        |   
+                                    |       *                                                                       |   
+                              6e+07 |-+     **                                                                    +-|   
+                                    |         **                                                                    |   
+                                    |           *                                                                   |   
+                                    |                                                                               |   
+                              4e+07 |-+          ****                                                             +-|   
+                                    |                ***                                                            |   
+                                    |                   *                                                           |   
+                                    |                    ****                                                       |   
+                              2e+07 |-+                      ****                                                 +-|   
+                                    |                            *********                                          |   
+                                    |                                     ********                                  |   
+                                    |   +        +       +       +        +       *********************     +       |   
+                                  0 +-------------------------------------------------------------------------------+   
+                                        2        4       6       8        10      12       14      16       18      20  
+                                                                        Coverage                                        
+                                                                                                                        
+
+Mon Sep 13 14:36:35 CDT 2021  CEB has modified dDocent here such that there is no user input
+
+Mon Sep 13 14:36:35 CDT 2021  Use the graph above to set CUTOFF1 in the config file
+
+Mon Sep 13 14:36:35 CDT 2021  CUTOFF1 is currently set to 10
+
+Mon Sep 13 14:36:35 CDT 2021  The graph below is dependent upon the value of CUTOFF1
+
+Mon Sep 13 14:36:35 CDT 2021  plot graph for cutoff 2
+
+                                                                                                                        
+                                              Number of Unique Sequences present in more than X Individuals             
+                                                                                                                        
+                              2e+06 +-------------------------------------------------------------------------------+   
+                                    |         +         +         +         +         +         +         +         |   
+                            1.8e+06 |-+                                                                           +-|   
+                                    |                                                                               |   
+                                    |                                                                               |   
+                            1.6e+06 |-+                                                                           +-|   
+                                    |                                                                               |   
+                            1.4e+06 |*+                                                                           +-|   
+                                    |*                                                                              |   
+                            1.2e+06 |*+                                                                           +-|   
+                                    |*                                                                              |   
+                              1e+06 |*+                                                                           +-|   
+                                    |*                                                                              |   
+                                    |*                                                                              |   
+                             800000 |*+                                                                           +-|   
+                                    |*                                                                              |   
+                             600000 |*+                                                                           +-|   
+                                    |*                                                                              |   
+                             400000 |*+                                                                           +-|   
+                                    |*                                                                              |   
+                                    | *                                                                             |   
+                             200000 |-**                                                                          +-|   
+                                    |  *****  +         +         +         +         +         +         +         |   
+                                  0 +-------------------------------------------------------------------------------+   
+                                    0         50       100       150       200       250       300       350       400  
+                                                                  Number of Individuals                                 
+                                                                                                                        
+
+Mon Sep 13 14:36:35 CDT 2021  CEB has modified dDocent here such that there is no user input
+
+Mon Sep 13 14:36:35 CDT 2021  Assembly Phase 2
+
+Mon Sep 13 14:36:35 CDT 2021  mawking
+
+Mon Sep 13 14:44:26 CDT 2021 begin PE Assembly
+
+Mon Sep 13 14:44:26 CDT 2021 Reads are first clustered using only the Forward reads using CD-hit instead of rainbow 
+
+Mon Sep 13 14:45:26 CDT 2021 Running rainbow div ...
+
+Mon Sep 13 14:45:27 CDT 2021 Running rainbow merge ...
+                              If you run out of RAM, adjust the number of threads and/or the -N and -R arguments
+                              THREADS=40	-r 2	-N 8	-R 8
+                              rbdiv10.20.out is being split into 397 files for parallel processing
+001,002,003,004,005,006,007,008,009,010,011,012,013,014,015,016,017,018,019,020,021,022,023,024,025,026,027,028,029,030,031,032,033,034,035,036,037,038,039,040,041,042,043,044,045,046,047,048,049,050,051,052,053,054,055,056,057,058,059,060,061,062,063,064,065,066,067,068,069,070,071,072,073,074,075,076,077,078,079,080,081,082,083,084,085,086,087,088,089,090,091,092,093,094,095,096,097,098,099,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,227,226,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365,366,367,368,369,370,371,372,373,374,375,376,377,378,379,380,381,382,383,384,385,386,387,388,389,390,391,392,393,394,395,396,397,
+Mon Sep 13 14:46:57 CDT 2021  Selecting contigs
+
+Mon Sep 13 14:46:57 CDT 2021 Check for overlap in paired end reads with Pear
+ ____  _____    _    ____ 
+|  _ \| ____|  / \  |  _ \
+| |_) |  _|   / _ \ | |_) |
+|  __/| |___ / ___ \|  _ <
+|_|   |_____/_/   \_\_| \_\
+
+PEAR v0.9.11 [Nov 5, 2017]
+
+Citation - PEAR: a fast and accurate Illumina Paired-End reAd mergeR
+Zhang et al (2014) Bioinformatics 30(5): 614-620 | doi:10.1093/bioinformatics/btt593
+
+Forward reads file.................: ref.10.20.F.fq
+Reverse reads file.................: ref.10.20.R.fq
+PHRED..............................: 33
+Using empirical frequencies........: YES
+Statistical method.................: OES
+Maximum assembly length............: 999999
+Minimum assembly length............: 175
+p-value............................: 0.000100
+Quality score threshold (trimming).: 0
+Minimum read size after trimming...: 1
+Maximal ratio of uncalled bases....: 1.000000
+Minimum overlap....................: 20
+Scoring method.....................: Scaled score
+Threads............................: 40
+
+Allocating memory..................: 200,000,000 bytes
+Computing empirical frequencies....: DONE
+  A: 0.296216
+  C: 0.204844
+  G: 0.205124
+  T: 0.293816
+  0 uncalled bases
+Assemblying reads: 0%Assemblying reads: 100%
+
+Assembled reads ...................: 51 / 27,516 (0.185%)
+Discarded reads ...................: 0 / 27,516 (0.000%)
+Not assembled reads ...............: 27,465 / 27,516 (99.815%)
+Assembled reads file...............: overlap.10.20.assembled.fastq
+Discarded reads file...............: overlap.10.20.discarded.fastq
+Unassembled forward reads file.....: overlap.10.20.unassembled.forward.fastq
+Unassembled reverse reads file.....: overlap.10.20.unassembled.reverse.fastq
+
+Mon Sep 13 14:47:00 CDT 2021 More mawking
+
+Mon Sep 13 14:47:01 CDT 2021 More CD-HITting
+================================================================
+Program: CD-HIT, V4.8.1 (+OpenMP), Mar 19 2019, 15:23:33
+Command: cd-hit-est -i totalover.10.20.fasta -o
+         reference.10.20.fasta.original -M 0 -T 0 -c 0.9
+
+Started: Mon Sep 13 14:47:01 2021
+================================================================
+                            Output                              
+----------------------------------------------------------------
+total number of CPUs in the system is 20
+Actual number of CPUs to be used: 20
+
+total seq: 27866
+longest and shortest : 545 and 140
+Total letters: 9346718
+Sequences have been sorted
+
+Approximated minimal memory consumption:
+Sequence        : 13M
+Buffer          : 20 X 12M = 249M
+Table           : 2 X 17M = 34M
+Miscellaneous   : 4M
+Total           : 301M
+
+Table limit with the given memory limit:
+Max number of representatives: 547213
+Max number of word counting entries: 29792018
+
+# comparing sequences from          0  to       1266
+.---------- new table with     1266 representatives
+# comparing sequences from       1266  to       2475
+.....................42.9%43.0%43.2%43.3%43.5%43.6%43.7%43.9%44.0%44.2%44.3%44.4%44.5%44.7%44.8%45.0%45.1%45.2%45.4%45.5%45.7%45.8%46.0%46.1%46.3%46.4%46.5%46.6%46.8%46.9%47.1%47.2%47.3%47.4%47.6%47.7%47.9%48.0%48.2%48.3%48.5%48.6%48.7%48.9%49.0%49.1%49.3%49.4%49.5%49.7%49.8%49.9%50.1%50.2%50.3%50.5%50.6%50.8%50.9%51.1%51.2%51.3%51.5%51.6%51.7%51.9%52.0%52.1%52.3%52.4%52.5%52.6%52.8%52.9%53.1%53.2%53.3%53.5%53.6%53.8%54.0%54.1%54.3%54.5%54.6%54.8%54.9%55.1%55.2%55.3%55.5%55.6%55.7%55.9%56.1%56.2%56.4%56.5%56.7%56.8%56.9%57.1%57.3%57.4%57.5%57.7%57.9%58.0%58.1%58.3%58.4%58.5%58.6%58.8%58.9%59.0%59.1%59.3%59.4%59.5%59.7%59.8%60.0%60.1%60.3%60.4%60.6%60.7%60.9%61.0%61.1%61.3%61.4%61.6%61.7%61.8%62.0%62.1%62.3%62.4%62.5%62.6%62.8%63.0%63.1%63.3%63.4%63.6%63.7%63.8%64.0%64.1%64.2%64.4%64.5%64.7%64.8%65.0%65.1%65.3%65.4%65.5%65.7%65.8%65.9%66.1%66.2%66.4%66.5%66.7%66.9%67.0%67.2%67.3%67.5%67.6%67.7%67.9%68.0%68.2%68.3%68.5%68.6%68.8%68.9%69.1%69.2%69.4%69.5%69.7%69.8%70.0%70.1%70.2%70.4%70.5%70.7%70.9%71.0%71.1%71.3%71.4%71.5%71.6%71.8%71.9%72.0%72.1%72.3%72.4%72.6%72.7%72.8%73.0%73.1%73.2%73.3%73.5%73.6%73.7%73.9%74.1%74.2%74.3%74.4%74.5%74.6%74.8%74.9%75.0%75.2%75.3%75.5%75.6%75.8%75.9%76.0%76.2%76.3%76.5%76.6%76.8%76.9%77.0%77.2%77.3%77.4%77.5%77.6%77.8%78.0%78.1%78.2%78.3%78.5%78.6%78.8%78.9%79.1%79.2%79.3%79.5%79.6%79.8%79.9%80.1%80.2%80.4%80.5%80.7%80.8%80.9%81.0%81.2%81.3%81.5%81.6%81.8%81.9%82.0%82.2%82.3%82.4%82.6%82.7%82.9%83.0%83.2%83.3%83.5%83.6%83.8%83.9%84.1%84.2%84.4%84.5%84.6%84.8%85.0%85.1%85.3%85.4%85.6%85.7%85.8%86.0%86.1%86.3%86.4%86.5%86.6%86.8%86.9%87.1%87.2%87.4%87.5%87.7%87.8%87.9%88.1%88.2%88.4%88.5%88.6%88.8%88.9%89.1%89.2%89.4%89.5%89.7%89.8%90.0%90.1%90.3%90.4%90.6%90.7%90.8%90.9%91.1%91.2%91.4%91.5%91.6%91.7%91.9%92.0%92.2%92.3%92.4%92.6%92.7%92.9%93.0%93.2%93.3%93.4%93.6%93.8%93.9%94.0%94.2%94.3%94.5%94.6%94.7%94.9%95.0%95.1%95.3%95.4%95.5%95.7%95.8%95.9%96.1%96.2%96.4%96.5%96.6%96.8%97.0%97.1%97.2%97.4%97.5%97.6%97.7%97.9%98.0%98.2%98.3%98.4%98.5%98.7%98.8%99.0%99.1%99.2%99.4%99.5%99.6%99.8%99.9%---------- new table with     1209 representatives
+# comparing sequences from       2475  to       3629
+.....................53.1%53.2%53.3%53.4%53.5%53.7%53.8%54.0%54.1%54.3%54.4%54.5%54.7%54.8%55.0%55.1%55.3%55.5%55.6%55.7%55.9%56.0%56.1%56.3%56.4%56.5%56.7%56.8%57.0%57.1%57.2%57.4%57.6%57.7%57.9%58.0%58.1%58.3%58.4%58.5%58.7%58.8%58.9%59.1%59.2%59.3%59.5%59.6%59.8%59.9%60.1%60.3%60.4%60.5%60.7%60.8%60.9%61.1%61.2%61.3%61.4%61.5%61.7%61.8%61.9%62.0%62.2%62.3%62.4%62.5%62.7%62.8%62.9%63.0%63.2%63.3%63.4%63.5%63.7%63.8%63.9%64.1%64.2%64.4%64.5%64.7%64.8%65.0%65.1%65.2%65.4%65.5%65.6%65.8%65.9%66.0%66.2%66.3%66.4%66.6%66.7%66.9%67.0%67.1%67.3%67.4%67.6%67.7%67.8%68.0%68.1%68.2%68.4%68.5%68.7%68.8%69.0%69.1%69.2%69.4%69.5%69.7%69.8%70.0%70.1%70.3%70.4%70.5%70.7%70.8%70.9%71.0%71.2%71.4%71.5%71.7%71.8%71.9%72.0%72.2%72.3%72.5%72.6%72.8%73.0%73.1%73.3%73.4%73.6%73.7%73.8%73.9%74.1%74.2%74.4%74.5%74.7%74.8%75.0%75.1%75.2%75.3%75.5%75.6%75.7%75.8%76.0%76.1%76.3%76.4%76.6%76.7%76.9%77.0%77.1%77.3%77.4%77.6%77.7%77.8%78.0%78.1%78.3%78.4%78.6%78.7%78.9%79.0%79.1%79.3%79.4%79.5%79.7%79.8%79.9%80.1%80.2%80.4%80.5%80.6%80.8%80.9%81.0%81.2%81.4%81.5%81.6%81.8%81.9%82.0%82.2%82.3%82.5%82.6%82.7%82.8%83.0%83.1%83.2%83.3%83.5%83.6%83.8%83.9%84.0%84.2%84.3%84.5%84.6%84.7%84.9%85.0%85.1%85.3%85.5%85.6%85.8%85.9%86.1%86.2%86.4%86.6%86.7%86.8%87.0%87.1%87.3%87.5%87.6%87.8%87.9%88.0%88.1%88.2%88.4%88.5%88.7%88.8%89.0%89.1%89.2%89.4%89.5%89.6%89.8%89.9%90.0%90.1%90.3%90.5%90.6%90.8%90.9%91.0%91.2%91.3%91.5%91.6%91.8%91.9%92.0%92.1%92.3%92.4%92.6%92.7%92.9%93.0%93.1%93.3%93.4%93.5%93.6%93.8%93.9%94.1%94.2%94.3%94.5%94.6%94.8%94.9%95.1%95.2%95.3%95.5%95.6%95.7%95.8%96.0%96.1%96.3%96.4%96.5%96.7%96.8%97.0%97.2%97.3%97.4%97.6%97.7%97.9%98.0%98.1%98.3%98.4%98.5%98.7%98.8%98.9%99.1%99.3%99.4%99.6%99.7%99.8%100.0%---------- new table with     1154 representatives
+# comparing sequences from       3629  to       4730
+.....................57.4%57.5%57.7%57.8%58.0%58.1%58.3%58.4%58.5%58.7%58.8%59.0%59.1%59.3%59.4%59.5%59.7%59.8%60.0%60.1%60.3%60.4%60.6%60.7%60.8%61.0%61.1%61.2%61.4%61.5%61.6%61.8%61.9%62.1%62.2%62.4%62.5%62.7%62.9%63.0%63.2%63.3%63.5%63.6%63.7%63.8%64.0%64.1%64.3%64.4%64.6%64.7%64.9%65.0%65.2%65.3%65.5%65.6%65.8%66.0%66.1%66.2%66.4%66.5%66.6%66.8%66.9%67.1%67.2%67.4%67.5%67.7%67.8%67.9%68.1%68.2%68.4%68.5%68.6%68.8%68.9%69.1%69.2%69.4%69.6%69.7%69.8%70.0%70.1%70.3%70.4%70.5%70.7%70.8%70.9%71.0%71.1%71.3%71.4%71.6%71.8%71.9%72.0%72.2%72.3%72.5%72.6%72.7%72.8%73.0%73.1%73.2%73.3%73.5%73.7%73.8%73.9%74.1%74.2%74.4%74.5%74.6%74.8%74.9%75.0%75.2%75.3%75.5%75.7%75.8%75.9%76.1%76.2%76.4%76.5%76.7%76.8%76.9%77.1%77.2%77.3%77.4%77.6%77.8%77.9%78.1%78.2%78.4%78.5%78.6%78.8%78.9%79.0%79.2%79.3%79.5%79.6%79.8%79.9%80.0%80.2%80.3%80.5%80.6%80.8%80.9%81.0%81.1%81.2%81.4%81.5%81.6%81.7%81.9%82.0%82.2%82.3%82.5%82.6%82.7%82.9%83.0%83.2%83.3%83.5%83.6%83.8%83.9%84.0%84.2%84.3%84.5%84.6%84.7%84.8%85.0%85.1%85.3%85.4%85.6%85.8%85.9%86.1%86.2%86.3%86.5%86.6%86.7%86.8%87.0%87.1%87.2%87.4%87.5%87.7%87.8%87.9%88.0%88.2%88.3%88.5%88.6%88.7%88.9%89.0%89.2%89.3%89.4%89.6%89.7%89.9%90.0%90.1%90.2%90.4%90.5%90.7%90.8%90.9%91.1%91.2%91.4%91.5%91.6%91.8%91.9%92.0%92.1%92.3%92.5%92.6%92.8%92.9%93.1%93.3%93.4%93.5%93.7%93.9%94.0%94.2%94.3%94.5%94.6%94.8%94.9%95.1%95.2%95.3%95.5%95.6%95.8%95.9%96.0%96.1%96.3%96.4%96.6%96.7%96.8%97.0%97.1%97.3%97.4%97.5%97.6%97.8%97.9%98.0%98.2%98.3%98.4%98.6%98.8%98.9%99.0%99.2%99.3%99.5%99.6%99.8%100.0%---------- new table with     1101 representatives
+# comparing sequences from       4730  to       5781
+.....................59.0%59.1%59.3%59.4%59.5%59.6%59.8%59.9%60.0%60.1%60.3%60.4%60.6%60.7%60.8%61.0%61.1%61.3%61.4%61.5%61.7%61.8%62.0%62.1%62.2%62.3%62.5%62.6%62.8%62.9%63.0%63.1%63.3%63.4%63.6%63.7%63.9%64.0%64.1%64.3%64.4%64.5%64.7%64.8%65.0%65.1%65.3%65.4%65.6%65.7%65.8%66.0%66.1%66.3%66.5%66.6%66.7%66.9%67.0%67.2%67.3%67.4%67.6%67.8%67.9%68.0%68.2%68.3%68.4%68.5%68.6%68.8%68.9%69.1%69.2%69.4%69.5%69.7%69.8%69.9%70.1%70.2%70.4%70.5%70.7%70.8%70.9%71.0%71.2%71.4%71.5%71.6%71.7%71.9%72.1%72.2%72.3%72.5%72.6%72.8%72.9%73.0%73.2%73.4%73.5%73.6%73.8%74.0%74.1%74.2%74.3%74.5%74.7%74.8%75.0%75.1%75.3%75.4%75.5%75.7%75.8%75.9%76.1%76.2%76.4%76.5%76.6%76.8%76.9%77.1%77.3%77.4%77.6%77.7%77.8%77.9%78.1%78.2%78.3%78.5%78.6%78.8%78.9%79.0%79.2%79.3%79.4%79.5%79.7%79.8%80.0%80.1%80.3%80.4%80.5%80.7%80.8%80.9%81.0%81.2%81.3%81.4%81.5%81.7%81.8%82.0%82.1%82.2%82.4%82.5%82.7%82.8%82.9%83.0%83.2%83.3%83.5%83.6%83.8%83.9%84.0%84.2%84.3%84.5%84.6%84.7%84.8%85.0%85.1%85.3%85.4%85.6%85.7%85.8%86.0%86.1%86.3%86.4%86.6%86.7%86.8%87.0%87.1%87.3%87.4%87.5%87.7%87.8%87.9%88.1%88.2%88.4%88.5%88.6%88.8%88.9%89.1%89.2%89.4%89.5%89.7%89.8%89.9%90.1%90.2%90.4%90.5%90.7%90.8%91.0%91.1%91.3%91.4%91.6%91.7%91.8%92.0%92.1%92.3%92.5%92.6%92.8%92.9%93.1%93.3%93.4%93.6%93.7%93.8%94.0%94.1%94.3%94.4%94.6%94.7%94.9%95.0%95.2%95.3%95.5%95.7%95.8%96.0%96.1%96.3%96.4%96.6%96.7%96.9%97.0%97.1%97.3%97.5%97.6%97.8%97.9%98.0%98.1%98.3%98.4%98.6%98.7%98.8%99.0%99.1%99.3%99.4%99.6%99.7%99.9%100.0%---------- new table with     1050 representatives
+# comparing sequences from       5781  to       6784
+.....................60.7%60.8%60.9%61.0%61.2%61.3%61.4%61.6%61.7%61.9%62.0%62.1%62.2%62.4%62.5%62.7%62.8%63.0%63.1%63.3%63.4%63.6%63.7%63.8%64.0%64.1%64.2%64.4%64.5%64.6%64.8%64.9%65.0%65.1%65.3%65.5%65.6%65.7%65.8%66.0%66.1%66.2%66.4%66.5%66.7%66.8%66.9%67.1%67.2%67.4%67.5%67.6%67.8%67.9%68.0%68.1%68.2%68.4%68.5%68.6%68.7%68.9%69.0%69.1%69.3%69.4%69.5%69.7%69.8%69.9%70.1%70.2%70.4%70.5%70.6%70.8%70.9%71.0%71.2%71.3%71.5%71.6%71.8%71.9%72.1%72.2%72.4%72.5%72.7%72.8%72.9%73.0%73.1%73.3%73.4%73.6%73.7%73.8%74.0%74.1%74.2%74.4%74.5%74.6%74.8%74.9%75.1%75.2%75.4%75.5%75.7%75.8%75.9%76.1%76.2%76.3%76.5%76.6%76.7%76.9%77.0%77.2%77.3%77.4%77.6%77.7%77.8%78.0%78.1%78.2%78.3%78.4%78.5%78.7%78.8%78.9%79.1%79.2%79.4%79.5%79.7%79.8%79.9%80.1%80.3%80.4%80.5%80.7%80.8%80.9%81.1%81.2%81.3%81.4%81.5%81.7%81.8%82.0%82.1%82.2%82.3%82.5%82.6%82.8%83.0%83.1%83.2%83.4%83.5%83.6%83.7%83.9%84.0%84.2%84.3%84.5%84.6%84.8%84.9%85.1%85.2%85.4%85.6%85.7%85.9%86.0%86.2%86.3%86.5%86.6%86.7%86.9%87.0%87.1%87.3%87.4%87.6%87.7%87.9%88.0%88.1%88.2%88.4%88.6%88.7%88.9%89.0%89.2%89.3%89.5%89.6%89.7%89.9%90.0%90.1%90.3%90.4%90.5%90.7%90.8%90.9%91.1%91.3%91.4%91.5%91.6%91.8%91.9%92.1%92.2%92.3%92.5%92.6%92.8%92.9%93.1%93.2%93.3%93.5%93.6%93.8%93.9%94.0%94.2%94.3%94.4%94.6%94.7%94.8%95.0%95.1%95.3%95.4%95.5%95.7%95.8%95.9%96.1%96.2%96.3%96.5%96.6%96.8%96.9%97.1%97.2%97.3%97.5%97.6%97.8%97.9%98.0%98.2%98.3%98.4%98.5%98.6%98.7%98.9%99.0%99.2%99.3%99.4%99.6%99.7%99.9%---------- new table with     1003 representatives
+# comparing sequences from       6784  to       7742
+.....................62.1%62.2%62.4%62.5%62.6%62.7%62.9%63.1%63.2%63.4%63.5%63.7%63.8%63.9%64.1%64.2%64.3%64.4%64.6%64.7%64.9%65.0%65.1%65.2%65.3%65.5%65.6%65.7%65.9%66.0%66.1%66.2%66.3%66.5%66.6%66.7%66.9%67.1%67.2%67.3%67.5%67.6%67.8%67.9%68.0%68.2%68.3%68.5%68.7%68.8%68.9%69.1%69.2%69.4%69.5%69.6%69.8%69.9%70.1%70.2%70.4%70.5%70.7%70.8%70.9%71.1%71.2%71.4%71.5%71.7%71.8%72.0%72.1%72.3%72.4%72.6%72.7%72.8%72.9%73.0%73.2%73.4%73.5%73.6%73.7%73.9%74.1%74.2%74.4%74.6%74.7%74.9%75.0%75.2%75.3%75.5%75.6%75.8%75.9%76.0%76.2%76.3%76.4%76.5%76.7%76.8%77.0%77.1%77.2%77.4%77.5%77.7%77.8%77.9%78.1%78.2%78.4%78.5%78.6%78.8%78.9%79.0%79.2%79.3%79.4%79.6%79.7%79.9%80.0%80.2%80.3%80.4%80.6%80.7%80.9%81.0%81.1%81.2%81.3%81.4%81.6%81.7%81.8%82.0%82.2%82.3%82.5%82.6%82.8%82.9%83.1%83.2%83.4%83.5%83.7%83.8%83.9%84.1%84.2%84.4%84.5%84.6%84.8%84.9%85.0%85.2%85.3%85.5%85.6%85.8%85.9%86.0%86.2%86.3%86.4%86.6%86.7%86.9%87.0%87.2%87.3%87.5%87.6%87.8%87.9%88.1%88.2%88.3%88.5%88.6%88.7%88.9%89.0%89.2%89.3%89.5%89.6%89.8%89.9%90.0%90.1%90.3%90.5%90.6%90.7%90.9%91.0%91.2%91.3%91.4%91.6%91.7%91.8%91.9%92.1%92.2%92.4%92.5%92.6%92.8%92.9%93.1%93.3%93.4%93.6%93.7%93.9%94.1%94.2%94.3%94.5%94.7%94.8%95.0%95.1%95.2%95.3%95.5%95.7%95.8%96.0%96.1%96.2%96.4%96.5%96.6%96.8%96.9%97.0%97.1%97.3%97.4%97.6%97.7%97.8%98.0%98.1%98.3%98.4%98.6%98.7%98.8%98.9%99.1%99.2%99.4%99.5%99.7%99.8%100.0%---------- new table with      957 representatives
+# comparing sequences from       7742  to       8656
+.....................64.2%64.4%64.5%64.7%64.8%65.0%65.1%65.2%65.4%65.5%65.7%65.8%66.0%66.1%66.2%66.3%66.5%66.6%66.8%66.9%67.0%67.1%67.2%67.4%67.5%67.6%67.8%67.9%68.0%68.1%68.3%68.4%68.6%68.7%68.9%69.0%69.2%69.3%69.5%69.6%69.7%69.9%70.0%70.2%70.3%70.4%70.5%70.6%70.8%70.9%71.1%71.2%71.3%71.5%71.6%71.7%71.8%72.0%72.1%72.2%72.4%72.5%72.6%72.8%72.9%73.0%73.2%73.3%73.5%73.6%73.8%73.9%74.0%74.2%74.3%74.4%74.5%74.7%74.8%74.9%75.1%75.2%75.4%75.6%75.7%75.9%76.0%76.1%76.3%76.4%76.6%76.7%76.8%77.0%77.1%77.3%77.4%77.5%77.7%77.8%77.9%78.0%78.2%78.3%78.5%78.6%78.7%78.9%79.0%79.2%79.3%79.4%79.6%79.7%79.8%80.0%80.1%80.3%80.4%80.6%80.7%80.8%80.9%81.0%81.2%81.3%81.4%81.5%81.7%81.9%82.0%82.2%82.3%82.5%82.6%82.8%82.9%83.0%83.2%83.3%83.5%83.6%83.8%83.9%84.0%84.2%84.3%84.4%84.6%84.7%84.8%84.9%85.1%85.3%85.4%85.5%85.7%85.8%85.9%86.0%86.1%86.3%86.4%86.5%86.6%86.8%86.9%87.1%87.2%87.3%87.5%87.6%87.8%88.0%88.1%88.2%88.4%88.5%88.6%88.8%88.9%89.1%89.2%89.3%89.5%89.6%89.8%89.9%90.1%90.2%90.4%90.6%90.7%90.8%91.0%91.1%91.3%91.5%91.6%91.8%91.9%92.1%92.2%92.4%92.5%92.6%92.8%92.9%93.0%93.2%93.4%93.5%93.7%93.8%94.0%94.1%94.3%94.4%94.6%94.7%94.9%95.0%95.2%95.3%95.4%95.6%95.7%95.9%96.1%96.2%96.3%96.5%96.6%96.8%97.0%97.1%97.3%97.4%97.5%97.7%97.8%98.0%98.1%98.2%98.3%98.4%98.6%98.7%98.8%99.0%99.2%99.3%99.4%99.6%99.7%99.8%---------- new table with      914 representatives
+# comparing sequences from       8656  to       9529
+.....................67.2%67.3%67.5%67.6%67.7%67.9%68.0%68.1%68.3%68.4%68.6%68.7%68.9%69.0%69.2%69.3%69.5%69.6%69.8%70.0%70.1%70.2%70.4%70.5%70.7%70.8%71.0%71.1%71.2%71.4%71.5%71.6%71.8%71.9%72.1%72.2%72.4%72.5%72.7%72.8%72.9%73.1%73.2%73.3%73.5%73.6%73.7%73.9%74.0%74.2%74.3%74.4%74.6%74.7%74.9%75.0%75.2%75.3%75.5%75.6%75.7%75.9%76.1%76.2%76.4%76.5%76.6%76.8%76.9%77.1%77.2%77.3%77.5%77.6%77.7%77.9%78.0%78.1%78.3%78.4%78.6%78.7%78.9%79.0%79.2%79.3%79.5%79.6%79.7%79.9%80.0%80.1%80.3%80.4%80.6%80.7%80.9%81.1%81.2%81.4%81.5%81.7%81.8%81.9%82.1%82.2%82.3%82.4%82.6%82.7%82.9%83.0%83.2%83.3%83.4%83.6%83.7%83.9%84.0%84.2%84.4%84.5%84.7%84.8%85.0%85.1%85.2%85.3%85.5%85.6%85.7%85.8%86.0%86.2%86.3%86.4%86.6%86.7%86.9%87.0%87.1%87.2%87.4%87.5%87.6%87.8%87.9%88.0%88.1%88.3%88.5%88.6%88.7%88.8%88.9%89.1%89.2%89.4%89.6%89.7%89.8%90.0%90.1%90.3%90.4%90.5%90.7%90.8%90.9%91.1%91.3%91.4%91.5%91.6%91.8%91.9%92.1%92.2%92.3%92.5%92.6%92.8%92.9%93.1%93.2%93.3%93.4%93.6%93.7%93.8%93.9%94.1%94.2%94.3%94.5%94.6%94.8%94.9%95.1%95.2%95.4%95.5%95.6%95.8%95.9%96.0%96.2%96.3%96.4%96.6%96.7%96.9%97.0%97.1%97.3%97.4%97.6%97.7%97.8%97.9%98.1%98.2%98.3%98.4%98.6%98.7%98.8%99.0%99.1%99.2%99.4%99.5%99.6%99.8%99.9%---------- new table with      873 representatives
+# comparing sequences from       9529  to      10362
+...............................    10000  finished       9998  clusters
+67.0%67.1%67.3%67.4%67.5%67.7%67.8%68.0%68.1%68.3%68.4%68.5%68.7%68.8%68.9%69.1%69.2%69.4%69.5%69.7%69.8%69.9%70.1%70.2%70.4%70.5%70.6%70.7%70.9%71.0%71.2%71.3%71.4%71.6%71.7%71.9%72.0%72.1%72.2%72.4%72.5%72.7%72.8%72.9%73.1%73.2%73.4%73.5%73.7%73.8%74.0%74.1%74.2%74.4%74.5%74.7%74.8%75.0%75.1%75.3%75.4%75.6%75.7%75.8%76.0%76.1%76.3%76.4%76.6%76.7%76.9%77.1%77.2%77.3%77.5%77.6%77.7%77.9%78.0%78.1%78.2%78.3%78.5%78.6%78.7%78.8%79.0%79.2%79.4%79.5%79.6%79.8%79.9%80.0%80.1%80.3%80.4%80.5%80.7%80.8%80.9%81.1%81.2%81.3%81.5%81.6%81.7%81.9%82.0%82.1%82.3%82.4%82.5%82.7%82.8%82.9%83.1%83.2%83.3%83.5%83.6%83.8%83.9%84.1%84.2%84.4%84.5%84.7%84.8%84.9%85.0%85.2%85.3%85.4%85.5%85.7%85.8%86.0%86.2%86.3%86.5%86.7%86.8%86.9%87.1%87.2%87.3%87.5%87.6%87.8%87.9%88.1%88.2%88.4%88.6%88.8%88.9%89.0%89.1%89.3%89.4%89.5%89.7%89.8%89.9%90.1%90.2%90.4%90.6%90.7%90.8%91.0%91.1%91.3%91.4%91.5%91.7%91.8%91.9%92.1%92.2%92.3%92.5%92.6%92.8%92.9%93.0%93.2%93.4%93.5%93.6%93.8%93.9%94.1%94.3%94.4%94.5%94.7%94.8%95.0%95.1%95.3%95.4%95.5%95.6%95.7%95.9%96.0%96.1%96.3%96.4%96.5%96.6%96.7%96.8%97.0%97.1%97.2%97.4%97.5%97.7%97.8%98.0%98.1%98.3%98.4%98.5%98.6%98.8%98.9%99.1%99.2%99.3%99.5%99.6%99.7%99.8%100.0%---------- new table with      833 representatives
+# comparing sequences from      10362  to      11157
+....................70.7%70.8%70.9%71.0%71.1%71.3%71.4%71.6%71.7%71.9%72.0%72.1%72.3%72.5%72.6%72.7%72.8%72.9%73.1%73.2%73.3%73.5%73.7%73.8%73.9%74.0%74.2%74.3%74.5%74.6%74.8%75.0%75.1%75.2%75.4%75.5%75.6%75.8%75.9%76.1%76.2%76.4%76.5%76.7%76.8%76.9%77.1%77.2%77.3%77.5%77.6%77.7%77.9%78.0%78.1%78.3%78.4%78.5%78.6%78.8%78.9%79.0%79.1%79.3%79.4%79.6%79.7%79.9%80.0%80.1%80.3%80.4%80.5%80.7%80.9%81.0%81.1%81.3%81.4%81.6%81.7%81.9%82.0%82.1%82.3%82.4%82.5%82.6%82.8%82.9%83.1%83.2%83.4%83.5%83.7%83.8%84.0%84.1%84.2%84.4%84.5%84.7%84.8%85.0%85.2%85.3%85.4%85.5%85.6%85.7%85.9%86.0%86.2%86.3%86.4%86.6%86.7%86.8%87.0%87.1%87.3%87.4%87.5%87.7%87.9%88.0%88.2%88.4%88.5%88.6%88.7%88.9%89.0%89.2%89.3%89.5%89.7%89.8%90.0%90.1%90.3%90.4%90.5%90.7%90.8%90.9%91.1%91.3%91.4%91.5%91.7%91.8%91.9%92.1%92.2%92.3%92.5%92.7%92.8%92.9%93.1%93.2%93.3%93.5%93.6%93.8%93.9%94.0%94.2%94.3%94.4%94.6%94.7%94.9%95.1%95.2%95.3%95.5%95.6%95.7%95.9%96.0%96.2%96.3%96.4%96.6%96.7%96.8%97.0%97.1%97.3%97.4%97.5%97.7%97.9%98.0%98.1%98.2%98.3%98.5%98.6%98.7%98.9%99.0%99.2%99.3%99.4%99.6%99.7%99.9%100.0%---------- new table with      794 representatives
+# comparing sequences from      11157  to      11916
+....................71.2%71.3%71.4%71.6%71.7%71.8%71.9%72.1%72.3%72.4%72.5%72.7%72.8%73.0%73.1%73.2%73.4%73.5%73.6%73.8%73.9%74.0%74.2%74.3%74.4%74.5%74.7%74.9%75.0%75.1%75.2%75.4%75.5%75.6%75.8%75.9%76.0%76.2%76.4%76.5%76.6%76.8%76.9%77.1%77.2%77.3%77.5%77.6%77.7%77.9%78.0%78.2%78.4%78.5%78.6%78.8%78.9%79.1%79.2%79.4%79.5%79.7%79.8%79.9%80.1%80.2%80.3%80.5%80.6%80.8%80.9%81.0%81.2%81.3%81.5%81.6%81.7%81.9%82.0%82.2%82.3%82.4%82.6%82.7%82.8%83.0%83.1%83.2%83.3%83.4%83.6%83.7%83.9%84.0%84.1%84.3%84.5%84.6%84.7%84.9%85.0%85.2%85.3%85.5%85.6%85.8%85.9%86.0%86.2%86.4%86.5%86.6%86.8%86.9%87.0%87.1%87.3%87.4%87.6%87.7%87.9%88.0%88.1%88.2%88.4%88.6%88.7%88.9%89.0%89.1%89.3%89.4%89.6%89.7%89.9%90.0%90.1%90.3%90.4%90.6%90.7%90.8%91.0%91.1%91.3%91.4%91.6%91.7%91.9%92.1%92.2%92.4%92.6%92.8%93.0%93.1%93.2%93.4%93.5%93.7%93.8%93.9%94.0%94.1%94.2%94.4%94.5%94.7%94.8%94.9%95.1%95.2%95.4%95.5%95.7%95.8%96.0%96.1%96.3%96.4%96.6%96.8%96.9%97.1%97.2%97.4%97.5%97.7%97.8%97.9%98.0%98.2%98.3%98.4%98.5%98.6%98.8%98.9%99.0%99.2%99.4%99.5%99.6%99.8%99.9%---------- new table with      759 representatives
+# comparing sequences from      11916  to      12641
+....................72.2%72.4%72.5%72.6%72.8%72.9%73.1%73.2%73.3%73.4%73.6%73.7%73.9%74.1%74.2%74.3%74.5%74.6%74.8%75.0%75.1%75.2%75.3%75.4%75.5%75.7%75.8%75.9%76.1%76.2%76.3%76.5%76.6%76.8%76.9%77.1%77.2%77.3%77.5%77.7%77.8%78.0%78.1%78.2%78.4%78.6%78.7%78.8%78.9%79.1%79.2%79.3%79.5%79.6%79.8%79.9%80.1%80.2%80.4%80.5%80.7%80.8%81.0%81.1%81.3%81.4%81.6%81.7%81.8%82.0%82.1%82.3%82.4%82.5%82.7%82.9%83.0%83.1%83.2%83.4%83.5%83.7%83.9%84.0%84.1%84.2%84.4%84.5%84.6%84.8%84.9%85.0%85.1%85.3%85.5%85.6%85.7%85.9%86.0%86.2%86.3%86.4%86.5%86.6%86.7%86.9%87.0%87.1%87.3%87.5%87.6%87.7%87.9%88.0%88.1%88.3%88.4%88.5%88.6%88.7%88.9%89.1%89.2%89.3%89.5%89.7%89.8%89.9%90.1%90.2%90.3%90.5%90.6%90.7%90.9%91.0%91.2%91.3%91.5%91.6%91.7%91.9%92.0%92.2%92.3%92.4%92.6%92.7%92.9%93.1%93.2%93.3%93.4%93.6%93.8%93.9%94.1%94.2%94.4%94.5%94.7%94.9%95.0%95.2%95.3%95.4%95.5%95.7%95.8%96.0%96.1%96.2%96.4%96.6%96.7%96.8%97.0%97.1%97.3%97.4%97.5%97.6%97.8%97.9%98.0%98.2%98.3%98.4%98.6%98.7%98.9%99.0%99.1%99.2%99.4%99.5%99.7%99.8%99.9%---------- new table with      724 representatives
+# comparing sequences from      12641  to      13333
+....................75.2%75.4%75.5%75.6%75.7%75.8%76.0%76.1%76.3%76.4%76.6%76.7%76.9%77.0%77.1%77.3%77.5%77.6%77.8%77.9%78.0%78.2%78.3%78.5%78.6%78.7%78.8%78.9%79.1%79.2%79.4%79.5%79.6%79.8%79.9%80.0%80.2%80.3%80.4%80.6%80.7%80.9%81.0%81.2%81.3%81.5%81.6%81.8%81.9%82.1%82.3%82.4%82.5%82.6%82.7%82.9%83.0%83.1%83.2%83.4%83.5%83.6%83.8%83.9%84.1%84.2%84.3%84.5%84.6%84.7%84.9%85.0%85.1%85.3%85.4%85.6%85.7%85.8%86.0%86.1%86.3%86.4%86.5%86.7%86.8%87.0%87.2%87.3%87.5%87.6%87.8%87.9%88.1%88.2%88.4%88.5%88.6%88.8%88.9%89.0%89.2%89.4%89.6%89.7%89.8%90.0%90.1%90.3%90.4%90.6%90.7%90.8%91.0%91.2%91.3%91.5%91.6%91.8%91.9%92.0%92.2%92.4%92.5%92.7%92.9%93.0%93.1%93.3%93.4%93.6%93.8%93.9%94.1%94.2%94.4%94.5%94.6%94.8%94.9%95.1%95.2%95.3%95.5%95.7%95.9%96.0%96.1%96.3%96.4%96.6%96.7%96.8%96.9%97.1%97.2%97.3%97.5%97.6%97.8%98.0%98.2%98.3%98.4%98.5%98.6%98.8%98.9%99.1%99.2%99.4%99.7%99.8%100.0%---------- new table with      692 representatives
+# comparing sequences from      13333  to      13993
+...................75.6%75.7%75.9%76.0%76.2%76.3%76.5%76.6%76.7%76.8%77.0%77.2%77.3%77.5%77.6%77.8%77.9%78.1%78.3%78.4%78.6%78.7%78.9%79.0%79.2%79.3%79.5%79.6%79.7%79.9%80.0%80.1%80.3%80.4%80.5%80.6%80.8%80.9%81.1%81.2%81.4%81.5%81.6%81.8%81.9%82.1%82.2%82.3%82.5%82.6%82.8%82.9%83.0%83.2%83.3%83.5%83.6%83.7%83.8%83.9%84.1%84.3%84.4%84.5%84.7%84.8%84.9%85.0%85.2%85.4%85.5%85.7%85.8%86.0%86.1%86.2%86.3%86.5%86.6%86.7%86.8%87.0%87.2%87.3%87.4%87.6%87.7%87.9%88.0%88.1%88.3%88.4%88.5%88.6%88.8%88.9%89.0%89.2%89.3%89.5%89.6%89.8%89.9%90.1%90.2%90.3%90.4%90.5%90.8%90.9%91.0%91.2%91.3%91.5%91.7%91.8%92.0%92.1%92.3%92.4%92.5%92.7%92.9%93.0%93.1%93.3%93.4%93.5%93.7%93.8%94.0%94.1%94.3%94.4%94.5%94.7%94.8%95.0%95.1%95.2%95.4%95.5%95.7%95.8%95.9%96.1%96.2%96.4%96.5%96.6%96.7%96.8%97.0%97.1%97.3%97.4%97.6%97.7%97.9%98.0%98.1%98.2%98.4%98.6%98.7%98.8%99.0%99.1%99.2%99.4%99.5%99.7%99.8%100.0%---------- new table with      660 representatives
+# comparing sequences from      13993  to      14623
+....................75.5%75.7%75.8%75.9%76.1%76.2%76.4%76.5%76.7%76.8%77.0%77.1%77.2%77.3%77.5%77.6%77.7%77.9%78.0%78.1%78.2%78.4%78.5%78.7%78.8%79.0%79.1%79.3%79.4%79.5%79.7%79.9%80.0%80.1%80.3%80.4%80.6%80.7%80.8%80.9%81.0%81.2%81.3%81.5%81.6%81.7%81.9%82.0%82.2%82.3%82.4%82.6%82.8%82.9%83.1%83.2%83.3%83.5%83.6%83.7%83.9%84.0%84.1%84.3%84.4%84.6%84.7%84.9%85.1%85.2%85.3%85.4%85.5%85.7%85.9%86.0%86.2%86.3%86.4%86.6%86.7%86.8%87.0%87.1%87.3%87.5%87.6%87.7%87.9%88.0%88.2%88.3%88.5%88.6%88.7%88.8%89.0%89.1%89.3%89.4%89.5%89.7%89.8%89.9%90.1%90.2%90.3%90.5%90.6%90.8%90.9%91.0%91.2%91.3%91.5%91.6%91.8%91.9%92.1%92.2%92.3%92.5%92.6%92.7%92.8%93.0%93.1%93.2%93.4%93.5%93.7%93.8%94.0%94.2%94.4%94.5%94.6%94.8%95.0%95.1%95.2%95.3%95.5%95.6%95.8%95.9%96.0%96.1%96.3%96.4%96.6%96.8%96.9%97.1%97.2%97.4%97.5%97.6%97.8%97.9%98.0%98.1%98.2%98.4%98.5%98.7%98.8%99.1%99.2%99.3%99.4%99.5%99.7%99.9%---------- new table with      629 representatives
+# comparing sequences from      14623  to      15224
+.....................78.6%78.8%78.9%79.0%79.2%79.3%79.4%79.6%79.7%79.8%80.0%80.2%80.3%80.4%80.6%80.7%80.8%81.0%81.1%81.3%81.4%81.6%81.7%81.8%81.9%82.1%82.2%82.3%82.5%82.7%82.8%83.0%83.1%83.3%83.4%83.5%83.7%83.9%84.0%84.1%84.3%84.4%84.6%84.7%84.9%85.0%85.2%85.4%85.5%85.6%85.7%85.9%86.0%86.2%86.3%86.5%86.6%86.7%86.8%87.0%87.1%87.2%87.4%87.5%87.7%87.8%87.9%88.0%88.2%88.3%88.4%88.7%88.8%88.9%89.1%89.2%89.4%89.5%89.7%89.9%90.0%90.1%90.3%90.4%90.5%90.7%90.8%90.9%91.1%91.2%91.3%91.5%91.6%91.7%91.9%92.0%92.2%92.3%92.5%92.6%92.7%92.8%93.0%93.1%93.2%93.3%93.5%93.6%93.8%93.9%94.1%94.2%94.3%94.5%94.6%94.8%94.9%95.0%95.2%95.3%95.5%95.6%95.8%96.0%96.1%96.3%96.4%96.6%96.7%96.8%96.9%97.1%97.2%97.3%97.5%97.6%97.7%97.8%97.9%98.2%98.4%98.5%98.6%98.8%98.9%99.0%99.1%99.3%99.4%99.5%99.7%99.8%100.0%---------- new table with      601 representatives
+# comparing sequences from      15224  to      15798
+....................79.2%79.3%79.4%79.6%79.7%79.9%80.0%80.2%80.3%80.4%80.5%80.7%80.8%81.0%81.1%81.3%81.4%81.5%81.6%81.8%81.9%82.0%82.2%82.3%82.4%82.6%82.7%82.9%83.1%83.2%83.4%83.5%83.6%83.8%83.9%84.0%84.2%84.3%84.5%84.6%84.8%84.9%85.1%85.2%85.3%85.4%85.5%85.7%85.9%86.0%86.2%86.3%86.4%86.6%86.8%86.9%87.0%87.1%87.3%87.4%87.5%87.7%87.8%87.9%88.1%88.2%88.4%88.6%88.7%88.9%89.0%89.1%89.3%89.4%89.6%89.7%89.8%90.0%90.1%90.2%90.3%90.4%90.6%90.7%90.9%91.0%91.1%91.2%91.3%91.5%91.6%91.7%91.8%92.0%92.1%92.2%92.3%92.5%92.6%92.8%92.9%93.1%93.2%93.3%93.5%93.6%93.8%93.9%94.0%94.1%94.3%94.4%94.5%94.6%94.7%94.8%95.0%95.1%95.3%95.5%95.6%95.7%95.8%96.0%96.1%96.2%96.3%96.5%96.6%96.8%96.9%97.0%97.2%97.3%97.5%97.6%97.7%97.9%98.0%98.1%98.2%98.3%98.4%98.6%98.8%98.9%99.1%99.2%99.4%99.5%99.6%99.8%100.0%---------- new table with      573 representatives
+# comparing sequences from      15798  to      16346
+....................79.5%79.6%79.7%79.8%80.0%80.1%80.2%80.3%80.5%80.6%80.7%80.9%81.0%81.2%81.3%81.5%81.6%81.7%81.9%82.0%82.2%82.3%82.5%82.6%82.7%82.9%83.0%83.1%83.2%83.4%83.5%83.6%83.8%83.9%84.0%84.2%84.3%84.5%84.6%84.8%84.9%85.0%85.2%85.3%85.4%85.6%85.7%85.8%86.0%86.1%86.3%86.4%86.5%86.6%86.8%86.9%87.0%87.2%87.3%87.5%87.6%87.7%87.9%88.0%88.1%88.3%88.4%88.5%88.7%88.8%89.0%89.1%89.2%89.4%89.5%89.7%89.9%90.0%90.2%90.3%90.5%90.7%90.8%91.0%91.1%91.2%91.3%91.5%91.6%91.8%91.9%92.0%92.1%92.3%92.4%92.6%92.7%92.9%93.0%93.1%93.2%93.3%93.5%93.6%93.8%93.9%94.1%94.2%94.3%94.5%94.6%94.7%94.9%95.0%95.1%95.3%95.4%95.5%95.7%95.8%95.9%96.1%96.2%96.3%96.5%96.6%96.8%96.9%97.1%97.3%97.4%97.6%97.7%97.8%97.9%98.1%98.2%98.3%98.5%98.7%98.9%99.0%99.3%99.4%99.5%99.6%99.8%99.9%---------- new table with      548 representatives
+# comparing sequences from      16346  to      16869
+...................81.6%81.8%81.9%82.0%82.2%82.3%82.4%82.6%82.7%82.9%83.0%83.1%83.3%83.4%83.6%83.7%83.9%84.1%84.2%84.4%84.6%84.7%84.8%85.0%85.2%85.4%85.5%85.6%85.8%85.9%86.1%86.2%86.4%86.5%86.6%86.8%86.9%87.1%87.2%87.4%87.5%87.6%87.8%87.9%88.0%88.2%88.3%88.5%88.6%88.7%88.8%89.0%89.1%89.3%89.4%89.6%89.7%89.9%90.0%90.1%90.2%90.4%90.5%90.7%90.8%91.0%91.1%91.3%91.4%91.6%91.7%91.8%92.0%92.1%92.3%92.4%92.5%92.7%92.8%93.0%93.1%93.3%93.5%93.6%93.8%93.9%94.0%94.1%94.3%94.4%94.5%94.7%94.9%95.0%95.2%95.3%95.5%95.6%95.8%96.0%96.1%96.3%96.4%96.5%96.7%96.9%97.0%97.1%97.2%97.4%97.5%97.7%97.8%97.9%98.1%98.2%98.4%98.5%98.7%98.8%99.0%99.1%99.2%99.4%99.5%99.7%99.8%99.9%---------- new table with      522 representatives
+# comparing sequences from      16869  to      17368
+.....................82.4%82.5%82.7%82.9%83.0%83.2%83.4%83.5%83.6%83.8%84.0%84.1%84.2%84.3%84.4%84.6%84.7%84.8%84.9%85.0%85.2%85.3%85.4%85.6%85.7%85.8%86.0%86.1%86.3%86.4%86.5%86.7%86.8%87.0%87.2%87.3%87.5%87.6%87.8%87.9%88.0%88.1%88.2%88.4%88.5%88.7%88.8%88.9%89.0%89.2%89.3%89.5%89.6%89.8%90.0%90.1%90.2%90.4%90.5%90.7%90.8%91.0%91.1%91.3%91.4%91.6%91.7%91.9%92.0%92.2%92.3%92.5%92.6%92.7%92.9%93.0%93.1%93.3%93.4%93.6%93.7%93.8%93.9%94.1%94.2%94.3%94.5%94.6%94.8%94.9%95.1%95.2%95.4%95.5%95.7%95.8%96.0%96.1%96.2%96.3%96.5%96.6%96.7%96.9%97.0%97.1%97.3%97.5%97.6%97.7%97.9%98.0%98.2%98.3%98.4%98.5%98.7%98.9%99.0%99.2%99.3%99.5%99.7%99.9%---------- new table with      499 representatives
+# comparing sequences from      17368  to      17845
+....................83.2%83.4%83.5%83.7%83.8%84.0%84.1%84.3%84.4%84.6%84.7%84.9%85.0%85.2%85.3%85.4%85.5%85.7%85.8%86.0%86.1%86.3%86.4%86.6%86.7%86.9%87.0%87.1%87.3%87.4%87.6%87.7%87.9%88.0%88.2%88.3%88.5%88.7%88.8%89.0%89.1%89.2%89.4%89.6%89.7%89.8%89.9%90.0%90.1%90.3%90.5%90.6%90.8%90.9%91.0%91.2%91.4%91.6%91.7%91.8%91.9%92.0%92.2%92.4%92.5%92.6%92.8%92.9%93.0%93.1%93.3%93.4%93.5%93.6%93.8%93.9%94.0%94.2%94.3%94.4%94.6%94.7%94.8%95.0%95.2%95.3%95.5%95.6%95.7%95.8%96.0%96.1%96.3%96.4%96.6%96.7%96.8%97.0%97.1%97.3%97.5%97.7%97.8%98.0%98.1%98.3%98.4%98.6%98.7%98.8%98.9%99.1%99.2%99.3%99.5%99.6%99.7%99.9%100.0%---------- new table with      476 representatives
+# comparing sequences from      17845  to      18300
+.....................84.6%84.8%84.9%85.0%85.1%85.3%85.5%85.7%85.8%86.0%86.1%86.2%86.4%86.5%86.6%86.8%86.9%87.1%87.2%87.3%87.4%87.5%87.7%87.8%88.0%88.2%88.3%88.5%88.6%88.7%88.9%89.0%89.1%89.3%89.4%89.5%89.7%89.9%90.0%90.1%90.3%90.4%90.6%90.7%90.8%91.0%91.2%91.3%91.4%91.6%91.7%91.8%92.0%92.1%92.3%92.4%92.5%92.7%92.8%93.0%93.2%93.3%93.5%93.6%93.7%93.9%94.0%94.1%94.2%94.4%94.5%94.7%94.9%95.0%95.1%95.3%95.4%95.5%95.6%95.8%95.9%96.1%96.2%96.3%96.5%96.7%96.8%96.9%97.0%97.2%97.3%97.5%97.6%97.7%97.9%98.0%98.2%98.3%98.4%98.5%98.6%98.8%99.0%99.1%99.2%99.3%99.5%99.6%99.8%100.0%---------- new table with      453 representatives
+# comparing sequences from      18300  to      18734
+....................85.8%85.9%86.1%86.2%86.4%86.5%86.6%86.7%86.9%87.1%87.2%87.3%87.5%87.6%87.8%87.9%88.0%88.1%88.3%88.4%88.5%88.6%88.7%88.9%89.0%89.2%89.3%89.5%89.6%89.8%90.0%90.1%90.2%90.4%90.5%90.6%90.8%90.9%91.0%91.2%91.3%91.5%91.6%91.7%91.9%92.1%92.2%92.3%92.5%92.6%92.7%92.9%93.0%93.1%93.3%93.4%93.5%93.7%93.8%94.0%94.1%94.2%94.4%94.5%94.6%94.8%94.9%95.0%95.1%95.3%95.4%95.6%95.7%95.9%96.0%96.1%96.2%96.3%96.5%96.6%96.7%96.8%97.0%97.1%97.3%97.5%97.7%97.8%97.9%98.1%98.2%98.3%98.5%98.6%98.7%98.8%99.0%99.1%99.2%99.4%99.6%99.7%99.9%100.0%---------- new table with      434 representatives
+# comparing sequences from      18734  to      19149
+....................86.1%86.2%86.3%86.5%86.7%86.8%86.9%87.1%87.3%87.4%87.5%87.6%87.8%87.9%88.0%88.1%88.3%88.4%88.6%88.7%88.8%88.9%89.0%89.1%89.3%89.4%89.6%89.7%89.9%90.0%90.1%90.2%90.3%90.5%90.6%90.7%90.9%91.0%91.1%91.2%91.4%91.5%91.6%91.8%91.9%92.0%92.1%92.3%92.4%92.5%92.7%92.8%92.9%93.1%93.2%93.3%93.5%93.6%93.8%93.9%94.1%94.2%94.4%94.5%94.7%94.8%94.9%95.0%95.2%95.3%95.4%95.6%95.7%95.8%95.9%96.1%96.3%96.4%96.6%96.7%96.9%97.0%97.2%97.3%97.5%97.6%97.7%97.9%98.0%98.1%98.3%98.4%98.5%98.7%98.8%99.0%99.1%99.3%99.4%99.5%99.7%99.8%99.9%---------- new table with      415 representatives
+# comparing sequences from      19149  to      19545
+....................86.3%86.5%86.6%86.8%86.9%87.0%87.2%87.3%87.5%87.6%87.7%87.9%88.0%88.2%88.3%88.4%88.5%88.7%88.8%89.0%89.1%89.2%89.4%89.5%89.7%89.8%90.0%90.1%90.2%90.4%90.5%90.7%90.8%90.9%91.1%91.2%91.4%91.5%91.6%91.8%91.9%92.1%92.2%92.4%92.5%92.7%92.8%92.9%93.1%93.2%93.3%93.4%93.5%93.7%93.8%94.0%94.1%94.2%94.4%94.5%94.7%94.8%95.0%95.1%95.3%95.4%95.6%95.7%95.9%96.1%96.2%96.3%96.5%96.6%96.7%96.9%97.0%97.1%97.2%97.4%97.5%97.6%97.7%97.9%98.0%98.2%98.3%98.4%98.6%98.7%98.9%99.1%99.3%99.4%99.5%99.7%99.8%100.0%---------- new table with      395 representatives
+# comparing sequences from      19545  to      19923
+....................87.1%87.3%87.4%87.5%87.6%87.8%87.9%88.0%88.2%88.3%88.4%88.6%88.7%88.8%89.0%89.1%89.2%89.4%89.6%89.7%89.8%90.0%90.2%90.3%90.4%90.6%90.7%90.9%91.0%91.1%91.2%91.4%91.5%91.6%91.8%91.9%92.1%92.2%92.3%92.4%92.6%92.7%92.9%93.0%93.1%93.3%93.5%93.6%93.8%93.9%94.0%94.1%94.2%94.4%94.5%94.7%94.8%94.9%95.1%95.2%95.3%95.5%95.7%95.9%96.0%96.2%96.4%96.5%96.6%96.8%96.9%97.0%97.1%97.3%97.5%97.6%97.8%97.9%98.0%98.2%98.4%98.5%98.6%98.8%98.9%99.0%99.2%99.3%99.4%99.6%99.7%99.9%---------- new table with      378 representatives
+# comparing sequences from      19923  to      20284
+..............................    20000  finished      19989  clusters
+89.0%89.1%89.2%89.4%89.5%89.6%89.7%89.8%90.0%90.1%90.3%90.4%90.5%90.7%90.8%90.9%91.1%91.2%91.3%91.5%91.7%91.9%92.0%92.1%92.3%92.5%92.6%92.7%92.9%93.1%93.3%93.4%93.6%93.7%93.9%94.1%94.2%94.4%94.5%94.6%94.8%94.9%95.1%95.2%95.4%95.5%95.7%95.8%95.9%96.1%96.2%96.3%96.5%96.6%96.7%96.9%97.1%97.2%97.4%97.5%97.7%97.8%97.9%98.2%98.3%98.4%98.6%98.7%98.8%98.9%99.1%99.3%99.4%99.5%99.7%99.9%---------- new table with      361 representatives
+# comparing sequences from      20284  to      20628
+...................88.9%89.0%89.2%89.3%89.4%89.5%89.7%89.8%90.0%90.1%90.2%90.4%90.6%90.7%90.9%91.0%91.1%91.2%91.4%91.5%91.7%91.8%92.0%92.2%92.3%92.5%92.6%92.7%92.8%92.9%93.1%93.3%93.4%93.5%93.7%93.8%93.9%94.1%94.2%94.4%94.6%94.8%94.9%95.0%95.2%95.3%95.4%95.6%95.7%95.9%96.0%96.2%96.3%96.4%96.6%96.7%96.9%97.0%97.2%97.4%97.5%97.7%97.8%97.9%98.0%98.1%98.3%98.4%98.6%98.7%98.9%99.0%99.2%99.3%99.4%99.6%99.7%99.9%---------- new table with      344 representatives
+# comparing sequences from      20628  to      20957
+...................89.2%89.3%89.5%89.6%89.8%89.9%90.1%90.2%90.4%90.6%90.7%90.9%91.0%91.2%91.3%91.4%91.5%91.6%91.8%92.0%92.1%92.2%92.4%92.6%92.7%92.8%93.0%93.1%93.2%93.3%93.5%93.7%93.8%93.9%94.1%94.2%94.4%94.5%94.6%94.7%94.8%95.0%95.1%95.2%95.3%95.5%95.6%95.7%95.9%96.1%96.2%96.3%96.5%96.6%96.7%96.8%96.9%97.1%97.2%97.4%97.5%97.6%97.7%97.9%98.0%98.1%98.2%98.4%98.6%98.7%98.8%99.0%99.1%99.2%99.4%99.5%99.7%99.8%99.9%---------- new table with      329 representatives
+# comparing sequences from      20957  to      21271
+.....................90.1%90.3%90.4%90.5%90.7%90.9%91.0%91.2%91.3%91.5%91.6%91.8%91.9%92.0%92.2%92.3%92.4%92.6%92.7%92.8%93.0%93.1%93.3%93.5%93.7%93.8%93.9%94.1%94.2%94.3%94.4%94.6%94.7%94.8%95.0%95.1%95.3%95.4%95.5%95.6%95.8%95.9%96.0%96.2%96.3%96.5%96.6%96.7%96.9%97.0%97.1%97.2%97.4%97.5%97.7%97.8%98.0%98.1%98.2%98.4%98.6%98.7%98.8%98.9%99.1%99.2%99.3%99.4%99.5%99.7%99.8%99.9%---------- new table with      314 representatives
+# comparing sequences from      21271  to      21570
+...................91.1%91.3%91.4%91.5%91.7%91.8%91.9%92.1%92.2%92.3%92.4%92.6%92.7%92.8%93.0%93.1%93.2%93.4%93.5%93.7%93.8%94.0%94.1%94.2%94.4%94.5%94.7%94.8%94.9%95.1%95.3%95.4%95.5%95.7%95.8%95.9%96.0%96.2%96.3%96.5%96.6%96.7%96.9%97.0%97.2%97.3%97.4%97.6%97.7%97.9%98.0%98.1%98.2%98.4%98.6%98.7%98.9%99.0%99.1%99.3%99.4%99.5%99.7%99.8%---------- new table with      299 representatives
+# comparing sequences from      21570  to      21856
+....................91.7%91.9%92.1%92.2%92.3%92.5%92.6%92.8%92.9%93.1%93.2%93.4%93.5%93.6%93.7%93.9%94.0%94.1%94.3%94.4%94.5%94.6%94.7%94.9%95.0%95.1%95.3%95.4%95.6%95.7%95.8%96.0%96.1%96.3%96.4%96.5%96.6%96.8%96.9%97.0%97.2%97.3%97.4%97.6%97.7%97.8%98.0%98.2%98.3%98.5%98.6%98.7%98.9%99.0%99.2%99.3%99.5%99.6%99.7%99.8%100.0%---------- new table with      286 representatives
+# comparing sequences from      21856  to      22129
+....................91.9%92.0%92.1%92.2%92.4%92.5%92.7%92.8%92.9%93.1%93.2%93.3%93.5%93.7%93.8%94.0%94.1%94.3%94.4%94.5%94.6%94.8%94.9%95.0%95.1%95.3%95.5%95.6%95.7%95.9%96.0%96.1%96.2%96.4%96.5%96.6%96.8%96.9%97.0%97.2%97.3%97.5%97.7%97.8%97.9%98.0%98.2%98.3%98.5%98.7%98.8%99.0%99.1%99.3%99.4%99.5%99.7%99.9%---------- new table with      273 representatives
+# comparing sequences from      22129  to      22389
+...................92.3%92.5%92.6%92.7%92.8%93.0%93.1%93.3%93.4%93.6%93.8%93.9%94.1%94.2%94.3%94.4%94.6%94.8%94.9%95.1%95.2%95.3%95.4%95.6%95.7%95.9%96.0%96.2%96.3%96.5%96.6%96.7%96.8%97.0%97.2%97.3%97.4%97.6%97.7%97.9%98.1%98.2%98.4%98.5%98.6%98.8%99.0%99.1%99.2%99.4%99.6%99.7%99.8%99.9%---------- new table with      260 representatives
+# comparing sequences from      22389  to      22637
+...................93.0%93.1%93.3%93.5%93.6%93.7%93.9%94.0%94.2%94.3%94.5%94.6%94.7%94.8%94.9%95.1%95.3%95.4%95.6%95.7%95.8%95.9%96.1%96.2%96.3%96.5%96.6%96.8%96.9%97.0%97.1%97.3%97.4%97.5%97.6%97.8%97.9%98.0%98.2%98.3%98.4%98.6%98.7%98.9%99.0%99.1%99.3%99.5%99.6%99.8%99.9%---------- new table with      248 representatives
+# comparing sequences from      22637  to      22874
+....................93.5%93.6%93.7%93.9%94.0%94.1%94.3%94.5%94.6%94.7%94.9%95.1%95.2%95.4%95.5%95.7%95.8%95.9%96.1%96.2%96.3%96.5%96.6%96.8%97.0%97.1%97.3%97.4%97.6%97.7%97.9%98.0%98.2%98.3%98.5%98.7%98.8%98.9%99.0%99.2%99.3%99.5%99.6%99.7%99.9%---------- new table with      237 representatives
+# comparing sequences from      22874  to      23100
+...................94.1%94.3%94.4%94.6%94.7%94.8%95.0%95.1%95.3%95.4%95.6%95.7%95.8%96.0%96.1%96.3%96.4%96.6%96.7%96.9%97.0%97.2%97.3%97.5%97.7%97.8%98.0%98.2%98.3%98.4%98.5%98.7%98.8%98.9%99.1%99.2%99.4%99.5%99.6%99.7%99.9%---------- new table with      224 representatives
+# comparing sequences from      23100  to      23316
+....................94.9%95.0%95.1%95.3%95.4%95.5%95.7%95.8%95.9%96.1%96.2%96.4%96.5%96.6%96.8%96.9%97.0%97.2%97.4%97.5%97.7%97.8%97.9%98.1%98.2%98.3%98.5%98.7%98.8%98.9%99.1%99.2%99.4%99.5%99.7%99.9%---------- new table with      216 representatives
+# comparing sequences from      23316  to      23522
+...................94.0%94.2%94.3%94.4%94.5%94.7%94.9%95.0%95.2%95.3%95.4%95.6%95.7%95.9%96.0%96.1%96.3%96.4%96.5%96.7%96.8%97.0%97.1%97.2%97.4%97.6%97.7%97.9%98.1%98.2%98.3%98.5%98.7%98.8%99.0%99.1%99.3%99.4%99.5%99.7%99.8%100.0%---------- new table with      206 representatives
+# comparing sequences from      23522  to      23719
+...................95.2%95.4%95.5%95.7%95.8%96.0%96.1%96.2%96.4%96.6%96.7%96.8%96.9%97.1%97.2%97.4%97.6%97.7%97.9%98.0%98.2%98.3%98.4%98.6%98.7%98.8%99.0%99.1%99.2%99.4%99.6%99.7%99.8%---------- new table with      196 representatives
+# comparing sequences from      23719  to      23907
+...................95.5%95.6%95.8%95.9%96.0%96.2%96.4%96.5%96.6%96.7%96.8%96.9%97.1%97.2%97.3%97.4%97.5%97.7%97.8%97.9%98.1%98.2%98.3%98.4%98.6%98.7%98.9%99.0%99.1%99.2%99.4%99.5%99.6%99.7%99.9%---------- new table with      186 representatives
+# comparing sequences from      23907  to      24086
+.....................95.6%95.7%95.9%96.0%96.2%96.3%96.4%96.6%96.8%96.9%97.1%97.2%97.4%97.5%97.6%97.8%98.0%98.1%98.3%98.4%98.5%98.6%98.7%98.9%99.0%99.2%99.3%99.4%99.6%99.7%99.8%100.0%---------- new table with      179 representatives
+# comparing sequences from      24086  to      24257
+...................96.4%96.6%96.7%96.8%97.0%97.1%97.3%97.4%97.5%97.7%97.8%98.0%98.2%98.3%98.4%98.6%98.7%98.9%99.1%99.2%99.4%99.5%99.7%99.8%100.0%---------- new table with      171 representatives
+# comparing sequences from      24257  to      24421
+..................96.6%96.7%96.9%97.0%97.2%97.4%97.5%97.6%97.8%98.0%98.1%98.2%98.4%98.5%98.6%98.7%98.9%99.0%99.2%99.3%99.5%99.6%99.8%99.9%---------- new table with      163 representatives
+# comparing sequences from      24421  to      24577
+....................97.0%97.1%97.2%97.4%97.6%97.7%97.9%98.0%98.1%98.3%98.5%98.6%98.7%98.9%99.1%99.2%99.4%99.5%99.6%99.8%99.9%---------- new table with      156 representatives
+# comparing sequences from      24577  to      24726
+..................96.9%97.0%97.1%97.3%97.4%97.6%97.7%97.9%98.0%98.1%98.3%98.4%98.6%98.7%98.8%99.0%99.1%99.2%99.4%99.5%99.6%99.8%99.9%---------- new table with      149 representatives
+# comparing sequences from      24726  to      24868
+..................97.5%97.7%97.8%97.9%98.0%98.2%98.3%98.4%98.6%98.7%98.9%99.0%99.2%99.3%99.4%99.6%99.7%99.8%---------- new table with      141 representatives
+# comparing sequences from      24868  to      25004
+....................97.4%97.6%97.7%97.8%98.0%98.1%98.3%98.4%98.6%98.7%98.8%98.9%99.1%99.2%99.4%99.5%99.7%99.8%99.9%---------- new table with      136 representatives
+# comparing sequences from      25004  to      25134
+...................97.7%97.9%98.0%98.1%98.2%98.4%98.5%98.7%98.8%99.0%99.1%99.3%99.4%99.5%99.7%99.8%---------- new table with      130 representatives
+# comparing sequences from      25134  to      25258
+..................98.0%98.2%98.3%98.4%98.6%98.7%98.8%99.0%99.1%99.2%99.4%99.5%99.7%99.8%99.9%---------- new table with      124 representatives
+# comparing sequences from      25258  to      25376
+....................98.5%98.6%98.8%98.9%99.0%99.2%99.3%99.5%99.7%99.8%99.9%---------- new table with      117 representatives
+# comparing sequences from      25376  to      25489
+...................98.9%99.0%99.1%99.2%99.4%99.5%99.7%99.8%99.9%---------- new table with      113 representatives
+# comparing sequences from      25489  to      25597
+..................99.1%99.2%99.4%99.5%99.7%99.8%99.9%---------- new table with      108 representatives
+# comparing sequences from      25597  to      25700
+.................99.1%99.3%99.4%99.6%99.8%99.9%---------- new table with      103 representatives
+# comparing sequences from      25700  to      25798
+....................98.4%98.5%98.6%98.8%98.9%99.1%99.2%99.4%99.5%99.6%99.7%99.9%100.0%---------- new table with       98 representatives
+# comparing sequences from      25798  to      25892
+...................99.4%99.6%99.7%99.9%100.0%---------- new table with       94 representatives
+# comparing sequences from      25892  to      25981
+..................99.8%99.9%---------- new table with       89 representatives
+# comparing sequences from      25981  to      26066
+..................---------- new table with       85 representatives
+# comparing sequences from      26066  to      26147
+................---------- new table with       81 representatives
+# comparing sequences from      26147  to      26225
+....................---------- new table with       77 representatives
+# comparing sequences from      26225  to      26299
+..................---------- new table with       73 representatives
+# comparing sequences from      26299  to      26370
+..................---------- new table with       71 representatives
+# comparing sequences from      26370  to      26438
+.................---------- new table with       68 representatives
+# comparing sequences from      26438  to      26502
+................---------- new table with       63 representatives
+# comparing sequences from      26502  to      26564
+...............---------- new table with       62 representatives
+# comparing sequences from      26564  to      26623
+....................---------- new table with       59 representatives
+# comparing sequences from      26623  to      26679
+..................---------- new table with       56 representatives
+# comparing sequences from      26679  to      26732
+..................---------- new table with       53 representatives
+# comparing sequences from      26732  to      26783
+.................---------- new table with       50 representatives
+# comparing sequences from      26783  to      26832
+................---------- new table with       49 representatives
+# comparing sequences from      26832  to      26879
+................---------- new table with       47 representatives
+# comparing sequences from      26879  to      27866
+.....................---------- new table with      983 representatives
+
+    27866  finished      27839  clusters
+
+Approximated maximum memory consumption: 307M
+writing new database
+writing clustering information
+program completed !
+
+Total CPU time 450.49
+
+Mon Sep 13 14:47:29 CDT 2021 samtools faidx & bwa index reference 
+[bwa_index] Pack FASTA... 0.10 sec
+[bwa_index] Construct BWT for the packed sequence...
+[bwa_index] 1.87 seconds elapse.
+[bwa_index] Update BWT... 0.05 sec
+[bwa_index] Pack forward-only FASTA... 0.09 sec
+[bwa_index] Construct SA from BWT and Occ... 1.03 sec
+[main] Version: 0.7.17-r1198-dirty
+[main] CMD: bwa index reference.10.20.fasta
+[main] Real time: 4.020 sec; CPU: 3.154 sec
+
+Mon Sep 13 14:47:33 CDT 2021 End Assembly of Reference Genome
+
+
+Compress large filesMon Sep 13 14:47:34 CDT 2021
