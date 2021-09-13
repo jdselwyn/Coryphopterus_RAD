@@ -5,13 +5,19 @@
 - MiSeq - Finished
 - NovaSeq - Finished
 
-## dDocent Tracking
+## dDocent Tracking - unsplit species
 - MiSeq only - Finished
-- MiSeq Assembly, NovaSeq Mapping - Filtering BAM
-- NovaSeq only - Making Reference
+- MiSeq Assembly, NovaSeq Mapping - Genotyping
+- NovaSeq only - Mapping
+
+## Species Identification
+- Mapping to Mitochondrial Genome
 
 ## ToDo
-- Choose NovaSeq only Reference
+- Set up blast
+- Download all Coryphopterus hyalinus & personatus mtdna sequences on genbank
+- Set up previous step as blast database
+https://open.oregonstate.education/computationalbiology/chapter/command-line-blast/
 
 ## Step 1.  Demultiplex Sequences
 ```
@@ -105,7 +111,10 @@ sbatch --array=0-$((${#all_prefix[@]}-1))%15 \
   mkREF_NovaSeq \
   Mitochondrial_Mapping
 ```
+Blast Mapped Reads
+```
 
+```
 
 ## Step 10. Get dDocent
 I copied [dDocentHPC](https://github.com/cbirdlab/dDocentHPC) to `/work/hobi/jselwyn/Coryphopterus_RAD/scripts`, and added it to `.gitignore`.
@@ -229,11 +238,13 @@ NovaSeq Reference Stats
 
 ## Step 12. Map reads to *de novo* reference genomes
 ### Choose Reference Genomes to use
-1. MiSeq - mkREF/reference.10.1.fasta
+1. MiSeq - mkREF_MiSeq/reference.10.1.fasta
   - Balance confidence in existence of locus with not removing too many.
   - Discuss with others to see about choice
   - 33,685 contigs
-2. NovaSeq -
+2. NovaSeq - mkREF_NovaSeq/reference.20.10.fasta
+  - Same reasons as above
+  - 33,407 contigs
 
 ### Test scripts by mapping MiSeq reads to MiSeq reference Genome
 ```
@@ -287,7 +298,24 @@ Mapping Stats
 ```
 mkdir mkBAM_NovaSeq
 cp mkBAM_MiSeq/*gz mkBAM_NovaSeq
+
+sbatch -p cbirdq -t 30-00:00:00 scripts/mkBAM.sbatch \
+  mkBAM_NovaSeq \
+  config_files/NovaSeq.config \
+  mkREF_NovaSeq/reference.20.10.fasta
+
+sbatch -o SLURM_out/bam_summary-%j.out \
+  scripts/runRscript.sbatch \
+  scripts/checkBAM.R \
+  mkBAM_MiSeq RAW
 ```
+Mapping Stats
+| Metric | # Reads Mapped |
+| --- | ----- |
+| Mean |  ±  SD |
+| Range |  -  |
+
+
 ## Step 13. Filter Mapped Reads
 ### Test scripts by filtering MiSeq reads mapped to MiSeq reference Genome
 ```
