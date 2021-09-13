@@ -17,7 +17,7 @@
 - Set up blast
 - Download all Coryphopterus hyalinus & personatus mtdna sequences on genbank
 - Set up previous step as blast database
-https://open.oregonstate.education/computationalbiology/chapter/command-line-blast/
+
 
 ## Step 1.  Demultiplex Sequences
 ```
@@ -113,8 +113,16 @@ sbatch --array=0-$((${#all_prefix[@]}-1))%15 \
 ```
 Blast Mapped Reads
 ```
+#Make BLAST Database with all the Coryphopterus Mitochondrial DNA on GenBank
+sbatch scripts/buildBlast.sbatch
 
+sbatch --array=0-$((${#all_prefix[@]}-1))%15 \
+  --output=SLURM_out/runBLAST_%A_%a.out \
+  scripts/runBLAST.sbatch \
+  Reference_Sequence/CoryphopterusBlast \
+  Mitochondrial_Mapping
 ```
+
 
 ## Step 10. Get dDocent
 I copied [dDocentHPC](https://github.com/cbirdlab/dDocentHPC) to `/work/hobi/jselwyn/Coryphopterus_RAD/scripts`, and added it to `.gitignore`.
