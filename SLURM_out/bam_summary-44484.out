@@ -1,2 +1,6 @@
 scripts/checkBAM.R
 Mapped Reads summary stats
+# A tibble: 1 × 4
+  mean_number sd_number min_number max_number
+        <dbl>     <dbl>      <int>      <int>
+1    6891175.  8686655.      31687  119213337
