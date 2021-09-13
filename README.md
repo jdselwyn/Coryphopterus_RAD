@@ -7,11 +7,11 @@
 
 ## dDocent Tracking
 - MiSeq only - Finished
-- MiSeq Assembly, NovaSeq Mapping -
-- NovaSeq only -
+- MiSeq Assembly, NovaSeq Mapping - Filtering BAM
+- NovaSeq only - Making Reference
 
 ## ToDo
--
+- Choose NovaSeq only Reference
 
 ## Step 1.  Demultiplex Sequences
 ```
@@ -174,7 +174,7 @@ Cutoff1 is the minimum coverage required to keep a contig
 Cutoff2 is the minimum number of individuals a contig must be present in to keep
 
 1. Cutoff1 = 2, Cutoff2 = 2
-2. Cutoff1 = , Cutoff2 =
+2. Cutoff1 = 10, Cutoff2 = 10
 3. Cutoff1 = , Cutoff2 =
 4. Cutoff1 = , Cutoff2 =
 5. Cutoff1 = , Cutoff2 =
@@ -192,7 +192,7 @@ module load R/gcc/64/3.5.1
 Rscript scripts/checkContigs.R  mkREF_NovaSeq/reference.2.2.fasta
 ```
 NovaSeq Reference Stats
-| Metric | 2.2 |  |  |  |  |
+| Metric | 2.2 | 10.10 |  |  |  |
 | --- | ----- | ----- | ----- | ----- | ----- |
 | Number Contigs | 361,609 |  |  |  |  |
 | Mean Length | 330 ± 49 SD |  ±  SD |  ±  SD |  ±  SD |  ±  SD |

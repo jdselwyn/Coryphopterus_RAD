@@ -2,8 +2,8 @@
 
 #SBATCH --job-name=fltrBAM
 #SBATCH -o SLURM_out/fltrBAM-%j.out
-#SBATCH --time=48:00:00
-#SBATCH -p normal
+#SBATCH --time=4-00:00:00
+#SBATCH -p normal,cbirdq
 #SBATCH --nodes=1
 
 module load ddocent
