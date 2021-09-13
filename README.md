@@ -190,15 +190,16 @@ Check Reference Genome Stats
 ```
 module load R/gcc/64/3.5.1
 Rscript scripts/checkContigs.R  mkREF_NovaSeq/reference.2.2.fasta
+Rscript scripts/checkContigs.R  mkREF_NovaSeq/reference.10.10.fasta
 ```
 NovaSeq Reference Stats
-| Metric | 2.2 | 10.10 |  |  |  |
+| Metric | 2.2 | 10.10 | 20.20 |  |  |
 | --- | ----- | ----- | ----- | ----- | ----- |
-| Number Contigs | 361,609 |  |  |  |  |
-| Mean Length | 330 ± 49 SD |  ±  SD |  ±  SD |  ±  SD |  ±  SD |
-| Range Length | 142 - 914 |  -  |  -  |  -  |  -  |
-| Total Length | 119,462,309 |  |  |  |  |
-| Contigs with Central Ns | 316,160 |  |  |  |  |
+| Number Contigs | 361,609 | 45,531 |  |  |  |
+| Mean Length | 330 ± 49 SD | 337 ± 23 SD |  ±  SD |  ±  SD |  ±  SD |
+| Range Length | 142 - 914 | 142 - 563 |  -  |  -  |  -  |
+| Total Length | 119,462,309 | 15,330,836 |  |  |  |
+| Contigs with Central Ns | 316,160 | 44,167 |  |  |  |
 
 ## Step 11. Map reads to *de novo* reference genomes
 ### Choose Reference Genomes to use
@@ -300,8 +301,8 @@ sbatch -o SLURM_out/bam_summary-%j.out \
 Mapping Stats
 | Metric | Value |
 | --- | ----- |
-| Mean Reads Mapped |  ±  SD |
-| Range Reads Mapped |  -  |
+| Mean Reads Mapped | 1,850,867 ± 2,265,530 SD |
+| Range Reads Mapped | 1,990 - 20,326,650 |
 
 ### Filter reads mapped to NovaSeq reference
 
