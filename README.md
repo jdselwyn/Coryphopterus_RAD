@@ -102,7 +102,7 @@ sbatch --array=0-$((${#all_prefix[@]}-1))%15 \
   --output=SLURM_out/mito_map_%A_%a.out \
   scripts/map_mito_to_reference.slurm \
   Reference_Sequence/bathygobius_cocosensis_complete_mitochondrion.fasta \
-  mkREF_NovaSeq} \
+  mkREF_NovaSeq \
   Mitochondrial_Mapping
 ```
 
