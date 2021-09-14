@@ -53,5 +53,3 @@ blastn \
   -max_hsps 100 \
   -out blast_out/${prefix}.tsv \
   -num_threads ${SLURM_CPUS_ON_NODE}
-
-rm tmp_prefix_file
