@@ -116,6 +116,7 @@ sbatch --array=0-$((${#all_prefix[@]}-1))%15 \
   mkREF_NovaSeq \
   Mitochondrial_Mapping
 
+module load R/gcc/64/3.5.1
 Rscript scripts/summarizeBLAST.R
 ```
 
