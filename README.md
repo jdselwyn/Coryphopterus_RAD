@@ -8,14 +8,16 @@
 ## dDocent Tracking - unsplit species
 - MiSeq only - Finished
 - MiSeq Assembly, NovaSeq Mapping - Genotyping
-- NovaSeq only - Mapping
+- NovaSeq only - Genotyping
 
 ## Species Identification
 - Mapping to Mitochondrial Genome
+-
 
 ## ToDo
 - Decide about mapping settings for mito-genome
 - DAPC or similar to group those without mito DNA
+- How to decide species from blast when multiple hits of different pident/escore etc
 
 
 ## Step 1.  Demultiplex Sequences
@@ -117,6 +119,7 @@ sbatch --array=0-$((${#all_prefix[@]}-1))%20 \
 
 module load R/gcc/64/3.5.1
 Rscript scripts/summarizeBLAST.R
+rm Mitochondrial_Mapping/tmp_prefix_file
 ```
 
 
@@ -423,10 +426,11 @@ Genotyping Stats
 mkdir mkVCF_MiSeq
 mv fltrBAM_MiSeq/*RG* mkVCF_MiSeq
 
-sbatch scripts/mkVCF.sbatch \
+sbatch -p cbirdq,long -t 15-00:00:00 scripts/mkVCF.sbatch \
   mkVCF_MiSeq \
   config_files/MiSeq.config \
   mkREF_MiSeq/reference.10.1.fasta
+#47809
 
 #Run on Head Node
 module load R/gcc/64/3.5.1
@@ -462,10 +466,11 @@ Genotyping Stats
 mkdir mkVCF_NovaSeq
 mv fltrBAM_NovaSeq/*RG* mkVCF_NovaSeq
 
-sbatch scripts/mkVCF.sbatch \
+sbatch -p long,cbirdq -t 15-00:00:00 scripts/mkVCF.sbatch \
   mkVCF_NovaSeq \
   config_files/NovaSeq.config \
   mkREF_NovaSeq/reference.20.10.fasta
+#47810
 
 #Run on Head Node
 module load R/gcc/64/3.5.1
@@ -494,4 +499,3 @@ Genotyping Stats
 | Range Missing (Ind) | % - % |
 | Mean Missing (Loci) | % ± % |
 | Range Missing (Loci) | % - % |
-

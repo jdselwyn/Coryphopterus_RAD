@@ -38,15 +38,24 @@ blast_results <- blast_out %>%
   write_csv('Mitochondrial_Mapping/raw_blast_results.csv')
 
 
-# Identify Species
-summarized_blast_results <- blast_results %>%
-  select(-taxomic_id, -qstart, -qend, -sstart, -send) %>%
-  select(sseqid, ID, pident, length, mismatch, gapopen, evalue, bitscore, ScientificName) %>%
-  group_by(ScientificName, ID, sseqid) %>%
-  summarise(across(where(is.numeric), mean),
-            n = n(),
-            .groups = 'drop_last') %>%
-  summarise(n = sum(n),
-            across(where(is.numeric), mean),
-            .groups = 'drop') %>%
-  write_csv('Mitochondrial_Mapping/summarized_blast_results.csv')
+#### Identify Species ####
+species_id <- blast_results %>%
+  arrange(ID) %>%
+  group_by(ID) %>%
+  mutate(certainty = if_else(n_distinct(ScientificName) == 1, 'certain', 'uncertain')) %>%
+  ungroup %>%
+  mutate(evalue = log(evalue, base = 10)) %>%
+  select(ID, ScientificName, sseqid, certainty, 
+         bitscore, evalue, pident, length) %>%
+  group_by(ID, ScientificName, certainty, sseqid) %>%
+  summarise(across(where(is.numeric), mean), .groups = 'drop') %>%
+  
+  select(-sseqid) %>%
+  distinct %>%
+  group_by(ID) %>%
+  filter(evalue == min(evalue)) %>%
+  arrange(ID) %>%
+  ungroup() %>%
+  rename(species = ScientificName) %T>%
+  
+  write_csv('Mitochondrial_Mapping/blast_speciesID.csv')
