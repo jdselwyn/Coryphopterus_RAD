@@ -14,9 +14,8 @@
 - Mapping to Mitochondrial Genome
 
 ## ToDo
-- Set up blast
-- Download all Coryphopterus hyalinus & personatus mtdna sequences on genbank
-- Set up previous step as blast database
+- Decide about mapping settings for mito-genome
+- DAPC or similar to group those without mito DNA
 
 
 ## Step 1.  Demultiplex Sequences
@@ -108,7 +107,7 @@ all_prefix=$(ls mkREF_NovaSeq/*.r1.fq.gz | sed 's/.*\///' | sed "s/\..*//")
 IFS=' ' read -ra all_prefix <<< $all_prefix
 printf "%s\n" "${all_prefix[@]}" > Mitochondrial_Mapping/tmp_prefix_file
 
-sbatch --array=0-$((${#all_prefix[@]}-1))%15 \
+sbatch --array=0-$((${#all_prefix[@]}-1))%20 \
   --output=SLURM_out/mitoBLAST_%A_%a.out \
   scripts/mitoBLAST.sbatch \
   Reference_Sequence/bathygobius_cocosensis_complete_mitochondrion.fasta \
@@ -304,7 +303,7 @@ Mapping Stats
 mkdir mkBAM_NovaSeq
 cp mkBAM_MiSeq/*gz mkBAM_NovaSeq
 
-sbatch -p cbirdq -t 30-00:00:00 scripts/mkBAM.sbatch \
+sbatch scripts/mkBAM.sbatch \
   mkBAM_NovaSeq \
   config_files/NovaSeq.config \
   mkREF_NovaSeq/reference.20.10.fasta
@@ -312,13 +311,14 @@ sbatch -p cbirdq -t 30-00:00:00 scripts/mkBAM.sbatch \
 sbatch -o SLURM_out/bam_summary-%j.out \
   scripts/runRscript.sbatch \
   scripts/checkBAM.R \
-  mkBAM_MiSeq RAW
+  mkBAM_NovaSeq RAW
+
 ```
 Mapping Stats
 | Metric | # Reads Mapped |
 | --- | ----- |
-| Mean |  ±  SD |
-| Range |  -  |
+| Mean | 5,675,411 ± 6,753,900 SD |
+| Range | 25,320 - 80,286,143 |
 
 
 ## Step 13. Filter Mapped Reads
@@ -364,6 +364,27 @@ Mapping Stats
 | Range Reads Mapped | 1,990 - 20,326,650 |
 
 ### Filter reads mapped to NovaSeq reference
+```
+mkdir fltrBAM_NovaSeq
+mv mkBAM_NovaSeq/*RAW* fltrBAM_NovaSeq
+
+sbatch scripts/fltrBAM.sbatch \
+  fltrBAM_NovaSeq \
+  config_files/NovaSeq.config \
+  mkREF_NovaSeq/reference.20.10.fasta
+
+sbatch -o SLURM_out/bam_summary-%j.out \
+  scripts/runRscript.sbatch \
+  scripts/checkBAM.R \
+  fltrBAM_NovaSeq RG
+```
+
+Mapping Stats
+| Metric | Value |
+| --- | ----- |
+| Mean Reads Mapped | 1,609,163 ± 1,905,412 SD |
+| Range Reads Mapped | 3,844 - 21,480,937 |
+
 
 ## Step 14. Genotyping
 ### Test scripts by genotyping MiSeq reads mapped to MiSeq reference Genome
@@ -437,3 +458,40 @@ Genotyping Stats
 
 
 ### Genotype reads mapped to NovaSeq reference
+```
+mkdir mkVCF_NovaSeq
+mv fltrBAM_NovaSeq/*RG* mkVCF_NovaSeq
+
+sbatch scripts/mkVCF.sbatch \
+  mkVCF_NovaSeq \
+  config_files/NovaSeq.config \
+  mkREF_NovaSeq/reference.20.10.fasta
+
+#Run on Head Node
+module load R/gcc/64/3.5.1
+Rscript scripts/summarizeVCF.R  mkVCF_NovaSeq/TotalRawSNPs.20.10.vcf
+
+#Run on Node
+sbatch -o SLURM_out/vcf_summary-%j.out \
+  scripts/runRscript.sbatch \
+  scripts/summarizeVCF.R \
+  mkVCF_NovaSeq/TotalRawSNPs.20.10.vcf
+```
+
+Genotyping Stats
+| Metric | Unfiltered VCF |
+| --- | ----- |
+| Number Individuals |  |
+| Number SNPs |  |
+| Number Contigs |  |
+| Mean SNPs/Contig |  ±  SD |
+| Range SNPs/Contig |  -  |
+| Mean Coverage |  ±  SD |
+| Range Coverage |  -  |
+| Mean PHRED |  ±  SD |
+| Range PHRED |  -  |
+| Mean Missing (Ind) | % ± % |
+| Range Missing (Ind) | % - % |
+| Mean Missing (Loci) | % ± % |
+| Range Missing (Loci) | % - % |
+
