@@ -1,0 +1,954 @@
+
+
+* dDocentHPC v4.5 Forked by cbird@tamucc.edu * 
+
+
+Running dDocentHPC mkVCF...
+ 
+Fri Sep 17 10:17:03 CDT 2021 Files output to:  /work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_NovaSeq
+
+Fri Sep 17 10:17:03 CDT 2021 Reading config file... 
+ 
+Settings for dDocentHPC
+#Made in notepad++, use for best viewing
+
+These default settings assume ddRAD, no overlapping 151 bp reads
+
+20		Number of Processors (Auto, 1, 2, 3, ..., n threads) cbirdq=40 normal=20
+230G	Maximum Memory (1G,2G,..., 256G)  G=gigabytes
+
+----------trimFQ: Settings for Trimming FASTQ Files---------------------------------------------------------------
+146		trimmomatic MINLEN (integer, mkREF only)						Drop the read if it is below a specified length. Set to the length of the Read1 reads.
+75		trimmomatic MINLEN (integer, mkBAM only)						Drop the read if it is below a specified length. Set to the minimum frag length you want mapped to the reference.
+20		trimmomatic LEADING:<quality> (integer, mkBAM only)				Specifies the minimum quality required to keep a base.
+15		trimmomatic TRAILING:<quality> (integer, mkREF only)			Specifies the minimum quality required to keep a base.
+20		trimmomatic TRAILING:<quality> (integer, mkBAM only)			Specifies the minimum quality required to keep a base.
+TruSeq3-PE-2.fa	trimmomatic ILLUMINACLIP:<fasta> (0, fasta file name)			Specifies the trimmomatic adapter file to use. entering a 0 (zero) will turn off adapter trimming. Options are: TruSeq3-PE-2.fa, TruSeq3-PE.fa, TruSeq3-SE.fa, TruSeq2-PE.fa, TruSeq2-SE.fa, any other files included with trimmomatic.  Entering a custom path here will break the script. If you want a customized file, you have to put it where the default trimmomatic files are located on your computer.  If you have trouble finding this location, run dDocentHPC trimREF and it will be included in the output.
+2		trimmomatic ILLUMINACLIP:<seed mismatches> (integer)			specifies the maximum mismatch count which will still allow a full match to be performed
+30		trimmomatic ILLUMINACLIP:<palindrome clip thresh> (integer)		specifies how accurate the match between the two 'adapter ligated' reads must be for PE palindrome read alignment
+10		trimmomatic ILLUMINACLIP:<simple clip thresh> (integer)			specifies how accurate the match between any adapter etc. sequence must be against a read.
+20		trimmomatic SLIDINGWINDOW:<windowSize> (integer)				specifies the number of bases to average across
+20		trimmomatic SLIDINGWINDOW:<windowQuality> (integer)				specifies the average quality required.
+0		trimmomatic CROP:<bp to keep> (integer, mkBAM only)    Trim read sequences down to this length. Enter 0 for no cropping
+0		trimmomatic HEADCROP:<length> (integer, only Read1 for ezRAD)	The number of bases to remove from the start of the read. 0 for ddRAD, 5 for ezRAD
+no		FixStacks (yes,no)   											Demultiplexing with stacks introduces anomolies.  This removes them.  
+------------------------------------------------------------------------------------------------------------------
+
+----------mkREF: Settings for de novo assembly of the reference genome--------------------------------------------
+PE		Type of reads for assembly (PE, SE, OL, RPE)					PE=ddRAD & ezRAD pairedend, non-overlapping reads; SE=singleend reads; OL=ddRAD & ezRAD overlapping reads, miseq; RPE=oregonRAD, restriction site + random shear
+0.9		cdhit Clustering_Similarity_Pct (0-1)							Use cdhit to cluster and collapse uniq reads by similarity threshold
+20		Cutoff1 (integer)												Use unique reads that have at least this much coverage for making the reference	genome
+10		Cutoff2 (integer)												Use unique reads that occur in at least this many individuals for making the reference genome
+0.05	rainbow merge -r <percentile> (decimal 0-1)						Percentile-based minimum number of seqs to assemble in a precluster
+0.95	rainbow merge -R <percentile> (decimal 0-1)						Percentile-based maximum number of seqs to assemble in a precluster
+------------------------------------------------------------------------------------------------------------------
+
+----------mkBAM: Settings for mapping the reads to the reference genome-------------------------------------------
+Make sure the cutoffs above match the reference*fasta!
+1		bwa mem -A Mapping_Match_Value (integer) 
+6		bwa mem -B Mapping_MisMatch_Value (integer) 
+10		bwa mem -O Mapping_GapOpen_Penalty (integer) 
+50		bwa mem -T Mapping_Minimum_Alignment_Score (integer) 			Remove reads that have an alignment score less than this. 
+30,5	bwa mem -L Mapping_Clipping_Penalty (integer,integer) 
+------------------------------------------------------------------------------------------------------------------
+
+----------fltrBAM: Settings for filtering mapping alignments in the *bam files---------------
+20		samtools view -q 		Mapping_Min_Quality (integer)    									Remove reads with mapping qual less than this value
+no		samtools view -F 4 		Remove_unmapped_reads? (yes,no)   									Since the reads aren't mapped, we generally don't need to filter them
+yes		samtools view -F 8 		Remove_read_pair_if_one_is_unmapped? (yes,no)    					If either read in a pair does not map, then the other is also removed
+yes		samtools view -F 256 	Remove_secondary_alignments? (yes,no)     							Secondary alignments are reads that also map to other contigs in the reference genome
+no		samtools view -F 512 	Remove_reads_not_passing_platform_vendor_filters (yes,no)     		We generally don't see any of these
+no		samtools view -F 1024 	Remove_PCR_or_optical_duplicates? (yes,no)     						You probably don't want to set this to yes
+no		samtools view -F 2048 	Remove_supplementary_alignments? (yes,no)     						We generally don't see any of these
+yes		samtools view -f 2 		Keep_only_properly_aligned_read_pairs? (yes,no)						Set to no if OL mode 
+0		samtools view -F 		Custom_samtools_view_F_bit_value? (integer)     					performed separately from the above, consult samtools man
+0		samtools view -f 		Custom_samtools_view_f_bit_value? (integer)     					performed separately from the above, consult samtools man
+20								Remove_reads_with_excessive_soft_clipping? (no, integers by 10s)	minimum number of soft clipped bases in a read that is unacceptable
+50								Remove_reads_with_alignment_score_below (integer)    		Should match bwa mem -T, which sometimes doesn't work
+yes								Remove_reads_orphaned_by_filters? (yes,no)
+------------------------------------------------------------------------------------------------------------------
+
+----------mkVCF: Settings for variant calling/ genotyping---------------------------------------------------------
+no		freebayes -J --pooled-discrete (yes|no) 						If yes, a pool of individuals is assumed to be the statistical unit of observation. 
+no		freebayes -A --cnv-map (filename.bed or no)						If the pools have different numbers of individuals, then you should provide a copy number variation (cnv) *.bed file with the "ploidy" of each pool. the bed file should be in the working directory and formatted as follows: popmap_column_1 ploidy_of_pool.  If that doesn't work, try the basenames of the files in popmap column 1.
+2		freebayes -p --ploidy (integer)									Whether pooled or not, if no cnv-map file is provided, then what is the ploidy of the samples? for pools, this number should be the number of individuals * ploidy
+no		freebayes -r --region (filename.bed or no)						Limit analysis to specified region.  Bed file format: <chrom>:<start_position>-<end_position>
+0		only genotype read 1 (integer)									Limit analysis to only Read 1 positions, integer is maximum Read1 bp position
+2		Minimum Mean Depth of Coverage Per Individual					Limit analysis to contigs with at least the specified mean depth of coverage per individual
+0		freebayes -n --use-best-n-alleles (integer)						reduce the number of alleles considered to n, zero means all, set to 2 or more if you run out of memory
+30		freebayes -m --min-mapping-quality (integer) 
+20		freebayes -q --min-base-quality (integer) 
+-1		freebayes -E --haplotype-length (-1, 3, or integer)    			Set to -1 to avoid multi nucleotide polymorphisms and force calling MNPs as SNPs.  Can be set up to half the read length, or more.
+0		freebayes    --min-repeat-entropy (0, 1, or integer) 			Set to 0 to avoid multi nucleotide polymorphisms and force calling MNPs as SNPs. To detect interrupted repeats, build across sequence until it has entropy > N bits per bp. 
+10		freebayes    --min-coverage (integer)       					Require at least this coverage to process a site
+0.375	freebayes -F --min-alternate-fraction (decimal 0-1)   			There must be at least 1 individual with this fraction of alt reads to evaluate the position. If your individuals are barcoded, then use 0.2. If your data is pooled, then set based upon ~ 1/(numIndivids * ploidy) and average depth of coverage
+20		freebayes -C --min-alternate-count (integer)					Require at least this count of observations supporting an alternate allele within a single individual in order to evaluate the position.  default: 2
+20		freebayes -G --min-alternate-total (integer)					Require at least this count of observations supporting an alternate allele within the total population in order to use the allele in analysis.  default: 1
+0.33	freebayes -z --read-max-mismatch-fraction (decimal 0-1)			Exclude reads with more than N [0,1] fraction of mismatches where each mismatch has base quality >= mismatch-base-quality-threshold default: 1.0
+20		freebayes -Q --mismatch-base-quality-threshold (integer)		Count mismatches toward --read-mismatch-limit if the base quality of the mismatch is >= Q.  default: 10
+30		freebayes -U --read-mismatch-limit (integer)					Exclude reads with more than N mismatches where each mismatch has base quality >= mismatch-base-quality-threshold. default: ~unbounded
+30		freebayes ~3 ~~min-alternate-qsum (integer)						This value is the mean base quality score for alternate reads and will be multiplied by -C to set -3. Description of -3: Require at least this count of observations supporting an alternate allele within a single individual in order to evaluate the position.  default: 2	
+30		freebayes -$ --read-snp-limit (integer)							Exclude reads with more than N base mismatches, ignoring gaps with quality >= mismatch-base-quality-threshold. default: ~unbounded
+20		freebayes -e --read-indel-limit	(integer)						Exclude reads with more than N separate gaps. default: ~unbounded
+no		freebayes -w --hwe-priors-off (no|yes)							Disable estimation of the probability of the combination arising under HWE given the allele frequency as estimated by observation frequency.
+no		freebayes -V --binomial-obs-priors-off (no|yes)					Disable incorporation of prior expectations about observations. Uses read placement probability, strand balance probability, and read position (5'-3') probability.
+no		freebayes -a --allele-balance-priors-off (no|yes)				Disable use of aggregate probability of observation balance between alleles as a component of the priors.
+no		freebayes    --no-partial-observations (no|yes)					Exclude observations which do not fully span the dynamically-determined detection window.  (default, use all observations, dividing partial support across matching haplotypes when generating haplotypes.)
+no		freebayes    --report-monomorphic (no|yes)						Report even loci which appear to be monomorphic, and report allconsidered alleles, even those which are not in called genotypes. Loci which do not have any potential alternates have '.' for ALT.
+
+------------------------------------------------------------------------------------------------------------------
+
+
+Email
+user@tamucc.edu
+
+
+Fri Sep 17 10:17:03 CDT 2021 Reading in variables from config file...
+
+Fri Sep 17 10:17:03 CDT 2021 Checking for all required dDocent software...
+
+ Running CheckDependencies Function...
+
+  The dependency trimmomatic is installed!
+
+  The dependency freebayes is installed!
+
+  The dependency mawk is installed!
+
+  The dependency bwa is installed!
+
+  The dependency samtools is installed!
+
+  The dependency vcftools is installed!
+
+  The dependency rainbow is installed!
+
+  The dependency gnuplot is installed!
+
+  The dependency gawk is installed!
+
+  The dependency seqtk is installed!
+
+  The dependency cd-hit-est is installed!
+
+  The dependency bamToBed is installed!
+
+  The dependency bedtools is installed!
+
+  The dependency coverageBed is installed!
+
+  The dependency parallel is installed!
+
+  The dependency vcfcombine is installed!
+
+  The dependency bamtools is installed!
+
+  The dependency pearRM is installed!
+
+ All dependencies are installed and up to date!
+
+
+Fri Sep 17 10:17:04 CDT 2021  Begin main ddocent function
+
+ The HPC version of dDocent will only digest files with particular extensions for particular tasks
+  untouched files for trimming must be *.F.fq.gz and *.R.fq.gz
+  files trimmed for assembly (mkREF) must be *r1.fq.gz *r2.fq.gz
+  files trimmed for mapping (mkBAM) must be *R1.fq.gz *R2.fq.gz
+
+  extensions selected: *.R1.fq.gz *.R2.fq.gz
+
+ The namelist file already exists and was not recreated. 
+  If you experience errors, you should delete the namelist file.
+ 
+ The samples being processed are:
+  COPE_0469.fp2.repr
+  COPE_0470.fp2.repr
+  COPE_0471.fp2.repr
+  COPE_0472.fp2.repr
+  COPE_0473.fp2.repr
+  COPE_0474.fp2.repr
+  COPE_0475.fp2.repr
+  COPE_0476.fp2.repr
+  COPE_0477.fp2.repr
+  COPE_0478.fp2.repr
+  COPE_0479.fp2.repr
+  COPE_0480.fp2.repr
+  COPE_0481.fp2.repr
+  COPE_0482.fp2.repr
+  COPE_0483.fp2.repr
+  COPE_0484.fp2.repr
+  COPE_0485.fp2.repr
+  COPE_0486.fp2.repr
+  COPE_0487.fp2.repr
+  COPE_0488.fp2.repr
+  COPE_0489.fp2.repr
+  COPE_0490.fp2.repr
+  COPE_0491.fp2.repr
+  COPE_0492.fp2.repr
+  COPE_0493.fp2.repr
+  COPE_0494.fp2.repr
+  COPE_0495.fp2.repr
+  COPE_0496.fp2.repr
+  COPE_0497.fp2.repr
+  COPE_0498.fp2.repr
+  COPE_0499.fp2.repr
+  COPE_0500.fp2.repr
+  COPE_0501.fp2.repr
+  COPE_0502.fp2.repr
+  COPE_0503.fp2.repr
+  COPE_0504.fp2.repr
+  COPE_0505.fp2.repr
+  COPE_0506.fp2.repr
+  COPE_0507.fp2.repr
+  COPE_0508.fp2.repr
+  COPE_0509.fp2.repr
+  COPE_0510.fp2.repr
+  COPE_0511.fp2.repr
+  COPE_0512.fp2.repr
+  COPE_0514.fp2.repr
+  COPE_0515.fp2.repr
+  COPE_0517.fp2.repr
+  COPE_0518.fp2.repr
+  COPE_0519.fp2.repr
+  COPE_0520.fp2.repr
+  COPE_0521.fp2.repr
+  COPE_0522.fp2.repr
+  COPE_0523.fp2.repr
+  COPE_0524.fp2.repr
+  COPE_0525.fp2.repr
+  COPE_0526.fp2.repr
+  COPE_0527.fp2.repr
+  COPE_0528.fp2.repr
+  COPE_0529.fp2.repr
+  COPE_0530.fp2.repr
+  COPE_0531.fp2.repr
+  COPE_0532.fp2.repr
+  COPE_0534.fp2.repr
+  COPE_0535.fp2.repr
+  COPE_0536.fp2.repr
+  COPE_0537.fp2.repr
+  COPE_0538.fp2.repr
+  COPE_0539.fp2.repr
+  COPE_0540.fp2.repr
+  COPE_0541.fp2.repr
+  COPE_0542.fp2.repr
+  COPE_0543.fp2.repr
+  COPE_0544.fp2.repr
+  COPE_0545.fp2.repr
+  COPE_0546.fp2.repr
+  COPE_0547.fp2.repr
+  COPE_0548.fp2.repr
+  COPE_0549.fp2.repr
+  COPE_0550.fp2.repr
+  COPE_0551.fp2.repr
+  COPE_0552.fp2.repr
+  COPE_0553.fp2.repr
+  COPE_0554.fp2.repr
+  COPE_0555.fp2.repr
+  COPE_0556.fp2.repr
+  COPE_0557.fp2.repr
+  COPE_0558.fp2.repr
+  COPE_0559.fp2.repr
+  COPE_0560.fp2.repr
+  COPE_0561.fp2.repr
+  COPE_0562.fp2.repr
+  COPE_0563.fp2.repr
+  COPE_0565.fp2.repr
+  COPE_0566.fp2.repr
+  COPE_0567.fp2.repr
+  COPE_0568.fp2.repr
+  COPE_0569.fp2.repr
+  COPE_0570.fp2.repr
+  COPE_0571.fp2.repr
+  COPE_0572.fp2.repr
+  COPE_0573.fp2.repr
+  COPE_0575.fp2.repr
+  COPE_0576.fp2.repr
+  COPE_0577.fp2.repr
+  COPE_0578.fp2.repr
+  COPE_0579.fp2.repr
+  COPE_0580.fp2.repr
+  COPE_0582.fp2.repr
+  COPE_0583.fp2.repr
+  COPE_0584.fp2.repr
+  COPE_0585.fp2.repr
+  COPE_0586.fp2.repr
+  COPE_0587.fp2.repr
+  COPE_0588.fp2.repr
+  COPE_0589.fp2.repr
+  COPE_0591.fp2.repr
+  COPE_0592.fp2.repr
+  COPE_0593.fp2.repr
+  COPE_0594.fp2.repr
+  COPE_0595.fp2.repr
+  COPE_0596.fp2.repr
+  COPE_0597.fp2.repr
+  COPE_0598.fp2.repr
+  COPE_0599.fp2.repr
+  COPE_0600.fp2.repr
+  COPE_0601.fp2.repr
+  COPE_0602.fp2.repr
+  COPE_0603.fp2.repr
+  COPE_0604.fp2.repr
+  COPE_0605.fp2.repr
+  COPE_0606.fp2.repr
+  COPE_0607.fp2.repr
+  COPE_0608.fp2.repr
+  COPE_0610.fp2.repr
+  COPE_0611.fp2.repr
+  COPE_0612.fp2.repr
+  COPE_0613.fp2.repr
+  COPE_0614.fp2.repr
+  COPE_0615.fp2.repr
+  COPE_0616.fp2.repr
+  COPE_0617.fp2.repr
+  COPE_0618.fp2.repr
+  COPE_0619.fp2.repr
+  COPE_0620.fp2.repr
+  COPE_0621.fp2.repr
+  COPE_0622.fp2.repr
+  COPE_0623.fp2.repr
+  COPE_0624.fp2.repr
+  COPE_0625.fp2.repr
+  COPE_0626.fp2.repr
+  COPE_0627.fp2.repr
+  COPE_0628.fp2.repr
+  COPE_0629.fp2.repr
+  COPE_0630.fp2.repr
+  COPE_0631.fp2.repr
+  COPE_0632.fp2.repr
+  COPE_0633.fp2.repr
+  COPE_0634.fp2.repr
+  COPE_0635.fp2.repr
+  COPE_0636.fp2.repr
+  COPE_0637.fp2.repr
+  COPE_0638.fp2.repr
+  COPE_0639.fp2.repr
+  COPE_0640.fp2.repr
+  COPE_0641.fp2.repr
+  COPE_0642.fp2.repr
+  COPE_0643.fp2.repr
+  COPE_0644.fp2.repr
+  COPE_0645.fp2.repr
+  COPE_0646.fp2.repr
+  COPE_0647.fp2.repr
+  COPE_0648.fp2.repr
+  COPE_0649.fp2.repr
+  COPE_0650.fp2.repr
+  COPE_0651.fp2.repr
+  COPE_0652.fp2.repr
+  COPE_0653.fp2.repr
+  COPE_0654.fp2.repr
+  COPE_0655.fp2.repr
+  COPE_0656.fp2.repr
+  COPE_0657.fp2.repr
+  COPE_0658.fp2.repr
+  COPE_0659.fp2.repr
+  COPE_0660.fp2.repr
+  COPE_0661.fp2.repr
+  COPE_0662.fp2.repr
+  COPE_0663.fp2.repr
+  COPE_0664.fp2.repr
+  COPE_0665.fp2.repr
+  COPE_0666.fp2.repr
+  COPE_0667.fp2.repr
+  COPE_0668.fp2.repr
+  COPE_0669.fp2.repr
+  COPE_0670.fp2.repr
+  COPE_0671.fp2.repr
+  COPE_0672.fp2.repr
+  COPE_0673.fp2.repr
+  COPE_0674.fp2.repr
+  COPE_0675.fp2.repr
+  COPE_0676.fp2.repr
+  COPE_0677.fp2.repr
+  COPE_0678.fp2.repr
+  COPE_0679.fp2.repr
+  COPE_0680.fp2.repr
+  COPE_0681.fp2.repr
+  COPE_0682.fp2.repr
+  COPE_0683.fp2.repr
+  COPE_0684.fp2.repr
+  COPE_0685.fp2.repr
+  COPE_0686.fp2.repr
+  COPE_0687.fp2.repr
+  COPE_0688.fp2.repr
+  COPE_0690.fp2.repr
+  COPE_0692.fp2.repr
+  COPE_0693.fp2.repr
+  COPE_0694.fp2.repr
+  COPE_0695.fp2.repr
+  COPE_0696.fp2.repr
+  COPE_0697.fp2.repr
+  COPE_0698.fp2.repr
+  COPE_0699.fp2.repr
+  COPE_0700.fp2.repr
+  COPE_0701.fp2.repr
+  COPE_0702.fp2.repr
+  COPE_0703.fp2.repr
+  COPE_0704.fp2.repr
+  COPE_0705.fp2.repr
+  COPE_0706.fp2.repr
+  COPE_0707.fp2.repr
+  COPE_0708.fp2.repr
+  COPE_0709.fp2.repr
+  COPE_0710.fp2.repr
+  COPE_0711.fp2.repr
+  COPE_0712.fp2.repr
+  COPE_0713.fp2.repr
+  COPE_0715.fp2.repr
+  COPE_0716.fp2.repr
+  COPE_0717.fp2.repr
+  COPE_0718.fp2.repr
+  COPE_0719.fp2.repr
+  COPE_0720.fp2.repr
+  COPE_0721.fp2.repr
+  COPE_0722.fp2.repr
+  COPE_0723.fp2.repr
+  COPE_0724.fp2.repr
+  COPE_0725.fp2.repr
+  COPE_0726.fp2.repr
+  COPE_0727.fp2.repr
+  COPE_0728.fp2.repr
+  COPE_0729.fp2.repr
+  COPE_0730.fp2.repr
+  COPE_0731.fp2.repr
+  COPE_0732.fp2.repr
+  COPE_0734.fp2.repr
+  COPE_0735.fp2.repr
+  COPE_0736.fp2.repr
+  COPE_0737.fp2.repr
+  COPE_0738.fp2.repr
+  COPE_0739.fp2.repr
+  COPE_0740.fp2.repr
+  COPE_0741.fp2.repr
+  COPE_0742.fp2.repr
+  COPE_0743.fp2.repr
+  COPE_0744.fp2.repr
+  COPE_0745.fp2.repr
+  COPE_0746.fp2.repr
+  COPE_0747.fp2.repr
+  COPE_0748.fp2.repr
+  COPE_0749.fp2.repr
+  COPE_0750.fp2.repr
+  COPE_0751.fp2.repr
+  COPE_0752.fp2.repr
+  COPE_0753.fp2.repr
+  COPE_0754.fp2.repr
+  COPE_0755.fp2.repr
+  COPE_0756.fp2.repr
+  COPE_0757.fp2.repr
+  COPE_0758.fp2.repr
+  COPE_0759.fp2.repr
+  COPE_0760.fp2.repr
+  COPE_0761.fp2.repr
+  COPE_0762.fp2.repr
+  COPE_0763.fp2.repr
+  COPE_0764.fp2.repr
+  COPE_0765.fp2.repr
+  COPE_0766.fp2.repr
+  COPE_0767.fp2.repr
+  COPE_0768.fp2.repr
+  COPE_0769.fp2.repr
+  COPE_0770.fp2.repr
+  COPE_0771.fp2.repr
+  COPE_0772.fp2.repr
+  COPE_0773.fp2.repr
+  COPE_0774.fp2.repr
+  COPE_0775.fp2.repr
+  COPE_0776.fp2.repr
+  COPE_0777.fp2.repr
+  COPE_0778.fp2.repr
+  COPE_0779.fp2.repr
+  COPE_0780.fp2.repr
+  COPE_0781.fp2.repr
+  COPE_0782.fp2.repr
+  COPE_0783.fp2.repr
+  COPE_0784.fp2.repr
+  COPE_0785.fp2.repr
+  COPE_0786.fp2.repr
+  COPE_0787.fp2.repr
+  COPE_0788.fp2.repr
+  COPE_0789.fp2.repr
+  COPE_0790.fp2.repr
+  COPE_0791.fp2.repr
+  COPE_0792.fp2.repr
+  COPE_0793.fp2.repr
+  COPE_0794.fp2.repr
+  COPE_0795.fp2.repr
+  COPE_0796.fp2.repr
+  COPE_0797.fp2.repr
+  COPE_0798.fp2.repr
+  COPE_0799.fp2.repr
+  COPE_0800.fp2.repr
+  COPE_0801.fp2.repr
+  COPE_0802.fp2.repr
+  COPE_0803.fp2.repr
+  COPE_0804.fp2.repr
+  COPE_0805.fp2.repr
+  COPE_0806.fp2.repr
+  COPE_0807.fp2.repr
+  COPE_0808.fp2.repr
+  COPE_0809.fp2.repr
+  COPE_0810.fp2.repr
+  COPE_0811.fp2.repr
+  COPE_0812.fp2.repr
+  COPE_0813.fp2.repr
+  COPE_0814.fp2.repr
+  COPE_0815.fp2.repr
+  COPE_0816.fp2.repr
+  COPE_0817.fp2.repr
+  COPE_0818.fp2.repr
+  COPE_0819.fp2.repr
+  COPE_0820.fp2.repr
+  COPE_0821.fp2.repr
+  COPE_0822.fp2.repr
+  COPE_0823.fp2.repr
+  COPE_0824.fp2.repr
+  COPE_0825.fp2.repr
+  COPE_0826.fp2.repr
+  COPE_0827.fp2.repr
+  COPE_0828.fp2.repr
+  COPE_0829.fp2.repr
+  COPE_0830.fp2.repr
+  COPE_0831.fp2.repr
+  COPE_0832.fp2.repr
+  COPE_0833.fp2.repr
+  COPE_0834.fp2.repr
+  COPE_0835.fp2.repr
+  COPE_0836.fp2.repr
+  COPE_0837.fp2.repr
+  COPE_0838.fp2.repr
+  COPE_0839.fp2.repr
+  COPE_0840.fp2.repr
+  COPE_0841.fp2.repr
+  COPE_0842.fp2.repr
+  COPE_0843.fp2.repr
+  COPE_0845.fp2.repr
+  COPE_0846.fp2.repr
+  COPE_0847.fp2.repr
+  COPE_0848.fp2.repr
+  COPE_0849.fp2.repr
+  COPE_0850.fp2.repr
+  COPE_0851.fp2.repr
+  COPE_0852.fp2.repr
+  COPE_0853.fp2.repr
+  COPE_0854.fp2.repr
+  COPE_0855.fp2.repr
+  COPE_0856.fp2.repr
+  COPE_0857.fp2.repr
+  COPE_0858.fp2.repr
+  COPE_0859.fp2.repr
+  COPE_0860.fp2.repr
+  COPE_0861.fp2.repr
+  COPE_0862.fp2.repr
+  COPE_0863.fp2.repr
+  COPE_0864.fp2.repr
+  COPE_0865.fp2.repr
+  COPE_0866.fp2.repr
+  COPE_0867.fp2.repr
+  COPE_0868.fp2.repr
+  COPE_0869.fp2.repr
+  COPE_0870.fp2.repr
+  COPE_0871.fp2.repr
+  COPE_0872.fp2.repr
+  COPE_0873.fp2.repr
+  COPE_0874.fp2.repr
+  COPE_0875.fp2.repr
+  COPE_0876.fp2.repr
+  COPE_0877.fp2.repr
+  COPE_0878.fp2.repr
+  COPE_0879.fp2.repr
+  COPE_0880.fp2.repr
+  COPE_0882.fp2.repr
+  COPE_0883.fp2.repr
+  COPE_0884.fp2.repr
+  COPE_0885.fp2.repr
+  COPE_0886.fp2.repr
+  COPE_0887.fp2.repr
+  COPE_0888.fp2.repr
+  COPE_0889.fp2.repr
+  COPE_0890.fp2.repr
+  COPE_0891.fp2.repr
+  COPE_0892.fp2.repr
+  COPE_0893.fp2.repr
+  COPE_0894.fp2.repr
+  COPE_0895.fp2.repr
+  COPE_0896.fp2.repr
+  COPE_0897.fp2.repr
+  COPE_0898.fp2.repr
+  COPE_0899.fp2.repr
+  COPE_0900.fp2.repr
+  COPE_0901.fp2.repr
+  COPE_0902.fp2.repr
+  COPE_0903.fp2.repr
+  COPE_0904.fp2.repr
+  COPE_0905.fp2.repr
+  COPE_0906.fp2.repr
+  COPE_0907.fp2.repr
+  COPE_0908.fp2.repr
+  COPE_0909.fp2.repr
+  COPE_0910.fp2.repr
+  COPE_0911.fp2.repr
+  COPE_0912.fp2.repr
+  COPE_0913.fp2.repr
+  COPE_0914.fp2.repr
+  COPE_0915.fp2.repr
+  COPE_0916.fp2.repr
+  COPE_0917.fp2.repr
+  COPE_0918.fp2.repr
+  COPE_0919.fp2.repr
+  COPE_0920.fp2.repr
+  COPE_0921.fp2.repr
+  COPE_0922.fp2.repr
+  COPE_0923.fp2.repr
+  COPE_0924.fp2.repr
+  COPE_0925.fp2.repr
+  COPE_0926.fp2.repr
+  COPE_0927.fp2.repr
+  COPE_0928.fp2.repr
+  COPE_0929.fp2.repr
+  COPE_0930.fp2.repr
+  COPE_0931.fp2.repr
+  COPE_0932.fp2.repr
+  COPE_0933.fp2.repr
+  COPE_0934.fp2.repr
+  COPE_0935.fp2.repr
+  COPE_0936.fp2.repr
+  COPE_0937.fp2.repr
+  COPE_0938.fp2.repr
+  COPE_0939.fp2.repr
+  COPE_0940.fp2.repr
+  COPE_0941.fp2.repr
+  COPE_0942.fp2.repr
+  COPE_0943.fp2.repr
+  COPE_0944.fp2.repr
+  COPE_0945.fp2.repr
+  COPE_0946.fp2.repr
+  COPE_0947.fp2.repr
+  COPE_0948.fp2.repr
+  COPE_0949.fp2.repr
+  COPE_0950.fp2.repr
+  COPE_0951.fp2.repr
+  COPE_0952.fp2.repr
+  COPE_0953.fp2.repr
+  COPE_0954.fp2.repr
+  COPE_0955.fp2.repr
+  COPE_0956.fp2.repr
+  COPE_0957.fp2.repr
+  COPE_0958.fp2.repr
+  COPE_0960.fp2.repr
+  COPE_0961.fp2.repr
+  COPE_0962.fp2.repr
+  COPE_0963.fp2.repr
+  COPE_0964.fp2.repr
+  COPE_0965.fp2.repr
+  COPE_0966.fp2.repr
+  COPE_0967.fp2.repr
+  COPE_0968.fp2.repr
+  COPE_0969.fp2.repr
+  COPE_0970.fp2.repr
+  COPE_0971.fp2.repr
+  COPE_0972.fp2.repr
+  COPE_0973.fp2.repr
+  COPE_0974.fp2.repr
+  COPE_0975.fp2.repr
+  COPE_0976.fp2.repr
+  COPE_0977.fp2.repr
+  COPE_0978.fp2.repr
+  COPE_0979.fp2.repr
+  COPE_0980.fp2.repr
+  COPE_0981.fp2.repr
+  COPE_0982.fp2.repr
+  COPE_0983.fp2.repr
+  COPE_0984.fp2.repr
+  COPE_0985.fp2.repr
+  COPE_0986.fp2.repr
+  COPE_0987.fp2.repr
+  COPE_0988.fp2.repr
+  COPE_0989.fp2.repr
+  COPE_0990.fp2.repr
+  COPE_0991.fp2.repr
+  COPE_0992.fp2.repr
+  COPE_0993.fp2.repr
+  COPE_0994.fp2.repr
+  COPE_0995.fp2.repr
+  COPE_0996.fp2.repr
+  COPE_0997.fp2.repr
+  COPE_0998.fp2.repr
+  COPE_0999.fp2.repr
+  COPE_1000.fp2.repr
+  COPE_1001.fp2.repr
+  COPE_1002.fp2.repr
+  COPE_1003.fp2.repr
+  COPE_1004.fp2.repr
+  COPE_1005.fp2.repr
+  COPE_1006.fp2.repr
+  COPE_1007.fp2.repr
+  COPE_1008.fp2.repr
+  COPE_1009.fp2.repr
+  COPE_1010.fp2.repr
+  COPE_1011.fp2.repr
+  COPE_1012.fp2.repr
+  COPE_1013.fp2.repr
+  COPE_1014.fp2.repr
+  COPE_1015.fp2.repr
+  COPE_1016.fp2.repr
+  COPE_1017.fp2.repr
+  COPE_1018.fp2.repr
+  COPE_1019.fp2.repr
+  COPE_1020.fp2.repr
+  COPE_1021.fp2.repr
+  COPE_1023.fp2.repr
+  COPE_1024.fp2.repr
+  COPE_1025.fp2.repr
+  COPE_1026.fp2.repr
+  COPE_1027.fp2.repr
+  COPE_1028.fp2.repr
+  COPE_1029.fp2.repr
+  COPE_1030.fp2.repr
+  COPE_1031.fp2.repr
+  COPE_1032.fp2.repr
+  COPE_1033.fp2.repr
+  COPE_1034.fp2.repr
+  COPE_1035.fp2.repr
+  COPE_1036.fp2.repr
+  COPE_1037.fp2.repr
+  COPE_1038.fp2.repr
+  COPE_1039.fp2.repr
+  COPE_1040.fp2.repr
+  COPE_1041.fp2.repr
+  COPE_1042.fp2.repr
+  COPE_1043.fp2.repr
+  COPE_1044.fp2.repr
+  COPE_1045.fp2.repr
+  COPE_1046.fp2.repr
+  COPE_1047.fp2.repr
+  COPE_1048.fp2.repr
+  COPE_1049.fp2.repr
+  COPE_1050.fp2.repr
+  COPE_1051.fp2.repr
+  COPE_1052.fp2.repr
+  COPE_1053.fp2.repr
+  COPE_1054.fp2.repr
+  COPE_1055.fp2.repr
+  COPE_1056.fp2.repr
+  COPE_1058.fp2.repr
+  COPE_1059.fp2.repr
+  COPE_1060.fp2.repr
+  COPE_1061.fp2.repr
+  COPE_1062.fp2.repr
+  COPE_1063.fp2.repr
+  COPE_1064.fp2.repr
+  COPE_1065.fp2.repr
+  COPE_1066.fp2.repr
+  COPE_1067.fp2.repr
+  COPE_1068.fp2.repr
+  COPE_1069.fp2.repr
+  COPE_1070.fp2.repr
+  COPE_1071.fp2.repr
+  COPE_1072.fp2.repr
+  COPE_1073.fp2.repr
+  COPE_1074.fp2.repr
+  COPE_1075.fp2.repr
+  COPE_1076.fp2.repr
+  COPE_1077.fp2.repr
+  COPE_1078.fp2.repr
+  COPE_1079.fp2.repr
+  COPE_1080.fp2.repr
+  COPE_1081.fp2.repr
+  COPE_1082.fp2.repr
+  COPE_1084.fp2.repr
+  COPE_1085.fp2.repr
+  COPE_1086.fp2.repr
+  COPE_1087.fp2.repr
+  COPE_1088.fp2.repr
+  COPE_1089.fp2.repr
+  COPE_1090.fp2.repr
+  COPE_1091.fp2.repr
+  COPE_1092.fp2.repr
+  COPE_1093.fp2.repr
+  COPE_1094.fp2.repr
+  COPE_1095.fp2.repr
+  COPE_1096.fp2.repr
+  COPE_1097.fp2.repr
+  COPE_1098.fp2.repr
+  COPE_1099.fp2.repr
+  COPE_1100.fp2.repr
+  COPE_1101.fp2.repr
+  COPE_1102.fp2.repr
+  COPE_1103.fp2.repr
+  COPE_1104.fp2.repr
+  COPE_1105.fp2.repr
+  COPE_1106.fp2.repr
+  COPE_1107.fp2.repr
+  COPE_1108.fp2.repr
+  COPE_1109.fp2.repr
+  COPE_1110.fp2.repr
+  COPE_1111.fp2.repr
+  COPE_1112.fp2.repr
+  COPE_1113.fp2.repr
+  COPE_1114.fp2.repr
+  COPE_1115.fp2.repr
+  COPE_1116.fp2.repr
+  COPE_1117.fp2.repr
+  COPE_1118.fp2.repr
+  COPE_1119.fp2.repr
+  COPE_1120.fp2.repr
+  COPE_1121.fp2.repr
+  COPE_1122.fp2.repr
+  COPE_1123.fp2.repr
+  COPE_1124.fp2.repr
+  COPE_1125.fp2.repr
+  COPE_1126.fp2.repr
+  COPE_1127.fp2.repr
+  COPE_1128.fp2.repr
+  COPE_1129.fp2.repr
+  COPE_1130.fp2.repr
+  COPE_1131.fp2.repr
+  COPE_1132.fp2.repr
+  COPE_1134.fp2.repr
+  COPE_1135.fp2.repr
+  COPE_1136.fp2.repr
+  COPE_1137.fp2.repr
+  COPE_1138.fp2.repr
+  COPE_1139.fp2.repr
+  COPE_1140.fp2.repr
+  COPE_1141.fp2.repr
+  COPE_1142.fp2.repr
+  COPE_1143.fp2.repr
+  COPE_1144.fp2.repr
+  COPE_1145.fp2.repr
+  COPE_1146.fp2.repr
+  COPE_1147.fp2.repr
+  COPE_1148.fp2.repr
+  COPE_1149.fp2.repr
+  COPE_1150.fp2.repr
+  COPE_1151.fp2.repr
+  COPE_1152.fp2.repr
+  COPE_1153.fp2.repr
+  COPE_1154.fp2.repr
+  COPE_1155.fp2.repr
+  COPE_1156.fp2.repr
+  COPE_1157.fp2.repr
+  COPE_1158.fp2.repr
+  COPE_1159.fp2.repr
+  COPE_1160.fp2.repr
+  COPE_1161.fp2.repr
+  COPE_1162.fp2.repr
+  COPE_1163.fp2.repr
+  COPE_1164.fp2.repr
+  COPE_1165.fp2.repr
+  COPE_1166.fp2.repr
+  COPE_1167.fp2.repr
+  COPE_1168.fp2.repr
+  COPE_1169.fp2.repr
+  COPE_1170.fp2.repr
+  COPE_1171.fp2.repr
+  COPE_1172.fp2.repr
+  COPE_1173.fp2.repr
+  COPE_1174.fp2.repr
+  COPE_1175.fp2.repr
+  COPE_1176.fp2.repr
+  COPE_1177.fp2.repr
+  COPE_1178.fp2.repr
+  COPE_1179.fp2.repr
+  COPE_1180.fp2.repr
+  COPE_1181.fp2.repr
+  COPE_1182.fp2.repr
+  COPE_1183.fp2.repr
+  COPE_1184.fp2.repr
+  COPE_1185.fp2.repr
+  COPE_1186.fp2.repr
+  COPE_1187.fp2.repr
+  COPE_1188.fp2.repr
+  COPE_1189.fp2.repr
+  COPE_1190.fp2.repr
+  COPE_1191.fp2.repr
+  COPE_1192.fp2.repr
+  COPE_1193.fp2.repr
+  COPE_1194.fp2.repr
+  COPE_1195.fp2.repr
+  COPE_1196.fp2.repr
+  COPE_1197.fp2.repr
+  COPE_1198.fp2.repr
+  COPE_1199.fp2.repr
+  COPE_1200.fp2.repr
+  COPE_1201.fp2.repr
+  COPE_1202.fp2.repr
+  COPE_1203.fp2.repr
+  COPE_1204.fp2.repr
+  COPE_1205.fp2.repr
+  COPE_1206.fp2.repr
+  COPE_1207.fp2.repr
+  COPE_1208.fp2.repr
+  COPE_1209.fp2.repr
+  COPE_1210.fp2.repr
+  COPE_1211.fp2.repr
+  COPE_1212.fp2.repr
+  COPE_1213.fp2.repr
+  COPE_1214.fp2.repr
+  COPE_1215.fp2.repr
+  COPE_1216.fp2.repr
+  COPE_1217.fp2.repr
+  COPE_1218.fp2.repr
+  COPE_1219.fp2.repr
+  COPE_1220.fp2.repr
+  COPE_1221.fp2.repr
+  COPE_1222.fp2.repr
+  COPE_1223.fp2.repr
+  COPE_1224.fp2.repr
+  COPE_1225.fp2.repr
+  COPE_1226.fp2.repr
+  COPE_1227.fp2.repr
+  COPE_1228.fp2.repr
+  COPE_1229.fp2.repr
+  COPE_1230.fp2.repr
+  COPE_1231.fp2.repr
+  COPE_1232.fp2.repr
+  COPE_1233.fp2.repr
+  COPE_1234.fp2.repr
+  COPE_1235.fp2.repr
+  COPE_1236.fp2.repr
+  COPE_1237.fp2.repr
+  COPE_1238.fp2.repr
+  COPE_1239.fp2.repr
+  COPE_1240.fp2.repr
+  COPE_1241.fp2.repr
+  COPE_1242.fp2.repr
+  COPE_1243.fp2.repr
+  COPE_1244.fp2.repr
+  COPE_1245.fp2.repr
+  COPE_1246.fp2.repr
+  COPE_1247.fp2.repr
+  COPE_1248.fp2.repr
+  COPE_1249.fp2.repr
+  COPE_1250.fp2.repr
+  COPE_1251.fp2.repr
+  COPE_1252.fp2.repr
+  COPE_1253.fp2.repr
+  COPE_1254.fp2.repr
+  COPE_1255.fp2.repr
+  COPE_1256.fp2.repr
+  COPE_1257.fp2.repr
+  COPE_1258.fp2.repr
+  COPE_1259.fp2.repr
+  COPE_1260.fp2.repr
+  COPE_1261.fp2.repr
+  COPE_1263.fp2.repr
+  COPE_1264.fp2.repr
+  COPE_1265.fp2.repr
+  COPE_1266.fp2.repr
+
+
+Fri Sep 17 10:17:08 CDT 2021 Genotyping initiated...
+
+ Fri Sep 17 10:17:08 CDT 2021  Preparing files for genotyping...
+
+  Fri Sep 17 10:17:09 CDT 2021 Filtered BAM files detected with -RG.bam.
+  Fri Sep 17 10:17:09 CDT 2021  Estimating coverage of ref intervals & remove extreme copy number loci...
+  Fri Sep 17 10:17:09 CDT 2021  Filtering contigs with low coverage...
+  Fri Sep 17 10:17:09 CDT 2021  Making the bed files...
+
+ Fri Sep 17 10:17:13 CDT 2021  Genotyping individuals of ploidy 2 using freebayes...
+slurmstepd: error: *** JOB 47808 ON hpcc44 CANCELLED AT 2021-09-17T10:20:11 ***

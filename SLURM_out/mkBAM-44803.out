@@ -7466,3 +7466,5624 @@ Tue Sep 14 01:13:15 CDT 2021  run samtools sort COPE_0892.fp2.repr
 
 Tue Sep 14 01:15:11 CDT 2021  run samtools index COPE_0892.fp2.repr
 [bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_0909.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:17:33 CDT 2021  run samtools sort COPE_0909.fp2.repr
+
+Tue Sep 14 01:19:12 CDT 2021  run samtools index COPE_0909.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_0930.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:18:44 CDT 2021  run samtools sort COPE_0930.fp2.repr
+
+Tue Sep 14 01:19:43 CDT 2021  run samtools index COPE_0930.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_0919.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:19:40 CDT 2021  run samtools sort COPE_0919.fp2.repr
+
+Tue Sep 14 01:21:11 CDT 2021  run samtools index COPE_0919.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_0912.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:19:57 CDT 2021  run samtools sort COPE_0912.fp2.repr
+
+Tue Sep 14 01:21:38 CDT 2021  run samtools index COPE_0912.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_0846.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:17:58 CDT 2021  run samtools sort COPE_0846.fp2.repr
+
+Tue Sep 14 01:21:49 CDT 2021  run samtools index COPE_0846.fp2.repr
+[bam_sort_core] merging from 5 files and 1 in-memory blocks...
+FILE=COPE_0946.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:22:38 CDT 2021  run samtools sort COPE_0946.fp2.repr
+
+Tue Sep 14 01:22:39 CDT 2021  run samtools index COPE_0946.fp2.repr
+FILE=COPE_0895.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:20:48 CDT 2021  run samtools sort COPE_0895.fp2.repr
+
+Tue Sep 14 01:23:26 CDT 2021  run samtools index COPE_0895.fp2.repr
+[bam_sort_core] merging from 3 files and 1 in-memory blocks...
+FILE=COPE_0937.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:24:36 CDT 2021  run samtools sort COPE_0937.fp2.repr
+
+Tue Sep 14 01:25:27 CDT 2021  run samtools index COPE_0937.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_0929.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:23:58 CDT 2021  run samtools sort COPE_0929.fp2.repr
+
+Tue Sep 14 01:25:30 CDT 2021  run samtools index COPE_0929.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_0932.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:25:04 CDT 2021  run samtools sort COPE_0932.fp2.repr
+
+Tue Sep 14 01:26:19 CDT 2021  run samtools index COPE_0932.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_0872.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:23:45 CDT 2021  run samtools sort COPE_0872.fp2.repr
+
+Tue Sep 14 01:27:50 CDT 2021  run samtools index COPE_0872.fp2.repr
+[bam_sort_core] merging from 5 files and 1 in-memory blocks...
+FILE=COPE_0933.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:27:58 CDT 2021  run samtools sort COPE_0933.fp2.repr
+
+Tue Sep 14 01:29:30 CDT 2021  run samtools index COPE_0933.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_0945.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:29:10 CDT 2021  run samtools sort COPE_0945.fp2.repr
+
+Tue Sep 14 01:29:35 CDT 2021  run samtools index COPE_0945.fp2.repr
+FILE=COPE_0782.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:22:57 CDT 2021  run samtools sort COPE_0782.fp2.repr
+
+Tue Sep 14 01:29:20 CDT 2021  run samtools index COPE_0782.fp2.repr
+[bam_sort_core] merging from 8 files and 1 in-memory blocks...
+FILE=COPE_0928.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:30:02 CDT 2021  run samtools sort COPE_0928.fp2.repr
+
+Tue Sep 14 01:31:46 CDT 2021  run samtools index COPE_0928.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_0954.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:31:47 CDT 2021  run samtools sort COPE_0954.fp2.repr
+
+Tue Sep 14 01:31:55 CDT 2021  run samtools index COPE_0954.fp2.repr
+FILE=COPE_0951.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:31:55 CDT 2021  run samtools sort COPE_0951.fp2.repr
+
+Tue Sep 14 01:32:12 CDT 2021  run samtools index COPE_0951.fp2.repr
+FILE=COPE_0950.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:32:32 CDT 2021  run samtools sort COPE_0950.fp2.repr
+
+Tue Sep 14 01:32:53 CDT 2021  run samtools index COPE_0950.fp2.repr
+FILE=COPE_0799.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:26:08 CDT 2021  run samtools sort COPE_0799.fp2.repr
+
+Tue Sep 14 01:32:31 CDT 2021  run samtools index COPE_0799.fp2.repr
+[bam_sort_core] merging from 8 files and 1 in-memory blocks...
+FILE=COPE_0925.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:31:13 CDT 2021  run samtools sort COPE_0925.fp2.repr
+
+Tue Sep 14 01:33:03 CDT 2021  run samtools index COPE_0925.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_0955.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:33:03 CDT 2021  run samtools sort COPE_0955.fp2.repr
+
+Tue Sep 14 01:33:14 CDT 2021  run samtools index COPE_0955.fp2.repr
+FILE=COPE_0957.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:33:28 CDT 2021  run samtools sort COPE_0957.fp2.repr
+
+Tue Sep 14 01:33:33 CDT 2021  run samtools index COPE_0957.fp2.repr
+FILE=COPE_0949.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:33:12 CDT 2021  run samtools sort COPE_0949.fp2.repr
+
+Tue Sep 14 01:33:37 CDT 2021  run samtools index COPE_0949.fp2.repr
+FILE=COPE_0944.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:33:09 CDT 2021  run samtools sort COPE_0944.fp2.repr
+
+Tue Sep 14 01:34:02 CDT 2021  run samtools index COPE_0944.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_0953.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:34:21 CDT 2021  run samtools sort COPE_0953.fp2.repr
+
+Tue Sep 14 01:34:35 CDT 2021  run samtools index COPE_0953.fp2.repr
+FILE=COPE_0788.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:27:34 CDT 2021  run samtools sort COPE_0788.fp2.repr
+
+Tue Sep 14 01:34:29 CDT 2021  run samtools index COPE_0788.fp2.repr
+[bam_sort_core] merging from 9 files and 1 in-memory blocks...
+FILE=COPE_0943.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:34:53 CDT 2021  run samtools sort COPE_0943.fp2.repr
+
+Tue Sep 14 01:35:52 CDT 2021  run samtools index COPE_0943.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_0969.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:37:13 CDT 2021  run samtools sort COPE_0969.fp2.repr
+
+Tue Sep 14 01:37:18 CDT 2021  run samtools index COPE_0969.fp2.repr
+FILE=COPE_0889.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:34:23 CDT 2021  run samtools sort COPE_0889.fp2.repr
+
+Tue Sep 14 01:37:59 CDT 2021  run samtools index COPE_0889.fp2.repr
+[bam_sort_core] merging from 5 files and 1 in-memory blocks...
+FILE=COPE_0938.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:38:00 CDT 2021  run samtools sort COPE_0938.fp2.repr
+
+Tue Sep 14 01:39:29 CDT 2021  run samtools index COPE_0938.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_0968.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:40:05 CDT 2021  run samtools sort COPE_0968.fp2.repr
+
+Tue Sep 14 01:40:21 CDT 2021  run samtools index COPE_0968.fp2.repr
+FILE=COPE_0963.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:42:12 CDT 2021  run samtools sort COPE_0963.fp2.repr
+
+Tue Sep 14 01:42:41 CDT 2021  run samtools index COPE_0963.fp2.repr
+FILE=COPE_0964.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:42:54 CDT 2021  run samtools sort COPE_0964.fp2.repr
+
+Tue Sep 14 01:43:26 CDT 2021  run samtools index COPE_0964.fp2.repr
+FILE=COPE_0962.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:43:38 CDT 2021  run samtools sort COPE_0962.fp2.repr
+
+Tue Sep 14 01:44:08 CDT 2021  run samtools index COPE_0962.fp2.repr
+FILE=COPE_0879.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:42:20 CDT 2021  run samtools sort COPE_0879.fp2.repr
+
+Tue Sep 14 01:47:07 CDT 2021  run samtools index COPE_0879.fp2.repr
+[bam_sort_core] merging from 6 files and 1 in-memory blocks...
+FILE=COPE_0921.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:44:16 CDT 2021  run samtools sort COPE_0921.fp2.repr
+
+Tue Sep 14 01:47:17 CDT 2021  run samtools index COPE_0921.fp2.repr
+[bam_sort_core] merging from 4 files and 1 in-memory blocks...
+FILE=COPE_0966.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:46:36 CDT 2021  run samtools sort COPE_0966.fp2.repr
+
+Tue Sep 14 01:47:29 CDT 2021  run samtools index COPE_0966.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_0936.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:45:10 CDT 2021  run samtools sort COPE_0936.fp2.repr
+
+Tue Sep 14 01:47:32 CDT 2021  run samtools index COPE_0936.fp2.repr
+[bam_sort_core] merging from 3 files and 1 in-memory blocks...
+FILE=COPE_0924.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:45:07 CDT 2021  run samtools sort COPE_0924.fp2.repr
+
+Tue Sep 14 01:48:11 CDT 2021  run samtools index COPE_0924.fp2.repr
+[bam_sort_core] merging from 4 files and 1 in-memory blocks...
+FILE=COPE_0911.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:45:29 CDT 2021  run samtools sort COPE_0911.fp2.repr
+
+Tue Sep 14 01:49:02 CDT 2021  run samtools index COPE_0911.fp2.repr
+[bam_sort_core] merging from 4 files and 1 in-memory blocks...
+FILE=COPE_0939.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:47:37 CDT 2021  run samtools sort COPE_0939.fp2.repr
+
+Tue Sep 14 01:50:00 CDT 2021  run samtools index COPE_0939.fp2.repr
+[bam_sort_core] merging from 3 files and 1 in-memory blocks...
+FILE=COPE_0979.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:50:03 CDT 2021  run samtools sort COPE_0979.fp2.repr
+
+Tue Sep 14 01:50:11 CDT 2021  run samtools index COPE_0979.fp2.repr
+FILE=COPE_0920.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:47:22 CDT 2021  run samtools sort COPE_0920.fp2.repr
+
+Tue Sep 14 01:50:41 CDT 2021  run samtools index COPE_0920.fp2.repr
+[bam_sort_core] merging from 4 files and 1 in-memory blocks...
+FILE=COPE_0967.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:51:21 CDT 2021  run samtools sort COPE_0967.fp2.repr
+
+Tue Sep 14 01:52:25 CDT 2021  run samtools index COPE_0967.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_0986.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:53:11 CDT 2021  run samtools sort COPE_0986.fp2.repr
+
+Tue Sep 14 01:53:13 CDT 2021  run samtools index COPE_0986.fp2.repr
+FILE=COPE_0978.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:53:04 CDT 2021  run samtools sort COPE_0978.fp2.repr
+
+Tue Sep 14 01:53:20 CDT 2021  run samtools index COPE_0978.fp2.repr
+FILE=COPE_0961.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:52:16 CDT 2021  run samtools sort COPE_0961.fp2.repr
+
+Tue Sep 14 01:53:26 CDT 2021  run samtools index COPE_0961.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_0984.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:53:38 CDT 2021  run samtools sort COPE_0984.fp2.repr
+
+Tue Sep 14 01:53:49 CDT 2021  run samtools index COPE_0984.fp2.repr
+FILE=COPE_0965.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:52:54 CDT 2021  run samtools sort COPE_0965.fp2.repr
+
+Tue Sep 14 01:54:06 CDT 2021  run samtools index COPE_0965.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_0941.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:51:39 CDT 2021  run samtools sort COPE_0941.fp2.repr
+
+Tue Sep 14 01:54:06 CDT 2021  run samtools index COPE_0941.fp2.repr
+[bam_sort_core] merging from 3 files and 1 in-memory blocks...
+FILE=COPE_0926.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:50:49 CDT 2021  run samtools sort COPE_0926.fp2.repr
+
+Tue Sep 14 01:54:04 CDT 2021  run samtools index COPE_0926.fp2.repr
+[bam_sort_core] merging from 4 files and 1 in-memory blocks...
+FILE=COPE_0908.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:51:51 CDT 2021  run samtools sort COPE_0908.fp2.repr
+
+Tue Sep 14 01:55:46 CDT 2021  run samtools index COPE_0908.fp2.repr
+[bam_sort_core] merging from 5 files and 1 in-memory blocks...
+FILE=COPE_0916.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:51:56 CDT 2021  run samtools sort COPE_0916.fp2.repr
+
+Tue Sep 14 01:55:47 CDT 2021  run samtools index COPE_0916.fp2.repr
+[bam_sort_core] merging from 5 files and 1 in-memory blocks...
+FILE=COPE_0901.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:51:21 CDT 2021  run samtools sort COPE_0901.fp2.repr
+
+Tue Sep 14 01:55:46 CDT 2021  run samtools index COPE_0901.fp2.repr
+[bam_sort_core] merging from 6 files and 1 in-memory blocks...
+FILE=COPE_0976.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:59:45 CDT 2021  run samtools sort COPE_0976.fp2.repr
+
+Tue Sep 14 02:00:50 CDT 2021  run samtools index COPE_0976.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_0952.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:59:30 CDT 2021  run samtools sort COPE_0952.fp2.repr
+
+Tue Sep 14 02:01:25 CDT 2021  run samtools index COPE_0952.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_0972.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:00:40 CDT 2021  run samtools sort COPE_0972.fp2.repr
+
+Tue Sep 14 02:02:13 CDT 2021  run samtools index COPE_0972.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_0997.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:02:30 CDT 2021  run samtools sort COPE_0997.fp2.repr
+
+Tue Sep 14 02:02:35 CDT 2021  run samtools index COPE_0997.fp2.repr
+FILE=COPE_0801.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:53:43 CDT 2021  run samtools sort COPE_0801.fp2.repr
+
+Tue Sep 14 02:02:13 CDT 2021  run samtools index COPE_0801.fp2.repr
+[bam_sort_core] merging from 11 files and 1 in-memory blocks...
+FILE=COPE_0948.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:00:27 CDT 2021  run samtools sort COPE_0948.fp2.repr
+
+Tue Sep 14 02:03:06 CDT 2021  run samtools index COPE_0948.fp2.repr
+[bam_sort_core] merging from 3 files and 1 in-memory blocks...
+FILE=COPE_0833.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 01:56:29 CDT 2021  run samtools sort COPE_0833.fp2.repr
+
+Tue Sep 14 02:03:51 CDT 2021  run samtools index COPE_0833.fp2.repr
+[bam_sort_core] merging from 10 files and 1 in-memory blocks...
+FILE=COPE_0974.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:04:31 CDT 2021  run samtools sort COPE_0974.fp2.repr
+
+Tue Sep 14 02:06:03 CDT 2021  run samtools index COPE_0974.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_0998.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:08:14 CDT 2021  run samtools sort COPE_0998.fp2.repr
+
+Tue Sep 14 02:08:32 CDT 2021  run samtools index COPE_0998.fp2.repr
+FILE=COPE_1000.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:09:27 CDT 2021  run samtools sort COPE_1000.fp2.repr
+
+Tue Sep 14 02:09:47 CDT 2021  run samtools index COPE_1000.fp2.repr
+FILE=COPE_0993.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:08:54 CDT 2021  run samtools sort COPE_0993.fp2.repr
+
+Tue Sep 14 02:09:53 CDT 2021  run samtools index COPE_0993.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_0942.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:08:23 CDT 2021  run samtools sort COPE_0942.fp2.repr
+
+Tue Sep 14 02:11:44 CDT 2021  run samtools index COPE_0942.fp2.repr
+[bam_sort_core] merging from 4 files and 1 in-memory blocks...
+FILE=COPE_0956.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:09:37 CDT 2021  run samtools sort COPE_0956.fp2.repr
+
+Tue Sep 14 02:12:04 CDT 2021  run samtools index COPE_0956.fp2.repr
+[bam_sort_core] merging from 3 files and 1 in-memory blocks...
+FILE=COPE_1005.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:12:51 CDT 2021  run samtools sort COPE_1005.fp2.repr
+
+Tue Sep 14 02:13:06 CDT 2021  run samtools index COPE_1005.fp2.repr
+FILE=COPE_0991.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:12:03 CDT 2021  run samtools sort COPE_0991.fp2.repr
+
+Tue Sep 14 02:13:09 CDT 2021  run samtools index COPE_0991.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1003.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:13:07 CDT 2021  run samtools sort COPE_1003.fp2.repr
+
+Tue Sep 14 02:13:34 CDT 2021  run samtools index COPE_1003.fp2.repr
+FILE=COPE_0989.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:12:58 CDT 2021  run samtools sort COPE_0989.fp2.repr
+
+Tue Sep 14 02:14:09 CDT 2021  run samtools index COPE_0989.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1006.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:14:44 CDT 2021  run samtools sort COPE_1006.fp2.repr
+
+Tue Sep 14 02:15:01 CDT 2021  run samtools index COPE_1006.fp2.repr
+FILE=COPE_1011.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:15:39 CDT 2021  run samtools sort COPE_1011.fp2.repr
+
+Tue Sep 14 02:15:48 CDT 2021  run samtools index COPE_1011.fp2.repr
+FILE=COPE_1002.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:15:08 CDT 2021  run samtools sort COPE_1002.fp2.repr
+
+Tue Sep 14 02:15:57 CDT 2021  run samtools index COPE_1002.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_0977.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:14:49 CDT 2021  run samtools sort COPE_0977.fp2.repr
+
+Tue Sep 14 02:16:40 CDT 2021  run samtools index COPE_0977.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_0985.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:15:21 CDT 2021  run samtools sort COPE_0985.fp2.repr
+
+Tue Sep 14 02:17:05 CDT 2021  run samtools index COPE_0985.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1013.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:17:41 CDT 2021  run samtools sort COPE_1013.fp2.repr
+
+Tue Sep 14 02:17:51 CDT 2021  run samtools index COPE_1013.fp2.repr
+FILE=COPE_1012.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:19:17 CDT 2021  run samtools sort COPE_1012.fp2.repr
+
+Tue Sep 14 02:19:34 CDT 2021  run samtools index COPE_1012.fp2.repr
+FILE=COPE_0981.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:18:29 CDT 2021  run samtools sort COPE_0981.fp2.repr
+
+Tue Sep 14 02:20:26 CDT 2021  run samtools index COPE_0981.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1004.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:19:51 CDT 2021  run samtools sort COPE_1004.fp2.repr
+
+Tue Sep 14 02:20:47 CDT 2021  run samtools index COPE_1004.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_0992.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:20:08 CDT 2021  run samtools sort COPE_0992.fp2.repr
+
+Tue Sep 14 02:21:47 CDT 2021  run samtools index COPE_0992.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1009.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:21:27 CDT 2021  run samtools sort COPE_1009.fp2.repr
+
+Tue Sep 14 02:21:54 CDT 2021  run samtools index COPE_1009.fp2.repr
+FILE=COPE_0958.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:18:43 CDT 2021  run samtools sort COPE_0958.fp2.repr
+
+Tue Sep 14 02:21:50 CDT 2021  run samtools index COPE_0958.fp2.repr
+[bam_sort_core] merging from 4 files and 1 in-memory blocks...
+FILE=COPE_1018.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:22:18 CDT 2021  run samtools sort COPE_1018.fp2.repr
+
+Tue Sep 14 02:22:33 CDT 2021  run samtools index COPE_1018.fp2.repr
+FILE=COPE_0975.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:20:23 CDT 2021  run samtools sort COPE_0975.fp2.repr
+
+Tue Sep 14 02:22:55 CDT 2021  run samtools index COPE_0975.fp2.repr
+[bam_sort_core] merging from 3 files and 1 in-memory blocks...
+FILE=COPE_0983.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:21:37 CDT 2021  run samtools sort COPE_0983.fp2.repr
+
+Tue Sep 14 02:23:54 CDT 2021  run samtools index COPE_0983.fp2.repr
+[bam_sort_core] merging from 3 files and 1 in-memory blocks...
+FILE=COPE_0990.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:22:05 CDT 2021  run samtools sort COPE_0990.fp2.repr
+
+Tue Sep 14 02:24:03 CDT 2021  run samtools index COPE_0990.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_0970.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:20:51 CDT 2021  run samtools sort COPE_0970.fp2.repr
+
+Tue Sep 14 02:24:01 CDT 2021  run samtools index COPE_0970.fp2.repr
+[bam_sort_core] merging from 4 files and 1 in-memory blocks...
+FILE=COPE_0947.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:20:35 CDT 2021  run samtools sort COPE_0947.fp2.repr
+
+Tue Sep 14 02:24:30 CDT 2021  run samtools index COPE_0947.fp2.repr
+[bam_sort_core] merging from 5 files and 1 in-memory blocks...
+FILE=COPE_1025.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:25:34 CDT 2021  run samtools sort COPE_1025.fp2.repr
+
+Tue Sep 14 02:25:45 CDT 2021  run samtools index COPE_1025.fp2.repr
+FILE=COPE_1021.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:25:34 CDT 2021  run samtools sort COPE_1021.fp2.repr
+
+Tue Sep 14 02:25:50 CDT 2021  run samtools index COPE_1021.fp2.repr
+FILE=COPE_0988.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:23:45 CDT 2021  run samtools sort COPE_0988.fp2.repr
+
+Tue Sep 14 02:25:47 CDT 2021  run samtools index COPE_0988.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1023.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:26:42 CDT 2021  run samtools sort COPE_1023.fp2.repr
+
+Tue Sep 14 02:27:00 CDT 2021  run samtools index COPE_1023.fp2.repr
+FILE=COPE_0994.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:25:13 CDT 2021  run samtools sort COPE_0994.fp2.repr
+
+Tue Sep 14 02:27:05 CDT 2021  run samtools index COPE_0994.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_0996.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:26:50 CDT 2021  run samtools sort COPE_0996.fp2.repr
+
+Tue Sep 14 02:28:51 CDT 2021  run samtools index COPE_0996.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1001.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:27:34 CDT 2021  run samtools sort COPE_1001.fp2.repr
+
+Tue Sep 14 02:29:14 CDT 2021  run samtools index COPE_1001.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_0971.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:26:39 CDT 2021  run samtools sort COPE_0971.fp2.repr
+
+Tue Sep 14 02:29:50 CDT 2021  run samtools index COPE_0971.fp2.repr
+[bam_sort_core] merging from 4 files and 1 in-memory blocks...
+FILE=COPE_0982.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:29:18 CDT 2021  run samtools sort COPE_0982.fp2.repr
+
+Tue Sep 14 02:31:58 CDT 2021  run samtools index COPE_0982.fp2.repr
+[bam_sort_core] merging from 3 files and 1 in-memory blocks...
+FILE=COPE_0831.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:22:34 CDT 2021  run samtools sort COPE_0831.fp2.repr
+
+Tue Sep 14 02:31:38 CDT 2021  run samtools index COPE_0831.fp2.repr
+[bam_sort_core] merging from 12 files and 1 in-memory blocks...
+FILE=COPE_0999.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:30:56 CDT 2021  run samtools sort COPE_0999.fp2.repr
+
+Tue Sep 14 02:32:40 CDT 2021  run samtools index COPE_0999.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1008.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:31:34 CDT 2021  run samtools sort COPE_1008.fp2.repr
+
+Tue Sep 14 02:32:50 CDT 2021  run samtools index COPE_1008.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1037.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:33:05 CDT 2021  run samtools sort COPE_1037.fp2.repr
+
+Tue Sep 14 02:33:24 CDT 2021  run samtools index COPE_1037.fp2.repr
+FILE=COPE_1036.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:33:20 CDT 2021  run samtools sort COPE_1036.fp2.repr
+
+Tue Sep 14 02:33:40 CDT 2021  run samtools index COPE_1036.fp2.repr
+FILE=COPE_1029.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:33:34 CDT 2021  run samtools sort COPE_1029.fp2.repr
+
+Tue Sep 14 02:34:05 CDT 2021  run samtools index COPE_1029.fp2.repr
+FILE=COPE_0960.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:30:00 CDT 2021  run samtools sort COPE_0960.fp2.repr
+
+Tue Sep 14 02:34:03 CDT 2021  run samtools index COPE_0960.fp2.repr
+[bam_sort_core] merging from 5 files and 1 in-memory blocks...
+FILE=COPE_0980.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:31:29 CDT 2021  run samtools sort COPE_0980.fp2.repr
+
+Tue Sep 14 02:34:33 CDT 2021  run samtools index COPE_0980.fp2.repr
+[bam_sort_core] merging from 4 files and 1 in-memory blocks...
+FILE=COPE_1026.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:36:24 CDT 2021  run samtools sort COPE_1026.fp2.repr
+
+Tue Sep 14 02:37:17 CDT 2021  run samtools index COPE_1026.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_0931.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:31:15 CDT 2021  run samtools sort COPE_0931.fp2.repr
+
+Tue Sep 14 02:37:25 CDT 2021  run samtools index COPE_0931.fp2.repr
+[bam_sort_core] merging from 8 files and 1 in-memory blocks...
+FILE=COPE_1033.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:37:10 CDT 2021  run samtools sort COPE_1033.fp2.repr
+
+Tue Sep 14 02:38:02 CDT 2021  run samtools index COPE_1033.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1020.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:36:59 CDT 2021  run samtools sort COPE_1020.fp2.repr
+
+Tue Sep 14 02:38:03 CDT 2021  run samtools index COPE_1020.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1041.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:38:03 CDT 2021  run samtools sort COPE_1041.fp2.repr
+
+Tue Sep 14 02:38:22 CDT 2021  run samtools index COPE_1041.fp2.repr
+FILE=COPE_1052.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:39:00 CDT 2021  run samtools sort COPE_1052.fp2.repr
+
+Tue Sep 14 02:39:03 CDT 2021  run samtools index COPE_1052.fp2.repr
+FILE=COPE_0973.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:35:08 CDT 2021  run samtools sort COPE_0973.fp2.repr
+
+Tue Sep 14 02:38:50 CDT 2021  run samtools index COPE_0973.fp2.repr
+[bam_sort_core] merging from 5 files and 1 in-memory blocks...
+FILE=COPE_1031.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:39:34 CDT 2021  run samtools sort COPE_1031.fp2.repr
+
+Tue Sep 14 02:40:39 CDT 2021  run samtools index COPE_1031.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1014.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:39:18 CDT 2021  run samtools sort COPE_1014.fp2.repr
+
+Tue Sep 14 02:40:59 CDT 2021  run samtools index COPE_1014.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1044.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:40:56 CDT 2021  run samtools sort COPE_1044.fp2.repr
+
+Tue Sep 14 02:41:20 CDT 2021  run samtools index COPE_1044.fp2.repr
+FILE=COPE_1038.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:42:27 CDT 2021  run samtools sort COPE_1038.fp2.repr
+
+Tue Sep 14 02:43:20 CDT 2021  run samtools index COPE_1038.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1039.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:43:04 CDT 2021  run samtools sort COPE_1039.fp2.repr
+
+Tue Sep 14 02:44:03 CDT 2021  run samtools index COPE_1039.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1045.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:43:59 CDT 2021  run samtools sort COPE_1045.fp2.repr
+
+Tue Sep 14 02:44:30 CDT 2021  run samtools index COPE_1045.fp2.repr
+FILE=COPE_1040.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:45:28 CDT 2021  run samtools sort COPE_1040.fp2.repr
+
+Tue Sep 14 02:46:30 CDT 2021  run samtools index COPE_1040.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1054.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:46:11 CDT 2021  run samtools sort COPE_1054.fp2.repr
+
+Tue Sep 14 02:46:35 CDT 2021  run samtools index COPE_1054.fp2.repr
+FILE=COPE_1043.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:45:50 CDT 2021  run samtools sort COPE_1043.fp2.repr
+
+Tue Sep 14 02:46:45 CDT 2021  run samtools index COPE_1043.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1055.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:46:30 CDT 2021  run samtools sort COPE_1055.fp2.repr
+
+Tue Sep 14 02:46:53 CDT 2021  run samtools index COPE_1055.fp2.repr
+FILE=COPE_1066.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:47:07 CDT 2021  run samtools sort COPE_1066.fp2.repr
+
+Tue Sep 14 02:47:08 CDT 2021  run samtools index COPE_1066.fp2.repr
+FILE=COPE_1034.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:46:20 CDT 2021  run samtools sort COPE_1034.fp2.repr
+
+Tue Sep 14 02:47:53 CDT 2021  run samtools index COPE_1034.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1065.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:48:05 CDT 2021  run samtools sort COPE_1065.fp2.repr
+
+Tue Sep 14 02:48:10 CDT 2021  run samtools index COPE_1065.fp2.repr
+FILE=COPE_1010.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:46:29 CDT 2021  run samtools sort COPE_1010.fp2.repr
+
+Tue Sep 14 02:48:46 CDT 2021  run samtools index COPE_1010.fp2.repr
+[bam_sort_core] merging from 3 files and 1 in-memory blocks...
+FILE=COPE_1064.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:49:00 CDT 2021  run samtools sort COPE_1064.fp2.repr
+
+Tue Sep 14 02:49:08 CDT 2021  run samtools index COPE_1064.fp2.repr
+FILE=COPE_1067.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:51:15 CDT 2021  run samtools sort COPE_1067.fp2.repr
+
+Tue Sep 14 02:51:29 CDT 2021  run samtools index COPE_1067.fp2.repr
+FILE=COPE_1062.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:51:28 CDT 2021  run samtools sort COPE_1062.fp2.repr
+
+Tue Sep 14 02:51:53 CDT 2021  run samtools index COPE_1062.fp2.repr
+FILE=COPE_1032.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:50:28 CDT 2021  run samtools sort COPE_1032.fp2.repr
+
+Tue Sep 14 02:52:12 CDT 2021  run samtools index COPE_1032.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_0940.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:47:07 CDT 2021  run samtools sort COPE_0940.fp2.repr
+
+Tue Sep 14 02:52:52 CDT 2021  run samtools index COPE_0940.fp2.repr
+[bam_sort_core] merging from 8 files and 1 in-memory blocks...
+FILE=COPE_1030.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:51:21 CDT 2021  run samtools sort COPE_1030.fp2.repr
+
+Tue Sep 14 02:53:12 CDT 2021  run samtools index COPE_1030.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1019.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:51:02 CDT 2021  run samtools sort COPE_1019.fp2.repr
+
+Tue Sep 14 02:53:22 CDT 2021  run samtools index COPE_1019.fp2.repr
+[bam_sort_core] merging from 3 files and 1 in-memory blocks...
+FILE=COPE_1077.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:53:44 CDT 2021  run samtools sort COPE_1077.fp2.repr
+
+Tue Sep 14 02:53:46 CDT 2021  run samtools index COPE_1077.fp2.repr
+FILE=COPE_1053.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:54:00 CDT 2021  run samtools sort COPE_1053.fp2.repr
+
+Tue Sep 14 02:55:00 CDT 2021  run samtools index COPE_1053.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1069.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:54:52 CDT 2021  run samtools sort COPE_1069.fp2.repr
+
+Tue Sep 14 02:55:12 CDT 2021  run samtools index COPE_1069.fp2.repr
+FILE=COPE_1061.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:55:16 CDT 2021  run samtools sort COPE_1061.fp2.repr
+
+Tue Sep 14 02:56:08 CDT 2021  run samtools index COPE_1061.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1071.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:56:47 CDT 2021  run samtools sort COPE_1071.fp2.repr
+
+Tue Sep 14 02:57:11 CDT 2021  run samtools index COPE_1071.fp2.repr
+FILE=COPE_1051.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:56:09 CDT 2021  run samtools sort COPE_1051.fp2.repr
+
+Tue Sep 14 02:57:17 CDT 2021  run samtools index COPE_1051.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1049.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:58:22 CDT 2021  run samtools sort COPE_1049.fp2.repr
+
+Tue Sep 14 03:00:04 CDT 2021  run samtools index COPE_1049.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1078.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:59:58 CDT 2021  run samtools sort COPE_1078.fp2.repr
+
+Tue Sep 14 03:00:18 CDT 2021  run samtools index COPE_1078.fp2.repr
+FILE=COPE_1024.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:57:56 CDT 2021  run samtools sort COPE_1024.fp2.repr
+
+Tue Sep 14 03:00:29 CDT 2021  run samtools index COPE_1024.fp2.repr
+[bam_sort_core] merging from 3 files and 1 in-memory blocks...
+FILE=COPE_1070.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:01:05 CDT 2021  run samtools sort COPE_1070.fp2.repr
+
+Tue Sep 14 03:02:00 CDT 2021  run samtools index COPE_1070.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1084.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:02:32 CDT 2021  run samtools sort COPE_1084.fp2.repr
+
+Tue Sep 14 03:02:49 CDT 2021  run samtools index COPE_1084.fp2.repr
+FILE=COPE_1082.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:02:58 CDT 2021  run samtools sort COPE_1082.fp2.repr
+
+Tue Sep 14 03:03:21 CDT 2021  run samtools index COPE_1082.fp2.repr
+FILE=COPE_0907.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 02:54:48 CDT 2021  run samtools sort COPE_0907.fp2.repr
+
+Tue Sep 14 03:03:12 CDT 2021  run samtools index COPE_0907.fp2.repr
+[bam_sort_core] merging from 11 files and 1 in-memory blocks...
+FILE=COPE_1076.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:03:23 CDT 2021  run samtools sort COPE_1076.fp2.repr
+
+Tue Sep 14 03:03:52 CDT 2021  run samtools index COPE_1076.fp2.repr
+FILE=COPE_1058.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:04:00 CDT 2021  run samtools sort COPE_1058.fp2.repr
+
+Tue Sep 14 03:05:35 CDT 2021  run samtools index COPE_1058.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1016.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:02:21 CDT 2021  run samtools sort COPE_1016.fp2.repr
+
+Tue Sep 14 03:05:33 CDT 2021  run samtools index COPE_1016.fp2.repr
+[bam_sort_core] merging from 4 files and 1 in-memory blocks...
+FILE=COPE_1092.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:05:47 CDT 2021  run samtools sort COPE_1092.fp2.repr
+
+Tue Sep 14 03:05:54 CDT 2021  run samtools index COPE_1092.fp2.repr
+FILE=COPE_1088.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:06:12 CDT 2021  run samtools sort COPE_1088.fp2.repr
+
+Tue Sep 14 03:06:29 CDT 2021  run samtools index COPE_1088.fp2.repr
+FILE=COPE_1015.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:03:13 CDT 2021  run samtools sort COPE_1015.fp2.repr
+
+Tue Sep 14 03:06:29 CDT 2021  run samtools index COPE_1015.fp2.repr
+[bam_sort_core] merging from 4 files and 1 in-memory blocks...
+FILE=COPE_1085.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:07:49 CDT 2021  run samtools sort COPE_1085.fp2.repr
+
+Tue Sep 14 03:08:30 CDT 2021  run samtools index COPE_1085.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1091.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:08:25 CDT 2021  run samtools sort COPE_1091.fp2.repr
+
+Tue Sep 14 03:08:42 CDT 2021  run samtools index COPE_1091.fp2.repr
+FILE=COPE_1090.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:09:27 CDT 2021  run samtools sort COPE_1090.fp2.repr
+
+Tue Sep 14 03:09:46 CDT 2021  run samtools index COPE_1090.fp2.repr
+FILE=COPE_1047.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:07:36 CDT 2021  run samtools sort COPE_1047.fp2.repr
+
+Tue Sep 14 03:09:53 CDT 2021  run samtools index COPE_1047.fp2.repr
+[bam_sort_core] merging from 3 files and 1 in-memory blocks...
+FILE=COPE_1086.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:10:16 CDT 2021  run samtools sort COPE_1086.fp2.repr
+
+Tue Sep 14 03:11:05 CDT 2021  run samtools index COPE_1086.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1102.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:11:27 CDT 2021  run samtools sort COPE_1102.fp2.repr
+
+Tue Sep 14 03:11:32 CDT 2021  run samtools index COPE_1102.fp2.repr
+FILE=COPE_1094.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:11:14 CDT 2021  run samtools sort COPE_1094.fp2.repr
+
+Tue Sep 14 03:11:31 CDT 2021  run samtools index COPE_1094.fp2.repr
+FILE=COPE_0876.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:00:24 CDT 2021  run samtools sort COPE_0876.fp2.repr
+
+Tue Sep 14 03:10:58 CDT 2021  run samtools index COPE_0876.fp2.repr
+[bam_sort_core] merging from 14 files and 1 in-memory blocks...
+FILE=COPE_1104.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:12:27 CDT 2021  run samtools sort COPE_1104.fp2.repr
+
+Tue Sep 14 03:12:30 CDT 2021  run samtools index COPE_1104.fp2.repr
+FILE=COPE_1099.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:13:47 CDT 2021  run samtools sort COPE_1099.fp2.repr
+
+Tue Sep 14 03:14:04 CDT 2021  run samtools index COPE_1099.fp2.repr
+FILE=COPE_1098.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:14:16 CDT 2021  run samtools sort COPE_1098.fp2.repr
+
+Tue Sep 14 03:14:39 CDT 2021  run samtools index COPE_1098.fp2.repr
+FILE=COPE_1101.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:15:28 CDT 2021  run samtools sort COPE_1101.fp2.repr
+
+Tue Sep 14 03:15:46 CDT 2021  run samtools index COPE_1101.fp2.repr
+FILE=COPE_1096.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:15:17 CDT 2021  run samtools sort COPE_1096.fp2.repr
+
+Tue Sep 14 03:15:46 CDT 2021  run samtools index COPE_1096.fp2.repr
+FILE=COPE_1027.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:12:27 CDT 2021  run samtools sort COPE_1027.fp2.repr
+
+Tue Sep 14 03:15:52 CDT 2021  run samtools index COPE_1027.fp2.repr
+[bam_sort_core] merging from 4 files and 1 in-memory blocks...
+FILE=COPE_1087.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:15:13 CDT 2021  run samtools sort COPE_1087.fp2.repr
+
+Tue Sep 14 03:16:11 CDT 2021  run samtools index COPE_1087.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1080.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:15:20 CDT 2021  run samtools sort COPE_1080.fp2.repr
+
+Tue Sep 14 03:16:35 CDT 2021  run samtools index COPE_1080.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1050.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:14:29 CDT 2021  run samtools sort COPE_1050.fp2.repr
+
+Tue Sep 14 03:16:59 CDT 2021  run samtools index COPE_1050.fp2.repr
+[bam_sort_core] merging from 3 files and 1 in-memory blocks...
+FILE=COPE_1109.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:17:09 CDT 2021  run samtools sort COPE_1109.fp2.repr
+
+Tue Sep 14 03:17:17 CDT 2021  run samtools index COPE_1109.fp2.repr
+FILE=COPE_1035.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:14:34 CDT 2021  run samtools sort COPE_1035.fp2.repr
+
+Tue Sep 14 03:17:52 CDT 2021  run samtools index COPE_1035.fp2.repr
+[bam_sort_core] merging from 4 files and 1 in-memory blocks...
+FILE=COPE_1113.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:18:10 CDT 2021  run samtools sort COPE_1113.fp2.repr
+
+Tue Sep 14 03:18:16 CDT 2021  run samtools index COPE_1113.fp2.repr
+FILE=COPE_1089.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:17:29 CDT 2021  run samtools sort COPE_1089.fp2.repr
+
+Tue Sep 14 03:18:25 CDT 2021  run samtools index COPE_1089.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1056.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:18:16 CDT 2021  run samtools sort COPE_1056.fp2.repr
+
+Tue Sep 14 03:20:50 CDT 2021  run samtools index COPE_1056.fp2.repr
+[bam_sort_core] merging from 3 files and 1 in-memory blocks...
+FILE=COPE_1081.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:19:22 CDT 2021  run samtools sort COPE_1081.fp2.repr
+
+Tue Sep 14 03:21:07 CDT 2021  run samtools index COPE_1081.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_0987.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:17:05 CDT 2021  run samtools sort COPE_0987.fp2.repr
+
+Tue Sep 14 03:22:48 CDT 2021  run samtools index COPE_0987.fp2.repr
+[bam_sort_core] merging from 8 files and 1 in-memory blocks...
+FILE=COPE_0995.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:17:39 CDT 2021  run samtools sort COPE_0995.fp2.repr
+
+Tue Sep 14 03:23:27 CDT 2021  run samtools index COPE_0995.fp2.repr
+[bam_sort_core] merging from 7 files and 1 in-memory blocks...
+FILE=COPE_1060.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:21:03 CDT 2021  run samtools sort COPE_1060.fp2.repr
+
+Tue Sep 14 03:24:10 CDT 2021  run samtools index COPE_1060.fp2.repr
+[bam_sort_core] merging from 4 files and 1 in-memory blocks...
+FILE=COPE_1120.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:24:14 CDT 2021  run samtools sort COPE_1120.fp2.repr
+
+Tue Sep 14 03:24:25 CDT 2021  run samtools index COPE_1120.fp2.repr
+FILE=COPE_1118.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:24:06 CDT 2021  run samtools sort COPE_1118.fp2.repr
+
+Tue Sep 14 03:24:25 CDT 2021  run samtools index COPE_1118.fp2.repr
+FILE=COPE_1074.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:23:53 CDT 2021  run samtools sort COPE_1074.fp2.repr
+
+Tue Sep 14 03:26:11 CDT 2021  run samtools index COPE_1074.fp2.repr
+[bam_sort_core] merging from 3 files and 1 in-memory blocks...
+FILE=COPE_0866.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:14:43 CDT 2021  run samtools sort COPE_0866.fp2.repr
+
+Tue Sep 14 03:26:11 CDT 2021  run samtools index COPE_0866.fp2.repr
+[bam_sort_core] merging from 15 files and 1 in-memory blocks...
+FILE=COPE_1042.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:24:35 CDT 2021  run samtools sort COPE_1042.fp2.repr
+
+Tue Sep 14 03:28:09 CDT 2021  run samtools index COPE_1042.fp2.repr
+[bam_sort_core] merging from 5 files and 1 in-memory blocks...
+FILE=COPE_1100.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:27:20 CDT 2021  run samtools sort COPE_1100.fp2.repr
+
+Tue Sep 14 03:28:35 CDT 2021  run samtools index COPE_1100.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1073.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:27:10 CDT 2021  run samtools sort COPE_1073.fp2.repr
+
+Tue Sep 14 03:29:36 CDT 2021  run samtools index COPE_1073.fp2.repr
+[bam_sort_core] merging from 3 files and 1 in-memory blocks...
+FILE=COPE_1093.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:28:07 CDT 2021  run samtools sort COPE_1093.fp2.repr
+
+Tue Sep 14 03:29:44 CDT 2021  run samtools index COPE_1093.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1124.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:29:43 CDT 2021  run samtools sort COPE_1124.fp2.repr
+
+Tue Sep 14 03:29:59 CDT 2021  run samtools index COPE_1124.fp2.repr
+FILE=COPE_1123.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:29:58 CDT 2021  run samtools sort COPE_1123.fp2.repr
+
+Tue Sep 14 03:30:17 CDT 2021  run samtools index COPE_1123.fp2.repr
+FILE=COPE_1134.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:31:54 CDT 2021  run samtools sort COPE_1134.fp2.repr
+
+Tue Sep 14 03:32:00 CDT 2021  run samtools index COPE_1134.fp2.repr
+FILE=COPE_1114.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:31:40 CDT 2021  run samtools sort COPE_1114.fp2.repr
+
+Tue Sep 14 03:32:40 CDT 2021  run samtools index COPE_1114.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1129.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:33:23 CDT 2021  run samtools sort COPE_1129.fp2.repr
+
+Tue Sep 14 03:33:37 CDT 2021  run samtools index COPE_1129.fp2.repr
+FILE=COPE_1068.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:30:46 CDT 2021  run samtools sort COPE_1068.fp2.repr
+
+Tue Sep 14 03:33:58 CDT 2021  run samtools index COPE_1068.fp2.repr
+[bam_sort_core] merging from 4 files and 1 in-memory blocks...
+FILE=COPE_1127.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:34:15 CDT 2021  run samtools sort COPE_1127.fp2.repr
+
+Tue Sep 14 03:34:40 CDT 2021  run samtools index COPE_1127.fp2.repr
+FILE=COPE_1105.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:33:03 CDT 2021  run samtools sort COPE_1105.fp2.repr
+
+Tue Sep 14 03:34:38 CDT 2021  run samtools index COPE_1105.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1130.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:34:44 CDT 2021  run samtools sort COPE_1130.fp2.repr
+
+Tue Sep 14 03:35:02 CDT 2021  run samtools index COPE_1130.fp2.repr
+FILE=COPE_1112.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:34:27 CDT 2021  run samtools sort COPE_1112.fp2.repr
+
+Tue Sep 14 03:35:36 CDT 2021  run samtools index COPE_1112.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1075.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:33:44 CDT 2021  run samtools sort COPE_1075.fp2.repr
+
+Tue Sep 14 03:36:38 CDT 2021  run samtools index COPE_1075.fp2.repr
+[bam_sort_core] merging from 4 files and 1 in-memory blocks...
+FILE=COPE_1107.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:35:15 CDT 2021  run samtools sort COPE_1107.fp2.repr
+
+Tue Sep 14 03:36:50 CDT 2021  run samtools index COPE_1107.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1137.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:37:27 CDT 2021  run samtools sort COPE_1137.fp2.repr
+
+Tue Sep 14 03:37:41 CDT 2021  run samtools index COPE_1137.fp2.repr
+FILE=COPE_1048.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:34:33 CDT 2021  run samtools sort COPE_1048.fp2.repr
+
+Tue Sep 14 03:38:37 CDT 2021  run samtools index COPE_1048.fp2.repr
+[bam_sort_core] merging from 5 files and 1 in-memory blocks...
+FILE=COPE_1147.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:39:17 CDT 2021  run samtools sort COPE_1147.fp2.repr
+
+Tue Sep 14 03:39:18 CDT 2021  run samtools index COPE_1147.fp2.repr
+FILE=COPE_1046.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:36:18 CDT 2021  run samtools sort COPE_1046.fp2.repr
+
+Tue Sep 14 03:40:24 CDT 2021  run samtools index COPE_1046.fp2.repr
+[bam_sort_core] merging from 5 files and 1 in-memory blocks...
+FILE=COPE_1007.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:34:22 CDT 2021  run samtools sort COPE_1007.fp2.repr
+
+Tue Sep 14 03:40:23 CDT 2021  run samtools index COPE_1007.fp2.repr
+[bam_sort_core] merging from 8 files and 1 in-memory blocks...
+FILE=COPE_1111.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:40:02 CDT 2021  run samtools sort COPE_1111.fp2.repr
+
+Tue Sep 14 03:41:43 CDT 2021  run samtools index COPE_1111.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1028.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:37:20 CDT 2021  run samtools sort COPE_1028.fp2.repr
+
+Tue Sep 14 03:41:54 CDT 2021  run samtools index COPE_1028.fp2.repr
+[bam_sort_core] merging from 6 files and 1 in-memory blocks...
+FILE=COPE_1151.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:43:30 CDT 2021  run samtools sort COPE_1151.fp2.repr
+
+Tue Sep 14 03:43:37 CDT 2021  run samtools index COPE_1151.fp2.repr
+FILE=COPE_0883.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:32:36 CDT 2021  run samtools sort COPE_0883.fp2.repr
+
+Tue Sep 14 03:43:55 CDT 2021  run samtools index COPE_0883.fp2.repr
+[bam_sort_core] merging from 15 files and 1 in-memory blocks...
+FILE=COPE_1150.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:45:26 CDT 2021  run samtools sort COPE_1150.fp2.repr
+
+Tue Sep 14 03:45:41 CDT 2021  run samtools index COPE_1150.fp2.repr
+FILE=COPE_1017.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:39:49 CDT 2021  run samtools sort COPE_1017.fp2.repr
+
+Tue Sep 14 03:45:24 CDT 2021  run samtools index COPE_1017.fp2.repr
+[bam_sort_core] merging from 7 files and 1 in-memory blocks...
+FILE=COPE_1116.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:44:13 CDT 2021  run samtools sort COPE_1116.fp2.repr
+
+Tue Sep 14 03:46:00 CDT 2021  run samtools index COPE_1116.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1153.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:47:35 CDT 2021  run samtools sort COPE_1153.fp2.repr
+
+Tue Sep 14 03:47:47 CDT 2021  run samtools index COPE_1153.fp2.repr
+FILE=COPE_1158.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:48:17 CDT 2021  run samtools sort COPE_1158.fp2.repr
+
+Tue Sep 14 03:48:19 CDT 2021  run samtools index COPE_1158.fp2.repr
+FILE=COPE_1132.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:47:15 CDT 2021  run samtools sort COPE_1132.fp2.repr
+
+Tue Sep 14 03:48:16 CDT 2021  run samtools index COPE_1132.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1063.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:44:21 CDT 2021  run samtools sort COPE_1063.fp2.repr
+
+Tue Sep 14 03:48:22 CDT 2021  run samtools index COPE_1063.fp2.repr
+[bam_sort_core] merging from 5 files and 1 in-memory blocks...
+FILE=COPE_1122.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:46:55 CDT 2021  run samtools sort COPE_1122.fp2.repr
+
+Tue Sep 14 03:48:33 CDT 2021  run samtools index COPE_1122.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1117.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:47:00 CDT 2021  run samtools sort COPE_1117.fp2.repr
+
+Tue Sep 14 03:48:52 CDT 2021  run samtools index COPE_1117.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1141.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:49:07 CDT 2021  run samtools sort COPE_1141.fp2.repr
+
+Tue Sep 14 03:50:01 CDT 2021  run samtools index COPE_1141.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1144.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:49:26 CDT 2021  run samtools sort COPE_1144.fp2.repr
+
+Tue Sep 14 03:50:19 CDT 2021  run samtools index COPE_1144.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1135.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:49:19 CDT 2021  run samtools sort COPE_1135.fp2.repr
+
+Tue Sep 14 03:50:27 CDT 2021  run samtools index COPE_1135.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1164.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:50:43 CDT 2021  run samtools sort COPE_1164.fp2.repr
+
+Tue Sep 14 03:50:46 CDT 2021  run samtools index COPE_1164.fp2.repr
+FILE=COPE_1162.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:50:46 CDT 2021  run samtools sort COPE_1162.fp2.repr
+
+Tue Sep 14 03:50:53 CDT 2021  run samtools index COPE_1162.fp2.repr
+FILE=COPE_1163.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:50:49 CDT 2021  run samtools sort COPE_1163.fp2.repr
+
+Tue Sep 14 03:50:55 CDT 2021  run samtools index COPE_1163.fp2.repr
+FILE=COPE_1110.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:49:50 CDT 2021  run samtools sort COPE_1110.fp2.repr
+
+Tue Sep 14 03:52:12 CDT 2021  run samtools index COPE_1110.fp2.repr
+[bam_sort_core] merging from 3 files and 1 in-memory blocks...
+FILE=COPE_1140.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:51:20 CDT 2021  run samtools sort COPE_1140.fp2.repr
+
+Tue Sep 14 03:52:24 CDT 2021  run samtools index COPE_1140.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1165.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:52:32 CDT 2021  run samtools sort COPE_1165.fp2.repr
+
+Tue Sep 14 03:52:40 CDT 2021  run samtools index COPE_1165.fp2.repr
+FILE=COPE_1143.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:52:27 CDT 2021  run samtools sort COPE_1143.fp2.repr
+
+Tue Sep 14 03:53:30 CDT 2021  run samtools index COPE_1143.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1125.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:53:06 CDT 2021  run samtools sort COPE_1125.fp2.repr
+
+Tue Sep 14 03:55:01 CDT 2021  run samtools index COPE_1125.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1149.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:54:12 CDT 2021  run samtools sort COPE_1149.fp2.repr
+
+Tue Sep 14 03:55:07 CDT 2021  run samtools index COPE_1149.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1148.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:54:15 CDT 2021  run samtools sort COPE_1148.fp2.repr
+
+Tue Sep 14 03:55:11 CDT 2021  run samtools index COPE_1148.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1157.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:55:22 CDT 2021  run samtools sort COPE_1157.fp2.repr
+
+Tue Sep 14 03:55:50 CDT 2021  run samtools index COPE_1157.fp2.repr
+FILE=COPE_1106.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:54:31 CDT 2021  run samtools sort COPE_1106.fp2.repr
+
+Tue Sep 14 03:57:02 CDT 2021  run samtools index COPE_1106.fp2.repr
+[bam_sort_core] merging from 3 files and 1 in-memory blocks...
+FILE=COPE_1139.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:55:45 CDT 2021  run samtools sort COPE_1139.fp2.repr
+
+Tue Sep 14 03:57:16 CDT 2021  run samtools index COPE_1139.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1155.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:58:32 CDT 2021  run samtools sort COPE_1155.fp2.repr
+
+Tue Sep 14 03:59:24 CDT 2021  run samtools index COPE_1155.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1175.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:59:14 CDT 2021  run samtools sort COPE_1175.fp2.repr
+
+Tue Sep 14 03:59:27 CDT 2021  run samtools index COPE_1175.fp2.repr
+FILE=COPE_1181.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:00:05 CDT 2021  run samtools sort COPE_1181.fp2.repr
+
+Tue Sep 14 04:00:07 CDT 2021  run samtools index COPE_1181.fp2.repr
+FILE=COPE_1170.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:00:54 CDT 2021  run samtools sort COPE_1170.fp2.repr
+
+Tue Sep 14 04:01:22 CDT 2021  run samtools index COPE_1170.fp2.repr
+FILE=COPE_1072.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:56:43 CDT 2021  run samtools sort COPE_1072.fp2.repr
+
+Tue Sep 14 04:01:13 CDT 2021  run samtools index COPE_1072.fp2.repr
+[bam_sort_core] merging from 6 files and 1 in-memory blocks...
+FILE=COPE_1177.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:01:15 CDT 2021  run samtools sort COPE_1177.fp2.repr
+
+Tue Sep 14 04:01:33 CDT 2021  run samtools index COPE_1177.fp2.repr
+FILE=COPE_1079.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 03:57:23 CDT 2021  run samtools sort COPE_1079.fp2.repr
+
+Tue Sep 14 04:01:44 CDT 2021  run samtools index COPE_1079.fp2.repr
+[bam_sort_core] merging from 6 files and 1 in-memory blocks...
+FILE=COPE_1131.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:00:15 CDT 2021  run samtools sort COPE_1131.fp2.repr
+
+Tue Sep 14 04:02:14 CDT 2021  run samtools index COPE_1131.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1145.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:02:13 CDT 2021  run samtools sort COPE_1145.fp2.repr
+
+Tue Sep 14 04:03:57 CDT 2021  run samtools index COPE_1145.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1180.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:04:25 CDT 2021  run samtools sort COPE_1180.fp2.repr
+
+Tue Sep 14 04:04:42 CDT 2021  run samtools index COPE_1180.fp2.repr
+FILE=COPE_1187.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:04:56 CDT 2021  run samtools sort COPE_1187.fp2.repr
+
+Tue Sep 14 04:05:05 CDT 2021  run samtools index COPE_1187.fp2.repr
+FILE=COPE_1095.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:00:54 CDT 2021  run samtools sort COPE_1095.fp2.repr
+
+Tue Sep 14 04:04:48 CDT 2021  run samtools index COPE_1095.fp2.repr
+[bam_sort_core] merging from 5 files and 1 in-memory blocks...
+FILE=COPE_1142.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:03:31 CDT 2021  run samtools sort COPE_1142.fp2.repr
+
+Tue Sep 14 04:05:26 CDT 2021  run samtools index COPE_1142.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1192.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:05:52 CDT 2021  run samtools sort COPE_1192.fp2.repr
+
+Tue Sep 14 04:05:53 CDT 2021  run samtools index COPE_1192.fp2.repr
+FILE=COPE_1176.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:05:30 CDT 2021  run samtools sort COPE_1176.fp2.repr
+
+Tue Sep 14 04:06:16 CDT 2021  run samtools index COPE_1176.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1182.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:07:02 CDT 2021  run samtools sort COPE_1182.fp2.repr
+
+Tue Sep 14 04:07:21 CDT 2021  run samtools index COPE_1182.fp2.repr
+FILE=COPE_1119.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:04:40 CDT 2021  run samtools sort COPE_1119.fp2.repr
+
+Tue Sep 14 04:07:46 CDT 2021  run samtools index COPE_1119.fp2.repr
+[bam_sort_core] merging from 4 files and 1 in-memory blocks...
+FILE=COPE_1189.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:09:29 CDT 2021  run samtools sort COPE_1189.fp2.repr
+
+Tue Sep 14 04:09:43 CDT 2021  run samtools index COPE_1189.fp2.repr
+FILE=COPE_1059.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:04:17 CDT 2021  run samtools sort COPE_1059.fp2.repr
+
+Tue Sep 14 04:09:38 CDT 2021  run samtools index COPE_1059.fp2.repr
+[bam_sort_core] merging from 7 files and 1 in-memory blocks...
+FILE=COPE_1171.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:10:27 CDT 2021  run samtools sort COPE_1171.fp2.repr
+
+Tue Sep 14 04:11:35 CDT 2021  run samtools index COPE_1171.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1195.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:12:08 CDT 2021  run samtools sort COPE_1195.fp2.repr
+
+Tue Sep 14 04:12:23 CDT 2021  run samtools index COPE_1195.fp2.repr
+FILE=COPE_1190.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:12:43 CDT 2021  run samtools sort COPE_1190.fp2.repr
+
+Tue Sep 14 04:13:04 CDT 2021  run samtools index COPE_1190.fp2.repr
+FILE=COPE_1166.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:12:11 CDT 2021  run samtools sort COPE_1166.fp2.repr
+
+Tue Sep 14 04:13:27 CDT 2021  run samtools index COPE_1166.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1193.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:13:32 CDT 2021  run samtools sort COPE_1193.fp2.repr
+
+Tue Sep 14 04:13:53 CDT 2021  run samtools index COPE_1193.fp2.repr
+FILE=COPE_1198.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:13:50 CDT 2021  run samtools sort COPE_1198.fp2.repr
+
+Tue Sep 14 04:14:02 CDT 2021  run samtools index COPE_1198.fp2.repr
+FILE=COPE_1191.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:14:21 CDT 2021  run samtools sort COPE_1191.fp2.repr
+
+Tue Sep 14 04:14:50 CDT 2021  run samtools index COPE_1191.fp2.repr
+FILE=COPE_1204.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:15:42 CDT 2021  run samtools sort COPE_1204.fp2.repr
+
+Tue Sep 14 04:15:48 CDT 2021  run samtools index COPE_1204.fp2.repr
+FILE=COPE_1200.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:16:15 CDT 2021  run samtools sort COPE_1200.fp2.repr
+
+Tue Sep 14 04:16:28 CDT 2021  run samtools index COPE_1200.fp2.repr
+FILE=COPE_1183.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:15:32 CDT 2021  run samtools sort COPE_1183.fp2.repr
+
+Tue Sep 14 04:16:29 CDT 2021  run samtools index COPE_1183.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1121.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:12:53 CDT 2021  run samtools sort COPE_1121.fp2.repr
+
+Tue Sep 14 04:16:34 CDT 2021  run samtools index COPE_1121.fp2.repr
+[bam_sort_core] merging from 5 files and 1 in-memory blocks...
+FILE=COPE_1136.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:15:06 CDT 2021  run samtools sort COPE_1136.fp2.repr
+
+Tue Sep 14 04:18:04 CDT 2021  run samtools index COPE_1136.fp2.repr
+[bam_sort_core] merging from 4 files and 1 in-memory blocks...
+FILE=COPE_1115.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:14:16 CDT 2021  run samtools sort COPE_1115.fp2.repr
+
+Tue Sep 14 04:18:07 CDT 2021  run samtools index COPE_1115.fp2.repr
+[bam_sort_core] merging from 5 files and 1 in-memory blocks...
+FILE=COPE_1156.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:16:49 CDT 2021  run samtools sort COPE_1156.fp2.repr
+
+Tue Sep 14 04:18:45 CDT 2021  run samtools index COPE_1156.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1152.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:17:11 CDT 2021  run samtools sort COPE_1152.fp2.repr
+
+Tue Sep 14 04:19:29 CDT 2021  run samtools index COPE_1152.fp2.repr
+[bam_sort_core] merging from 3 files and 1 in-memory blocks...
+FILE=COPE_1128.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:16:25 CDT 2021  run samtools sort COPE_1128.fp2.repr
+
+Tue Sep 14 04:19:44 CDT 2021  run samtools index COPE_1128.fp2.repr
+[bam_sort_core] merging from 4 files and 1 in-memory blocks...
+FILE=COPE_1168.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:20:05 CDT 2021  run samtools sort COPE_1168.fp2.repr
+
+Tue Sep 14 04:21:59 CDT 2021  run samtools index COPE_1168.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1213.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:22:40 CDT 2021  run samtools sort COPE_1213.fp2.repr
+
+Tue Sep 14 04:22:50 CDT 2021  run samtools index COPE_1213.fp2.repr
+FILE=COPE_1214.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:22:59 CDT 2021  run samtools sort COPE_1214.fp2.repr
+
+Tue Sep 14 04:23:10 CDT 2021  run samtools index COPE_1214.fp2.repr
+FILE=COPE_1179.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:22:16 CDT 2021  run samtools sort COPE_1179.fp2.repr
+
+Tue Sep 14 04:23:57 CDT 2021  run samtools index COPE_1179.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1215.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:24:43 CDT 2021  run samtools sort COPE_1215.fp2.repr
+
+Tue Sep 14 04:24:51 CDT 2021  run samtools index COPE_1215.fp2.repr
+FILE=COPE_1212.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:25:06 CDT 2021  run samtools sort COPE_1212.fp2.repr
+
+Tue Sep 14 04:25:25 CDT 2021  run samtools index COPE_1212.fp2.repr
+FILE=COPE_1218.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:26:46 CDT 2021  run samtools sort COPE_1218.fp2.repr
+
+Tue Sep 14 04:26:56 CDT 2021  run samtools index COPE_1218.fp2.repr
+FILE=COPE_1201.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:26:14 CDT 2021  run samtools sort COPE_1201.fp2.repr
+
+Tue Sep 14 04:27:07 CDT 2021  run samtools index COPE_1201.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1220.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:27:26 CDT 2021  run samtools sort COPE_1220.fp2.repr
+
+Tue Sep 14 04:27:33 CDT 2021  run samtools index COPE_1220.fp2.repr
+FILE=COPE_1172.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:26:29 CDT 2021  run samtools sort COPE_1172.fp2.repr
+
+Tue Sep 14 04:28:44 CDT 2021  run samtools index COPE_1172.fp2.repr
+[bam_sort_core] merging from 3 files and 1 in-memory blocks...
+FILE=COPE_1209.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:28:20 CDT 2021  run samtools sort COPE_1209.fp2.repr
+
+Tue Sep 14 04:29:09 CDT 2021  run samtools index COPE_1209.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1103.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:25:00 CDT 2021  run samtools sort COPE_1103.fp2.repr
+
+Tue Sep 14 04:29:44 CDT 2021  run samtools index COPE_1103.fp2.repr
+[bam_sort_core] merging from 6 files and 1 in-memory blocks...
+FILE=COPE_1217.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:30:25 CDT 2021  run samtools sort COPE_1217.fp2.repr
+
+Tue Sep 14 04:30:45 CDT 2021  run samtools index COPE_1217.fp2.repr
+FILE=COPE_1108.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:25:27 CDT 2021  run samtools sort COPE_1108.fp2.repr
+
+Tue Sep 14 04:30:27 CDT 2021  run samtools index COPE_1108.fp2.repr
+[bam_sort_core] merging from 6 files and 1 in-memory blocks...
+FILE=COPE_1184.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:29:26 CDT 2021  run samtools sort COPE_1184.fp2.repr
+
+Tue Sep 14 04:31:14 CDT 2021  run samtools index COPE_1184.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1202.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:30:20 CDT 2021  run samtools sort COPE_1202.fp2.repr
+
+Tue Sep 14 04:31:23 CDT 2021  run samtools index COPE_1202.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1186.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:30:26 CDT 2021  run samtools sort COPE_1186.fp2.repr
+
+Tue Sep 14 04:32:14 CDT 2021  run samtools index COPE_1186.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1216.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:31:50 CDT 2021  run samtools sort COPE_1216.fp2.repr
+
+Tue Sep 14 04:32:21 CDT 2021  run samtools index COPE_1216.fp2.repr
+FILE=COPE_1196.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:31:33 CDT 2021  run samtools sort COPE_1196.fp2.repr
+
+Tue Sep 14 04:33:06 CDT 2021  run samtools index COPE_1196.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1206.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:32:11 CDT 2021  run samtools sort COPE_1206.fp2.repr
+
+Tue Sep 14 04:33:12 CDT 2021  run samtools index COPE_1206.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1138.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:30:12 CDT 2021  run samtools sort COPE_1138.fp2.repr
+
+Tue Sep 14 04:33:59 CDT 2021  run samtools index COPE_1138.fp2.repr
+[bam_sort_core] merging from 5 files and 1 in-memory blocks...
+FILE=COPE_1208.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:33:12 CDT 2021  run samtools sort COPE_1208.fp2.repr
+
+Tue Sep 14 04:34:14 CDT 2021  run samtools index COPE_1208.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1228.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:34:32 CDT 2021  run samtools sort COPE_1228.fp2.repr
+
+Tue Sep 14 04:34:45 CDT 2021  run samtools index COPE_1228.fp2.repr
+FILE=COPE_1205.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:33:51 CDT 2021  run samtools sort COPE_1205.fp2.repr
+
+Tue Sep 14 04:35:02 CDT 2021  run samtools index COPE_1205.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1174.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:32:37 CDT 2021  run samtools sort COPE_1174.fp2.repr
+
+Tue Sep 14 04:35:02 CDT 2021  run samtools index COPE_1174.fp2.repr
+[bam_sort_core] merging from 3 files and 1 in-memory blocks...
+FILE=COPE_1239.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:35:29 CDT 2021  run samtools sort COPE_1239.fp2.repr
+
+Tue Sep 14 04:35:29 CDT 2021  run samtools index COPE_1239.fp2.repr
+FILE=COPE_1225.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:35:29 CDT 2021  run samtools sort COPE_1225.fp2.repr
+
+Tue Sep 14 04:35:47 CDT 2021  run samtools index COPE_1225.fp2.repr
+FILE=COPE_1223.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:36:19 CDT 2021  run samtools sort COPE_1223.fp2.repr
+
+Tue Sep 14 04:36:45 CDT 2021  run samtools index COPE_1223.fp2.repr
+FILE=COPE_1222.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:36:21 CDT 2021  run samtools sort COPE_1222.fp2.repr
+
+Tue Sep 14 04:36:50 CDT 2021  run samtools index COPE_1222.fp2.repr
+FILE=COPE_1197.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:35:23 CDT 2021  run samtools sort COPE_1197.fp2.repr
+
+Tue Sep 14 04:37:10 CDT 2021  run samtools index COPE_1197.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1244.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:37:39 CDT 2021  run samtools sort COPE_1244.fp2.repr
+
+Tue Sep 14 04:37:40 CDT 2021  run samtools index COPE_1244.fp2.repr
+FILE=COPE_1160.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:34:24 CDT 2021  run samtools sort COPE_1160.fp2.repr
+
+Tue Sep 14 04:37:28 CDT 2021  run samtools index COPE_1160.fp2.repr
+[bam_sort_core] merging from 4 files and 1 in-memory blocks...
+FILE=COPE_1242.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:38:50 CDT 2021  run samtools sort COPE_1242.fp2.repr
+
+Tue Sep 14 04:38:58 CDT 2021  run samtools index COPE_1242.fp2.repr
+FILE=COPE_1247.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:39:13 CDT 2021  run samtools sort COPE_1247.fp2.repr
+
+Tue Sep 14 04:39:14 CDT 2021  run samtools index COPE_1247.fp2.repr
+FILE=COPE_1159.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:35:55 CDT 2021  run samtools sort COPE_1159.fp2.repr
+
+Tue Sep 14 04:39:10 CDT 2021  run samtools index COPE_1159.fp2.repr
+[bam_sort_core] merging from 4 files and 1 in-memory blocks...
+FILE=COPE_1203.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:38:47 CDT 2021  run samtools sort COPE_1203.fp2.repr
+
+Tue Sep 14 04:40:26 CDT 2021  run samtools index COPE_1203.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1173.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:37:43 CDT 2021  run samtools sort COPE_1173.fp2.repr
+
+Tue Sep 14 04:40:52 CDT 2021  run samtools index COPE_1173.fp2.repr
+[bam_sort_core] merging from 4 files and 1 in-memory blocks...
+FILE=COPE_1154.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:37:46 CDT 2021  run samtools sort COPE_1154.fp2.repr
+
+Tue Sep 14 04:41:07 CDT 2021  run samtools index COPE_1154.fp2.repr
+[bam_sort_core] merging from 4 files and 1 in-memory blocks...
+FILE=COPE_1250.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:41:27 CDT 2021  run samtools sort COPE_1250.fp2.repr
+
+Tue Sep 14 04:41:31 CDT 2021  run samtools index COPE_1250.fp2.repr
+FILE=COPE_1126.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:37:21 CDT 2021  run samtools sort COPE_1126.fp2.repr
+
+Tue Sep 14 04:42:03 CDT 2021  run samtools index COPE_1126.fp2.repr
+[bam_sort_core] merging from 6 files and 1 in-memory blocks...
+FILE=COPE_1167.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:41:02 CDT 2021  run samtools sort COPE_1167.fp2.repr
+
+Tue Sep 14 04:44:24 CDT 2021  run samtools index COPE_1167.fp2.repr
+[bam_sort_core] merging from 4 files and 1 in-memory blocks...
+FILE=COPE_1146.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:40:18 CDT 2021  run samtools sort COPE_1146.fp2.repr
+
+Tue Sep 14 04:44:22 CDT 2021  run samtools index COPE_1146.fp2.repr
+[bam_sort_core] merging from 5 files and 1 in-memory blocks...
+FILE=COPE_1236.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:44:30 CDT 2021  run samtools sort COPE_1236.fp2.repr
+
+Tue Sep 14 04:44:58 CDT 2021  run samtools index COPE_1236.fp2.repr
+FILE=COPE_1219.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:44:37 CDT 2021  run samtools sort COPE_1219.fp2.repr
+
+Tue Sep 14 04:45:50 CDT 2021  run samtools index COPE_1219.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1185.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:43:30 CDT 2021  run samtools sort COPE_1185.fp2.repr
+
+Tue Sep 14 04:46:00 CDT 2021  run samtools index COPE_1185.fp2.repr
+[bam_sort_core] merging from 3 files and 1 in-memory blocks...
+FILE=COPE_1246.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:46:32 CDT 2021  run samtools sort COPE_1246.fp2.repr
+
+Tue Sep 14 04:46:58 CDT 2021  run samtools index COPE_1246.fp2.repr
+FILE=COPE_1255.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:48:35 CDT 2021  run samtools sort COPE_1255.fp2.repr
+
+Tue Sep 14 04:48:49 CDT 2021  run samtools index COPE_1255.fp2.repr
+FILE=COPE_1249.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:48:26 CDT 2021  run samtools sort COPE_1249.fp2.repr
+
+Tue Sep 14 04:48:54 CDT 2021  run samtools index COPE_1249.fp2.repr
+FILE=COPE_1258.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:48:55 CDT 2021  run samtools sort COPE_1258.fp2.repr
+
+Tue Sep 14 04:49:05 CDT 2021  run samtools index COPE_1258.fp2.repr
+FILE=COPE_1240.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:48:59 CDT 2021  run samtools sort COPE_1240.fp2.repr
+
+Tue Sep 14 04:49:55 CDT 2021  run samtools index COPE_1240.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1237.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:48:58 CDT 2021  run samtools sort COPE_1237.fp2.repr
+
+Tue Sep 14 04:49:58 CDT 2021  run samtools index COPE_1237.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1260.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:49:55 CDT 2021  run samtools sort COPE_1260.fp2.repr
+
+Tue Sep 14 04:50:04 CDT 2021  run samtools index COPE_1260.fp2.repr
+FILE=COPE_1232.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:49:06 CDT 2021  run samtools sort COPE_1232.fp2.repr
+
+Tue Sep 14 04:50:12 CDT 2021  run samtools index COPE_1232.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1224.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:49:45 CDT 2021  run samtools sort COPE_1224.fp2.repr
+
+Tue Sep 14 04:51:14 CDT 2021  run samtools index COPE_1224.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1235.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:50:38 CDT 2021  run samtools sort COPE_1235.fp2.repr
+
+Tue Sep 14 04:51:38 CDT 2021  run samtools index COPE_1235.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1263.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:51:43 CDT 2021  run samtools sort COPE_1263.fp2.repr
+
+Tue Sep 14 04:51:51 CDT 2021  run samtools index COPE_1263.fp2.repr
+FILE=COPE_0934.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:37:07 CDT 2021  run samtools sort COPE_0934.fp2.repr
+
+Tue Sep 14 04:51:50 CDT 2021  run samtools index COPE_0934.fp2.repr
+[bam_sort_core] merging from 19 files and 1 in-memory blocks...
+FILE=COPE_1210.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:51:44 CDT 2021  run samtools sort COPE_1210.fp2.repr
+
+Tue Sep 14 04:53:49 CDT 2021  run samtools index COPE_1210.fp2.repr
+[bam_sort_core] merging from 3 files and 1 in-memory blocks...
+FILE=COPE_1227.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:53:58 CDT 2021  run samtools sort COPE_1227.fp2.repr
+
+Tue Sep 14 04:55:24 CDT 2021  run samtools index COPE_1227.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1233.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:55:32 CDT 2021  run samtools sort COPE_1233.fp2.repr
+
+Tue Sep 14 04:57:04 CDT 2021  run samtools index COPE_1233.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1265.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:57:13 CDT 2021  run samtools sort COPE_1265.fp2.repr
+
+Tue Sep 14 04:57:34 CDT 2021  run samtools index COPE_1265.fp2.repr
+FILE=COPE_1266.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:57:28 CDT 2021  run samtools sort COPE_1266.fp2.repr
+
+Tue Sep 14 04:57:50 CDT 2021  run samtools index COPE_1266.fp2.repr
+FILE=COPE_1161.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:54:04 CDT 2021  run samtools sort COPE_1161.fp2.repr
+
+Tue Sep 14 04:58:05 CDT 2021  run samtools index COPE_1161.fp2.repr
+[bam_sort_core] merging from 6 files and 1 in-memory blocks...
+FILE=COPE_1257.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:57:53 CDT 2021  run samtools sort COPE_1257.fp2.repr
+
+Tue Sep 14 04:58:38 CDT 2021  run samtools index COPE_1257.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1243.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:57:35 CDT 2021  run samtools sort COPE_1243.fp2.repr
+
+Tue Sep 14 04:58:52 CDT 2021  run samtools index COPE_1243.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1226.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 04:58:19 CDT 2021  run samtools sort COPE_1226.fp2.repr
+
+Tue Sep 14 04:59:53 CDT 2021  run samtools index COPE_1226.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1252.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 05:02:39 CDT 2021  run samtools sort COPE_1252.fp2.repr
+
+Tue Sep 14 05:03:57 CDT 2021  run samtools index COPE_1252.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1241.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 05:02:47 CDT 2021  run samtools sort COPE_1241.fp2.repr
+
+Tue Sep 14 05:04:20 CDT 2021  run samtools index COPE_1241.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1248.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 05:03:53 CDT 2021  run samtools sort COPE_1248.fp2.repr
+
+Tue Sep 14 05:05:17 CDT 2021  run samtools index COPE_1248.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1254.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 05:03:59 CDT 2021  run samtools sort COPE_1254.fp2.repr
+
+Tue Sep 14 05:05:26 CDT 2021  run samtools index COPE_1254.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1221.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 05:03:27 CDT 2021  run samtools sort COPE_1221.fp2.repr
+
+Tue Sep 14 05:05:24 CDT 2021  run samtools index COPE_1221.fp2.repr
+[bam_sort_core] merging from 3 files and 1 in-memory blocks...
+FILE=COPE_1251.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 05:04:56 CDT 2021  run samtools sort COPE_1251.fp2.repr
+
+Tue Sep 14 05:06:19 CDT 2021  run samtools index COPE_1251.fp2.repr
+[bam_sort_core] merging from 2 files and 1 in-memory blocks...
+FILE=COPE_1264.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 05:05:37 CDT 2021  run samtools sort COPE_1264.fp2.repr
+
+Tue Sep 14 05:06:30 CDT 2021  run samtools index COPE_1264.fp2.repr
+[bam_sort_core] merging from 1 files and 1 in-memory blocks...
+FILE=COPE_1199.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 05:04:46 CDT 2021  run samtools sort COPE_1199.fp2.repr
+
+Tue Sep 14 05:07:41 CDT 2021  run samtools index COPE_1199.fp2.repr
+[bam_sort_core] merging from 5 files and 1 in-memory blocks...
+FILE=COPE_1207.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 05:05:36 CDT 2021  run samtools sort COPE_1207.fp2.repr
+
+Tue Sep 14 05:08:06 CDT 2021  run samtools index COPE_1207.fp2.repr
+[bam_sort_core] merging from 4 files and 1 in-memory blocks...
+FILE=COPE_1169.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 05:05:13 CDT 2021  run samtools sort COPE_1169.fp2.repr
+
+Tue Sep 14 05:08:54 CDT 2021  run samtools index COPE_1169.fp2.repr
+[bam_sort_core] merging from 7 files and 1 in-memory blocks...
+FILE=COPE_1253.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 05:08:18 CDT 2021  run samtools sort COPE_1253.fp2.repr
+
+Tue Sep 14 05:09:53 CDT 2021  run samtools index COPE_1253.fp2.repr
+[bam_sort_core] merging from 3 files and 1 in-memory blocks...
+FILE=COPE_1194.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 05:07:22 CDT 2021  run samtools sort COPE_1194.fp2.repr
+
+Tue Sep 14 05:10:28 CDT 2021  run samtools index COPE_1194.fp2.repr
+[bam_sort_core] merging from 6 files and 1 in-memory blocks...
+FILE=COPE_1245.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 05:08:54 CDT 2021  run samtools sort COPE_1245.fp2.repr
+
+Tue Sep 14 05:10:36 CDT 2021  run samtools index COPE_1245.fp2.repr
+[bam_sort_core] merging from 3 files and 1 in-memory blocks...
+FILE=COPE_1230.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 05:09:40 CDT 2021  run samtools sort COPE_1230.fp2.repr
+
+Tue Sep 14 05:11:48 CDT 2021  run samtools index COPE_1230.fp2.repr
+[bam_sort_core] merging from 4 files and 1 in-memory blocks...
+FILE=COPE_1178.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 05:08:25 CDT 2021  run samtools sort COPE_1178.fp2.repr
+
+Tue Sep 14 05:11:58 CDT 2021  run samtools index COPE_1178.fp2.repr
+[bam_sort_core] merging from 7 files and 1 in-memory blocks...
+FILE=COPE_1097.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 05:06:03 CDT 2021  run samtools sort COPE_1097.fp2.repr
+
+Tue Sep 14 05:12:08 CDT 2021  run samtools index COPE_1097.fp2.repr
+[bam_sort_core] merging from 11 files and 1 in-memory blocks...
+FILE=COPE_1259.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 05:11:35 CDT 2021  run samtools sort COPE_1259.fp2.repr
+
+Tue Sep 14 05:13:12 CDT 2021  run samtools index COPE_1259.fp2.repr
+[bam_sort_core] merging from 3 files and 1 in-memory blocks...
+FILE=COPE_1211.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 05:11:13 CDT 2021  run samtools sort COPE_1211.fp2.repr
+
+Tue Sep 14 05:13:57 CDT 2021  run samtools index COPE_1211.fp2.repr
+[bam_sort_core] merging from 5 files and 1 in-memory blocks...
+FILE=COPE_1238.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 05:12:37 CDT 2021  run samtools sort COPE_1238.fp2.repr
+
+Tue Sep 14 05:15:00 CDT 2021  run samtools index COPE_1238.fp2.repr
+[bam_sort_core] merging from 4 files and 1 in-memory blocks...
+FILE=COPE_1188.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 05:13:48 CDT 2021  run samtools sort COPE_1188.fp2.repr
+
+Tue Sep 14 05:17:39 CDT 2021  run samtools index COPE_1188.fp2.repr
+[bam_sort_core] merging from 7 files and 1 in-memory blocks...
+FILE=COPE_1256.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 05:18:14 CDT 2021  run samtools sort COPE_1256.fp2.repr
+
+Tue Sep 14 05:20:29 CDT 2021  run samtools index COPE_1256.fp2.repr
+[bam_sort_core] merging from 4 files and 1 in-memory blocks...
+FILE=COPE_1231.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 05:25:56 CDT 2021  run samtools sort COPE_1231.fp2.repr
+
+Tue Sep 14 05:29:33 CDT 2021  run samtools index COPE_1231.fp2.repr
+[bam_sort_core] merging from 7 files and 1 in-memory blocks...
+FILE=COPE_1261.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 05:37:20 CDT 2021  run samtools sort COPE_1261.fp2.repr
+
+Tue Sep 14 05:41:02 CDT 2021  run samtools index COPE_1261.fp2.repr
+[bam_sort_core] merging from 7 files and 1 in-memory blocks...
+FILE=COPE_1234.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 06:18:05 CDT 2021  run samtools sort COPE_1234.fp2.repr
+
+Tue Sep 14 06:26:32 CDT 2021  run samtools index COPE_1234.fp2.repr
+[bam_sort_core] merging from 17 files and 1 in-memory blocks...
+FILE=COPE_1229.fp2.repr
+CUTOFFS=20.10
+MAPPING_CLIPPING_PENALTY=30,5
+INSERT_MEAN=337.592
+INSERT_SD=16.4987
+INSERT_MAX=547
+INSERT_MIN=142
+MAPPING_MIN_ALIGNMENT_SCORE=50
+optA=1
+optB=6
+optO=10
+
+Tue Sep 14 07:30:10 CDT 2021  run samtools sort COPE_1229.fp2.repr
+
+Tue Sep 14 07:45:42 CDT 2021  run samtools index COPE_1229.fp2.repr
+[bam_sort_core] merging from 31 files and 1 in-memory blocks...
+
+Tue Sep 14 07:46:53 CDT 2021 mkBAM completed!
+
+Compress large filesTue Sep 14 07:49:30 CDT 2021

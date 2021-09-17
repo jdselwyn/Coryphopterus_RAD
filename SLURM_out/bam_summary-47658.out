@@ -1,0 +1,3 @@
+scripts/checkBAM.R
+Mapped Reads summary stats
+slurmstepd: error: *** JOB 47658 ON hpcc11 CANCELLED AT 2021-09-14T15:31:43 ***

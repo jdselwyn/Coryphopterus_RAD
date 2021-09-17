@@ -1762,3 +1762,4 @@ COPE_1265.fp2.repr	COPE
 COPE_1266.fp2.repr	COPE
 
  Mon Sep 13 17:32:50 CDT 2021  Genotyping individuals of ploidy 2 using freebayes...
+slurmstepd: error: *** JOB 44557 ON hpcc26 CANCELLED AT 2021-09-17T10:11:13 ***

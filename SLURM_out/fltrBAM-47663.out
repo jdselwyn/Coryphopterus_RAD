@@ -1,0 +1,152 @@
+cp: cannot create regular file ‘fltrBAM_NovaSeq/fltrBAM.config’: No such file or directory
+/cm/local/apps/slurm/var/spool/job47663/slurm_script: line 21: cd: fltrBAM_NovaSeq: Not a directory
+
+
+* dDocentHPC v4.5 Forked by cbird@tamucc.edu * 
+
+
+Running dDocentHPC fltrBAM...
+ 
+Tue Sep 14 16:05:37 CDT 2021 Files output to:  /work/hobi/jselwyn/Coryphopterus_RAD
+
+Tue Sep 14 16:05:37 CDT 2021 Reading config file... 
+ 
+cat: fltrBAM.config: No such file or directory
+
+Tue Sep 14 16:05:37 CDT 2021 Reading in variables from config file...
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+/work/hobi/jselwyn/Coryphopterus_RAD/scripts/dDocentHPC/dDocentHPC.bash: line 150: [: ==: unary operator expected
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+/work/hobi/jselwyn/Coryphopterus_RAD/scripts/dDocentHPC/dDocentHPC.bash: line 170: [: ==: unary operator expected
+grep: fltrBAM.config: No such file or directory
+/work/hobi/jselwyn/Coryphopterus_RAD/scripts/dDocentHPC/dDocentHPC.bash: line 171: [: ==: unary operator expected
+grep: fltrBAM.config: No such file or directory
+/work/hobi/jselwyn/Coryphopterus_RAD/scripts/dDocentHPC/dDocentHPC.bash: line 172: [: ==: unary operator expected
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+grep: fltrBAM.config: No such file or directory
+
+Tue Sep 14 16:05:37 CDT 2021 Checking for all required dDocent software...
+
+ Running CheckDependencies Function...
+
+/work/hobi/jselwyn/Coryphopterus_RAD/scripts/dDocentHPC/dDocentHPC.bash: line 216: [: !=: unary operator expected
+  The dependency trimmomatic is installed!
+
+  The dependency freebayes is installed!
+
+  The dependency mawk is installed!
+
+  The dependency bwa is installed!
+
+  The dependency samtools is installed!
+
+  The dependency vcftools is installed!
+
+  The dependency rainbow is installed!
+
+  The dependency gnuplot is installed!
+
+  The dependency gawk is installed!
+
+  The dependency seqtk is installed!
+
+  The dependency cd-hit-est is installed!
+
+  The dependency bamToBed is installed!
+
+  The dependency bedtools is installed!
+
+  The dependency coverageBed is installed!
+
+  The dependency parallel is installed!
+
+  The dependency vcfcombine is installed!
+
+  The dependency bamtools is installed!
+
+  The dependency pearRM is installed!
+
+ All dependencies are installed and up to date!
+
+
+Tue Sep 14 16:05:38 CDT 2021  Begin main ddocent function
+
+ The HPC version of dDocent will only digest files with particular extensions for particular tasks
+  untouched files for trimming must be *.F.fq.gz and *.R.fq.gz
+  files trimmed for assembly (mkREF) must be *r1.fq.gz *r2.fq.gz
+  files trimmed for mapping (mkBAM) must be *R1.fq.gz *R2.fq.gz
+
+  extensions selected: *.R1.fq.gz *.R2.fq.gz
+ls: cannot access *..-RAW.bam: No such file or directory
+ls: cannot access *..-RAW.bam: No such file or directory
+ 
+ The samples being processed are:
+
+
+ Tue Sep 14 16:05:38 CDT 2021 Filtering raw BAM Files
+
+  Tue Sep 14 16:05:38 CDT 2021  Applying Filter 1: removing paired reads mapping to different contigs, secondary, and supplementary alignments
+/work/hobi/jselwyn/Coryphopterus_RAD/scripts/dDocentHPC/dDocentHPC.bash: line 1704: 0+: syntax error: operand expected (error token is "+")
+
+Compress large filesTue Sep 14 16:05:38 CDT 2021

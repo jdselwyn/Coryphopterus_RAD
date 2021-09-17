@@ -1,0 +1,10 @@
+
+
+Building a new DB, current time: 09/14/2021 01:49:06
+New DB name:   /work/hobi/jselwyn/Coryphopterus_RAD/Reference_Sequence/CoryphopterusBlast
+New DB title:  Coryphopterus Blast DB
+Sequence type: Nucleotide
+Deleted existing Nucleotide BLAST database named /work/hobi/jselwyn/Coryphopterus_RAD/Reference_Sequence/CoryphopterusBlast
+Keep MBits: T
+Maximum file size: 1000000000B
+Adding sequences from FASTA; added 374 sequences in 0.140656 seconds.
