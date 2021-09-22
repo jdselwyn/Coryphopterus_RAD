@@ -38,8 +38,4 @@ Mitochondrial_Mapping/tmp_prefix_file
 *mitoBLAST*out
 *blast_out/
 *raw_blast_results.csv
-!fltrVCF*/*pdf
-!fltrVCF*/*png
-!fltrVCF*/*summary.csv
-!*summary.csv
 scripts/fltrVCF*/
