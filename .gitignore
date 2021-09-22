@@ -10,7 +10,6 @@
 *.bam.*
 *.sam
 dDocentHPC/
-fltrVCF*/
 *discards
 *json
 mkREF*/
@@ -43,3 +42,4 @@ Mitochondrial_Mapping/tmp_prefix_file
 !fltrVCF*/*png
 !fltrVCF*/*summary.csv
 !*summary.csv
+scripts/fltrVCF*/
