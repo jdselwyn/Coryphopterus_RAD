@@ -12,13 +12,12 @@
 
 ## Species Identification
 - Mapping to Mitochondrial Genome
--
 
 ## ToDo
 - Decide about mapping settings for mito-genome
 - DAPC or similar to group those without mito DNA
-- How to decide species from blast when multiple hits of different pident/escore etc
-
+- VCF Filter Settings to lightly filter for species identity
+- split species & rerun pipeline?
 
 ## Step 1.  Demultiplex Sequences
 ```
@@ -433,15 +432,12 @@ sbatch -p cbirdq,long -t 15-00:00:00 scripts/mkVCF.sbatch \
   mkREF_MiSeq/reference.10.1.fasta
 #47809
 
-#Run on Head Node
-module load R/gcc/64/3.5.1
-Rscript scripts/summarizeVCF.R  mkVCF_MiSeq/TotalRawSNPs.10.1.vcf
-
 #Run on Node
 sbatch -o SLURM_out/vcf_summary-%j.out \
   scripts/runRscript.sbatch \
   scripts/summarizeVCF.R \
   mkVCF_MiSeq/TotalRawSNPs.10.1.vcf
+48213
 ```
 
 Genotyping Stats
@@ -473,15 +469,12 @@ sbatch -p long,cbirdq -t 15-00:00:00 scripts/mkVCF.sbatch \
   mkREF_NovaSeq/reference.20.10.fasta
 #47810
 
-#Run on Head Node
-module load R/gcc/64/3.5.1
-Rscript scripts/summarizeVCF.R  mkVCF_NovaSeq/TotalRawSNPs.20.10.vcf
-
 #Run on Node
 sbatch -o SLURM_out/vcf_summary-%j.out \
   scripts/runRscript.sbatch \
   scripts/summarizeVCF.R \
   mkVCF_NovaSeq/TotalRawSNPs.20.10.vcf
+48214
 ```
 
 Genotyping Stats
