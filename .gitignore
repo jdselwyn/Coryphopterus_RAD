@@ -9,6 +9,7 @@
 *.bam
 *.bam.*
 *.sam
+*vcf
 dDocentHPC/
 *discards
 *json
