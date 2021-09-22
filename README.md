@@ -510,26 +510,36 @@ sbatch scripts/fltrVCF.sbatch \
 	mkVCF_test/TotalRawSNPs.10.1.vcf \
 	config_files/fltrVCF_A.config \
 	A
+
+#Run on Head Node
+module load R/gcc/64/3.5.1
+Rscript scripts/summarizeVCF.R  fltrVCF_test/test_A.10.1.Fltr21.22.MostInformativeSNP.vcf
+
+#Run on Node
+sbatch -o SLURM_out/vcf_summary-%j.out \
+  scripts/runRscript.sbatch \
+  scripts/summarizeVCF.R \
+  fltrVCF_test/test_A.10.1.Fltr21.22.MostInformativeSNP.vcf
 ```
 
 Genotyping Stats
 | Metric | [Filter Set A](config_files/fltrVCF_A.config) |
 | --- | ----- |
-| JobID | [``](SLURM_out/fltrVCF-.out) |
-| Summary Graph | [A](fltrVCF/.fltrStats2.plots.pdf) |
-| Number Individuals |  |
-| Number SNPs |  |
-| Number Contigs |  |
-| Mean SNPs/Contig |  ±  SD |
-| Range SNPs/Contig |  -  |
-| Mean Coverage |  ±  SD |
-| Range Coverage |  -  |
-| Mean PHRED |  ±  SD |
-| Range PHRED |  -  |
-| Mean Missing (Ind) | % ± % |
-| Range Missing (Ind) | % - % |
-| Mean Missing (Loci) | % ± % |
-| Range Missing (Loci) | % - % |
+| JobID | [`48267`](SLURM_out/fltrVCF-48267.out) |
+| Summary Graph | [A](fltrVCF_test/test_A.fltrStats2.plots.pdf) |
+| Number Individuals | 5 |
+| Number SNPs | 6,451 |
+| Number Contigs | 6,451 |
+| Mean SNPs/Contig | 1 ± 0 SD |
+| Range SNPs/Contig | 1 - 1 |
+| Mean Coverage | 415 ± 234 SD |
+| Range Coverage | 86 - 1,370 |
+| Mean PHRED | 3,429 ± 2,874 SD |
+| Range PHRED | 283 - 27,495 |
+| Mean Missing (Ind) | 2.8% ± 1.2% |
+| Range Missing (Ind) | 1.3% - 4.0% |
+| Mean Missing (Loci) | 2.8% ± 7.5% |
+| Range Missing (Loci) | 0% - 40% |
 
 ### Filter genotypes of reads mapped to MiSeq reference
 ```
