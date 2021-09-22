@@ -41,3 +41,13 @@ Mitochondrial_Mapping/tmp_prefix_file
 *raw_blast_results.csv
 scripts/fltrVCF*/
 *Fltr*
+*hwe
+*QUALbefore
+*genotypedepthbefore
+*meandepthVSvariance
+*meandepthpersitebefore
+*siteAB.dat
+*sitedepthmeanbefore
+*sitemissingness
+*inds
+
