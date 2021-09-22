@@ -1,0 +1,7 @@
+scripts/summarizeVCF.R
+Scanning file to determine attributes.
+File attributes:
+  meta lines: 60
+  header_line: 61
+  variant count: 1020147
+  column count: 787
