@@ -390,6 +390,7 @@ Mapping Stats
 
 
 ## Step 14. Genotyping
+
 ### Test scripts by genotyping MiSeq reads mapped to MiSeq reference Genome
 ```
 mkdir mkVCF_test
@@ -486,6 +487,86 @@ sbatch -o SLURM_out/vcf_summary-%j.out \
 Genotyping Stats
 | Metric | Unfiltered VCF |
 | --- | ----- |
+| Number Individuals |  |
+| Number SNPs |  |
+| Number Contigs |  |
+| Mean SNPs/Contig |  ±  SD |
+| Range SNPs/Contig |  -  |
+| Mean Coverage |  ±  SD |
+| Range Coverage |  -  |
+| Mean PHRED |  ±  SD |
+| Range PHRED |  -  |
+| Mean Missing (Ind) | % ± % |
+| Range Missing (Ind) | % - % |
+| Mean Missing (Loci) | % ± % |
+| Range Missing (Loci) | % - % |
+
+## Step 14. Filter Genotypes
+
+### Test scripts by filtering vcf of MiSeq reads mapped to MiSeq reference
+```
+sbatch scripts/fltrVCF.sbatch \
+	fltrVCF_test \
+	mkVCF_test/TotalRawSNPs.10.1.vcf \
+	config_files/fltrVCF_A.config \
+	A
+```
+
+Genotyping Stats
+| Metric | [Filter Set A](config_files/fltrVCF_A.config) |
+| --- | ----- |
+| JobID | [``](SLURM_out/fltrVCF-.out) |
+| Summary Graph | [A](fltrVCF/.fltrStats2.plots.pdf) |
+| Number Individuals |  |
+| Number SNPs |  |
+| Number Contigs |  |
+| Mean SNPs/Contig |  ±  SD |
+| Range SNPs/Contig |  -  |
+| Mean Coverage |  ±  SD |
+| Range Coverage |  -  |
+| Mean PHRED |  ±  SD |
+| Range PHRED |  -  |
+| Mean Missing (Ind) | % ± % |
+| Range Missing (Ind) | % - % |
+| Mean Missing (Loci) | % ± % |
+| Range Missing (Loci) | % - % |
+
+### Filter genotypes of reads mapped to MiSeq reference
+```
+
+```
+
+Genotyping Stats
+| Metric | [Filter Set A](config_files/fltrVCF_A.config) |
+| --- | ----- |
+| JobID | [``](SLURM_out/fltrVCF-.out) |
+| Summary Graph | [A](fltrVCF/.fltrStats2.plots.pdf) |
+| Number Individuals |  |
+| Number SNPs |  |
+| Number Contigs |  |
+| Mean SNPs/Contig |  ±  SD |
+| Range SNPs/Contig |  -  |
+| Mean Coverage |  ±  SD |
+| Range Coverage |  -  |
+| Mean PHRED |  ±  SD |
+| Range PHRED |  -  |
+| Mean Missing (Ind) | % ± % |
+| Range Missing (Ind) | % - % |
+| Mean Missing (Loci) | % ± % |
+| Range Missing (Loci) | % - % |
+
+
+
+### Filter genotypes of reads mapped to NovaSeq reference
+```
+
+```
+
+Genotyping Stats
+| Metric | [Filter Set A](config_files/fltrVCF_A.config) |
+| --- | ----- |
+| JobID | [``](SLURM_out/fltrVCF-.out) |
+| Summary Graph | [A](fltrVCF/.fltrStats2.plots.pdf) |
 | Number Individuals |  |
 | Number SNPs |  |
 | Number Contigs |  |
