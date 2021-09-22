@@ -40,3 +40,4 @@ Mitochondrial_Mapping/tmp_prefix_file
 *blast_out/
 *raw_blast_results.csv
 scripts/fltrVCF*/
+*Fltr[0-9]+*
