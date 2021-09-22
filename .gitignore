@@ -42,4 +42,4 @@ Mitochondrial_Mapping/tmp_prefix_file
 !fltrVCF*/*pdf
 !fltrVCF*/*png
 !fltrVCF*/*summary.csv
-*summary.csv
+!*summary.csv
