@@ -610,7 +610,7 @@ sbatch -o SLURM_out/vcf_summary-%j.out \
 
 Genotyping Stats
 | Metric | [Filter Set A](config_files/fltrVCF_A.config) | [Species Filter](config_files/fltrVCF_lightSpecies.config) |
-| --- | ----- |
+| --- | ----- | ----- |
 | JobID | [`48280`](SLURM_out/fltrVCF-48280.out) | [`48337`](SLURM_out/fltrVCF-48337.out) |
 | Summary Graph | [A](fltrVCF_NovaSeq/NovaSeq_A.fltrStats2.plots.pdf) | [Species](fltrVCF_NovaSeq/NovaSeq_lightSpecies.fltrStats2.plots.pdf) |
 | Number Individuals | 508 |  |
