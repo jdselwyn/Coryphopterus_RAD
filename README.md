@@ -543,6 +543,13 @@ sbatch scripts/fltrVCF.sbatch \
 	mkVCF_MiSeq/TotalRawSNPs.10.1.vcf \
 	config_files/fltrVCF_A.config \
 	A
+	
+sbatch scripts/fltrVCF.sbatch \
+	fltrVCF_MiSeq \
+	mkVCF_MiSeq/TotalRawSNPs.10.1.vcf \
+	config_files/fltrVCF_lightSpecies.config \
+	lightSpecies
+
 
 #Run on Head Node
 module load R/gcc/64/3.5.1
@@ -556,23 +563,23 @@ sbatch -o SLURM_out/vcf_summary-%j.out \
 ```
 
 Genotyping Stats
-| Metric | [Filter Set A](config_files/fltrVCF_A.config) |
-| --- | ----- |
-| JobID | [`48279`](SLURM_out/fltrVCF-48279.out) |
-| Summary Graph | [A](fltrVCF/MiSeq_A.fltrStats2.plots.pdf) |
-| Number Individuals | 516 |
-| Number SNPs | 3,372 |
-| Number Contigs | 3,372 |
-| Mean SNPs/Contig | 1 ± 0 SD |
-| Range SNPs/Contig | 1 - 1 |
-| Mean Coverage | 68,920 ± 27,365 SD |
-| Range Coverage | 18,326 - 156,828 |
-| Mean PHRED | 209,170 ± 376,042 SD |
-| Range PHRED | 258 - 3,264,620 |
-| Mean Missing (Ind) | 11% ± 10% |
-| Range Missing (Ind) | 4.5% - 42% |
-| Mean Missing (Loci) | 11% ± 7% |
-| Range Missing (Loci) | 0% - 29% |
+| Metric | [Filter Set A](config_files/fltrVCF_A.config) | [Species Filter](config_files/fltrVCF_lightSpecies.config) |
+| --- | ----- | ----- |
+| JobID | [`48279`](SLURM_out/fltrVCF-48279.out) | [`48336`](SLURM_out/fltrVCF-48336.out) |
+| Summary Graph | [A](fltrVCF_MiSeq/MiSeq_A.fltrStats2.plots.pdf) | [Species](fltrVCF_MiSeq/MiSeq_lightSpecies.fltrStats2.plots.pdf) |
+| Number Individuals | 516 |  |
+| Number SNPs | 3,372 |  |
+| Number Contigs | 3,372 |  |
+| Mean SNPs/Contig | - | - |
+| Range SNPs/Contig | - | - |
+| Mean Coverage | 68,920 ± 27,365 SD |  ±  SD |
+| Range Coverage | 18,326 - 156,828 |  -  |
+| Mean PHRED | 209,170 ± 376,042 SD |  ±  SD |
+| Range PHRED | 258 - 3,264,620 |  -  |
+| Mean Missing (Ind) | 11% ± 10% | % ± % |
+| Range Missing (Ind) | 4.5% - 42% | % - % |
+| Mean Missing (Loci) | 11% ± 7% | % ± % |
+| Range Missing (Loci) | 0% - 29% | % - % |
 
 
 
@@ -583,6 +590,12 @@ sbatch scripts/fltrVCF.sbatch \
 	mkVCF_NovaSeq/TotalRawSNPs.20.10.vcf \
 	config_files/fltrVCF_A.config \
 	A
+
+sbatch scripts/fltrVCF.sbatch \
+	fltrVCF_NovaSeq \
+	mkVCF_NovaSeq/TotalRawSNPs.20.10.vcf \
+	config_files/fltrVCF_lightSpecies.config \
+	lightSpecies
 
 #Run on Head Node
 module load R/gcc/64/3.5.1
@@ -596,20 +609,20 @@ sbatch -o SLURM_out/vcf_summary-%j.out \
 ```
 
 Genotyping Stats
-| Metric | [Filter Set A](config_files/fltrVCF_A.config) |
+| Metric | [Filter Set A](config_files/fltrVCF_A.config) | [Species Filter](config_files/fltrVCF_lightSpecies.config) |
 | --- | ----- |
-| JobID | [`48280`](SLURM_out/fltrVCF-48280.out) |
-| Summary Graph | [A](fltrVCF/NovaSeq_A.fltrStats2.plots.pdf) |
-| Number Individuals | 508 |
-| Number SNPs | 2,261 |
-| Number Contigs | 2,261 |
-| Mean SNPs/Contig | 1 ± 1 SD |
-| Range SNPs/Contig | 1 - 1 |
-| Mean Coverage | 61,620 ± 23,967 SD |
-| Range Coverage | 18,311 - 152,024 |
-| Mean PHRED | 214,921 ± 405,328 SD |
-| Range PHRED | 300 - 3,222,750 |
-| Mean Missing (Ind) | 12% ± 10% |
-| Range Missing (Ind) | 0.5% - 40% |
-| Mean Missing (Loci) | 12% ± 7% |
-| Range Missing (Loci) | 0% - 31% |
+| JobID | [`48280`](SLURM_out/fltrVCF-48280.out) | [`48337`](SLURM_out/fltrVCF-48337.out) |
+| Summary Graph | [A](fltrVCF_NovaSeq/NovaSeq_A.fltrStats2.plots.pdf) | [Species](fltrVCF_NovaSeq/NovaSeq_lightSpecies.fltrStats2.plots.pdf) |
+| Number Individuals | 508 |  |
+| Number SNPs | 2,261 |  |
+| Number Contigs | 2,261 |  |
+| Mean SNPs/Contig | - | - |
+| Range SNPs/Contig | - | - |
+| Mean Coverage | 61,620 ± 23,967 SD |  ±  SD |
+| Range Coverage | 18,311 - 152,024 |  -  |
+| Mean PHRED | 214,921 ± 405,328 SD |  ±  SD |
+| Range PHRED | 300 - 3,222,750 |  -  |
+| Mean Missing (Ind) | 12% ± 10% | % ± % |
+| Range Missing (Ind) | 0.5% - 40% | % - % |
+| Mean Missing (Loci) | 12% ± 7% | % ± % |
+| Range Missing (Loci) | 0% - 31% | % - % |
