@@ -550,6 +550,12 @@ sbatch scripts/fltrVCF.sbatch \
 	config_files/fltrVCF_lightSpecies.config \
 	lightSpecies
 
+sbatch scripts/fltrVCF.sbatch \
+	fltrVCF_MiSeq \
+	mkVCF_MiSeq/TotalRawSNPs.10.1.vcf \
+	config_files/fltrVCF_lightSpecies.config \
+	Initial
+
 
 #Run on Head Node
 module load R/gcc/64/3.5.1

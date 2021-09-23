@@ -9,7 +9,7 @@
 - [A](fltrVCF_A.config)
   - Default settings
   - Change to keep only most Informative SNP per contig
-- [initialTwo](fltrVCF_initialTwo.config)
+- [initial](fltrVCF_initial.config)
   - Just the first two filter steps
 	- Keep only Biallelic SNPs (infinite sites)
 	- Remove Indels
