@@ -160,7 +160,8 @@ Cutoff2 is the minimum number of individuals a contig must be present in to keep
 4. Cutoff1 = 5, Cutoff2 = 1
 5. Cutoff1 = 5, Cutoff2 = 2
 6. Cutoff1 = 10, Cutoff2 = 2
-6. Cutoff1 = 15, Cutoff2 = 1
+7. Cutoff1 = 15, Cutoff2 = 1
+8. Cutoff1 = 2, Cutoff2 = 1
 
 Must edit config file each time and then run below line
 ```
@@ -177,15 +178,16 @@ Rscript scripts/checkContigs.R  mkREF_MiSeq/reference.5.1.fasta
 Rscript scripts/checkContigs.R  mkREF_MiSeq/reference.5.2.fasta
 Rscript scripts/checkContigs.R  mkREF_MiSeq/reference.10.2.fasta
 Rscript scripts/checkContigs.R  mkREF_MiSeq/reference.15.1.fasta
+Rscript scripts/checkContigs.R  mkREF_MiSeq/reference.2.1.fasta
 ```
 MiSeq Reference Stats
-| Metric | 1.1 | 2.2 | 10.1 | 5.1 | 5.2 | 10.2 | 15.1 |
-| --- | ----- | ----- | ----- | ----- | ----- | ----- | ----- |
-| Number Contigs | 88,540 | 13,330 | 33,685 | 47,443 | 8,097 | 5,459 | 26,910 |
-| Mean Length | 470 ± 65 SD | 476 ± 56 SD | 497 ± 27 SD | 493 ± 33 SD | 492 ± 29 SD | 496 ± 25 SD | 499 ± 25 SD |
-| Range Length | 282 - 586 | 282 - 585 | 285 - 575 | 282 - 581 | 284 - 575 | 285 - 575 | 285 - 562 |
-| Total Length | 41,644,725 | 6,339,890 | 16,733,979 | 23,379,362 | 3,986,179 | 2,706,419 | 13,416,533 |
-| Contigs with Central Ns | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| Metric | 1.1 | 2.2 | 10.1 | 5.1 | 5.2 | 10.2 | 15.1 | 2.1 |
+| --- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- |
+| Number Contigs | 88,540 | 13,330 | 33,685 | 47,443 | 8,097 | 5,459 | 26,910 |  |
+| Mean Length | 470 ± 65 SD | 476 ± 56 SD | 497 ± 27 SD | 493 ± 33 SD | 492 ± 29 SD | 496 ± 25 SD | 499 ± 25 SD |  ±  SD |
+| Range Length | 282 - 586 | 282 - 585 | 285 - 575 | 282 - 581 | 284 - 575 | 285 - 575 | 285 - 562 |  -  |
+| Total Length | 41,644,725 | 6,339,890 | 16,733,979 | 23,379,362 | 3,986,179 | 2,706,419 | 13,416,533 |  |
+| Contigs with Central Ns | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 
 ### NovaSeq
 ```
@@ -536,50 +538,78 @@ Genotyping Stats
 
 ### Filter genotypes of reads mapped to MiSeq reference
 ```
+sbatch scripts/fltrVCF.sbatch \
+	fltrVCF_MiSeq \
+	mkVCF_MiSeq/TotalRawSNPs.10.1.vcf \
+	config_files/fltrVCF_A.config \
+	A
 
+#Run on Head Node
+module load R/gcc/64/3.5.1
+Rscript scripts/summarizeVCF.R  fltrVCF_MiSeq/MiSeq_A.10.1.Fltr21.22.MostInformativeSNP.vcf
+
+#Run on Node
+sbatch -o SLURM_out/vcf_summary-%j.out \
+  scripts/runRscript.sbatch \
+  scripts/summarizeVCF.R \
+  fltrVCF_MiSeq/MiSeq_A.10.1.Fltr21.22.MostInformativeSNP.vcf
 ```
 
 Genotyping Stats
 | Metric | [Filter Set A](config_files/fltrVCF_A.config) |
 | --- | ----- |
-| JobID | [``](SLURM_out/fltrVCF-.out) |
-| Summary Graph | [A](fltrVCF/.fltrStats2.plots.pdf) |
-| Number Individuals |  |
-| Number SNPs |  |
-| Number Contigs |  |
-| Mean SNPs/Contig |  ±  SD |
-| Range SNPs/Contig |  -  |
-| Mean Coverage |  ±  SD |
-| Range Coverage |  -  |
-| Mean PHRED |  ±  SD |
-| Range PHRED |  -  |
-| Mean Missing (Ind) | % ± % |
-| Range Missing (Ind) | % - % |
-| Mean Missing (Loci) | % ± % |
-| Range Missing (Loci) | % - % |
+| JobID | [`48279`](SLURM_out/fltrVCF-48279.out) |
+| Summary Graph | [A](fltrVCF/MiSeq_A.fltrStats2.plots.pdf) |
+| Number Individuals | 516 |
+| Number SNPs | 3,372 |
+| Number Contigs | 3,372 |
+| Mean SNPs/Contig | 1 ± 0 SD |
+| Range SNPs/Contig | 1 - 1 |
+| Mean Coverage | 68,920 ± 27,365 SD |
+| Range Coverage | 18,326 - 156,828 |
+| Mean PHRED | 209,170 ± 376,042 SD |
+| Range PHRED | 258 - 3,264,620 |
+| Mean Missing (Ind) | 11% ± 10% |
+| Range Missing (Ind) | 4.5% - 42% |
+| Mean Missing (Loci) | 11% ± 7% |
+| Range Missing (Loci) | 0% - 29% |
 
 
 
 ### Filter genotypes of reads mapped to NovaSeq reference
 ```
+sbatch scripts/fltrVCF.sbatch \
+	fltrVCF_NovaSeq \
+	mkVCF_NovaSeq/TotalRawSNPs.20.10.vcf \
+	config_files/fltrVCF_A.config \
+	A
 
+#Run on Head Node
+module load R/gcc/64/3.5.1
+Rscript scripts/summarizeVCF.R  fltrVCF_NovaSeq/NovaSeq_A.20.10.Fltr21.22.MostInformativeSNP.vcf
+
+#Run on Node
+sbatch -o SLURM_out/vcf_summary-%j.out \
+  scripts/runRscript.sbatch \
+  scripts/summarizeVCF.R \
+  mkVCF_MiSeq/test_A.10.1.Fltr21.22.MostInformativeSNP.vcf
 ```
 
 Genotyping Stats
 | Metric | [Filter Set A](config_files/fltrVCF_A.config) |
 | --- | ----- |
-| JobID | [``](SLURM_out/fltrVCF-.out) |
-| Summary Graph | [A](fltrVCF/.fltrStats2.plots.pdf) |
-| Number Individuals |  |
-| Number SNPs |  |
-| Number Contigs |  |
-| Mean SNPs/Contig |  ±  SD |
-| Range SNPs/Contig |  -  |
-| Mean Coverage |  ±  SD |
-| Range Coverage |  -  |
-| Mean PHRED |  ±  SD |
-| Range PHRED |  -  |
-| Mean Missing (Ind) | % ± % |
-| Range Missing (Ind) | % - % |
-| Mean Missing (Loci) | % ± % |
-| Range Missing (Loci) | % - % |
+| JobID | [`48280`](SLURM_out/fltrVCF-48280.out) |
+| Summary Graph | [A](fltrVCF/NovaSeq_A.fltrStats2.plots.pdf) |
+| Number Individuals | 508 |
+| Number SNPs | 2,261 |
+| Number Contigs | 2,261 |
+| Mean SNPs/Contig | 1 ± 1 SD |
+| Range SNPs/Contig | 1 - 1 |
+| Mean Coverage | 61,620 ± 23,967 SD |
+| Range Coverage | 18,311 - 152,024 |
+| Mean PHRED | 214,921 ± 405,328 SD |
+| Range PHRED | 300 - 3,222,750 |
+| Mean Missing (Ind) | 12% ± 10% |
+| Range Missing (Ind) | 0.5% - 40% |
+| Mean Missing (Loci) | 12% ± 7% |
+| Range Missing (Loci) | 0% - 31% |
