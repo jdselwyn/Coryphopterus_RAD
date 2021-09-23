@@ -21,3 +21,20 @@ Extracting gt element GQ
 Extracting gt element GL
 Extracting gt element DP
 Extracting gt element AD
+Extracting gt element RO
+Extracting gt element QR
+Extracting gt element AO
+Extracting gt element QA
+Extracting gt element MIN_DP
+Error: Internal error in `dict_hash_with()`: Dictionary is full.
+Backtrace:
+    █
+ 1. ├─`%>%`(...)
+ 2. ├─tidyr::pivot_wider(., names_from = Indiv, values_from = gt_GT)
+ 3. └─tidyr:::pivot_wider.data.frame(., names_from = Indiv, values_from = gt_GT)
+ 4.   └─tidyr::build_wider_spec(...)
+ 5.     └─vctrs::vec_unique(data[names_from])
+ 6.       ├─vctrs::vec_slice(x, vec_unique_loc(x))
+ 7.       └─vctrs::vec_unique_loc(x)
+ 8.         └─(function () ...
+Execution halted

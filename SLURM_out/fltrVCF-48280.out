@@ -1,0 +1,1174 @@
+
+
+fltrVCF.bash v4.4 -- a script to filter vcf files repeatably
+
+Dependencies required for fltrVCF to be fully functional:
+	R
+		tidyverse
+		gridExtra
+	vcftools
+	vcflib
+	samtools
+	perl
+	mawk
+	parallel
+	rad_haplotyper.pl https://github.com/cbirdlab/rad_haplotyper.git
+	filter_hwe_by_pop_HPC
+
+Wed Sep 22 16:54:24 CDT 2021 Reading options from command line:
+
+	Settings File:            /work/hobi/jselwyn/Coryphopterus_RAD/config_files/fltrVCF_A.config
+
+	Cutoffs:                  20.10
+	Path to BAM files:        /work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_NovaSeq
+	PopMap File:              /work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_NovaSeq/mapped.20.10.bed
+	VCF File:                 /work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_NovaSeq/TotalRawSNPs.20.10.vcf
+	REF File:                 /work/hobi/jselwyn/Coryphopterus_RAD/mkREF_NovaSeq/reference.20.10.fasta
+	PopMap File:              /work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_NovaSeq/popmap.20.10
+	Output file prefix:       NovaSeq_A
+	Path to R scripts and other scripts:        /work/hobi/jselwyn/Coryphopterus_RAD/scripts/fltrVCF/scripts
+	HWE Script:               /work/hobi/jselwyn/Coryphopterus_RAD/scripts/fltrVCF/filter_hwe_by_pop_HPC.pl
+	Rad_Haplotyper script:    /work/hobi/jselwyn/Coryphopterus_RAD/scripts/rad_haplotyper/rad_haplotyper.pl
+	Number of threads:          20
+
+Wed Sep 22 16:54:24 CDT 2021 Reading options from config file and setting defaults
+	SETTINGS are being loaded from file: '/work/hobi/jselwyn/Coryphopterus_RAD/config_files/fltrVCF_A.config'
+	Filters are set to '01 02 03 04 14 07 05 16 17 15 06 09 08 10 13 05 16 07 041 32 18 21'
+	CutoffCode is set to '.20.10'
+	BAM_PATH is set to '/work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_NovaSeq'
+	SCRIPT_PATH is set to '/work/hobi/jselwyn/Coryphopterus_RAD/scripts/fltrVCF/scripts'
+	VCF_FILE is set to '/work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_NovaSeq/TotalRawSNPs.20.10.vcf'
+	Bed file is set to '/work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_NovaSeq/mapped.20.10.bed'
+	Reference genome is set to '/work/hobi/jselwyn/Coryphopterus_RAD/mkREF_NovaSeq/reference.20.10.fasta'
+	PopMap is set to '/work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_NovaSeq/popmap.20.10'
+	HWE_SCRIPT is set to '/work/hobi/jselwyn/Coryphopterus_RAD/scripts/fltrVCF/filter_hwe_by_pop_HPC.pl'
+	RADHAP_SCRIPT is set to '/work/hobi/jselwyn/Coryphopterus_RAD/scripts/rad_haplotyper/rad_haplotyper.pl'
+	Output file prefix is set to 'NovaSeq_A'
+	The number of threads is set to '1'
+	-P not set by user. Only filters that natively support parallelization will be run in parallel.
+	/work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_NovaSeq/TotalRawSNPs.20.10.vcf will be used for serial processing.
+
+Wed Sep 22 16:54:24 CDT 2021 Getting universal chromosome/contig prefix ...
+          Querying /work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_NovaSeq/TotalRawSNPs.20.10.vcf ...
+          Prefix: dDocent
+          It is assumed that all values in the CHROM column of vcf begin with dDocent
+          If this is not the case, then fltrVCF will not work properly.
+          The prefix is used to count SNPs/variants, contigs, etc and is used in some filters.
+
+Wed Sep 22 16:54:24 CDT 2021  reading variables into MAIN
+
+Wed Sep 22 16:54:24 CDT 2021 ---------------------------FILTER01: Remove sites with Y < alleles < X -----------------------------
+     vcftools --vcf /work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_NovaSeq/TotalRawSNPs.20.10.vcf --min-alleles 2 --max-alleles 2 --recode --recode-INFO-all --out NovaSeq_A.20.10.Fltr01.1.recode.vcf 2> /dev/null
+	Sites remaining:	912414
+	Contigs remaining:	30233
+
+
+Wed Sep 22 17:38:09 CDT 2021 ---------------------------FILTER02: Remove Sites with Indels -----------------------------
+     vcftools --vcf NovaSeq_A.20.10.Fltr01.1.recode.vcf --remove-indels --recode --recode-INFO-all --out NovaSeq_A.20.10.Fltr02.2.recode.vcf 2> /dev/null
+	Sites remaining:	875755
+	Contigs remaining:	30156
+
+
+Wed Sep 22 18:19:22 CDT 2021 ---------------------------FILTER03: Remove Sites with QUAL < minQ -----------------------------
+                                                                                                                        
+                                                     Histogram of QUAL before FILTER03                                  
+                                                                                                                        
+                 3500 +---------------------------------------------------------------------------------------------+   
+                      |                  +                  +                 +           ******** *** ***          |   
+                      |                                         'QUALbefore' using (bin(***b**w*d***)***.***********|   
+                 3000 |-+                                                               * * ** * * * * * * **** * *-|   
+                      |                                                                 * * ** * * * * * * ** * * * |   
+                      |                                                               *** * ** * * * * * * ** * * * |   
+                      |                                                             *** * * ** * * * * * * ** * * * |   
+                 2500 |-+                                                           * * * * ** * * * * * * ** * * *-|   
+                      |                                                           *** * * * ** * * * * * * ** * * * |   
+                      |                                                           * * * * * ** * * * * * * ** * * * |   
+                 2000 |-+                                                       *** * * * * ** * * * * * * ** * * *-|   
+                      |                                                         * * * * * * ** * * * * * * ** * * * |   
+                      |                                                       *** * * * * * ** * * * * * * ** * * * |   
+                 1500 |-+                                                    ** * * * * * * ** * * * * * * ** * * *-|   
+                      |                                                      ** * * * * * * ** * * * * * * ** * * * |   
+                      |                                                    **** * * * * * * ** * * * * * * ** * * * |   
+                 1000 |-+                                                  * ** * * * * * * ** * * * * * * ** * * *-|   
+                      |                                                  *** ** * * * * * * ** * * * * * * ** * * * |   
+                      |                                                *** * ** * * * * * * ** * * * * * * ** * * * |   
+                      |                                                * * * ** * * * * * * ** * * * * * * ** * * * |   
+                  500 |-+                                            *** * * ** * * * * * * ** * * * * * * ** * * *-|   
+                      |**                                        ***** * * * ** * * * * * * ** * * * * * * ** * * * |   
+                      | *                +                ******** * * * * * ** * * * * * * ** * * * * * * ** * * * |   
+                    0 +---------------------------------------------------------------------------------------------+   
+                      0                 100                200               300                400                500  
+                                          QUAL ~ Phred-Scaled Probality of Zero Alternate Alleles                       
+                                                                                                                        
+                                                                                                                        
+                                                                         Scatter plot of QUAL per site.                 
+                                                                                                                        
+                                                         500 +------------------------------------------------------+   
+                                                             |     +     +     +     +      +     +     +     +*    |   
+                                                             |                                 'QUALbefore'    **   |   
+                                                             |                                                  *   |   
+                                                             |                                                  *   |   
+                                                         400 |-+                                                **+-|   
+                                                             |                                                   *  |   
+                                                             |                                                   ** |   
+                                                             |                                                    * |   
+                                                         300 |-+                                                  *-|   
+                                                             |                                                    * |   
+                                                             |                                                    * |   
+                                                             |                                                    * |   
+                                                             |                                                    * |   
+                                                         200 |-+                                                  *-|   
+                                                             |                                                    * |   
+                                                             |                                                    * |   
+                                                             |                                                    * |   
+                                                         100 |-+                                                  *-|   
+                                                             |                                                    * |   
+                                                             |                                                    * |   
+                                                             |                                                    * |   
+                                                             |     +     +     +     +      +     +     +     +   * |   
+                                                           0 +------------------------------------------------------+   
+                                                             0   10000 20000 30000 400000 50000 60000 70000 80000 900000
+                                                                                      Site                              
+                                                                                                                        
+     vcftools --vcf NovaSeq_A.20.10.Fltr02.2.recode.vcf --minQ 40 --recode --recode-INFO-all --out NovaSeq_A.20.10.Fltr03.3.recode.vcf 2> /dev/null
+	Sites remaining:	875438
+	Contigs remaining:	30154
+
+
+Wed Sep 22 19:01:36 CDT 2021 ---------------------------FILTER04: Remove Sites With Mean Depth of Coverage < min-meanDP -----------------------------
+                                                                                                                        
+                                             Histogram of mean depth per site before FILTER04                           
+                                                                                                                        
+                 16000 +--------------------------------------------------------------------------------------------+   
+                       |            +             +            +            +            +             +            |   
+                       | *                             'sitedepthmeanbefore' using (bin($1,binwidth)):(1.0) ******* |   
+                 14000 |-*                                                                                        +-|   
+                       | **                                                                                         |   
+                       |***                                                                                         |   
+                 12000 |***                                                                                       +-|   
+                       |***                                                                                         |   
+                       |****                                                                                        |   
+                 10000 |****                                                                                      +-|   
+                       |****                                                                                        |   
+                  8000 |****                                                                                      +-|   
+                       |****                                                                                        |   
+                       |*****                                                                                       |   
+                  6000 |*****                                                                                     +-|   
+                       |*****                                                                                       |   
+                       |******                                                                                      |   
+                  4000 |******                                                                                    +-|   
+                       |******                                                                                      |   
+                       |*******                                                                                     |   
+                  2000 |********                                                                                  +-|   
+                       |*********                                                                                   |   
+                       |*********** +             +            +            +            +             +            |   
+                     0 +--------------------------------------------------------------------------------------------+   
+                       0           200           400          600          800          1000          1200         1400 
+                                                                Mean Depth                                              
+                                                                                                                        
+                                                                                                                        
+                                        Scatter plot of mean depth per site before FILTER04.                            
+                                                                                                                        
+            1400 +--------------------------------------------------------------------------------------------------+   
+                 |          +          +          +          +          +          +          +          +          |   
+                 |                                                                    'sitedepthmeanbefore'    *    |   
+            1200 |-+                                                                                              +-|   
+                 |                                                                                                  |   
+                 |                                                                                                  |   
+                 |                                                                                                  |   
+            1000 |-+                                                                                              +-|   
+                 |                                                                                                  |   
+                 |                                                                                                  |   
+             800 |-+                                                                                              +-|   
+                 |                                                                                                  |   
+                 |                                                                                                  |   
+             600 |-+                                                                                              +-|   
+                 |                                                                                                  |   
+                 |                                                                                                  |   
+             400 |-+                                                                                              +-|   
+                 |                                                                                                  |   
+                 |                                                                                                  |   
+                 |                                                                                                  |   
+             200 |**                                                                                              +-|   
+                 | ************                                                                                     |   
+                 |          + ***********************************************************     +          +          |   
+               0 +--------------------------------------------------------------------------------------------------+   
+                 0        100000     200000     300000     400000     500000     600000     700000     800000     900000
+                                                                Site                                                    
+                                                                                                                        
+                                                                                                                        
+                                    Scatter plot of depth variance vs mean depth per site before FILTER04.              
+                                                                                                                        
+                   4.5e+06 +----------------------------------------------------------------------------------------+   
+                           |            +           +*           +            +            +           +            |   
+                           |                        **                                'meandepthVSvariance'    *    |   
+                     4e+06 |-+                      *                                                             +-|   
+                           |                       *                                                                |   
+                   3.5e+06 |-+                     *                                                              +-|   
+                           |                      *                                                                 |   
+                           |                                                                                        |   
+                     3e+06 |-+                                                                                    +-|   
+                           |                     *                                                                  |   
+                   2.5e+06 |-+                  *                                                                 +-|   
+                           |                   **                                                                   |   
+                           |                  *                                                                     |   
+                     2e+06 |-+                                                                                    +-|   
+                           |                                                                                        |   
+                   1.5e+06 |-+                                                                                    +-|   
+                           |                                                                                        |   
+                           |              **      **                                                                |   
+                     1e+06 |-+           * **    **   *                                                           +-|   
+                           |          *****                                                                         |   
+                    500000 |-+  * ***********                                                                     +-|   
+                           |   *** *********    *    *   *                                                          |   
+                           | **************** **    +    *       +            +            +           +            |   
+                         0 +----------------------------------------------------------------------------------------+   
+                           0           200         400          600          800          1000        1200         1400 
+                                                                  Mean Depth                                            
+                                                                                                                        
+     vcftools --vcf NovaSeq_A.20.10.Fltr03.3.recode.vcf --min-meanDP 10 --recode --recode-INFO-all --out NovaSeq_A.20.10.Fltr04.4.recode.vcf 2> /dev/null
+	Sites remaining:	696554
+	Contigs remaining:	19041
+
+
+Wed Sep 22 19:39:37 CDT 2021 ---------------------------FILTER14: If individual's genotype has DP < X, convert to missing data -----------------------------
+                                                                                                                        
+                                                   Histogram of genotype depth before FILTER14                          
+                                                                                                                        
+                       3e+08 +--------------------------------------------------------------------------------------+   
+                             |   *            +                 +                +                 +                |   
+                             |   *                     'genotypedepthbefore' using (bin($1,binwidth)):(1.0) ******* |   
+                             |   *                                                                                  |   
+                     2.5e+08 |-+ *                                                                                +-|   
+                             |   *                                                                                  |   
+                             |   *                                                                                  |   
+                             |   *                                                                                  |   
+                       2e+08 |-+ *                                                                                +-|   
+                             |   *                                                                                  |   
+                             |   *                                                                                  |   
+                     1.5e+08 |-+ *                                                                                +-|   
+                             |   *                                                                                  |   
+                             |   *                                                                                  |   
+                             |   *                                                                                  |   
+                       1e+08 |-+ *                                                                                +-|   
+                             |   *                                                                                  |   
+                             |   *                                                                                  |   
+                             |   *                                                                                  |   
+                       5e+07 |-+ ******                                                                           +-|   
+                             |   *    *                                                                             |   
+                             |   *    *****                                                                         |   
+                             |   *    *   ***************************            +                 +                |   
+                           0 +--------------------------------------------------------------------------------------+   
+                             0                20                40               60                80              100  
+                                                                      Depth                                             
+                                                                                                                        
+                                                                                                                        
+                                     Scatter plot of mean depth per site before FILTER14.                               
+                                                                                                                        
+       100 +--------------------------------------------------------------------------------------------------------+   
+           |         **      +                +                 +                +                 +                |   
+           |          *                                                               'genotypedepthbefore'    *    |   
+           |          **                                                                                            |   
+           |           *                                                                                            |   
+        80 |-+         **                                                                                         +-|   
+           |            *                                                                                           |   
+           |            **                                                                                          |   
+           |             **                                                                                         |   
+        60 |-+            *                                                                                       +-|   
+           |              **                                                                                        |   
+           |               **                                                                                       |   
+           |                **                                                                                      |   
+           |                 **                                                                                     |   
+        40 |-+                **                                                                                  +-|   
+           |                   ***                                                                                  |   
+           |                     **                                                                                 |   
+           |                      ***                                                                               |   
+        20 |-+                      ***                                                                           +-|   
+           |                          ***                                                                           |   
+           |                            ******                                                                      |   
+           |                                 ******                                                                 |   
+           |                 +                +   ***********   +                +                 +                |   
+         0 +--------------------------------------------------------------------------------------------------------+   
+           0               1e+08            2e+08             3e+08            4e+08             5e+08            6e+08 
+                                                           Genotype                                                     
+                                                                                                                        
+     vcftools --vcf NovaSeq_A.20.10.Fltr04.4.recode.vcf --minDP 10 --recode --recode-INFO-all --out NovaSeq_A.20.10.Fltr14.5.recode.vcf 2> /dev/null | vcffixup -
+	Sites remaining:	696554
+	Contigs remaining:	19041
+
+
+Wed Sep 22 23:51:32 CDT 2021 ---------------------------FILTER07: Remove sites with Alternate Allele Count <=X -----------------------------
+     vcffixup NovaSeq_A.20.10.Fltr14.5.recode.vcf | vcffilter -s -f "AC > 0 & AN - AC > 0"  > NovaSeq_A.20.10.Fltr07.6.vcf
+	Sites remaining:	695928
+	Contigs remaining:	19041
+
+Thu Sep 23 02:01:38 CDT 2021 ---------------------------FILTER05: Remove sites called in <X proportion of individuals -----------------------------
+                                                                                                                        
+                                         Histogram of the proportion of genotypes that are missing                      
+                                                                                                                        
+                 90000 +--------------------------------------------------------------------------------------------+   
+                       |                  +                 +                  +                 +                  |   
+                       |                                   'sitemissingness' using (bin(******width)):(1.0) ******* |   
+                 80000 |-+                                                         ******    *                    +-|   
+                       |                                                           *    *    *****                  |   
+                 70000 |-+                                                         *    *    *   ******           +-|   
+                       |                                                       *****    *    *   *    *             |   
+                       |                                                  ******   *    *    *   *    *             |   
+                 60000 |-+                                                *    *   *    *    *   *    *           +-|   
+                       |                                                  *    *   *    *    *   *    *             |   
+                 50000 |-+                                            *****    *   *    *    *   *    *           +-|   
+                       |                                         ******   *    *   *    *    *   *    ******        |   
+                       |                                         *    *   *    *   *    *    *   *    *    *        |   
+                 40000 |-+                                  ******    *   *    *   *    *    *   *    *    *      +-|   
+                       |                                    *    *    *   *    *   *    *    *   *    *    *        |   
+                 30000 |-+                              *****    *    *   *    *   *    *    *   *    *    *      +-|   
+                       |                                *   *    *    *   *    *   *    *    *   *    *    *        |   
+                       |                           ******   *    *    *   *    *   *    *    *   *    *    *        |   
+                 20000 |-+                         *    *   *    *    *   *    *   *    *    *   *    *    *      +-|   
+                       |                           *    *   *    *    *   *    *   *    *    *   *    *    *        |   
+                 10000 |-+                    ******    *   *    *    *   *    *   *    *    *   *    *    *      +-|   
+                       |                      *    *    *   *    *    *   *    *   *    *    *   *    *    *        |   
+                       |                  *****    *    *   *    *    *   *    *   *    *    *   *    *    *****    |   
+                     0 +--------------------------------------------------------------------------------------------+   
+                       0                 0.2               0.4                0.6               0.8                 1   
+                                                            Proportion Missing                                          
+                                                                                                                        
+                                                                                                                        
+                                             Scatter plot of the proportion of genotypes that are missing.              
+                                                                                                                        
+                                1 +---------------------------------------------------------------------------------+   
+                                  |           +          +           +           +           +          +           |   
+                                  |*                                                      'sitemissingness'    *    |   
+                              0.9 |****                                                                           +-|   
+                                  |   *******                                                                       |   
+                              0.8 |-+       ********                                                              +-|   
+                                  |                ********                                                         |   
+                                  |                       *********                                                 |   
+                              0.7 |-+                             ********                                        +-|   
+                                  |                                      ********                                   |   
+                              0.6 |-+                                           ******                            +-|   
+                                  |                                                  *******                        |   
+                                  |                                                        ******                   |   
+                              0.5 |-+                                                           *****             +-|   
+                                  |                                                                 *****           |   
+                              0.4 |-+                                                                   ****      +-|   
+                                  |                                                                        *****    |   
+                                  |                                                                            ***  |   
+                              0.3 |-+                                                                            **-|   
+                                  |                                                                               **|   
+                              0.2 |-+                                                                             +*|   
+                                  |                                                                                *|   
+                                  |           +          +           +           +           +          +           |   
+                              0.1 +---------------------------------------------------------------------------------+   
+                                  0         100000     200000      300000      400000      500000     600000      700000
+                                                                         Site                                           
+                                                                                                                        
+     vcftools --vcf NovaSeq_A.20.10.Fltr07.6.vcf --max-missing 0.5 --recode --recode-INFO-all --out NovaSeq_A.20.10.Fltr05.7.recode.vcf 2> /dev/null
+	Sites remaining:	157336
+	Contigs remaining:	3553
+
+
+Thu Sep 23 02:13:58 CDT 2021 ---------------------------FILTER16: Remove Individuals|Libraries with Too Much Missing Data-----------------------------
+                                                                                                                        
+                      Histogram of % missing data per individual|library before filter. Bars to the left are desireable.
+                                                                                                                        
+                                 40 +-------------------------------------------------------------------------------+   
+                                    |               +               +               +               +               |   
+                                    |  **                     'totalmissing' using (bin($1,binwidth)):(1.0) ******* |   
+                                 35 |-+**                                                                         +-|   
+                                    |  **                                                                           |   
+                                    |  **                                                                          *|   
+                                 30 |-+****                                                                       **|   
+                                    |  ****                                                                       **|   
+                                    |  ****                                                                       **|   
+                                 25 |-******                                                                      **|   
+                                    | ******                                                                      **|   
+                                 20 |-**********                                                                  **|   
+                                    | ************                                                               ***|   
+                                    | ************                                                               ***|   
+                                 15 |-*************   **                                                         ***|   
+                                    | *************   ** **   **                                                 ***|   
+                                    | *************** ** **   **                                                 ***|   
+                                 10 |-****************** ***  **                                                 ***|   
+                                    | *********************** **                                              * ****|   
+                                    | *********************** **  *              **                          ** ****|   
+                                  5 |-*******************************    **   *  ** **       **  ** **    *  *******|   
+                                    | *********************** *******   **** **********  *************** ** ********|   
+                                    |************************ ******************************************************|   
+                                  0 +-------------------------------------------------------------------------------+   
+                                    0              0.2             0.4             0.6             0.8              1   
+                                                                   % missing genotypes                                  
+                                                                                                                        
+                                                                                                                        
+                                          Scatter plot of % missing data per individual|library.                        
+                                                                                                                        
+                     1 +--------------------------------------------------------------------------------------------+   
+                       |       *******         +           +           +           +           +           +        |   
+                       |              ***                                                       'imiss.dat'    *    |   
+                       |                ***                                                                         |   
+                       |                  **                                                                        |   
+                   0.8 |-+                 ***                                                                    +-|   
+                       |                     **                                                                     |   
+                       |                      ***                                                                   |   
+                       |                        **                                                                  |   
+                   0.6 |-+                       ***                                                              +-|   
+                       |                           ***                                                              |   
+                       |                             ***                                                            |   
+                       |                               **                                                           |   
+                       |                                **                                                          |   
+                   0.4 |-+                               ***                                                      +-|   
+                       |                                   ****                                                     |   
+                       |                                       ****                                                 |   
+                       |                                          ******                                            |   
+                   0.2 |-+                                             *******                                    +-|   
+                       |                                                     *******                                |   
+                       |                                                            *********                       |   
+                       |                                                                    ************            |   
+                       |           +           +           +           +           +           +       *************|   
+                     0 +--------------------------------------------------------------------------------------------+   
+                       0          100         200         300         400         500         600         700           
+                                                                Individual                                              
+                                                                                                                        
+ 168 individuals|libraries with too much missing data:
+INDV
+COPE_0472.fp2.repr
+COPE_0480.fp2.repr
+COPE_0486.fp2.repr
+COPE_0487.fp2.repr
+COPE_0489.fp2.repr
+COPE_0490.fp2.repr
+COPE_0500.fp2.repr
+COPE_0501.fp2.repr
+COPE_0502.fp2.repr
+COPE_0503.fp2.repr
+COPE_0520.fp2.repr
+COPE_0523.fp2.repr
+COPE_0526.fp2.repr
+COPE_0529.fp2.repr
+COPE_0540.fp2.repr
+COPE_0541.fp2.repr
+COPE_0544.fp2.repr
+COPE_0547.fp2.repr
+COPE_0553.fp2.repr
+COPE_0560.fp2.repr
+COPE_0562.fp2.repr
+COPE_0566.fp2.repr
+COPE_0568.fp2.repr
+COPE_0569.fp2.repr
+COPE_0571.fp2.repr
+COPE_0575.fp2.repr
+COPE_0578.fp2.repr
+COPE_0585.fp2.repr
+COPE_0587.fp2.repr
+COPE_0598.fp2.repr
+COPE_0599.fp2.repr
+COPE_0603.fp2.repr
+COPE_0604.fp2.repr
+COPE_0606.fp2.repr
+COPE_0614.fp2.repr
+COPE_0617.fp2.repr
+COPE_0622.fp2.repr
+COPE_0623.fp2.repr
+COPE_0625.fp2.repr
+COPE_0627.fp2.repr
+COPE_0628.fp2.repr
+COPE_0629.fp2.repr
+COPE_0641.fp2.repr
+COPE_0646.fp2.repr
+COPE_0651.fp2.repr
+COPE_0658.fp2.repr
+COPE_0666.fp2.repr
+COPE_0670.fp2.repr
+COPE_0671.fp2.repr
+COPE_0673.fp2.repr
+COPE_0679.fp2.repr
+COPE_0692.fp2.repr
+COPE_0698.fp2.repr
+COPE_0701.fp2.repr
+COPE_0707.fp2.repr
+COPE_0710.fp2.repr
+COPE_0712.fp2.repr
+COPE_0736.fp2.repr
+COPE_0740.fp2.repr
+COPE_0742.fp2.repr
+COPE_0745.fp2.repr
+COPE_0764.fp2.repr
+COPE_0776.fp2.repr
+COPE_0777.fp2.repr
+COPE_0779.fp2.repr
+COPE_0787.fp2.repr
+COPE_0792.fp2.repr
+COPE_0802.fp2.repr
+COPE_0804.fp2.repr
+COPE_0807.fp2.repr
+COPE_0810.fp2.repr
+COPE_0811.fp2.repr
+COPE_0814.fp2.repr
+COPE_0817.fp2.repr
+COPE_0827.fp2.repr
+COPE_0830.fp2.repr
+COPE_0832.fp2.repr
+COPE_0834.fp2.repr
+COPE_0835.fp2.repr
+COPE_0838.fp2.repr
+COPE_0839.fp2.repr
+COPE_0855.fp2.repr
+COPE_0857.fp2.repr
+COPE_0858.fp2.repr
+COPE_0859.fp2.repr
+COPE_0860.fp2.repr
+COPE_0869.fp2.repr
+COPE_0873.fp2.repr
+COPE_0875.fp2.repr
+COPE_0880.fp2.repr
+COPE_0884.fp2.repr
+COPE_0887.fp2.repr
+COPE_0896.fp2.repr
+COPE_0898.fp2.repr
+COPE_0905.fp2.repr
+COPE_0906.fp2.repr
+COPE_0915.fp2.repr
+COPE_0917.fp2.repr
+COPE_0935.fp2.repr
+COPE_0938.fp2.repr
+COPE_0946.fp2.repr
+COPE_0950.fp2.repr
+COPE_0953.fp2.repr
+COPE_0957.fp2.repr
+COPE_0969.fp2.repr
+COPE_0978.fp2.repr
+COPE_0984.fp2.repr
+COPE_0986.fp2.repr
+COPE_0992.fp2.repr
+COPE_0998.fp2.repr
+COPE_1000.fp2.repr
+COPE_1010.fp2.repr
+COPE_1012.fp2.repr
+COPE_1013.fp2.repr
+COPE_1023.fp2.repr
+COPE_1025.fp2.repr
+COPE_1052.fp2.repr
+COPE_1066.fp2.repr
+COPE_1069.fp2.repr
+COPE_1077.fp2.repr
+COPE_1078.fp2.repr
+COPE_1084.fp2.repr
+COPE_1085.fp2.repr
+COPE_1088.fp2.repr
+COPE_1090.fp2.repr
+COPE_1092.fp2.repr
+COPE_1101.fp2.repr
+COPE_1104.fp2.repr
+COPE_1106.fp2.repr
+COPE_1109.fp2.repr
+COPE_1113.fp2.repr
+COPE_1123.fp2.repr
+COPE_1124.fp2.repr
+COPE_1129.fp2.repr
+COPE_1132.fp2.repr
+COPE_1137.fp2.repr
+COPE_1141.fp2.repr
+COPE_1147.fp2.repr
+COPE_1148.fp2.repr
+COPE_1151.fp2.repr
+COPE_1153.fp2.repr
+COPE_1158.fp2.repr
+COPE_1162.fp2.repr
+COPE_1163.fp2.repr
+COPE_1164.fp2.repr
+COPE_1172.fp2.repr
+COPE_1181.fp2.repr
+COPE_1182.fp2.repr
+COPE_1185.fp2.repr
+COPE_1186.fp2.repr
+COPE_1192.fp2.repr
+COPE_1193.fp2.repr
+COPE_1195.fp2.repr
+COPE_1196.fp2.repr
+COPE_1204.fp2.repr
+COPE_1213.fp2.repr
+COPE_1214.fp2.repr
+COPE_1217.fp2.repr
+COPE_1225.fp2.repr
+COPE_1228.fp2.repr
+COPE_1239.fp2.repr
+COPE_1244.fp2.repr
+COPE_1246.fp2.repr
+COPE_1247.fp2.repr
+COPE_1250.fp2.repr
+COPE_1258.fp2.repr
+COPE_1263.fp2.repr
+COPE_1264.fp2.repr
+     vcftools --vcf NovaSeq_A.20.10.Fltr05.7.recode.vcf --remove NovaSeq_A.20.10.Fltr16.8.lowDP-2.indv --recode --recode-INFO-all --out NovaSeq_A.20.10.Fltr16.8.recode.vcf 2> /dev/null | vcffixup -
+	Sites remaining:	157336
+	Contigs remaining:	3553
+
+
+ Individuals|Libraries Remaining Per Sample
+    610 COPE
+
+Thu Sep 23 02:40:51 CDT 2021 ---------------------------FILTER17: Remove sites with data missing for too many individuals|libraries in a population -----------------------------
+     Using PopMap File: /work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_NovaSeq/popmap.20.10
+     vcftools --vcf NovaSeq_A.20.10.Fltr16.8.recode.vcf --exclude-positions NovaSeq_A.20.10.Fltr17.9.badloci --recode --recode-INFO-all --out NovaSeq_A.20.10.Fltr17.9.recode.vcf 2> /dev/null
+	Sites remaining:	157080
+	Contigs remaining:	3542
+
+
+Thu Sep 23 02:47:49 CDT 2021 ---------------------------FILTER15: Remove sites with maf > minor allele frequency > max-maf -----------------------------
+     vcftools --vcf NovaSeq_A.20.10.Fltr17.9.recode.vcf --maf 0 --max-maf 1 --recode --recode-INFO-all --out NovaSeq_A.20.10.Fltr15.10.recode.vcf 2> /dev/null
+	Sites remaining:	157080
+	Contigs remaining:	3542
+
+
+Thu Sep 23 02:54:14 CDT 2021 ---------------------------FILTER06: Remove sites with Average Allele Balance deviating too far from 0.5 while keeping those with AB=0  -----------------------------
+                                                                                                                        
+                                                        Histogram of Allele Balance                                     
+                                                                                                                        
+                 9000 +---------------------------------------------------------------------------------------------+   
+                      |                  +                  +     *****       +                  +                  |   
+                      |                                         '******.dat' using (bin($1,binwidth)):(1.0) ******* |   
+                 8000 |****                                      ******                                           +-|   
+                      |   *                                     ********                                            |   
+                 7000 |-+ *                                     ********                                          +-|   
+                      |   *                                    **********                                           |   
+                      |   *                                    **********                                           |   
+                 6000 |-+ *                                   ***********                                         +-|   
+                      |   *                                   ************                                          |   
+                 5000 |-+ *                                  **************                                       +-|   
+                      |   *                                  **************                                         |   
+                      |   *                                  ***************                                        |   
+                 4000 |-+ *                                 ****************                                      +-|   
+                      |   *                                 *****************                                       |   
+                 3000 |-+ *                                *******************                                    +-|   
+                      |   *                               ********************                                      |   
+                      |   *                               ********************                                      |   
+                 2000 |-+ *                              ***********************                                  +-|   
+                      |   *                              *************************                                  |   
+                 1000 |-+ *                            *****************************                              +-|   
+                      |   *                         *************************************                           |   
+                      |   *          **  ******************************************************  **                 |   
+                    0 +---------------------------------------------------------------------------------------------+   
+                      0                 0.2                0.4               0.6                0.8                 1   
+                         Allele Balance ~ proportion of alleles in heterozygotes that are reference allelic state       
+                                                                                                                        
+                                                                                                                        
+                                                     Scatter plot of Allele Balance.                                    
+                                                                                                                        
+                  1 +-----------------------------------------------------------------------------------------------+   
+                    |           +           +           +           +           +           +           +           |   
+                0.9 |-+                                                                        'siteAB.dat'    *  +-|   
+                    |*                                                                                              |   
+                    |*                                                                                              |   
+                0.8 |*+                                                                                           +-|   
+                    |**                                                                                             |   
+                0.7 |-***                                                                                         +-|   
+                    |   ***                                                                                         |   
+                0.6 |-+   ******                                                                                  +-|   
+                    |          ***********                                                                          |   
+                0.5 |-+                  *******************                                                      +-|   
+                    |                                      **********************                                   |   
+                    |                                                           *****************                   |   
+                0.4 |-+                                                                         *********         +-|   
+                    |                                                                                   ***         |   
+                0.3 |-+                                                                                   **      +-|   
+                    |                                                                                      **       |   
+                0.2 |-+                                                                                     **    +-|   
+                    |                                                                                        *      |   
+                    |                                                                                        *      |   
+                0.1 |-+                                                                                      **   +-|   
+                    |           +           +           +           +           +           +           +           |   
+                  0 +-----------------------------------------------------------------------------------------------+   
+                    0         20000       40000       60000       80000       100000      120000      140000      160000
+                                                                  Site                                                  
+                                                                                                                        
+     vcffixup NovaSeq_A.20.10.Fltr15.10.recode.vcf | vcffilter -s -f "AB > 0.375 & AB < 0.625 | AB = 0"  > NovaSeq_A.20.10.Fltr06.11.vcf
+	Sites remaining:	134353
+	Contigs remaining:	3537
+
+Thu Sep 23 03:22:24 CDT 2021 ---------------------------FILTER09: Remove sites with low/high ratio of mean mapping quality of alt to ref -----------------------------
+     vcffilter -s -f "MQM / MQMR > 0.75 & MQM / MQMR < 1.33333" NovaSeq_A.20.10.Fltr06.11.vcf > NovaSeq_A.20.10.Fltr09.12.vcf
+	Sites remaining:	134208
+	Contigs remaining:	3537
+
+Thu Sep 23 03:25:12 CDT 2021 ---------------------------FILTER08: Remove sites covered by both F and R reads-----------------------------
+     vcffilter -s -f "SAF / SAR > 10 & SRF / SRR > 10 | SAR / SAF > 10 & SRR / SRF > 10" NovaSeq_A.20.10.Fltr09.12.vcf > NovaSeq_A.20.10.Fltr08.13.vcf
+	Sites remaining:	134158
+	Contigs remaining:	3530
+
+Thu Sep 23 03:28:02 CDT 2021 ---------------------------FILTER10: Remove sites with one allele only supported by reads not properly paired -----------------------------
+     vcffilter -s -f "PAIRED > 0.05 & PAIREDR > 0.05 & PAIREDR / PAIRED < 1.75 & PAIREDR / PAIRED > 0.25 | PAIRED < 0.05 & PAIREDR < 0.05" NovaSeq_A.20.10.Fltr08.13.vcf > NovaSeq_A.20.10.Fltr10.14.vcf
+	Sites remaining:	133755
+	Contigs remaining:	3523
+
+Thu Sep 23 03:30:51 CDT 2021 ---------------------------FILTER13: Remove sites with mean DP greater than X  -----------------------------
+                                                                                                                        
+                                                 Histogram of mean depth per site before filter                         
+                                                                                                                        
+                       2000 +---------------------------------------------------------------------------------------+   
+                            |              +   ***       +              +              +             +              |   
+                       1800 |-+                ***  'meandepthpersitebefore' using (bin($1,binwidth)):(1.0) *******-|   
+                            |                  ***                                                                  |   
+                            |                *******                                                                |   
+                       1600 |-+              *********                                                            +-|   
+                            |              ***********  **                                                          |   
+                       1400 |-+            ***************                                                        +-|   
+                            |              ***************                                                          |   
+                       1200 |-+           ******************                                                      +-|   
+                            |             ******************                                                        |   
+                       1000 |-+           ******************* *                                                   +-|   
+                            |            ***********************                                                    |   
+                            |            *************************                                                  |   
+                        800 |-+          *************************                                                +-|   
+                            |            ****************************                                               |   
+                        600 |-+         *****************************                                             +-|   
+                            |           *******************************                                             |   
+                        400 |-+        ***********************************                                        +-|   
+                            |          **************************************                                       |   
+                            |          ***************************************  **                                  |   
+                        200 |-+      ************************************************                             +-|   
+                            |       *********************************************************** *** ***             |   
+                          0 +---------------------------------------------------------------------------------------+   
+                            0              50           100            150            200           250            300  
+                                                                   Mean Depth                                           
+                                                                                                                        
+     vcftools --vcf NovaSeq_A.20.10.Fltr10.14.vcf --max-meanDP 250 --recode --recode-INFO-all --out NovaSeq_A.20.10.Fltr13.15.recode.vcf 2> /dev/null
+	Sites remaining:	133114
+	Contigs remaining:	3513
+
+
+Thu Sep 23 03:36:52 CDT 2021 ---------------------------FILTER05: Remove sites called in <X proportion of individuals -----------------------------
+                                                                                                                        
+                                         Histogram of the proportion of genotypes that are missing                      
+                                                                                                                        
+                 35000 +--------------------------------------------------------------------------------------------+   
+                       |                  +                 +                  +                 +                  |   
+                       |                                   'sitemissingness' using (bin($1,binwidth)):(1.0) ******* |   
+                 30000 |-+                         ******                                                         +-|   
+                       |                           *    *                                                           |   
+                       |                           *    *                                                           |   
+                       |                           *    *                                                           |   
+                 25000 |-+                **********    *                                                         +-|   
+                       |                  *   *    *    *                                                           |   
+                       |                  *   *    *    *                                                           |   
+                 20000 |-+                *   *    *    *                                                         +-|   
+                       |                  *   *    *    *                                                           |   
+                       |             ******   *    *    *                                                           |   
+                 15000 |-+           *    *   *    *    *                                                         +-|   
+                       |        ******    *   *    *    *                                                           |   
+                       |        *    *    *   *    *    *****                                                       |   
+                 10000 |-+      *    *    *   *    *    *   *                                                     +-|   
+                       |        *    *    *   *    *    *   *                                                       |   
+                       |    *****    *    *   *    *    *   *                                                       |   
+                       |    *   *    *    *   *    *    *   *                                                       |   
+                  5000 |-+  *   *    *    *   *    *    *   *                                                     +-|   
+                       |*****   *    *    *   *    *    *   *                                                       |   
+                       |    *   *    *    *   *    *    *   ******             +                 +                  |   
+                     0 +--------------------------------------------------------------------------------------------+   
+                       0                 0.2               0.4                0.6               0.8                 1   
+                                                            Proportion Missing                                          
+                                                                                                                        
+                                                                                                                        
+                                             Scatter plot of the proportion of genotypes that are missing.              
+                                                                                                                        
+                               0.5 +--------------------------------------------------------------------------------+   
+                                   |           +          +           +          +           +          +           |   
+                              0.45 |-+                                                    'sitemissingness'    *  +-|   
+                                   |                                                                                |   
+                                   |*                                                                               |   
+                               0.4 |*+                                                                            +-|   
+                                   |*****                                                                           |   
+                              0.35 |-+  *********                                                                 +-|   
+                                   |            *********                                                           |   
+                               0.3 |-+                  *******                                                   +-|   
+                                   |                          *******                                               |   
+                              0.25 |-+                              ********                                      +-|   
+                                   |                                       *******                                  |   
+                                   |                                             *******                            |   
+                               0.2 |-+                                                 ******                     +-|   
+                                   |                                                        ******                  |   
+                              0.15 |-+                                                           ****             +-|   
+                                   |                                                                *****           |   
+                               0.1 |-+                                                                  ****      +-|   
+                                   |                                                                       ***      |   
+                                   |                                                                         **     |   
+                              0.05 |-+                                                                        *** +-|   
+                                   |           +          +           +          +           +          +       *   |   
+                                 0 +--------------------------------------------------------------------------------+   
+                                   0         20000      40000       60000      80000       100000     120000      140000
+                                                                         Site                                           
+                                                                                                                        
+     vcftools --vcf NovaSeq_A.20.10.Fltr13.15.recode.vcf --max-missing 0.7 --recode --recode-INFO-all --out NovaSeq_A.20.10.Fltr05.16.recode.vcf 2> /dev/null
+	Sites remaining:	89704
+	Contigs remaining:	2327
+
+
+Thu Sep 23 03:41:09 CDT 2021 ---------------------------FILTER16: Remove Individuals|Libraries with Too Much Missing Data-----------------------------
+                                                                                                                        
+                      Histogram of % missing data per individual|library before filter. Bars to the left are desireable.
+                                                                                                                        
+                                 70 +-------------------------------------------------------------------------------+   
+                                    |               +               +               +               +               |   
+                                    | **                      'totalmissing' using (bin($1,binwidth)):(1.0) ******* |   
+                                 60 |-**                                                                          +-|   
+                                    | **                                                                            |   
+                                    | **                                                                            |   
+                                    | **                                                                            |   
+                                 50 |-**                                                                          +-|   
+                                    | **                                                                            |   
+                                    | ***                                                                           |   
+                                 40 |-***                                                                         +-|   
+                                    | ***                                                                           |   
+                                    | ***                                                                           |   
+                                 30 |-****                                                                        +-|   
+                                    | ****                                                                          |   
+                                    | *****                                                                         |   
+                                 20 |-***** ***                                                                   +-|   
+                                    | **********                                                                    |   
+                                    | ********** ** **                                                              |   
+                                    | ****************                                                              |   
+                                 10 |-****************  **                                                        +-|   
+                                    |***************************  **     ** ** ****         ***                     |   
+                                    |**************************** ******************* ************* +               |   
+                                  0 +-------------------------------------------------------------------------------+   
+                                    0              0.2             0.4             0.6             0.8              1   
+                                                                   % missing genotypes                                  
+                                                                                                                        
+                                                                                                                        
+                                          Scatter plot of % missing data per individual|library.                        
+                                                                                                                        
+                     1 +--------------------------------------------------------------------------------------------+   
+                       |              +              +               +              +              +              + |   
+                       |                                                                        'imiss.dat'    *    |   
+                       |                                                                                            |   
+                       |                                                                                            |   
+                   0.8 |*+                                                                                        +-|   
+                       |***                                                                                         |   
+                       |  ***                                                                                       |   
+                       |    **                                                                                      |   
+                   0.6 |-+   **                                                                                   +-|   
+                       |      ***                                                                                   |   
+                       |        ***                                                                                 |   
+                       |          ****                                                                              |   
+                       |             **                                                                             |   
+                   0.4 |-+            ***                                                                         +-|   
+                       |                **                                                                          |   
+                       |                 ****                                                                       |   
+                       |                    *****                                                                   |   
+                   0.2 |-+                       *******                                                          +-|   
+                       |                               ********                                                     |   
+                       |                                      ************                                          |   
+                       |                                                 *************                              |   
+                       |              +              +               +              +*******************************|   
+                     0 +--------------------------------------------------------------------------------------------+   
+                       0             100            200             300            400            500            600    
+                                                                Individual                                              
+                                                                                                                        
+ 102 individuals|libraries with too much missing data:
+INDV
+COPE_0474.fp2.repr
+COPE_0475.fp2.repr
+COPE_0484.fp2.repr
+COPE_0491.fp2.repr
+COPE_0499.fp2.repr
+COPE_0512.fp2.repr
+COPE_0518.fp2.repr
+COPE_0519.fp2.repr
+COPE_0536.fp2.repr
+COPE_0549.fp2.repr
+COPE_0550.fp2.repr
+COPE_0551.fp2.repr
+COPE_0554.fp2.repr
+COPE_0570.fp2.repr
+COPE_0580.fp2.repr
+COPE_0582.fp2.repr
+COPE_0586.fp2.repr
+COPE_0596.fp2.repr
+COPE_0600.fp2.repr
+COPE_0605.fp2.repr
+COPE_0615.fp2.repr
+COPE_0619.fp2.repr
+COPE_0626.fp2.repr
+COPE_0631.fp2.repr
+COPE_0632.fp2.repr
+COPE_0635.fp2.repr
+COPE_0640.fp2.repr
+COPE_0644.fp2.repr
+COPE_0648.fp2.repr
+COPE_0659.fp2.repr
+COPE_0668.fp2.repr
+COPE_0669.fp2.repr
+COPE_0675.fp2.repr
+COPE_0687.fp2.repr
+COPE_0706.fp2.repr
+COPE_0715.fp2.repr
+COPE_0724.fp2.repr
+COPE_0735.fp2.repr
+COPE_0747.fp2.repr
+COPE_0749.fp2.repr
+COPE_0757.fp2.repr
+COPE_0761.fp2.repr
+COPE_0772.fp2.repr
+COPE_0774.fp2.repr
+COPE_0780.fp2.repr
+COPE_0781.fp2.repr
+COPE_0782.fp2.repr
+COPE_0783.fp2.repr
+COPE_0793.fp2.repr
+COPE_0800.fp2.repr
+COPE_0806.fp2.repr
+COPE_0823.fp2.repr
+COPE_0825.fp2.repr
+COPE_0828.fp2.repr
+COPE_0829.fp2.repr
+COPE_0845.fp2.repr
+COPE_0846.fp2.repr
+COPE_0847.fp2.repr
+COPE_0854.fp2.repr
+COPE_0861.fp2.repr
+COPE_0865.fp2.repr
+COPE_0874.fp2.repr
+COPE_0889.fp2.repr
+COPE_0907.fp2.repr
+COPE_0910.fp2.repr
+COPE_0922.fp2.repr
+COPE_0923.fp2.repr
+COPE_0927.fp2.repr
+COPE_0940.fp2.repr
+COPE_0954.fp2.repr
+COPE_0963.fp2.repr
+COPE_0976.fp2.repr
+COPE_0979.fp2.repr
+COPE_0990.fp2.repr
+COPE_0997.fp2.repr
+COPE_1011.fp2.repr
+COPE_1028.fp2.repr
+COPE_1033.fp2.repr
+COPE_1058.fp2.repr
+COPE_1059.fp2.repr
+COPE_1064.fp2.repr
+COPE_1065.fp2.repr
+COPE_1067.fp2.repr
+COPE_1082.fp2.repr
+COPE_1086.fp2.repr
+COPE_1093.fp2.repr
+COPE_1096.fp2.repr
+COPE_1097.fp2.repr
+COPE_1102.fp2.repr
+COPE_1120.fp2.repr
+COPE_1134.fp2.repr
+COPE_1165.fp2.repr
+COPE_1187.fp2.repr
+COPE_1198.fp2.repr
+COPE_1200.fp2.repr
+COPE_1218.fp2.repr
+COPE_1220.fp2.repr
+COPE_1222.fp2.repr
+COPE_1223.fp2.repr
+COPE_1242.fp2.repr
+COPE_1257.fp2.repr
+COPE_1261.fp2.repr
+     vcftools --vcf NovaSeq_A.20.10.Fltr05.16.recode.vcf --remove NovaSeq_A.20.10.Fltr16.17.lowDP-2.indv --recode --recode-INFO-all --out NovaSeq_A.20.10.Fltr16.17.recode.vcf 2> /dev/null | vcffixup -
+	Sites remaining:	89704
+	Contigs remaining:	2327
+
+
+ Individuals|Libraries Remaining Per Sample
+    508 COPE
+
+Thu Sep 23 03:54:20 CDT 2021 ---------------------------FILTER07: Remove sites with Alternate Allele Count <=X -----------------------------
+     vcffixup NovaSeq_A.20.10.Fltr16.17.recode.vcf | vcffilter -s -f "AC > 0 & AN - AC > 0"  > NovaSeq_A.20.10.Fltr07.18.vcf
+	Sites remaining:	88663
+	Contigs remaining:	2327
+
+Thu Sep 23 04:06:51 CDT 2021 ---------------------------FILTER041: Remove Contigs With Extreme DP -----------------------------
+── Attaching packages ────────────────────────────────── tidyverse 1.3.0.9000 ──
+✔ ggplot2 3.3.5     ✔ purrr   0.3.4
+✔ tibble  3.1.4     ✔ dplyr   1.0.7
+✔ tidyr   1.1.3     ✔ stringr 1.4.0
+✔ readr   1.3.1     ✔ forcats 0.5.0
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+
+Attaching package: ‘gridExtra’
+
+The following object is masked from ‘package:dplyr’:
+
+    combine
+
+'data.frame':	2327 obs. of  6 variables:
+ $ Contig       : Factor w/ 2327 levels "dDocent_Contig_100",..: 1576 1122 1729 280 353 1749 575 1994 614 478 ...
+ $ BP           : int  4 30 40 12 21 11 5 27 22 12 ...
+ $ Mean_Mean_Cvg: num  30.7 35.5 37.9 38.5 39.4 ...
+ $ CV_Mean_Cvg  : num  8.23e-05 3.83e-05 2.37e-05 6.58e-05 7.19e-05 ...
+ $ Mean_CV_Cvg  : num  0.873 0.917 0.888 1.223 2.551 ...
+ $ CV_CV_Cvg    : num  0.000597 0.023144 0.003724 0.001803 0.082947 ...
+'data.frame':	2279 obs. of  6 variables:
+ $ Contig       : Factor w/ 2327 levels "dDocent_Contig_100",..: 1117 2077 1077 44 312 1219 1609 141 1545 2072 ...
+ $ BP           : int  27 28 17 11 6 44 20 33 44 15 ...
+ $ Mean_Mean_Cvg: num  47.7 47.8 48 48.4 48.4 ...
+ $ CV_Mean_Cvg  : num  1.49e-05 5.89e-06 2.15e-04 1.97e-05 9.88e-05 ...
+ $ Mean_CV_Cvg  : num  2.3 1.35 1.46 1.33 1.67 ...
+ $ CV_CV_Cvg    : num  0.012226 0.006053 0.002461 0.000481 0.000981 ...
+'data.frame':	2303 obs. of  6 variables:
+ $ Contig       : Factor w/ 2327 levels "dDocent_Contig_100",..: 1576 1122 1729 280 1749 575 1994 614 1224 59 ...
+ $ BP           : int  4 30 40 12 11 5 27 22 37 31 ...
+ $ Mean_Mean_Cvg: num  30.7 35.5 37.9 38.5 39.6 ...
+ $ CV_Mean_Cvg  : num  8.23e-05 3.83e-05 2.37e-05 6.58e-05 1.40e-04 ...
+ $ Mean_CV_Cvg  : num  0.873 0.917 0.888 1.223 0.971 ...
+ $ CV_CV_Cvg    : num  0.000597 0.023144 0.003724 0.001803 0.001026 ...
+'data.frame':	2303 obs. of  6 variables:
+ $ Contig       : Factor w/ 2327 levels "dDocent_Contig_100",..: 1576 1122 1729 280 353 1749 575 1994 614 478 ...
+ $ BP           : int  4 30 40 12 21 11 5 27 22 12 ...
+ $ Mean_Mean_Cvg: num  30.7 35.5 37.9 38.5 39.4 ...
+ $ CV_Mean_Cvg  : num  8.23e-05 3.83e-05 2.37e-05 6.58e-05 7.19e-05 ...
+ $ Mean_CV_Cvg  : num  0.873 0.917 0.888 1.223 2.551 ...
+ $ CV_CV_Cvg    : num  0.000597 0.023144 0.003724 0.001803 0.082947 ...
+'data.frame':	2303 obs. of  6 variables:
+ $ Contig       : Factor w/ 2327 levels "dDocent_Contig_100",..: 1576 1122 1729 280 1749 575 1994 614 478 1224 ...
+ $ BP           : int  4 30 40 12 11 5 27 22 12 37 ...
+ $ Mean_Mean_Cvg: num  30.7 35.5 37.9 38.5 39.6 ...
+ $ CV_Mean_Cvg  : num  8.23e-05 3.83e-05 2.37e-05 6.58e-05 1.40e-04 ...
+ $ Mean_CV_Cvg  : num  0.873 0.917 0.888 1.223 0.971 ...
+ $ CV_CV_Cvg    : num  0.000597 0.023144 0.003724 0.001803 0.001026 ...
+Warning messages:
+1: Removed 2 rows containing missing values (geom_bar). 
+2: Removed 2 rows containing missing values (geom_bar). 
+Warning messages:
+1: Removed 2 rows containing missing values (geom_bar). 
+2: Removed 2 rows containing missing values (geom_bar). 
+Warning messages:
+1: Removed 2 rows containing missing values (geom_bar). 
+2: Removed 2 rows containing missing values (geom_bar). 
+Warning messages:
+1: Removed 2 rows containing missing values (geom_bar). 
+2: Removed 2 rows containing missing values (geom_bar). 
+null device 
+          1 
+ The following contigs have been filtered:
+	dDocent_Contig_10057	dDocent_Contig_1053	dDocent_Contig_10533	dDocent_Contig_11340	dDocent_Contig_122
+	dDocent_Contig_123	dDocent_Contig_1294	dDocent_Contig_13744	dDocent_Contig_14954	dDocent_Contig_1548
+	dDocent_Contig_1626	dDocent_Contig_16304	dDocent_Contig_1699	dDocent_Contig_17719	dDocent_Contig_1815
+	dDocent_Contig_183	dDocent_Contig_1904	dDocent_Contig_19735	dDocent_Contig_2164	dDocent_Contig_22291
+	dDocent_Contig_2305	dDocent_Contig_245	dDocent_Contig_2594	dDocent_Contig_2629	dDocent_Contig_2895
+	dDocent_Contig_28977	dDocent_Contig_29152	dDocent_Contig_2926	dDocent_Contig_30178	dDocent_Contig_3204
+	dDocent_Contig_32451	dDocent_Contig_331	dDocent_Contig_3712	dDocent_Contig_373	dDocent_Contig_3988
+	dDocent_Contig_3994	dDocent_Contig_405	dDocent_Contig_417	dDocent_Contig_43	dDocent_Contig_435
+	dDocent_Contig_44	dDocent_Contig_4545	dDocent_Contig_4655	dDocent_Contig_482	dDocent_Contig_49
+	dDocent_Contig_530	dDocent_Contig_5576	dDocent_Contig_571	dDocent_Contig_5752	dDocent_Contig_641
+	dDocent_Contig_645	dDocent_Contig_6472	dDocent_Contig_6559	dDocent_Contig_6702	dDocent_Contig_711
+	dDocent_Contig_719	dDocent_Contig_7242	dDocent_Contig_7394	dDocent_Contig_741	dDocent_Contig_764
+	dDocent_Contig_7962	dDocent_Contig_805	dDocent_Contig_981
+
+ Plots output to NovaSeq_A.20.10.Fltr041.19.ldepth.mean.contigs.pdf
+
+Thu Sep 23 04:07:35 CDT 2021 ---------------------------FILTER32: Keep Contigs w Fewer Heterozygotes -----------------------------
+NovaSeq_A.20.10.Fltr041.19.vcf
+0.9
+[1] TRUE TRUE
+Saving 7 x 7 in image
+── Attaching packages ────────────────────────────────── tidyverse 1.3.0.9000 ──
+✔ ggplot2 3.3.5     ✔ purrr   0.3.4
+✔ tibble  3.1.4     ✔ dplyr   1.0.7
+✔ tidyr   1.1.3     ✔ stringr 1.4.0
+✔ readr   1.3.1     ✔ forcats 0.5.0
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+
+Attaching package: ‘gridExtra’
+
+The following object is masked from ‘package:dplyr’:
+
+    combine
+
+Warning messages:
+1: Removed 2 rows containing missing values (geom_bar). 
+2: Removed 2 rows containing missing values (geom_bar). 
+null device 
+          1 
+
+ The following contigs have been filtered:
+
+ Plots output to NovaSeq_A.20.10.Fltr32.20.hetero.contigs.plots.pdf
+
+	Sites remaining:	87404
+	Contigs remaining:	2264
+
+Thu Sep 23 05:11:59 CDT 2021 ---------------------------FILTER18: Remove sites not in HWE p<X) -----------------------------
+Processing population: COPE (778 inds)
+Outputting results of HWE test for filtered loci to 'filtered.hwe'
+Kept 74995 of a possible 87404 loci (filtered 12409 loci)
+
+	Sites remaining:	74995
+	Contigs remaining:	2261
+	Sites remaining:	74995
+	Contigs remaining:	2261
+
+Thu Sep 23 05:15:13 CDT 2021 ---------------------------FILTER21: Select Most Informative SNP per Contig -----------------------------
+74994
+74994
+2261
+
+Thu Sep 23 05:16:48 CDT 2021  --------------------------- Filtering complete! ---------------------------
+
+
+Thu Sep 23 05:16:48 CDT 2021 Running fltrVCFstats2 with the following settings...
+          DIRECTORY: /work/hobi/jselwyn/Coryphopterus_RAD/fltrVCF_NovaSeq
+          THREADS: 20
+          FILE PREFIX: NovaSeq_A
+
+Thu Sep 23 05:16:48 CDT 2021 Getting universal chromosome/contig prefix ...
+          Querying  ...
+          Prefix: dDocent
+          It is assumed that all values in the CHROM column of vcf begin with dDocent
+          If this is not the case, then fltrVCF will not work properly.
+
+Thu Sep 23 05:16:49 CDT 2021 Making column 1 of 19 ...
+
+Thu Sep 23 05:16:49 CDT 2021 Making column 2 of 19 ...
+
+Thu Sep 23 05:16:49 CDT 2021 Making column 3 of 19 ...
+
+Thu Sep 23 05:25:48 CDT 2021 Making column 4 of 19 ...
+
+Thu Sep 23 05:26:53 CDT 2021 Making column 5 of 19 ...
+
+Thu Sep 23 05:27:59 CDT 2021 Making column 6 of 19 ...
+
+Thu Sep 23 05:27:59 CDT 2021 Making column 7 of 19 ...
+
+Thu Sep 23 05:29:02 CDT 2021 Making column 8 of 19 ...
+
+Thu Sep 23 05:29:08 CDT 2021 Making column 9 of 19 ...
+
+Thu Sep 23 05:29:14 CDT 2021 Making column 10 of 19 ...
+
+Thu Sep 23 05:29:21 CDT 2021 Making column 11 of 19 ...
+
+Thu Sep 23 05:29:26 CDT 2021 Making column 12 of 19 ...
+
+Thu Sep 23 05:29:32 CDT 2021 Making column 13 of 19 ...
+
+Thu Sep 23 05:37:53 CDT 2021 Making column 14 of 19 ...
+
+Thu Sep 23 06:02:39 CDT 2021 Making column 15 of 19 ...
+
+Thu Sep 23 06:26:48 CDT 2021 Making column 16 of 19 ...
+
+Thu Sep 23 06:51:17 CDT 2021 Making column 17 of 19 ...
+
+Thu Sep 23 07:15:57 CDT 2021 Making column 18 of 19 ...
+
+Thu Sep 23 07:42:06 CDT 2021 Making column 19 of 19 ...
+
+Thu Sep 23 08:13:23 CDT 2021 Assembling tidy data table...
+
+Thu Sep 23 08:13:23 CDT 2021 Plotting results...
+Warning messages:
+1: Removed 22 row(s) containing missing values (geom_path). 
+2: Removed 22 rows containing missing values (geom_point). 
+null device 
+          1 
+
+Thu Sep 23 08:13:26 CDT 2021 fltrVCFstats2 complete!
