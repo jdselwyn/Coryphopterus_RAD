@@ -1,0 +1,128 @@
+
+
+fltrVCF.bash v4.4 -- a script to filter vcf files repeatably
+
+Dependencies required for fltrVCF to be fully functional:
+	R
+		tidyverse
+		gridExtra
+	vcftools
+	vcflib
+	samtools
+	perl
+	mawk
+	parallel
+	rad_haplotyper.pl https://github.com/cbirdlab/rad_haplotyper.git
+	filter_hwe_by_pop_HPC
+
+Thu Sep 23 10:34:34 CDT 2021 Reading options from command line:
+
+	Settings File:            /work/hobi/jselwyn/Coryphopterus_RAD/config_files/fltrVCF_initial.config
+
+	Cutoffs:                  10.1
+	Path to BAM files:        /work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_MiSeq
+	PopMap File:              /work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_MiSeq/mapped.10.1.bed
+	VCF File:                 /work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_MiSeq/TotalRawSNPs.10.1.vcf
+	REF File:                 /work/hobi/jselwyn/Coryphopterus_RAD/mkREF_MiSeq/reference.10.1.fasta
+	PopMap File:              /work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_MiSeq/popmap.10.1
+	Output file prefix:       MiSeq_Initial
+	Path to R scripts and other scripts:        /work/hobi/jselwyn/Coryphopterus_RAD/scripts/fltrVCF/scripts
+	HWE Script:               /work/hobi/jselwyn/Coryphopterus_RAD/scripts/fltrVCF/filter_hwe_by_pop_HPC.pl
+	Rad_Haplotyper script:    /work/hobi/jselwyn/Coryphopterus_RAD/scripts/rad_haplotyper/rad_haplotyper.pl
+	Number of threads:          20
+
+Thu Sep 23 10:34:34 CDT 2021 Reading options from config file and setting defaults
+ls: cannot access /work/hobi/jselwyn/Coryphopterus_RAD/config_files/fltrVCF_initial.config: No such file or directory
+	SETTINGS are being loaded from file: ''
+	ERROR :-< 	configuration file is missing
+
+Thu Sep 23 10:34:34 CDT 2021 Running fltrVCFstats2 with the following settings...
+          DIRECTORY: /work/hobi/jselwyn/Coryphopterus_RAD/fltrVCF_MiSeq
+          THREADS: 20
+          FILE PREFIX: MiSeq_Initial
+
+Thu Sep 23 10:34:34 CDT 2021 Getting universal chromosome/contig prefix ...
+          Querying  ...
+ls: cannot access MiSeq_Initial*vcf: No such file or directory
+          Prefix: 
+          It is assumed that all values in the CHROM column of vcf begin with 
+          If this is not the case, then fltrVCF will not work properly.
+
+Thu Sep 23 10:34:34 CDT 2021 Making column 1 of 19 ...
+ls: cannot access MiSeq_Initial*vcf: No such file or directory
+
+Thu Sep 23 10:34:34 CDT 2021 Making column 2 of 19 ...
+ls: cannot access MiSeq_Initial*vcf: No such file or directory
+
+Thu Sep 23 10:34:34 CDT 2021 Making column 3 of 19 ...
+ls: cannot access MiSeq_Initial*vcf: No such file or directory
+
+Thu Sep 23 10:34:35 CDT 2021 Making column 4 of 19 ...
+ls: cannot access MiSeq_Initial*vcf: No such file or directory
+
+Thu Sep 23 10:34:35 CDT 2021 Making column 5 of 19 ...
+ls: cannot access MiSeq_Initial*vcf: No such file or directory
+
+Thu Sep 23 10:34:35 CDT 2021 Making column 6 of 19 ...
+
+Thu Sep 23 10:34:35 CDT 2021 Making column 7 of 19 ...
+ls: cannot access MiSeq_Initial*vcf: No such file or directory
+
+Thu Sep 23 10:34:35 CDT 2021 Making column 8 of 19 ...
+ls: cannot access MiSeq_Initial*vcf: No such file or directory
+
+Thu Sep 23 10:34:35 CDT 2021 Making column 9 of 19 ...
+ls: cannot access MiSeq_Initial*vcf: No such file or directory
+
+Thu Sep 23 10:34:35 CDT 2021 Making column 10 of 19 ...
+ls: cannot access MiSeq_Initial*vcf: No such file or directory
+
+Thu Sep 23 10:34:36 CDT 2021 Making column 11 of 19 ...
+ls: cannot access MiSeq_Initial*vcf: No such file or directory
+
+Thu Sep 23 10:34:36 CDT 2021 Making column 12 of 19 ...
+ls: cannot access MiSeq_Initial*vcf: No such file or directory
+
+Thu Sep 23 10:34:36 CDT 2021 Making column 13 of 19 ...
+ls: cannot access MiSeq_Initial*vcf: No such file or directory
+
+Thu Sep 23 10:34:36 CDT 2021 Making column 14 of 19 ...
+ls: cannot access MiSeq_Initial*vcf: No such file or directory
+
+Thu Sep 23 10:34:36 CDT 2021 Making column 15 of 19 ...
+ls: cannot access MiSeq_Initial*vcf: No such file or directory
+
+Thu Sep 23 10:34:36 CDT 2021 Making column 16 of 19 ...
+ls: cannot access MiSeq_Initial*vcf: No such file or directory
+
+Thu Sep 23 10:34:36 CDT 2021 Making column 17 of 19 ...
+ls: cannot access MiSeq_Initial*vcf: No such file or directory
+
+Thu Sep 23 10:34:37 CDT 2021 Making column 18 of 19 ...
+ls: cannot access MiSeq_Initial*vcf: No such file or directory
+
+Thu Sep 23 10:34:37 CDT 2021 Making column 19 of 19 ...
+ls: cannot access MiSeq_Initial*vcf: No such file or directory
+
+Thu Sep 23 10:34:37 CDT 2021 Assembling tidy data table...
+
+Thu Sep 23 10:34:37 CDT 2021 Plotting results...
+Warning messages:
+1: Removed 1 row(s) containing missing values (geom_path). 
+2: Removed 1 rows containing missing values (geom_point). 
+Warning messages:
+1: Removed 5 row(s) containing missing values (geom_path). 
+2: Removed 5 rows containing missing values (geom_point). 
+Warning messages:
+1: Removed 3 row(s) containing missing values (geom_path). 
+2: Removed 3 rows containing missing values (geom_point). 
+Warning messages:
+1: Removed 7 row(s) containing missing values (geom_path). 
+2: Removed 7 rows containing missing values (geom_point). 
+Warning messages:
+1: Removed 7 row(s) containing missing values (geom_path). 
+2: Removed 7 rows containing missing values (geom_point). 
+null device 
+          1 
+
+Thu Sep 23 10:34:41 CDT 2021 fltrVCFstats2 complete!
