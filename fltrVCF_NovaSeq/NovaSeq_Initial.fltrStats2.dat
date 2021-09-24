@@ -1,0 +1,3 @@
+File	FilterID	FilterOrder	NumInd	NumContigs	NumMonorphicContigs	NumSNPContigs	NumInsContigs	NumDelContigs	NumSNPs	NumIns	NumDel	NumMissingGeno	NumGenoLess10X	NumGeno10-19X	NumGeno20-49X	NumGeno50-99X	NumGeno100-999X	NumGenoGreater999X
+NovaSeq_Initial.20.10.Fltr01.1.recode.vcf	1	recode	778	30233		30156	11798	12706	875985	15861	17350	313833514	177226860	50169367	63006951	42917013	61497509	1206878
+NovaSeq_Initial.20.10.Fltr02.2.recode.vcf	2	recode	778	30156		30156	0	0	875755	0	0	299516722	170325876	48364241	60853396	41522533	59586861	1167761
