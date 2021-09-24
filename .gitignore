@@ -52,4 +52,4 @@ scripts/fltrVCF*/
 *inds
 !*ab_v_het.png
 !*config
-
+tmp_dir/

@@ -35,7 +35,6 @@ preprocess_data <- list.files('..', pattern = 'sample_preprocess.csv$',
   filter(preprocess_step == 'fq_fp1_fp2_fqscrn_repaired') %>%
   select(sequencing_type, sample, number_reads)
 
-
 species_id <- read_csv('../Mitochondrial_Mapping/blast_speciesID.csv') 
 
 full_data <- full_join(species_id, preprocess_data, by = c('ID' = 'sample')) %>%
