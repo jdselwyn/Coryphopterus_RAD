@@ -14,10 +14,10 @@
 - Mapping to Mitochondrial Genome
 
 ## ToDo
-- Decide about mapping settings for mito-genome
-- DAPC or similar to group those without mito DNA
 - VCF Filter Settings to lightly filter for species identity
 - split species & rerun pipeline?
+- use Random Forest or similar for species classification??
+- sort out why misIDs between mito & dapc - if artifact of blast etc try to solve...may be hybrids/introgression
 
 ## Step 1.  Demultiplex Sequences
 ```
