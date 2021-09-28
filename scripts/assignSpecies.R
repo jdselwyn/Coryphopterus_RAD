@@ -41,14 +41,14 @@ just_mito_id <- vcf_genind[mito_id$id_index, ]
 strata(just_mito_id) <- as.data.frame(mito_id)
 setPop(just_mito_id) <- ~species
 
-parallel_cluster <- parallel::makeCluster(parallel::detectCores())
+# parallel_cluster <- parallel::makeCluster(parallel::detectCores())
 cv_mito_dapc <- xvalDapc(tab(just_mito_id, NA.method = "mean"), grp = pop(just_mito_id),
                          n.pca = 1:(nLoc(just_mito_id) - 1), n.rep = NBOOT,
                          center = TRUE, scale = TRUE,
                          xval.plot = FALSE, 
                          parallel = "snow", 
-                         cl = parallel_cluster)
-parallel::stopCluster(parallel_cluster)
+                         ncpus = parallel::detectCores())
+# parallel::stopCluster(parallel_cluster)
 
 message('Number of PCs retained: ', cv_mito_dapc$`Number of PCs Achieving Highest Mean Success`, 
         '\n, RMSE = ', 
@@ -262,14 +262,14 @@ grp <- find.clusters(vcf_genind, max.n.clust = 15,
 strata(vcf_genind) <- data.frame(cluster = LETTERS[as.integer(grp$grp)])
 setPop(vcf_genind) <- ~cluster
 
-parallel_cluster <- parallel::makeCluster(parallel::detectCores())
+# parallel_cluster <- parallel::makeCluster(parallel::detectCores())
 cv_all_dapc <- xvalDapc(tab(vcf_genind, NA.method = "mean"), grp = pop(vcf_genind),
-                         n.pca = 1:(nLoc(vcf_genind) - 1), n.rep = NBOOT,
-                         center = TRUE, scale = TRUE,
-                         xval.plot = FALSE, 
-                         parallel = "snow",
-                         cl = parallel_cluster)
-parallel::stopCluster(parallel_cluster)
+                        n.pca = 1:(nLoc(vcf_genind) - 1), n.rep = NBOOT,
+                        center = TRUE, scale = TRUE,
+                        xval.plot = FALSE, 
+                        parallel = "snow", 
+                        ncpus = parallel::detectCores())
+# parallel::stopCluster(parallel_cluster)
 
 
 message('Number of PCs retained: ', cv_all_dapc$`Number of PCs Achieving Highest Mean Success`, 
