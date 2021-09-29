@@ -27,3 +27,4 @@ Warning message:
 Removed 39 rows containing missing values (geom_point). 
 Warning message:
 Removed 36 rows containing missing values (geom_point). 
+slurmstepd: error: *** JOB 48472 ON hpcc30 CANCELLED AT 2021-09-28T11:34:29 ***

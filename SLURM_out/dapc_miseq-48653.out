@@ -1,0 +1,30 @@
+scripts/assignSpecies.R
+[1] "Mitochondrial_Mapping/blast_speciesID.csv"                       
+[2] "fltrVCF_MiSeq/MiSeq_lightSpecies.10.1.Fltr20.7.randSNPperLoc.vcf"
+[3] "100"                                                             
+[4] "MiSeq_lightSpecies"                                              
+Scanning file to determine attributes.
+File attributes:
+  meta lines: 59
+  header_line: 60
+  variant count: 1575
+  column count: 787
+Meta line 59 read in.
+All meta lines processed.
+gt matrix initialized.
+Character matrix gt created.
+  Character matrix gt rows: 1575
+  Character matrix gt cols: 787
+  skip: 0
+  nrows: 1575
+  row_num: 0
+Processed variant 1000Processed variant: 1575
+All variants processed
+Number of PCs retained: 11
+, RMSE = 0.118
+
+Warning message:
+Removed 39 rows containing missing values (geom_point). 
+Warning message:
+Removed 36 rows containing missing values (geom_point). 
+slurmstepd: error: *** JOB 48653 ON hpcc12 CANCELLED AT 2021-09-28T16:02:49 ***

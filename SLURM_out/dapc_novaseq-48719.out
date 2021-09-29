@@ -1,0 +1,23 @@
+scripts/assignSpecies.R
+[1] "Mitochondrial_Mapping/blast_speciesID.csv"                            
+[2] "fltrVCF_NovaSeq/NovaSeq_lightSpecies.20.10.Fltr20.7.randSNPperLoc.vcf"
+[3] "10"                                                                   
+[4] "NovaSeq_lightSpecies_mini"                                            
+Scanning file to determine attributes.
+File attributes:
+  meta lines: 59
+  header_line: 60
+  variant count: 2861
+  column count: 787
+Meta line 59 read in.
+All meta lines processed.
+gt matrix initialized.
+Character matrix gt created.
+  Character matrix gt rows: 2861
+  Character matrix gt cols: 787
+  skip: 0
+  nrows: 2861
+  row_num: 0
+Processed variant 1000Processed variant 2000Processed variant: 2861
+All variants processed
+slurmstepd: error: *** JOB 48719 ON hpcc05 CANCELLED AT 2021-09-29T11:33:47 ***
