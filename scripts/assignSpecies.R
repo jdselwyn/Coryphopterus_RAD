@@ -14,15 +14,16 @@ prefix <- args[4]
 # mitoID_file <- 'Mitochondrial_Mapping/blast_speciesID.csv'
 # vcf_file <- 'fltrVCF_MiSeq/MiSeq_lightSpecies.10.1.Fltr20.7.randSNPperLoc.vcf'
 # NBOOT <- 10
-# prefix <- 'MiSeq_lightSpecies'
-
-outDir <- 'splitSpecies'
+# prefix <- 'MiSeq_lightSpecies_mini'
+# 
+# outDir <- 'splitSpecies'
 
 suppressMessages(library(tidyverse))
 suppressMessages(library(magrittr))
 suppressMessages(library(adegenet))
 suppressMessages(library(vcfR))
 suppressMessages(library(ggbeeswarm))
+suppressMessages(library(parallel))
 
 dir.create(outDir, showWarnings = FALSE, recursive = TRUE)
 
@@ -41,14 +42,14 @@ just_mito_id <- vcf_genind[mito_id$id_index, ]
 strata(just_mito_id) <- as.data.frame(mito_id)
 setPop(just_mito_id) <- ~species
 
-# parallel_cluster <- parallel::makeCluster(parallel::detectCores())
+parallel_cluster <- makeCluster(detectCores())
 cv_mito_dapc <- xvalDapc(tab(just_mito_id, NA.method = "mean"), grp = pop(just_mito_id),
                          n.pca = 1:(nLoc(just_mito_id) - 1), n.rep = NBOOT,
                          center = TRUE, scale = TRUE,
                          xval.plot = FALSE, 
                          parallel = "snow", 
-                         ncpus = parallel::detectCores())
-# parallel::stopCluster(parallel_cluster)
+                         cl = parallel_cluster)
+stopCluster(parallel_cluster)
 
 message('Number of PCs retained: ', cv_mito_dapc$`Number of PCs Achieving Highest Mean Success`, 
         '\n, RMSE = ', 
@@ -262,14 +263,15 @@ grp <- find.clusters(vcf_genind, max.n.clust = 15,
 strata(vcf_genind) <- data.frame(cluster = LETTERS[as.integer(grp$grp)])
 setPop(vcf_genind) <- ~cluster
 
-# parallel_cluster <- parallel::makeCluster(parallel::detectCores())
+# new_clust <- makeCluster(detectCores())
 cv_all_dapc <- xvalDapc(tab(vcf_genind, NA.method = "mean"), grp = pop(vcf_genind),
-                        n.pca = 1:(nLoc(vcf_genind) - 1), n.rep = NBOOT,
+                        n.pca = seq(1, (nLoc(vcf_genind) - 1), by = 1), n.rep = NBOOT,
                         center = TRUE, scale = TRUE,
                         xval.plot = FALSE, 
-                        parallel = "snow", 
-                        ncpus = parallel::detectCores())
-# parallel::stopCluster(parallel_cluster)
+                        parallel = "multicore", 
+                        ncpus = detectCores())
+# stopCluster(new_clust)
+
 
 
 message('Number of PCs retained: ', cv_all_dapc$`Number of PCs Achieving Highest Mean Success`, 
@@ -312,7 +314,7 @@ all_pca_data_pre <- bind_cols(dapc_assign = as.character(all_dapc$assign),
   ungroup 
 
 
-decode_cluster <- all_pca_data %>%
+decode_cluster <- all_pca_data_pre %>%
   count(species, dapc_assign) %>%
   filter(!is.na(species)) %>%
   group_by(species) %>%

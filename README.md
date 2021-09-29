@@ -677,3 +677,31 @@ sbatch -o SLURM_out/dapc_novaseq-%j.out \
     NovaSeq_lightSpecies
 
 ```
+## Step 16. Upload to NCBI
+Go to: https://submit.ncbi.nlm.nih.gov/subs/sra/ and click 'Aspera command line and FTP upload options' to request a preload folder
+  1. Make Folder with all files to upload
+  ```
+  mkdir NCBI_upload
+  cp MiSeq/fq_fp1_fp2_fqscrn_repaired/COPE*gz NCBI_upload/
+  cp mkREF_MiSeq/COPE*gz NCBI_upload/
+  rename fp2.repr miseq NCBI_upload/*gz
+
+  cp NovaSeq/fq_fp1_fp2_fqscrn_repaired/COPE*gz NCBI_upload/
+  cp mkREF_NovaSeq/COPE*gz NCBI_upload/
+  rename fp2.repr novaseq NCBI_upload/*gz
+  ```
+  2. Rename `COPE` portion to species ID from DAPC
+  ```
+
+  ```
+  3. Follow NCBI instructions
+  ```
+  ftp ftp-private.ncbi.nlm.nih.gov
+  subftp
+  w4pYB9VQ
+
+  cd uploads/jdselwyn_gmail.com_62dZVjCq
+  mkdir coryphopterus_upload
+  cd coryphopterus_upload
+  mput *fq.gz
+  ```
