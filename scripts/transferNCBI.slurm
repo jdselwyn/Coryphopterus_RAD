@@ -21,7 +21,6 @@ echo mkdir ${NCBI_FOLDER_MAKE} >> sftp_commands.txt
 echo cd ${NCBI_FOLDER_MAKE} >> sftp_commands.txt
 echo mput *fq.gz >> sftp_commands.txt
 
-
 sshpass -p ${NCBI_PW} sftp -b sftp_commands.txt ${NCBI_USER}@${NCBI_HOST}
 
 rm sftp_commands.txt
