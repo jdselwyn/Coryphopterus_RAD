@@ -660,6 +660,8 @@ Genotyping Stats
 ## Step 15. Species Assignment part 2
 ```
 sbatch -o SLURM_out/dapc_miseq-%j.out \
+  -p cbirdq \
+  -t 15-00:00:00 \
   scripts/runRscript.sbatch \
   scripts/assignSpecies.R \
     Mitochondrial_Mapping/blast_speciesID.csv \
@@ -669,6 +671,8 @@ sbatch -o SLURM_out/dapc_miseq-%j.out \
 
 
 sbatch -o SLURM_out/dapc_novaseq-%j.out \
+  -p cbirdq \
+  -t 15-00:00:00 \
   scripts/runRscript.sbatch \
   scripts/assignSpecies.R \
     Mitochondrial_Mapping/blast_speciesID.csv \
@@ -692,12 +696,13 @@ Go to: https://submit.ncbi.nlm.nih.gov/subs/sra/ and click 'Aspera command line 
   ```
   2. Rename `COPE` portion to species ID from DAPC
   ```
-
+  module load R/gcc/64/3.5.1
+  Rscript scripts/rename_ncbi.R
   ```
   3. Follow NCBI instructions
   ```
-  ftp ftp-private.ncbi.nlm.nih.gov
-  subftp
+  cd NCBI_upload
+  sftp subftp@sftp-private.ncbi.nlm.nih.gov
   w4pYB9VQ
 
   cd uploads/jdselwyn_gmail.com_62dZVjCq
