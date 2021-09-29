@@ -702,11 +702,21 @@ Go to: https://submit.ncbi.nlm.nih.gov/subs/sra/ and click 'Aspera command line 
   3. Follow NCBI instructions
   ```
   cd NCBI_upload
-  sftp subftp@sftp-private.ncbi.nlm.nih.gov
-  w4pYB9VQ
+  sshpass -p w4pYB9VQ sftp subftp@sftp-private.ncbi.nlm.nih.gov
 
   cd uploads/jdselwyn_gmail.com_62dZVjCq
   mkdir coryphopterus_upload
   cd coryphopterus_upload
   mput *fq.gz
+
+
+  sbatch scripts/transferNCBI.slurm \
+    NCBI_upload \
+    sftp-private.ncbi.nlm.nih.gov \
+    subftp \
+    w4pYB9VQ \
+    uploads/jdselwyn_gmail.com_62dZVjCq \
+    coryphopterus_upload2
+
+
   ```

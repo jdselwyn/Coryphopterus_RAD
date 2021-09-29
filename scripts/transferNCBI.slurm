@@ -15,12 +15,13 @@ NCBI_FOLDER_MAKE=$6 #new folder for me to make - this is where everything will b
 
 cd ${DIR}
 
-sshpass -p ${NCBI_PW} sftp ${NCBI_USER}@${NCBI_HOST}
+#make file with commands of what to do after sftp connection
+echo cd ${NCBI_FOLDER} > sftp_commands.txt
+echo mkdir ${NCBI_FOLDER_MAKE} >> sftp_commands.txt
+echo cd ${NCBI_FOLDER_MAKE} >> sftp_commands.txt
+echo mput *fq.gz >> sftp_commands.txt
 
-#to do after sftp success
-cd ${NCBI_FOLDER}
 
-mkdir ${NCBI_FOLDER_MAKE}
-cd ${NCBI_FOLDER_MAKE}
+sshpass -p ${NCBI_PW} sftp -b sftp_commands.txt ${NCBI_USER}@${NCBI_HOST}
 
-mput *fq.gz
+rm sftp_commands.txt
