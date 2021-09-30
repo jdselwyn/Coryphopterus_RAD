@@ -1,0 +1,4 @@
+cd uploads/jdselwyn_gmail.com_62dZVjCq
+mkdir coryphopterus_upload2
+cd coryphopterus_upload2
+mput *fq.gz
