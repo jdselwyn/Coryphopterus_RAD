@@ -726,6 +726,7 @@ sbatch -o SLURM_out/vcf_summary-%j.out \
   scripts/runRscript.sbatch \
   scripts/summarizeVCF.R \
   fltrVCF_MiSeq/MiSeq_CHYA_Initial.10.1.Fltr02.2.recode.vcf.gz
+49230
 ```
 
 ```

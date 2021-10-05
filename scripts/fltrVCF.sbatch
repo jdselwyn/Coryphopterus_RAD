@@ -32,7 +32,7 @@ HWE="$(pwd)/scripts/fltrVCF/filter_hwe_by_pop_HPC.pl"
 haplotyper="$(pwd)/scripts/rad_haplotyper/rad_haplotyper.pl"
 
 
-cutoffs=$(echo ${startVCFS} | grep -Eo '[0-9]+\.[0-9]+')
+cutoffs=$(echo ${startVCFS} | grep -Eo '\.[0-9]+\.[0-9]+\.' | grep -Eo '[0-9]+\.[0-9]+')
 helperVCF=$(echo ${startVCFS} | grep -oP '(?<=_).*?(?=/)')
 
 
