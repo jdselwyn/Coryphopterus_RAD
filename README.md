@@ -668,7 +668,7 @@ sbatch -o SLURM_out/dapc_miseq-%j.out \
   scripts/assignSpecies.R \
     Mitochondrial_Mapping/blast_speciesID.csv \
     fltrVCF_MiSeq/MiSeq_lightSpecies.10.1.Fltr20.7.randSNPperLoc.vcf \
-    1000 \
+    100 \
     MiSeq_lightSpecies
 
 
@@ -679,7 +679,7 @@ sbatch -o SLURM_out/dapc_novaseq-%j.out \
   scripts/assignSpecies.R \
     Mitochondrial_Mapping/blast_speciesID.csv \
     fltrVCF_NovaSeq/NovaSeq_lightSpecies.20.10.Fltr20.7.randSNPperLoc.vcf \
-    1000 \
+    100 \
     NovaSeq_lightSpecies
 
 ```
@@ -716,6 +716,42 @@ This is a helpful page: https://meschedl.github.io/MESPutnam_Open_Lab_Notebook/S
 
 ## Step 17. Remove CPERS and Filter Genotypes
 ```
+module load bcftools
+bgzip -c fltrVCF_MiSeq/MiSeq_Initial.10.1.Fltr02.2.recode.vcf > fltrVCF_MiSeq/MiSeq_Initial.10.1.Fltr02.2.recode.vcf.gz
+tabix -p vcf fltrVCF_MiSeq/MiSeq_Initial.10.1.Fltr02.2.recode.vcf.gz
+bcftools view -S splitSpecies/CHYA.list fltrVCF_MiSeq/MiSeq_Initial.10.1.Fltr02.2.recode.vcf.gz > fltrVCF_MiSeq/MiSeq_CHYA_Initial.10.1.Fltr02.2.recode.vcf.gz
 
-bcftools view -S
+
+sbatch -o SLURM_out/vcf_summary-%j.out \
+  scripts/runRscript.sbatch \
+  scripts/summarizeVCF.R \
+  fltrVCF_MiSeq/MiSeq_CHYA_Initial.10.1.Fltr02.2.recode.vcf.gz
 ```
+
+```
+sbatch scripts/fltrVCF.sbatch \
+	fltrVCF_MiSeq \
+	fltrVCF_MiSeq/MiSeq_CHYA_Initial.10.1.Fltr02.2.recode.vcf.gz \
+	config_files/fltrVCF_chya_A.config \
+	chyaA
+```
+
+
+Genotyping Stats
+| Metric | [Initial](config_files/fltrVCF_initial.config) | []() | []() |
+| --- | ----- | ----- | ----- |
+| JobID | [`48339`](SLURM_out/fltrVCF-48339.out) | [``]() | [``]() |
+| Summary Graph | [Initial](fltrVCF_MiSeq/MiSeq_Initial.fltrStats2.plots.pdf) | []() | []() |
+| Number Individuals |  |  |  |
+| Number SNPs |  |  |  |
+| Number Contigs |  |  |  |
+| Mean SNPs/Contig |  |  |  |
+| Range SNPs/Contig |  |  |  |
+| Mean Coverage |  ±  SD |  ±  SD |  ±  SD |
+| Range Coverage |  -  |  -  |  -  |
+| Mean PHRED |  ±  SD |  ±  SD |  ±  SD |
+| Range PHRED |  -  |  -  |  -  |
+| Mean Missing (Ind) | % ± % | % ± % | % ± % |
+| Range Missing (Ind) | % - % | % - % | % - % |
+| Mean Missing (Loci) | % ± % | % ± % | % ± % |
+| Range Missing (Loci) | % - % | % - % | % - % |

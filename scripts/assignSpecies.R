@@ -16,7 +16,7 @@ prefix <- args[4]
 # NBOOT <- 10
 # prefix <- 'MiSeq_lightSpecies_mini'
 # 
-# outDir <- 'splitSpecies'
+outDir <- 'splitSpecies'
 
 suppressMessages(library(tidyverse))
 suppressMessages(library(magrittr))

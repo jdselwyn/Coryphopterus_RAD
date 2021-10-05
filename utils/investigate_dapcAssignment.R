@@ -71,4 +71,6 @@ full_data %>%
   filter(dapc_species == 'hyalinus', 
          species != 'personatus' | is.na(species))  %>%
   select(ID) %>%
-  mutate(ID = str_c(ID, '.fp2.repr'))
+  mutate(ID = str_c(ID, '.fp2.repr')) %>%
+  pull(ID) %>%
+  write_lines('../splitSpecies/CHYA.list')
