@@ -739,10 +739,10 @@ sbatch scripts/fltrVCF.sbatch \
 
 
 Genotyping Stats
-| Metric | [Initial](config_files/fltrVCF_initial.config) | []() | []() |
+| Metric | [Initial](config_files/fltrVCF_initial.config) | [chyaA](config_files/fltrVCF_chya_A.config) | []() |
 | --- | ----- | ----- | ----- |
-| JobID | [`48339`](SLURM_out/fltrVCF-48339.out) | [``]() | [``]() |
-| Summary Graph | [Initial](fltrVCF_MiSeq/MiSeq_Initial.fltrStats2.plots.pdf) | []() | []() |
+| JobID | [`48339`](SLURM_out/fltrVCF-48339.out) | [`49235`](SLURM_out/fltrVCF-49235.out) | [``]() |
+| Summary Graph | [Initial](fltrVCF_MiSeq/MiSeq_Initial.fltrStats2.plots.pdf) | [chyaA](fltrVCF_MiSeq/MiSeq_chyaA.fltrStats2.plots.pdf) | []() |
 | Number Individuals |  |  |  |
 | Number SNPs |  |  |  |
 | Number Contigs |  |  |  |
