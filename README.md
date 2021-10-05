@@ -7,16 +7,18 @@
 
 ## dDocent Tracking - unsplit species
 - MiSeq only - Finished
-- MiSeq Assembly, NovaSeq Mapping - Genotyping
-- NovaSeq only - Genotyping
+- MiSeq Assembly, NovaSeq Mapping - Finished
+- NovaSeq only - Finished
 
 ## Species Identification
-- Mapping to Mitochondrial Genome
+- Finished
+
+## VCF Filtering
+- MiSeq Assembly, NovaSeq Mapping - To Do
+- NovaSeq only - To Do
 
 ## ToDo
 - VCF Filter Settings to lightly filter for species identity
-- split species & rerun pipeline?
-- use Random Forest or similar for species classification??
 - sort out why misIDs between mito & dapc - if artifact of blast etc try to solve...may be hybrids/introgression
 
 ## Step 1.  Demultiplex Sequences
@@ -683,6 +685,7 @@ sbatch -o SLURM_out/dapc_novaseq-%j.out \
 ```
 ## Step 16. Upload to NCBI
 Go to: https://submit.ncbi.nlm.nih.gov/subs/sra/ and click 'Aspera command line and FTP upload options' to request a preload folder
+This is a helpful page: https://meschedl.github.io/MESPutnam_Open_Lab_Notebook/SRA-Upload_Protocol/
   1. Make Folder with all files to upload
   ```
   mkdir NCBI_upload
@@ -702,21 +705,17 @@ Go to: https://submit.ncbi.nlm.nih.gov/subs/sra/ and click 'Aspera command line 
   3. Follow NCBI instructions
   ```
   cd NCBI_upload
-  sshpass -p w4pYB9VQ sftp subftp@sftp-private.ncbi.nlm.nih.gov
+  sshpass -p PWORD sftp UID@SFTP
 
-  cd uploads/jdselwyn_gmail.com_62dZVjCq
+  cd THEIR_FOLDER
   mkdir coryphopterus_upload
   cd coryphopterus_upload
   mput *fq.gz
 
-
-  sbatch scripts/transferNCBI.slurm \
-    NCBI_upload \
-    sftp-private.ncbi.nlm.nih.gov \
-    subftp \
-    w4pYB9VQ \
-    uploads/jdselwyn_gmail.com_62dZVjCq \
-    coryphopterus_upload2
-
-
   ```
+
+## Step 17. Remove CPERS and Filter Genotypes
+```
+
+bcftools view -S
+```

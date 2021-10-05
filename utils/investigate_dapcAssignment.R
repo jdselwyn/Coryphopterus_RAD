@@ -23,7 +23,8 @@ preprocess_data <- list.files('..', pattern = 'sample_preprocess.csv$',
 
 mitochondrial_id <- read_csv('../Mitochondrial_Mapping/blast_speciesID.csv') 
 
-dapc_id <- read_csv('../tmp_dir/MiSeq_lightSpecies_dapc_all_pca.csv')
+dapc_id <- read_csv('../splitSpecies/MiSeq_lightSpecies_mini_dapc_all_cluster_pca.csv') %>%
+  mutate(ID = str_remove(ID, '.fp2.repr'))
 
 full_data <- full_join(dapc_id, preprocess_data, by = c('ID' = 'sample')) %>%
   filter(number_reads >= 10000) %>%
@@ -32,7 +33,8 @@ full_data <- full_join(dapc_id, preprocess_data, by = c('ID' = 'sample')) %>%
   group_by(ID) %>%
   mutate(has_miseq = any(sequencing_type == 'MiSeq')) %>%
   ungroup %>%
-  filter(sequencing_type != 'MiSeq')
+  filter(sequencing_type != 'MiSeq') %>%
+  left_join(select(mitochondrial_id, -species), by = 'ID')
 
 #### Where are MiSeq specimens in PCA space ####
 ggplot(full_data, aes(x = Axis1, y = Axis2, colour = has_miseq)) +
@@ -42,9 +44,31 @@ ggplot(full_data, aes(x = Axis1, y = Axis2, colour = has_miseq)) +
 #### Do Reads relate to species? ####
 full_data %>%
   filter(str_detect(id_match, 'pred', negate = TRUE)) %>%
-  mutate(id_match = if_else(species == dapc_prediction, 'match', 'fail')) %>%
+  mutate(id_match = if_else(species == dapc_species, 'match', 'fail')) %>%
   select(-starts_with('Axis')) %>%
   mutate(success = as.integer(id_match == 'match')) %>%
   
   glm(success ~ number_reads, data = ., family = 'binomial') %>% 
   summary
+
+
+
+full_data %>%
+  count(dapc_species, species) %>%
+  filter(!is.na(species))
+
+
+full_data %>%
+  filter(!is.na(species), 
+         dapc_species != species) %>%
+  select(-starts_with('Axis')) %>%
+  ggplot(aes(x = certainty, y = evalue)) +
+  geom_point()
+
+
+#### Make List of C. hyalinus to keep in VCF ####
+full_data %>%
+  filter(dapc_species == 'hyalinus', 
+         species != 'personatus' | is.na(species))  %>%
+  select(ID) %>%
+  mutate(ID = str_c(ID, '.fp2.repr'))
