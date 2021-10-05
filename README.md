@@ -742,24 +742,31 @@ sbatch scripts/fltrVCF.sbatch \
 	fltrVCF_MiSeq/MiSeq_CHYA_Initial.10.1.Fltr02.2.recode.vcf.gz \
 	config_files/fltrVCF_chya_B.config \
 	chyaB
+
+
+sbatch scripts/fltrVCF.sbatch \
+	fltrVCF_MiSeq3 \
+	fltrVCF_MiSeq/MiSeq_CHYA_Initial.10.1.Fltr02.2.recode.vcf.gz \
+	config_files/fltrVCF_chya_C.config \
+	chyaC
 ```
 
 
 Genotyping Stats
-| Metric | [Initial](config_files/fltrVCF_initial.config) | [chyaA](config_files/fltrVCF_chya_A.config) | [chyaB](config_files/fltrVCF_chya_B.config) |
-| --- | ----- | ----- | ----- |
-| JobID | [`48339`](SLURM_out/fltrVCF-48339.out) | [`49235`](SLURM_out/fltrVCF-49235.out) | [`49237`](SLURM_out/fltrVCF-49237.out) |
-| Summary Graph | [Initial](fltrVCF_MiSeq/MiSeq_Initial.fltrStats2.plots.pdf) | [chyaA](fltrVCF_MiSeq/MiSeq_chyaA.fltrStats2.plots.pdf) | [chyaB](fltrVCF_MiSeq/MiSeq_chyaB.fltrStats2.plots.pdf) |
-| Number Individuals |  |  |  |
-| Number SNPs |  |  |  |
-| Number Contigs |  |  |  |
-| Mean SNPs/Contig |  |  |  |
-| Range SNPs/Contig |  |  |  |
-| Mean Coverage |  ±  SD |  ±  SD |  ±  SD |
-| Range Coverage |  -  |  -  |  -  |
-| Mean PHRED |  ±  SD |  ±  SD |  ±  SD |
-| Range PHRED |  -  |  -  |  -  |
-| Mean Missing (Ind) | % ± % | % ± % | % ± % |
-| Range Missing (Ind) | % - % | % - % | % - % |
-| Mean Missing (Loci) | % ± % | % ± % | % ± % |
-| Range Missing (Loci) | % - % | % - % | % - % |
+| Metric | [Initial](config_files/fltrVCF_initial.config) | [chyaA](config_files/fltrVCF_chya_A.config) | [chyaB](config_files/fltrVCF_chya_B.config) | [chyaC](config_files/fltrVCF_chya_C.config) |
+| --- | ----- | ----- | ----- | ----- |
+| JobID | [`48339`](SLURM_out/fltrVCF-48339.out) | [`49235`](SLURM_out/fltrVCF-49235.out) | [`49237`](SLURM_out/fltrVCF-49237.out) | [`49239`](SLURM_out/fltrVCF-49239.out) |
+| Summary Graph | [Initial](fltrVCF_MiSeq/MiSeq_Initial.fltrStats2.plots.pdf) | [chyaA](fltrVCF_MiSeq/MiSeq_chyaA.fltrStats2.plots.pdf) | [chyaB](fltrVCF_MiSeq/MiSeq_chyaB.fltrStats2.plots.pdf) | [chyaC](fltrVCF_MiSeq/MiSeq_chyaC.fltrStats2.plots.pdf) |
+| Number Individuals |  |  |  |  |
+| Number SNPs |  |  |  |  |
+| Number Contigs |  |  |  |  |
+| Mean SNPs/Contig |  |  |  |  |
+| Range SNPs/Contig |  |  |  |  |
+| Mean Coverage |  ±  SD |  ±  SD |  ±  SD |  ±  SD |
+| Range Coverage |  -  |  -  |  -  |  -  |
+| Mean PHRED |  ±  SD |  ±  SD |  ±  SD |  ±  SD |
+| Range PHRED |  -  |  -  |  -  |  -  |
+| Mean Missing (Ind) | % ± % | % ± % | % ± % | % ± % |
+| Range Missing (Ind) | % - % | % - % | % - % | % - % |
+| Mean Missing (Loci) | % ± % | % ± % | % ± % | % ± % |
+| Range Missing (Loci) | % - % | % - % | % - % | % - % |
