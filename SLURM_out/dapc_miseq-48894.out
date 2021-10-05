@@ -20,3 +20,4 @@ Character matrix gt created.
   row_num: 0
 Processed variant 1000Processed variant: 1575
 All variants processed
+slurmstepd: error: *** JOB 48894 ON hpcc25 CANCELLED AT 2021-10-05T09:38:49 ***
