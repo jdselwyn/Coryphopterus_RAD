@@ -17,6 +17,7 @@ prefix <- args[4]
 # prefix <- 'MiSeq_lightSpecies_mini'
 # 
 outDir <- 'splitSpecies/DAPC'
+dir.create(outDir, recursive = TRUE)
 
 suppressMessages(library(tidyverse))
 suppressMessages(library(magrittr))

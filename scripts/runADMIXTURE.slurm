@@ -10,6 +10,7 @@
 #https://dalexander.github.io/admixture/admixture-manual.pdf
 
 module load plink/1.90
+module load admixture/1.3.0
 
 dir=$1
 inVCF=$2
@@ -25,7 +26,7 @@ mkdir -p ${dir}
 inVCF="$(pwd)/${inVCF}"
 cd ${dir}
 
-plink --vcf ${inVCF} --make-bed --maf 0.05 --recode --allow-extra-chr --out ${outNAME}
+plink --vcf ${inVCF} --make-bed --recode --allow-extra-chr --out ${outNAME}
 awk '{$1=0;print $0}' ${outNAME}.bim > ${outNAME}.bim.tmp
 mv ${outNAME}.bim.tmp ${outNAME}.bim
 
@@ -36,6 +37,7 @@ done
 
 grep -h CV log*.out
 #Some R stuff here to make a ggplot of the CV
+
 
 
 #Some R stuff here to make STRUCTURE plots for each value of K

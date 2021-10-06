@@ -16,7 +16,6 @@
   - https://dalexander.github.io/admixture/download.html
   - https://dalexander.github.io/admixture/admixture-manual.pdf
   - https://speciationgenomics.github.io/ADMIXTURE/
-  - Use PLINK to find largest set of unrelated individuals and then project admixture on all individuals
 - run NewHybrids to identify putatative 1st/2nd generation hybrids
 - Upload data to NCBI
 - Split out only pure CHYA for dispersal analysis
@@ -571,13 +570,20 @@ sbatch scripts/fltrVCF.sbatch \
 sbatch scripts/fltrVCF.sbatch \
 	fltrVCF_MiSeq \
 	mkVCF_MiSeq/TotalRawSNPs.10.1.vcf \
+	config_files/fltrVCF_lightSpecies2.config \
+	lightSpecies2
+
+sbatch scripts/fltrVCF.sbatch \
+	fltrVCF_MiSeq \
+	mkVCF_MiSeq/TotalRawSNPs.10.1.vcf \
 	config_files/fltrVCF_initial.config \
 	Initial
-48339
 
 #Run on Head Node
 module load R/gcc/64/3.5.1
 Rscript scripts/summarizeVCF.R  fltrVCF_MiSeq/MiSeq_lightSpecies.10.1.Fltr20.7.randSNPperLoc.vcf
+
+Rscript scripts/summarizeVCF.R  fltrVCF_MiSeq/MiSeq_lightSpecies2.10.1.Fltr20.8.randSNPperLoc.vcf
 
 #Run on Node
 sbatch -o SLURM_out/vcf_summary-%j.out \
@@ -588,23 +594,23 @@ sbatch -o SLURM_out/vcf_summary-%j.out \
 ```
 
 Genotyping Stats
-| Metric | [Filter Set A](config_files/fltrVCF_A.config) | [Species Filter](config_files/fltrVCF_lightSpecies.config) | [Initial Filter](config_files/fltrVCF_initial.config) |
-| --- | ----- | ----- | ----- |
-| JobID | [`48279`](SLURM_out/fltrVCF-48279.out) | [`48336`](SLURM_out/fltrVCF-48336.out) | [`48339`](SLURM_out/fltrVCF-48339.out) |
-| Summary Graph | [A](fltrVCF_MiSeq/MiSeq_A.fltrStats2.plots.pdf) | [Species](fltrVCF_MiSeq/MiSeq_lightSpecies.fltrStats2.plots.pdf) | [Initial](fltrVCF_MiSeq/MiSeq_Initial.fltrStats2.plots.pdf) |
-| Number Individuals | 516 | 778 |  |
-| Number SNPs | 3,372 | 1,575 |  |
-| Number Contigs | 3,372 | 1,575 |  |
+| Metric | [Filter Set A](config_files/fltrVCF_A.config) | [Species Filter](config_files/fltrVCF_lightSpecies.config) | [Species Filter 2](config_files/fltrVCF_lightSpecies2.config) |
+| --- | ----- | ----- | ----- | ----- |
+| JobID | [`48279`](SLURM_out/fltrVCF-48279.out) | [`48336`](SLURM_out/fltrVCF-48336.out) | [`49316`](SLURM_out/fltrVCF-49316.out) |
+| Summary Graph | [A](fltrVCF_MiSeq/MiSeq_A.fltrStats2.plots.pdf) | [Species](fltrVCF_MiSeq/MiSeq_lightSpecies.fltrStats2.plots.pdf) | [Species Filter 2](fltrVCF_MiSeq/MiSeq_lightSpecies2.fltrStats2.plots.pdf) |
+| Number Individuals | 516 | 778 | 778 |
+| Number SNPs | 3,372 | 1,575 | 1,726 |
+| Number Contigs | 3,372 | 1,575 | 1,726 |
 | Mean SNPs/Contig | - | - | - |
 | Range SNPs/Contig | - | - | - |
-| Mean Coverage | 68,920 ± 27,365 SD | 76,556 ± 49,534 SD |  ±  SD |
-| Range Coverage | 18,326 - 156,828 | 10,101 - 706,622 |  -  |
-| Mean PHRED | 209,170 ± 376,042 SD | 485,037 ± 22,468 SD |  ±  SD |
-| Range PHRED | 258 - 3,264,620 | 82,979 - 500,000 |  -  |
-| Mean Missing (Ind) | 11% ± 10% | 16% ± 25% | % ± % |
-| Range Missing (Ind) | 4.5% - 42% | 0% - 99.5% | % - % |
-| Mean Missing (Loci) | 11% ± 7% | 16% ± 4.7% | % ± % |
-| Range Missing (Loci) | 0% - 29% | 1.8% - 25% | % - % |
+| Mean Coverage | 68,920 ± 27,365 SD | 76,556 ± 49,534 SD | 75,158 ± 48,132 SD |
+| Range Coverage | 18,326 - 156,828 | 10,101 - 706,622 | 9,804 - 646,358 |
+| Mean PHRED | 209,170 ± 376,042 SD | 485,037 ± 22,468 SD | 461,508 ± 52,904 SD |
+| Range PHRED | 258 - 3,264,620 | 82,979 - 500,000 | 13,985 - 500,000 |
+| Mean Missing (Ind) | 11% ± 10% | 16% ± 25% | 16.3% ± 24.9% |
+| Range Missing (Ind) | 4.5% - 42% | 0% - 99.5% | 0% - 99.5% |
+| Mean Missing (Loci) | 11% ± 7% | 16% ± 4.7% | 16.3% ± 4.8% |
+| Range Missing (Loci) | 0% - 29% | 1.8% - 25% | 1.7% - 25% |
 
 
 
