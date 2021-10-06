@@ -1,6 +1,4 @@
 args <- commandArgs(trailingOnly = TRUE)
-print(args)
-
 outNAME <- args[1]
 # outNAME <- 'MiSeq_lightSpecies2.10.1'
 
