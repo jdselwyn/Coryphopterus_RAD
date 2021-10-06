@@ -1,0 +1,32 @@
+PLINK v1.90b5.2 64-bit (9 Jan 2018)
+Options in effect:
+  --allow-extra-chr
+  --make-bed
+  --out MiSeq_lightSpecies2.10.1
+  --recode
+  --vcf /work/hobi/jselwyn/Coryphopterus_RAD/fltrVCF_MiSeq/MiSeq_lightSpecies2.10.1.Fltr20.8.randSNPperLoc.vcf
+
+Hostname: hpcc11
+Working directory: /work/hobi/jselwyn/Coryphopterus_RAD/splitSpecies/ADMIXTURE
+Start time: Wed Oct  6 11:10:09 2021
+
+Random number seed: 1633536609
+257882 MB RAM detected; reserving 128941 MB for main workspace.
+--vcf: MiSeq_lightSpecies2.10.1-temporary.bed +
+MiSeq_lightSpecies2.10.1-temporary.bim + MiSeq_lightSpecies2.10.1-temporary.fam
+written.
+1726 variants loaded from .bim file.
+778 people (0 males, 0 females, 778 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to MiSeq_lightSpecies2.10.1.nosex .
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 778 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+Total genotyping rate is 0.836783.
+1726 variants and 778 people pass filters and QC.
+Note: No phenotypes present.
+--make-bed to MiSeq_lightSpecies2.10.1.bed + MiSeq_lightSpecies2.10.1.bim +
+MiSeq_lightSpecies2.10.1.fam ... done.
+--recode ped to MiSeq_lightSpecies2.10.1.ped + MiSeq_lightSpecies2.10.1.map ...
+done.
+
+End time: Wed Oct  6 11:10:10 2021
