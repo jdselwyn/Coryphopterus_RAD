@@ -23,6 +23,7 @@ preprocess_data <- list.files('..', pattern = 'sample_preprocess.csv$',
 
 mitochondrial_id <- read_csv('../Mitochondrial_Mapping/blast_speciesID.csv') 
 
+# 'MiSeq_lightSpecies_mini_dapc_all_cluster_pca.csv'
 dapc_id <- read_csv('../splitSpecies/MiSeq_lightSpecies_mini_dapc_all_cluster_pca.csv') %>%
   mutate(ID = str_remove(ID, '.fp2.repr'))
 
@@ -51,8 +52,6 @@ full_data %>%
   glm(success ~ number_reads, data = ., family = 'binomial') %>% 
   summary
 
-
-
 full_data %>%
   count(dapc_species, species) %>%
   filter(!is.na(species))
@@ -72,5 +71,11 @@ full_data %>%
          species != 'personatus' | is.na(species))  %>%
   select(ID) %>%
   mutate(ID = str_c(ID, '.fp2.repr')) %>%
-  pull(ID) %>%
+  pull(ID) %>% 
   write_lines('../splitSpecies/CHYA.list')
+
+
+#### Get most extreme individuals which agree on mito & nuc and find diagnostic SNPs ####
+full_data %>%
+  select(-starts_with('Axis')) %>%
+  filter(dapc_species == species)

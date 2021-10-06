@@ -10,16 +10,17 @@
 - MiSeq Assembly, NovaSeq Mapping - Finished
 - NovaSeq only - Finished
 
-## Species Identification
-- Finished
-
-## VCF Filtering
-- MiSeq Assembly, NovaSeq Mapping - To Do
-- NovaSeq only - To Do
-
 ## ToDo
-- VCF Filter Settings to lightly filter for species identity
-- sort out why misIDs between mito & dapc - if artifact of blast etc try to solve...may be hybrids/introgression
+- Delete and reupload NCBI data - need to change species IDs post ADMIXTURE & NewHybrids
+- Run admixture to identify putatively pure specimens
+  - https://dalexander.github.io/admixture/download.html
+  - https://dalexander.github.io/admixture/admixture-manual.pdf
+  - https://speciationgenomics.github.io/ADMIXTURE/
+  - Use PLINK to find largest set of unrelated individuals and then project admixture on all individuals
+- run NewHybrids to identify putatative 1st/2nd generation hybrids
+- Upload data to NCBI
+- Split out only pure CHYA for dispersal analysis
+- Rerun SNP filtering
 
 ## Step 1.  Demultiplex Sequences
 ```
@@ -683,6 +684,22 @@ sbatch -o SLURM_out/dapc_novaseq-%j.out \
     NovaSeq_lightSpecies
 
 ```
+## Step 16. Species Assignment part 3
+Use admixture to find pure specimens to use in NewHybrids. From here on just use MiSeq assembly
+```
+sbatch scripts/runADMIXTURE.slurm \
+  splitSpecies/ADMIXTURE \
+  fltrVCF_MiSeq/MiSeq_lightSpecies.10.1.Fltr20.7.randSNPperLoc.vcf \
+  15 \
+  5
+
+```
+
+
+
+
+
+# IGNORE BELOW HERE SAVE FOR LATER
 ## Step 16. Upload to NCBI
 Go to: https://submit.ncbi.nlm.nih.gov/subs/sra/ and click 'Aspera command line and FTP upload options' to request a preload folder
 This is a helpful page: https://meschedl.github.io/MESPutnam_Open_Lab_Notebook/SRA-Upload_Protocol/
@@ -720,7 +737,7 @@ module load bcftools
 bgzip -c fltrVCF_MiSeq/MiSeq_Initial.10.1.Fltr02.2.recode.vcf > fltrVCF_MiSeq/MiSeq_Initial.10.1.Fltr02.2.recode.vcf.gz
 tabix -p vcf fltrVCF_MiSeq/MiSeq_Initial.10.1.Fltr02.2.recode.vcf.gz
 bcftools view -S splitSpecies/CHYA.list fltrVCF_MiSeq/MiSeq_Initial.10.1.Fltr02.2.recode.vcf.gz > fltrVCF_MiSeq/MiSeq_CHYA_Initial.10.1.Fltr02.2.recode.vcf.gz
-
+bgzip -d fltrVCF_MiSeq/MiSeq_CHYA_Initial.10.1.Fltr02.2.recode.vcf.gz > fltrVCF_MiSeq/MiSeq_CHYA_Initial.10.1.Fltr02.2.recode.vcf
 
 sbatch -o SLURM_out/vcf_summary-%j.out \
   scripts/runRscript.sbatch \
@@ -732,41 +749,42 @@ sbatch -o SLURM_out/vcf_summary-%j.out \
 ```
 sbatch scripts/fltrVCF.sbatch \
 	fltrVCF_MiSeq \
-	fltrVCF_MiSeq/MiSeq_CHYA_Initial.10.1.Fltr02.2.recode.vcf.gz \
+	fltrVCF_MiSeq/MiSeq_CHYA_Initial.10.1.Fltr02.2.recode.vcf \
 	config_files/fltrVCF_chya_A.config \
 	chyaA
 
 
 sbatch scripts/fltrVCF.sbatch \
 	fltrVCF_MiSeq2 \
-	fltrVCF_MiSeq/MiSeq_CHYA_Initial.10.1.Fltr02.2.recode.vcf.gz \
+	fltrVCF_MiSeq/MiSeq_CHYA_Initial.10.1.Fltr02.2.recode.vcf \
 	config_files/fltrVCF_chya_B.config \
 	chyaB
 
 
 sbatch scripts/fltrVCF.sbatch \
 	fltrVCF_MiSeq3 \
-	fltrVCF_MiSeq/MiSeq_CHYA_Initial.10.1.Fltr02.2.recode.vcf.gz \
+	fltrVCF_MiSeq/MiSeq_CHYA_Initial.10.1.Fltr02.2.recode.vcf \
 	config_files/fltrVCF_chya_C.config \
 	chyaC
+
 ```
 
 
 Genotyping Stats
 | Metric | [Initial](config_files/fltrVCF_initial.config) | [chyaA](config_files/fltrVCF_chya_A.config) | [chyaB](config_files/fltrVCF_chya_B.config) | [chyaC](config_files/fltrVCF_chya_C.config) |
 | --- | ----- | ----- | ----- | ----- |
-| JobID | [`48339`](SLURM_out/fltrVCF-48339.out) | [`49235`](SLURM_out/fltrVCF-49235.out) | [`49237`](SLURM_out/fltrVCF-49237.out) | [`49239`](SLURM_out/fltrVCF-49239.out) |
+| JobID | [`48339`](SLURM_out/fltrVCF-48339.out) | [`49267`](SLURM_out/fltrVCF-49267.out) | [`49268`](SLURM_out/fltrVCF-49268.out) | [`49266`](SLURM_out/fltrVCF-49266.out) |
 | Summary Graph | [Initial](fltrVCF_MiSeq/MiSeq_Initial.fltrStats2.plots.pdf) | [chyaA](fltrVCF_MiSeq/MiSeq_chyaA.fltrStats2.plots.pdf) | [chyaB](fltrVCF_MiSeq/MiSeq_chyaB.fltrStats2.plots.pdf) | [chyaC](fltrVCF_MiSeq/MiSeq_chyaC.fltrStats2.plots.pdf) |
-| Number Individuals |  |  |  |  |
-| Number SNPs |  |  |  |  |
-| Number Contigs |  |  |  |  |
-| Mean SNPs/Contig |  |  |  |  |
-| Range SNPs/Contig |  |  |  |  |
-| Mean Coverage |  ±  SD |  ±  SD |  ±  SD |  ±  SD |
-| Range Coverage |  -  |  -  |  -  |  -  |
-| Mean PHRED |  ±  SD |  ±  SD |  ±  SD |  ±  SD |
-| Range PHRED |  -  |  -  |  -  |  -  |
-| Mean Missing (Ind) | % ± % | % ± % | % ± % | % ± % |
-| Range Missing (Ind) | % - % | % - % | % - % | % - % |
-| Mean Missing (Loci) | % ± % | % ± % | % ± % | % ± % |
-| Range Missing (Loci) | % - % | % - % | % - % | % - % |
+| Number Individuals | 645 |  |  |  |
+| Number SNPs | 802,220 |  |  |  |
+| Number Contigs | 22,196 |  |  |  |
+| Mean SNPs/Contig | 36.1  ± 18.9 SD |  ±  SD |   ±  SD  |   ±  SD  |
+| Range SNPs/Contig | 1 - 113 | - | - | - |
+| Mean Coverage | 30,097 ± 33,587 SD |  ±  SD |  ±  SD |  ±  SD |
+| Range Coverage | 20 - 708,357 |  -  |  -  |  -  |
+| Mean PHRED | 26,029 ± 123,271 SD |  ±  SD |  ±  SD |  ±  SD |
+| Range PHRED | 0 - 16,289,400 |  -  |  -  |  -  |
+| Mean Missing (Ind) | 49.4% ± 20.8% | % ± % | % ± % | % ± % |
+| Range Missing (Ind) | 18.6% - 99.8% | % - % | % - % | % - % |
+| Mean Missing (Loci) | 49.4% ± 26.4% | % ± % | % ± % | % ± % |
+| Range Missing (Loci) | 1.4% - 100% | % - % | % - % | % - % |
