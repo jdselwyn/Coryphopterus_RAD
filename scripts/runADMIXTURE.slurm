@@ -35,12 +35,11 @@ mv ${outNAME}.bim.tmp ${outNAME}.bim
 
 for ((K=1; K<=${maxK}; K++))
 do
- admixture -C 10 --cv=${CV} $outNAME.bed $K -j${SLURM_CPUS_ON_NODE} > ${outNAME}.log${K}.out
+ admixture --cv=${CV} $outNAME.bed $K -j${SLURM_CPUS_ON_NODE} > ${outNAME}.log${K}.out
 done
 
 grep -h CV ${outNAME}.log*.out > ${outNAME}.CV_error
-#Some R stuff here to make a ggplot of the CV
 minK=$(Rscript ${R_CV} ${outNAME})
+echo "Best K = ${minK}"
 
-#Some R stuff here to make STRUCTURE plots for each value of K
-less -S ${outNAME}.${minK}.Q
+Rscript ${R_STRUCTURE} ${outNAME} ${minK}
