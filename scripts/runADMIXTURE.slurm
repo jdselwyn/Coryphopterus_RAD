@@ -26,7 +26,7 @@ mkdir -p ${dir}
 
 inVCF="$(pwd)/${inVCF}"
 R_CV="$(pwd)/scripts/admixtureCVPlot.R"
-R_STRUCTURE="$(pwd)/scripts/admixtrueStructurePlot.R"
+R_STRUCTURE="$(pwd)/scripts/admixtureStructurePlot.R"
 cd ${dir}
 
 plink --vcf ${inVCF} --make-bed --recode --allow-extra-chr --out ${outNAME}
@@ -42,6 +42,5 @@ grep -h CV ${outNAME}.log*.out > ${outNAME}.CV_error
 #Some R stuff here to make a ggplot of the CV
 minK=$(Rscript ${R_CV} ${outNAME})
 
-
-
 #Some R stuff here to make STRUCTURE plots for each value of K
+less -S ${outNAME}.${minK}.Q
