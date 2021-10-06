@@ -674,28 +674,17 @@ sbatch -o SLURM_out/dapc_miseq-%j.out \
   scripts/runRscript.sbatch \
   scripts/assignSpecies.R \
     Mitochondrial_Mapping/blast_speciesID.csv \
-    fltrVCF_MiSeq/MiSeq_lightSpecies.10.1.Fltr20.7.randSNPperLoc.vcf \
-    100 \
-    MiSeq_lightSpecies
-
-
-sbatch -o SLURM_out/dapc_novaseq-%j.out \
-  -p cbirdq \
-  -t 15-00:00:00 \
-  scripts/runRscript.sbatch \
-  scripts/assignSpecies.R \
-    Mitochondrial_Mapping/blast_speciesID.csv \
-    fltrVCF_NovaSeq/NovaSeq_lightSpecies.20.10.Fltr20.7.randSNPperLoc.vcf \
-    100 \
-    NovaSeq_lightSpecies
-
+    fltrVCF_MiSeq/MiSeq_lightSpecies2.10.1.Fltr20.8.randSNPperLoc.vcf \
+    500 \
+    MiSeq_lightSpecies2
+49364
 ```
 ## Step 16. Species Assignment part 3
 Use admixture to find pure specimens to use in NewHybrids. From here on just use MiSeq assembly
 ```
 sbatch scripts/runADMIXTURE.slurm \
   splitSpecies/ADMIXTURE \
-  fltrVCF_MiSeq/MiSeq_lightSpecies.10.1.Fltr20.7.randSNPperLoc.vcf \
+  fltrVCF_MiSeq/MiSeq_lightSpecies2.10.1.Fltr20.8.randSNPperLoc.vcf \
   15 \
   5
 

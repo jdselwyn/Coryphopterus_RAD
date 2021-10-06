@@ -11,6 +11,7 @@
 
 module load plink/1.90
 module load admixture/1.3.0
+module load R/gcc/64/3.5.1
 
 dir=$1
 inVCF=$2
@@ -32,11 +33,12 @@ mv ${outNAME}.bim.tmp ${outNAME}.bim
 
 for ((K=1; K<=${maxK}; K++))
 do
- admixture --cv=${CV} $outNAME.bed $K -j${SLURM_CPUS_ON_NODE} > log${K}.out
+ admixture -C 10 --cv=${CV} $outNAME.bed $K -j${SLURM_CPUS_ON_NODE} > ${outNAME}.log${K}.out
 done
 
-grep -h CV log*.out
+grep -h CV ${outNAME}.log*.out > ${outNAME}.CV_error
 #Some R stuff here to make a ggplot of the CV
+Rscript #${outNAME}.CV_error
 
 
 
