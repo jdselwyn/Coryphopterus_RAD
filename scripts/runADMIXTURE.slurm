@@ -25,6 +25,8 @@ outNAME="${outNAME}.${cutoffs}"
 mkdir -p ${dir}
 
 inVCF="$(pwd)/${inVCF}"
+R_CV="$(pwd)/scripts/admixtureCVPlot.R"
+R_STRUCTURE="$(pwd)/scripts/admixtrueStructurePlot.R"
 cd ${dir}
 
 plink --vcf ${inVCF} --make-bed --recode --allow-extra-chr --out ${outNAME}
@@ -38,7 +40,7 @@ done
 
 grep -h CV ${outNAME}.log*.out > ${outNAME}.CV_error
 #Some R stuff here to make a ggplot of the CV
-Rscript #${outNAME}.CV_error
+minK=$(Rscript ${R_CV} ${outNAME})
 
 
 
