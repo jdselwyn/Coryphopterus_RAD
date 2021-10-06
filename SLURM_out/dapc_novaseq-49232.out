@@ -1,0 +1,8 @@
+scripts/assignSpecies.R
+[1] "Mitochondrial_Mapping/blast_speciesID.csv"                            
+[2] "fltrVCF_NovaSeq/NovaSeq_lightSpecies.20.10.Fltr20.7.randSNPperLoc.vcf"
+[3] "100"                                                                  
+[4] "NovaSeq_lightSpecies"                                                 
+Error in dir.create(outDir, showWarnings = FALSE, recursive = TRUE) : 
+  object 'outDir' not found
+Execution halted

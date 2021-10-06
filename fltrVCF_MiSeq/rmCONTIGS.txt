@@ -1,10 +1,8 @@
 dDocent_Contig_4
 dDocent_Contig_21
 dDocent_Contig_28
-dDocent_Contig_34
 dDocent_Contig_39
 dDocent_Contig_54
-dDocent_Contig_59
 dDocent_Contig_70
 dDocent_Contig_76
 dDocent_Contig_78
@@ -24,21 +22,17 @@ dDocent_Contig_166
 dDocent_Contig_167
 dDocent_Contig_170
 dDocent_Contig_173
-dDocent_Contig_201
 dDocent_Contig_212
 dDocent_Contig_214
 dDocent_Contig_217
-dDocent_Contig_222
 dDocent_Contig_235
 dDocent_Contig_237
 dDocent_Contig_241
-dDocent_Contig_246
 dDocent_Contig_248
 dDocent_Contig_255
 dDocent_Contig_262
 dDocent_Contig_266
 dDocent_Contig_269
-dDocent_Contig_273
 dDocent_Contig_277
 dDocent_Contig_282
 dDocent_Contig_287
@@ -52,7 +46,6 @@ dDocent_Contig_309
 dDocent_Contig_319
 dDocent_Contig_320
 dDocent_Contig_324
-dDocent_Contig_340
 dDocent_Contig_345
 dDocent_Contig_347
 dDocent_Contig_349
@@ -70,7 +63,6 @@ dDocent_Contig_383
 dDocent_Contig_385
 dDocent_Contig_387
 dDocent_Contig_393
-dDocent_Contig_394
 dDocent_Contig_396
 dDocent_Contig_400
 dDocent_Contig_404
@@ -107,7 +99,6 @@ dDocent_Contig_504
 dDocent_Contig_515
 dDocent_Contig_522
 dDocent_Contig_523
-dDocent_Contig_524
 dDocent_Contig_529
 dDocent_Contig_532
 dDocent_Contig_534
@@ -125,7 +116,6 @@ dDocent_Contig_574
 dDocent_Contig_576
 dDocent_Contig_582
 dDocent_Contig_584
-dDocent_Contig_585
 dDocent_Contig_590
 dDocent_Contig_592
 dDocent_Contig_598
@@ -160,8 +150,6 @@ dDocent_Contig_702
 dDocent_Contig_716
 dDocent_Contig_720
 dDocent_Contig_724
-dDocent_Contig_727
-dDocent_Contig_729
 dDocent_Contig_732
 dDocent_Contig_734
 dDocent_Contig_736
@@ -195,7 +183,6 @@ dDocent_Contig_809
 dDocent_Contig_810
 dDocent_Contig_811
 dDocent_Contig_813
-dDocent_Contig_816
 dDocent_Contig_819
 dDocent_Contig_821
 dDocent_Contig_824
@@ -220,14 +207,12 @@ dDocent_Contig_885
 dDocent_Contig_888
 dDocent_Contig_889
 dDocent_Contig_893
-dDocent_Contig_894
 dDocent_Contig_896
 dDocent_Contig_897
 dDocent_Contig_901
 dDocent_Contig_903
 dDocent_Contig_904
 dDocent_Contig_906
-dDocent_Contig_907
 dDocent_Contig_910
 dDocent_Contig_914
 dDocent_Contig_918
@@ -270,16 +255,13 @@ dDocent_Contig_1039
 dDocent_Contig_1049
 dDocent_Contig_1051
 dDocent_Contig_1052
-dDocent_Contig_1053
 dDocent_Contig_1054
 dDocent_Contig_1055
 dDocent_Contig_1059
 dDocent_Contig_1060
-dDocent_Contig_1071
 dDocent_Contig_1072
 dDocent_Contig_1080
 dDocent_Contig_1087
-dDocent_Contig_1092
 dDocent_Contig_1093
 dDocent_Contig_1107
 dDocent_Contig_1108
@@ -291,17 +273,14 @@ dDocent_Contig_1119
 dDocent_Contig_1132
 dDocent_Contig_1137
 dDocent_Contig_1139
-dDocent_Contig_1140
 dDocent_Contig_1142
 dDocent_Contig_1143
 dDocent_Contig_1145
 dDocent_Contig_1157
 dDocent_Contig_1161
 dDocent_Contig_1163
-dDocent_Contig_1164
 dDocent_Contig_1166
 dDocent_Contig_1173
-dDocent_Contig_1177
 dDocent_Contig_1178
 dDocent_Contig_1189
 dDocent_Contig_1190
@@ -330,7 +309,6 @@ dDocent_Contig_1294
 dDocent_Contig_1296
 dDocent_Contig_1298
 dDocent_Contig_1313
-dDocent_Contig_1317
 dDocent_Contig_1318
 dDocent_Contig_1321
 dDocent_Contig_1323
@@ -391,7 +369,6 @@ dDocent_Contig_1494
 dDocent_Contig_1495
 dDocent_Contig_1496
 dDocent_Contig_1498
-dDocent_Contig_1506
 dDocent_Contig_1512
 dDocent_Contig_1515
 dDocent_Contig_1520
@@ -444,7 +421,6 @@ dDocent_Contig_1673
 dDocent_Contig_1677
 dDocent_Contig_1681
 dDocent_Contig_1683
-dDocent_Contig_1685
 dDocent_Contig_1698
 dDocent_Contig_1699
 dDocent_Contig_1706
@@ -487,7 +463,6 @@ dDocent_Contig_1850
 dDocent_Contig_1853
 dDocent_Contig_1858
 dDocent_Contig_1864
-dDocent_Contig_1870
 dDocent_Contig_1880
 dDocent_Contig_1892
 dDocent_Contig_1897
@@ -515,7 +490,6 @@ dDocent_Contig_1946
 dDocent_Contig_1965
 dDocent_Contig_1968
 dDocent_Contig_1969
-dDocent_Contig_1973
 dDocent_Contig_1978
 dDocent_Contig_1988
 dDocent_Contig_2000
@@ -607,7 +581,6 @@ dDocent_Contig_2323
 dDocent_Contig_2329
 dDocent_Contig_2330
 dDocent_Contig_2332
-dDocent_Contig_2336
 dDocent_Contig_2338
 dDocent_Contig_2342
 dDocent_Contig_2344
@@ -624,9 +597,7 @@ dDocent_Contig_2374
 dDocent_Contig_2376
 dDocent_Contig_2377
 dDocent_Contig_2382
-dDocent_Contig_2384
 dDocent_Contig_2388
-dDocent_Contig_2389
 dDocent_Contig_2391
 dDocent_Contig_2395
 dDocent_Contig_2398
@@ -642,7 +613,6 @@ dDocent_Contig_2420
 dDocent_Contig_2422
 dDocent_Contig_2428
 dDocent_Contig_2449
-dDocent_Contig_2450
 dDocent_Contig_2451
 dDocent_Contig_2456
 dDocent_Contig_2458
@@ -719,7 +689,6 @@ dDocent_Contig_2759
 dDocent_Contig_2760
 dDocent_Contig_2765
 dDocent_Contig_2766
-dDocent_Contig_2768
 dDocent_Contig_2770
 dDocent_Contig_2773
 dDocent_Contig_2776
@@ -771,7 +740,6 @@ dDocent_Contig_2962
 dDocent_Contig_2963
 dDocent_Contig_2965
 dDocent_Contig_2966
-dDocent_Contig_2969
 dDocent_Contig_2973
 dDocent_Contig_2978
 dDocent_Contig_2992
@@ -785,7 +753,6 @@ dDocent_Contig_3013
 dDocent_Contig_3023
 dDocent_Contig_3025
 dDocent_Contig_3038
-dDocent_Contig_3042
 dDocent_Contig_3048
 dDocent_Contig_3049
 dDocent_Contig_3056
@@ -831,7 +798,6 @@ dDocent_Contig_3258
 dDocent_Contig_3262
 dDocent_Contig_3281
 dDocent_Contig_3282
-dDocent_Contig_3283
 dDocent_Contig_3287
 dDocent_Contig_3290
 dDocent_Contig_3295
@@ -855,7 +821,6 @@ dDocent_Contig_3467
 dDocent_Contig_3469
 dDocent_Contig_3472
 dDocent_Contig_3475
-dDocent_Contig_3480
 dDocent_Contig_3486
 dDocent_Contig_3490
 dDocent_Contig_3498
@@ -868,7 +833,6 @@ dDocent_Contig_3524
 dDocent_Contig_3526
 dDocent_Contig_3536
 dDocent_Contig_3538
-dDocent_Contig_3545
 dDocent_Contig_3547
 dDocent_Contig_3548
 dDocent_Contig_3550
@@ -896,7 +860,6 @@ dDocent_Contig_3628
 dDocent_Contig_3630
 dDocent_Contig_3632
 dDocent_Contig_3634
-dDocent_Contig_3640
 dDocent_Contig_3641
 dDocent_Contig_3643
 dDocent_Contig_3646
@@ -913,10 +876,8 @@ dDocent_Contig_3673
 dDocent_Contig_3679
 dDocent_Contig_3681
 dDocent_Contig_3683
-dDocent_Contig_3685
 dDocent_Contig_3688
 dDocent_Contig_3689
-dDocent_Contig_3697
 dDocent_Contig_3700
 dDocent_Contig_3709
 dDocent_Contig_3726
@@ -937,7 +898,6 @@ dDocent_Contig_3775
 dDocent_Contig_3776
 dDocent_Contig_3778
 dDocent_Contig_3780
-dDocent_Contig_3785
 dDocent_Contig_3792
 dDocent_Contig_3795
 dDocent_Contig_3799
@@ -957,7 +917,6 @@ dDocent_Contig_3861
 dDocent_Contig_3864
 dDocent_Contig_3880
 dDocent_Contig_3881
-dDocent_Contig_3892
 dDocent_Contig_3897
 dDocent_Contig_3902
 dDocent_Contig_3904
@@ -1015,7 +974,6 @@ dDocent_Contig_4094
 dDocent_Contig_4102
 dDocent_Contig_4104
 dDocent_Contig_4107
-dDocent_Contig_4112
 dDocent_Contig_4120
 dDocent_Contig_4127
 dDocent_Contig_4131
@@ -1042,7 +1000,6 @@ dDocent_Contig_4230
 dDocent_Contig_4231
 dDocent_Contig_4245
 dDocent_Contig_4246
-dDocent_Contig_4250
 dDocent_Contig_4253
 dDocent_Contig_4254
 dDocent_Contig_4255
@@ -1145,7 +1102,6 @@ dDocent_Contig_4677
 dDocent_Contig_4678
 dDocent_Contig_4679
 dDocent_Contig_4682
-dDocent_Contig_4697
 dDocent_Contig_4716
 dDocent_Contig_4722
 dDocent_Contig_4723
@@ -1166,7 +1122,6 @@ dDocent_Contig_4803
 dDocent_Contig_4814
 dDocent_Contig_4831
 dDocent_Contig_4840
-dDocent_Contig_4844
 dDocent_Contig_4855
 dDocent_Contig_4856
 dDocent_Contig_4857
@@ -1276,7 +1231,6 @@ dDocent_Contig_5340
 dDocent_Contig_5351
 dDocent_Contig_5353
 dDocent_Contig_5359
-dDocent_Contig_5362
 dDocent_Contig_5365
 dDocent_Contig_5374
 dDocent_Contig_5379
@@ -1364,11 +1318,9 @@ dDocent_Contig_5803
 dDocent_Contig_5809
 dDocent_Contig_5811
 dDocent_Contig_5817
-dDocent_Contig_5818
 dDocent_Contig_5823
 dDocent_Contig_5824
 dDocent_Contig_5826
-dDocent_Contig_5832
 dDocent_Contig_5833
 dDocent_Contig_5835
 dDocent_Contig_5836
@@ -1393,7 +1345,6 @@ dDocent_Contig_5902
 dDocent_Contig_5903
 dDocent_Contig_5913
 dDocent_Contig_5917
-dDocent_Contig_5918
 dDocent_Contig_5919
 dDocent_Contig_5923
 dDocent_Contig_5929
@@ -1443,7 +1394,6 @@ dDocent_Contig_6166
 dDocent_Contig_6167
 dDocent_Contig_6168
 dDocent_Contig_6169
-dDocent_Contig_6177
 dDocent_Contig_6181
 dDocent_Contig_6186
 dDocent_Contig_6188
@@ -1502,12 +1452,10 @@ dDocent_Contig_6394
 dDocent_Contig_6399
 dDocent_Contig_6404
 dDocent_Contig_6406
-dDocent_Contig_6407
 dDocent_Contig_6421
 dDocent_Contig_6422
 dDocent_Contig_6427
 dDocent_Contig_6429
-dDocent_Contig_6436
 dDocent_Contig_6441
 dDocent_Contig_6443
 dDocent_Contig_6444
@@ -1595,7 +1543,6 @@ dDocent_Contig_6866
 dDocent_Contig_6867
 dDocent_Contig_6868
 dDocent_Contig_6875
-dDocent_Contig_6877
 dDocent_Contig_6878
 dDocent_Contig_6879
 dDocent_Contig_6883
@@ -1657,7 +1604,6 @@ dDocent_Contig_7071
 dDocent_Contig_7075
 dDocent_Contig_7077
 dDocent_Contig_7079
-dDocent_Contig_7081
 dDocent_Contig_7082
 dDocent_Contig_7083
 dDocent_Contig_7087
@@ -1672,13 +1618,11 @@ dDocent_Contig_7135
 dDocent_Contig_7137
 dDocent_Contig_7144
 dDocent_Contig_7145
-dDocent_Contig_7164
 dDocent_Contig_7185
 dDocent_Contig_7187
 dDocent_Contig_7188
 dDocent_Contig_7195
 dDocent_Contig_7196
-dDocent_Contig_7204
 dDocent_Contig_7205
 dDocent_Contig_7216
 dDocent_Contig_7228
@@ -1699,7 +1643,6 @@ dDocent_Contig_7300
 dDocent_Contig_7314
 dDocent_Contig_7319
 dDocent_Contig_7323
-dDocent_Contig_7330
 dDocent_Contig_7335
 dDocent_Contig_7336
 dDocent_Contig_7337
@@ -1715,7 +1658,6 @@ dDocent_Contig_7440
 dDocent_Contig_7442
 dDocent_Contig_7444
 dDocent_Contig_7454
-dDocent_Contig_7457
 dDocent_Contig_7467
 dDocent_Contig_7469
 dDocent_Contig_7472
@@ -1772,7 +1714,6 @@ dDocent_Contig_7672
 dDocent_Contig_7674
 dDocent_Contig_7679
 dDocent_Contig_7687
-dDocent_Contig_7693
 dDocent_Contig_7694
 dDocent_Contig_7712
 dDocent_Contig_7720
@@ -1800,7 +1741,6 @@ dDocent_Contig_7842
 dDocent_Contig_7849
 dDocent_Contig_7854
 dDocent_Contig_7861
-dDocent_Contig_7867
 dDocent_Contig_7869
 dDocent_Contig_7878
 dDocent_Contig_7879
@@ -1818,12 +1758,10 @@ dDocent_Contig_7931
 dDocent_Contig_7932
 dDocent_Contig_7934
 dDocent_Contig_7936
-dDocent_Contig_7937
 dDocent_Contig_7938
 dDocent_Contig_7939
 dDocent_Contig_7947
 dDocent_Contig_7958
-dDocent_Contig_7963
 dDocent_Contig_7973
 dDocent_Contig_7982
 dDocent_Contig_7983
@@ -1844,7 +1782,6 @@ dDocent_Contig_8036
 dDocent_Contig_8040
 dDocent_Contig_8041
 dDocent_Contig_8047
-dDocent_Contig_8048
 dDocent_Contig_8053
 dDocent_Contig_8060
 dDocent_Contig_8063
@@ -1968,7 +1905,6 @@ dDocent_Contig_8876
 dDocent_Contig_8883
 dDocent_Contig_8887
 dDocent_Contig_8903
-dDocent_Contig_8911
 dDocent_Contig_8923
 dDocent_Contig_8936
 dDocent_Contig_8942
@@ -2007,10 +1943,8 @@ dDocent_Contig_9116
 dDocent_Contig_9124
 dDocent_Contig_9127
 dDocent_Contig_9154
-dDocent_Contig_9162
 dDocent_Contig_9165
 dDocent_Contig_9175
-dDocent_Contig_9177
 dDocent_Contig_9182
 dDocent_Contig_9187
 dDocent_Contig_9193
@@ -2020,7 +1954,6 @@ dDocent_Contig_9229
 dDocent_Contig_9232
 dDocent_Contig_9247
 dDocent_Contig_9274
-dDocent_Contig_9284
 dDocent_Contig_9288
 dDocent_Contig_9291
 dDocent_Contig_9301
@@ -2093,7 +2026,6 @@ dDocent_Contig_9850
 dDocent_Contig_9892
 dDocent_Contig_9900
 dDocent_Contig_9914
-dDocent_Contig_9922
 dDocent_Contig_9943
 dDocent_Contig_9972
 dDocent_Contig_9978
@@ -2211,7 +2143,6 @@ dDocent_Contig_10752
 dDocent_Contig_10755
 dDocent_Contig_10762
 dDocent_Contig_10773
-dDocent_Contig_10786
 dDocent_Contig_10789
 dDocent_Contig_10814
 dDocent_Contig_10823
@@ -2233,11 +2164,9 @@ dDocent_Contig_10921
 dDocent_Contig_10932
 dDocent_Contig_10933
 dDocent_Contig_10934
-dDocent_Contig_10935
 dDocent_Contig_10947
 dDocent_Contig_10958
 dDocent_Contig_10962
-dDocent_Contig_10965
 dDocent_Contig_10972
 dDocent_Contig_10983
 dDocent_Contig_10984
@@ -2650,7 +2579,6 @@ dDocent_Contig_14028
 dDocent_Contig_14034
 dDocent_Contig_14038
 dDocent_Contig_14041
-dDocent_Contig_14054
 dDocent_Contig_14073
 dDocent_Contig_14082
 dDocent_Contig_14134
@@ -2744,7 +2672,6 @@ dDocent_Contig_14840
 dDocent_Contig_14842
 dDocent_Contig_14849
 dDocent_Contig_14856
-dDocent_Contig_14865
 dDocent_Contig_14868
 dDocent_Contig_14889
 dDocent_Contig_14897
@@ -2762,7 +2689,6 @@ dDocent_Contig_14997
 dDocent_Contig_15008
 dDocent_Contig_15016
 dDocent_Contig_15022
-dDocent_Contig_15025
 dDocent_Contig_15037
 dDocent_Contig_15043
 dDocent_Contig_15047
@@ -2954,13 +2880,11 @@ dDocent_Contig_16504
 dDocent_Contig_16505
 dDocent_Contig_16509
 dDocent_Contig_16511
-dDocent_Contig_16537
 dDocent_Contig_16540
 dDocent_Contig_16544
 dDocent_Contig_16553
 dDocent_Contig_16561
 dDocent_Contig_16568
-dDocent_Contig_16584
 dDocent_Contig_16595
 dDocent_Contig_16621
 dDocent_Contig_16632
@@ -3089,7 +3013,6 @@ dDocent_Contig_17861
 dDocent_Contig_17863
 dDocent_Contig_17866
 dDocent_Contig_17871
-dDocent_Contig_17880
 dDocent_Contig_17883
 dDocent_Contig_17891
 dDocent_Contig_17923
@@ -3149,7 +3072,6 @@ dDocent_Contig_18244
 dDocent_Contig_18251
 dDocent_Contig_18252
 dDocent_Contig_18254
-dDocent_Contig_18259
 dDocent_Contig_18261
 dDocent_Contig_18262
 dDocent_Contig_18264
@@ -3300,7 +3222,6 @@ dDocent_Contig_19317
 dDocent_Contig_19333
 dDocent_Contig_19351
 dDocent_Contig_19356
-dDocent_Contig_19364
 dDocent_Contig_19383
 dDocent_Contig_19389
 dDocent_Contig_19397
@@ -3411,7 +3332,6 @@ dDocent_Contig_20381
 dDocent_Contig_20383
 dDocent_Contig_20394
 dDocent_Contig_20398
-dDocent_Contig_20406
 dDocent_Contig_20408
 dDocent_Contig_20445
 dDocent_Contig_20448
@@ -3430,7 +3350,6 @@ dDocent_Contig_20547
 dDocent_Contig_20553
 dDocent_Contig_20558
 dDocent_Contig_20586
-dDocent_Contig_20603
 dDocent_Contig_20619
 dDocent_Contig_20629
 dDocent_Contig_20642
@@ -4051,7 +3970,6 @@ dDocent_Contig_25980
 dDocent_Contig_25984
 dDocent_Contig_26004
 dDocent_Contig_26006
-dDocent_Contig_26010
 dDocent_Contig_26015
 dDocent_Contig_26023
 dDocent_Contig_26029
@@ -4105,7 +4023,6 @@ dDocent_Contig_26335
 dDocent_Contig_26345
 dDocent_Contig_26346
 dDocent_Contig_26347
-dDocent_Contig_26350
 dDocent_Contig_26367
 dDocent_Contig_26373
 dDocent_Contig_26383
@@ -4551,14 +4468,12 @@ dDocent_Contig_29842
 dDocent_Contig_29845
 dDocent_Contig_29856
 dDocent_Contig_29857
-dDocent_Contig_29860
 dDocent_Contig_29867
 dDocent_Contig_29871
 dDocent_Contig_29875
 dDocent_Contig_29889
 dDocent_Contig_29896
 dDocent_Contig_29902
-dDocent_Contig_29905
 dDocent_Contig_29912
 dDocent_Contig_29915
 dDocent_Contig_29916
@@ -4578,7 +4493,6 @@ dDocent_Contig_30052
 dDocent_Contig_30062
 dDocent_Contig_30080
 dDocent_Contig_30087
-dDocent_Contig_30099
 dDocent_Contig_30105
 dDocent_Contig_30115
 dDocent_Contig_30132
@@ -4616,7 +4530,6 @@ dDocent_Contig_30305
 dDocent_Contig_30329
 dDocent_Contig_30336
 dDocent_Contig_30342
-dDocent_Contig_30350
 dDocent_Contig_30361
 dDocent_Contig_30373
 dDocent_Contig_30388
@@ -4644,7 +4557,6 @@ dDocent_Contig_30631
 dDocent_Contig_30651
 dDocent_Contig_30658
 dDocent_Contig_30660
-dDocent_Contig_30661
 dDocent_Contig_30668
 dDocent_Contig_30676
 dDocent_Contig_30679
@@ -4664,7 +4576,6 @@ dDocent_Contig_30774
 dDocent_Contig_30781
 dDocent_Contig_30791
 dDocent_Contig_30795
-dDocent_Contig_30806
 dDocent_Contig_30819
 dDocent_Contig_30835
 dDocent_Contig_30843
@@ -4815,7 +4726,6 @@ dDocent_Contig_31923
 dDocent_Contig_31926
 dDocent_Contig_31931
 dDocent_Contig_31936
-dDocent_Contig_31939
 dDocent_Contig_31965
 dDocent_Contig_31967
 dDocent_Contig_31970
@@ -4877,7 +4787,6 @@ dDocent_Contig_32809
 dDocent_Contig_32826
 dDocent_Contig_32831
 dDocent_Contig_32858
-dDocent_Contig_32875
 dDocent_Contig_32876
 dDocent_Contig_32883
 dDocent_Contig_32893
@@ -4908,7 +4817,6 @@ dDocent_Contig_34157
 dDocent_Contig_34165
 dDocent_Contig_34176
 dDocent_Contig_34196
-dDocent_Contig_34211
 dDocent_Contig_34230
 dDocent_Contig_34232
 dDocent_Contig_34257
@@ -5015,7 +4923,6 @@ dDocent_Contig_34970
 dDocent_Contig_34974
 dDocent_Contig_34981
 dDocent_Contig_34991
-dDocent_Contig_35005
 dDocent_Contig_35007
 dDocent_Contig_35013
 dDocent_Contig_35036
@@ -5030,7 +4937,6 @@ dDocent_Contig_35088
 dDocent_Contig_35089
 dDocent_Contig_35094
 dDocent_Contig_35110
-dDocent_Contig_35118
 dDocent_Contig_35122
 dDocent_Contig_35124
 dDocent_Contig_35133
@@ -5058,7 +4964,6 @@ dDocent_Contig_35339
 dDocent_Contig_35344
 dDocent_Contig_35355
 dDocent_Contig_35356
-dDocent_Contig_35357
 dDocent_Contig_35359
 dDocent_Contig_35361
 dDocent_Contig_35377
@@ -5113,7 +5018,6 @@ dDocent_Contig_35807
 dDocent_Contig_35813
 dDocent_Contig_35817
 dDocent_Contig_35830
-dDocent_Contig_35833
 dDocent_Contig_35835
 dDocent_Contig_35838
 dDocent_Contig_35848
@@ -5123,7 +5027,6 @@ dDocent_Contig_35868
 dDocent_Contig_35870
 dDocent_Contig_35873
 dDocent_Contig_35879
-dDocent_Contig_35882
 dDocent_Contig_35889
 dDocent_Contig_35896
 dDocent_Contig_35906
@@ -5140,7 +5043,6 @@ dDocent_Contig_36009
 dDocent_Contig_36012
 dDocent_Contig_36014
 dDocent_Contig_36015
-dDocent_Contig_36021
 dDocent_Contig_36032
 dDocent_Contig_36035
 dDocent_Contig_36046
@@ -5415,7 +5317,6 @@ dDocent_Contig_38265
 dDocent_Contig_38271
 dDocent_Contig_38286
 dDocent_Contig_38287
-dDocent_Contig_38289
 dDocent_Contig_38297
 dDocent_Contig_38308
 dDocent_Contig_38314
@@ -5435,7 +5336,6 @@ dDocent_Contig_38408
 dDocent_Contig_38415
 dDocent_Contig_38419
 dDocent_Contig_38422
-dDocent_Contig_38425
 dDocent_Contig_38431
 dDocent_Contig_38433
 dDocent_Contig_38440
@@ -5585,7 +5485,6 @@ dDocent_Contig_39624
 dDocent_Contig_39630
 dDocent_Contig_39643
 dDocent_Contig_39667
-dDocent_Contig_39670
 dDocent_Contig_39682
 dDocent_Contig_39691
 dDocent_Contig_39701
@@ -5780,7 +5679,6 @@ dDocent_Contig_41222
 dDocent_Contig_41227
 dDocent_Contig_41236
 dDocent_Contig_41254
-dDocent_Contig_41261
 dDocent_Contig_41270
 dDocent_Contig_41272
 dDocent_Contig_41283
@@ -5826,7 +5724,6 @@ dDocent_Contig_41624
 dDocent_Contig_41625
 dDocent_Contig_41626
 dDocent_Contig_41636
-dDocent_Contig_41640
 dDocent_Contig_41650
 dDocent_Contig_41662
 dDocent_Contig_41688
@@ -6009,7 +5906,6 @@ dDocent_Contig_43068
 dDocent_Contig_43071
 dDocent_Contig_43076
 dDocent_Contig_43081
-dDocent_Contig_43092
 dDocent_Contig_43100
 dDocent_Contig_43109
 dDocent_Contig_43111
@@ -6263,7 +6159,6 @@ dDocent_Contig_45432
 dDocent_Contig_45436
 dDocent_Contig_45443
 dDocent_Contig_45452
-dDocent_Contig_45466
 dDocent_Contig_45471
 dDocent_Contig_45492
 dDocent_Contig_45499
@@ -6393,7 +6288,6 @@ dDocent_Contig_46840
 dDocent_Contig_46846
 dDocent_Contig_46852
 dDocent_Contig_46856
-dDocent_Contig_46865
 dDocent_Contig_46872
 dDocent_Contig_46880
 dDocent_Contig_46881
@@ -6462,7 +6356,6 @@ dDocent_Contig_47493
 dDocent_Contig_47496
 dDocent_Contig_47498
 dDocent_Contig_47500
-dDocent_Contig_47511
 dDocent_Contig_47516
 dDocent_Contig_47517
 dDocent_Contig_47519
@@ -6559,7 +6452,6 @@ dDocent_Contig_48396
 dDocent_Contig_48399
 dDocent_Contig_48404
 dDocent_Contig_48405
-dDocent_Contig_48412
 dDocent_Contig_48423
 dDocent_Contig_48424
 dDocent_Contig_48429
@@ -6689,7 +6581,6 @@ dDocent_Contig_49941
 dDocent_Contig_49945
 dDocent_Contig_49950
 dDocent_Contig_49984
-dDocent_Contig_50000
 dDocent_Contig_50005
 dDocent_Contig_50016
 dDocent_Contig_50024
@@ -6746,7 +6637,6 @@ dDocent_Contig_50570
 dDocent_Contig_50571
 dDocent_Contig_50578
 dDocent_Contig_50589
-dDocent_Contig_50611
 dDocent_Contig_50614
 dDocent_Contig_50624
 dDocent_Contig_50625
@@ -6908,7 +6798,6 @@ dDocent_Contig_51928
 dDocent_Contig_51930
 dDocent_Contig_51952
 dDocent_Contig_51961
-dDocent_Contig_51964
 dDocent_Contig_51987
 dDocent_Contig_51991
 dDocent_Contig_51996
@@ -7074,7 +6963,6 @@ dDocent_Contig_53366
 dDocent_Contig_53368
 dDocent_Contig_53371
 dDocent_Contig_53374
-dDocent_Contig_53389
 dDocent_Contig_53398
 dDocent_Contig_53405
 dDocent_Contig_53421
@@ -7242,7 +7130,6 @@ dDocent_Contig_54875
 dDocent_Contig_54877
 dDocent_Contig_54886
 dDocent_Contig_54892
-dDocent_Contig_55008
 dDocent_Contig_55019
 dDocent_Contig_55035
 dDocent_Contig_55044
@@ -7353,7 +7240,6 @@ dDocent_Contig_55966
 dDocent_Contig_55972
 dDocent_Contig_55975
 dDocent_Contig_55994
-dDocent_Contig_56001
 dDocent_Contig_56008
 dDocent_Contig_56021
 dDocent_Contig_56025
@@ -7589,7 +7475,6 @@ dDocent_Contig_58390
 dDocent_Contig_58408
 dDocent_Contig_58417
 dDocent_Contig_58426
-dDocent_Contig_58428
 dDocent_Contig_58429
 dDocent_Contig_58436
 dDocent_Contig_58438
@@ -7668,7 +7553,6 @@ dDocent_Contig_59058
 dDocent_Contig_59059
 dDocent_Contig_59065
 dDocent_Contig_59066
-dDocent_Contig_59080
 dDocent_Contig_59085
 dDocent_Contig_59099
 dDocent_Contig_59114
@@ -7826,7 +7710,6 @@ dDocent_Contig_60315
 dDocent_Contig_60323
 dDocent_Contig_60325
 dDocent_Contig_60328
-dDocent_Contig_60333
 dDocent_Contig_60342
 dDocent_Contig_60344
 dDocent_Contig_60357
@@ -7862,9 +7745,7 @@ dDocent_Contig_60590
 dDocent_Contig_60596
 dDocent_Contig_60604
 dDocent_Contig_60620
-dDocent_Contig_60621
 dDocent_Contig_60622
-dDocent_Contig_60633
 dDocent_Contig_60637
 dDocent_Contig_60648
 dDocent_Contig_60672
@@ -7897,7 +7778,6 @@ dDocent_Contig_60810
 dDocent_Contig_60812
 dDocent_Contig_60813
 dDocent_Contig_60819
-dDocent_Contig_60825
 dDocent_Contig_60852
 dDocent_Contig_60859
 dDocent_Contig_60873
@@ -7924,7 +7804,6 @@ dDocent_Contig_61049
 dDocent_Contig_61053
 dDocent_Contig_61054
 dDocent_Contig_61056
-dDocent_Contig_61058
 dDocent_Contig_61093
 dDocent_Contig_61095
 dDocent_Contig_61102
@@ -7935,7 +7814,6 @@ dDocent_Contig_61117
 dDocent_Contig_61123
 dDocent_Contig_61124
 dDocent_Contig_61142
-dDocent_Contig_61144
 dDocent_Contig_61149
 dDocent_Contig_61164
 dDocent_Contig_61173
@@ -7987,7 +7865,6 @@ dDocent_Contig_61511
 dDocent_Contig_61513
 dDocent_Contig_61514
 dDocent_Contig_61519
-dDocent_Contig_61522
 dDocent_Contig_61524
 dDocent_Contig_61527
 dDocent_Contig_61531
@@ -8064,7 +7941,6 @@ dDocent_Contig_61994
 dDocent_Contig_61998
 dDocent_Contig_62003
 dDocent_Contig_62058
-dDocent_Contig_62090
 dDocent_Contig_62121
 dDocent_Contig_62126
 dDocent_Contig_62155
@@ -8089,7 +7965,6 @@ dDocent_Contig_62289
 dDocent_Contig_62290
 dDocent_Contig_62300
 dDocent_Contig_62301
-dDocent_Contig_62307
 dDocent_Contig_62314
 dDocent_Contig_62322
 dDocent_Contig_62326
@@ -8170,7 +8045,6 @@ dDocent_Contig_62983
 dDocent_Contig_62993
 dDocent_Contig_63013
 dDocent_Contig_63014
-dDocent_Contig_63017
 dDocent_Contig_63027
 dDocent_Contig_63043
 dDocent_Contig_63048
@@ -8349,7 +8223,6 @@ dDocent_Contig_64618
 dDocent_Contig_64619
 dDocent_Contig_64622
 dDocent_Contig_64623
-dDocent_Contig_64631
 dDocent_Contig_64663
 dDocent_Contig_64665
 dDocent_Contig_64672
@@ -8385,7 +8258,6 @@ dDocent_Contig_64912
 dDocent_Contig_64917
 dDocent_Contig_64926
 dDocent_Contig_64929
-dDocent_Contig_64950
 dDocent_Contig_64971
 dDocent_Contig_64989
 dDocent_Contig_64992
@@ -8425,7 +8297,6 @@ dDocent_Contig_65296
 dDocent_Contig_65300
 dDocent_Contig_65301
 dDocent_Contig_65304
-dDocent_Contig_65311
 dDocent_Contig_65316
 dDocent_Contig_65324
 dDocent_Contig_65331
@@ -8469,7 +8340,6 @@ dDocent_Contig_65657
 dDocent_Contig_65680
 dDocent_Contig_65705
 dDocent_Contig_65715
-dDocent_Contig_65740
 dDocent_Contig_65750
 dDocent_Contig_65754
 dDocent_Contig_65757
@@ -8597,7 +8467,6 @@ dDocent_Contig_66683
 dDocent_Contig_66691
 dDocent_Contig_66700
 dDocent_Contig_66703
-dDocent_Contig_66716
 dDocent_Contig_66718
 dDocent_Contig_66719
 dDocent_Contig_66724
@@ -8812,7 +8681,6 @@ dDocent_Contig_68784
 dDocent_Contig_68786
 dDocent_Contig_68790
 dDocent_Contig_68795
-dDocent_Contig_68801
 dDocent_Contig_68827
 dDocent_Contig_68841
 dDocent_Contig_68849
@@ -8864,7 +8732,6 @@ dDocent_Contig_69184
 dDocent_Contig_69194
 dDocent_Contig_69204
 dDocent_Contig_69208
-dDocent_Contig_69224
 dDocent_Contig_69229
 dDocent_Contig_69235
 dDocent_Contig_69239
@@ -8900,7 +8767,6 @@ dDocent_Contig_69471
 dDocent_Contig_69475
 dDocent_Contig_69482
 dDocent_Contig_69488
-dDocent_Contig_69491
 dDocent_Contig_69500
 dDocent_Contig_69506
 dDocent_Contig_69518
@@ -8937,7 +8803,6 @@ dDocent_Contig_69807
 dDocent_Contig_69812
 dDocent_Contig_69816
 dDocent_Contig_69817
-dDocent_Contig_69820
 dDocent_Contig_69824
 dDocent_Contig_69828
 dDocent_Contig_69829
@@ -9022,7 +8887,6 @@ dDocent_Contig_70410
 dDocent_Contig_70420
 dDocent_Contig_70430
 dDocent_Contig_70434
-dDocent_Contig_70441
 dDocent_Contig_70445
 dDocent_Contig_70450
 dDocent_Contig_70459
@@ -9049,7 +8913,6 @@ dDocent_Contig_70650
 dDocent_Contig_70653
 dDocent_Contig_70658
 dDocent_Contig_70659
-dDocent_Contig_70678
 dDocent_Contig_70680
 dDocent_Contig_70684
 dDocent_Contig_70689
@@ -9057,7 +8920,6 @@ dDocent_Contig_70698
 dDocent_Contig_70701
 dDocent_Contig_70705
 dDocent_Contig_70708
-dDocent_Contig_70723
 dDocent_Contig_70749
 dDocent_Contig_70757
 dDocent_Contig_70760
@@ -9351,7 +9213,6 @@ dDocent_Contig_73497
 dDocent_Contig_73498
 dDocent_Contig_73516
 dDocent_Contig_73523
-dDocent_Contig_73527
 dDocent_Contig_73532
 dDocent_Contig_73549
 dDocent_Contig_73551
@@ -9389,7 +9250,6 @@ dDocent_Contig_73872
 dDocent_Contig_73880
 dDocent_Contig_73889
 dDocent_Contig_73898
-dDocent_Contig_73919
 dDocent_Contig_73922
 dDocent_Contig_73925
 dDocent_Contig_73959
@@ -9422,7 +9282,6 @@ dDocent_Contig_74196
 dDocent_Contig_74218
 dDocent_Contig_74231
 dDocent_Contig_74247
-dDocent_Contig_74248
 dDocent_Contig_74252
 dDocent_Contig_74280
 dDocent_Contig_74282
@@ -9436,15 +9295,12 @@ dDocent_Contig_74310
 dDocent_Contig_74316
 dDocent_Contig_74320
 dDocent_Contig_74325
-dDocent_Contig_74332
 dDocent_Contig_74356
 dDocent_Contig_74362
 dDocent_Contig_74364
-dDocent_Contig_74366
 dDocent_Contig_74375
 dDocent_Contig_74381
 dDocent_Contig_74384
-dDocent_Contig_74392
 dDocent_Contig_74415
 dDocent_Contig_74425
 dDocent_Contig_74426
@@ -9539,7 +9395,6 @@ dDocent_Contig_75194
 dDocent_Contig_75197
 dDocent_Contig_75205
 dDocent_Contig_75212
-dDocent_Contig_75215
 dDocent_Contig_75217
 dDocent_Contig_75221
 dDocent_Contig_75238
@@ -9674,7 +9529,6 @@ dDocent_Contig_76426
 dDocent_Contig_76462
 dDocent_Contig_76473
 dDocent_Contig_76474
-dDocent_Contig_76475
 dDocent_Contig_76481
 dDocent_Contig_76484
 dDocent_Contig_76487
@@ -9995,7 +9849,6 @@ dDocent_Contig_78960
 dDocent_Contig_78975
 dDocent_Contig_78976
 dDocent_Contig_78983
-dDocent_Contig_78993
 dDocent_Contig_79010
 dDocent_Contig_79015
 dDocent_Contig_79019
@@ -10130,7 +9983,6 @@ dDocent_Contig_79974
 dDocent_Contig_79976
 dDocent_Contig_79980
 dDocent_Contig_79986
-dDocent_Contig_79990
 dDocent_Contig_79997
 dDocent_Contig_80011
 dDocent_Contig_80013
@@ -10141,7 +9993,6 @@ dDocent_Contig_80042
 dDocent_Contig_80046
 dDocent_Contig_80049
 dDocent_Contig_80054
-dDocent_Contig_80070
 dDocent_Contig_80073
 dDocent_Contig_80081
 dDocent_Contig_80084
@@ -10256,7 +10107,6 @@ dDocent_Contig_80909
 dDocent_Contig_80932
 dDocent_Contig_80934
 dDocent_Contig_80941
-dDocent_Contig_80948
 dDocent_Contig_80958
 dDocent_Contig_80985
 dDocent_Contig_81003
@@ -10274,18 +10124,15 @@ dDocent_Contig_81081
 dDocent_Contig_81085
 dDocent_Contig_81090
 dDocent_Contig_81092
-dDocent_Contig_81105
 dDocent_Contig_81106
 dDocent_Contig_81108
 dDocent_Contig_81126
 dDocent_Contig_81142
 dDocent_Contig_81146
-dDocent_Contig_81159
 dDocent_Contig_81179
 dDocent_Contig_81190
 dDocent_Contig_81193
 dDocent_Contig_81215
-dDocent_Contig_81217
 dDocent_Contig_81238
 dDocent_Contig_81244
 dDocent_Contig_81259
@@ -10411,7 +10258,6 @@ dDocent_Contig_82581
 dDocent_Contig_82586
 dDocent_Contig_82591
 dDocent_Contig_82609
-dDocent_Contig_82617
 dDocent_Contig_82630
 dDocent_Contig_82632
 dDocent_Contig_82640
@@ -10519,7 +10365,6 @@ dDocent_Contig_83739
 dDocent_Contig_83742
 dDocent_Contig_83794
 dDocent_Contig_83801
-dDocent_Contig_83807
 dDocent_Contig_83816
 dDocent_Contig_83826
 dDocent_Contig_83840
@@ -10577,7 +10422,6 @@ dDocent_Contig_84403
 dDocent_Contig_84408
 dDocent_Contig_84409
 dDocent_Contig_84417
-dDocent_Contig_84424
 dDocent_Contig_84444
 dDocent_Contig_84447
 dDocent_Contig_84453
@@ -10799,7 +10643,6 @@ dDocent_Contig_86593
 dDocent_Contig_86604
 dDocent_Contig_86617
 dDocent_Contig_86631
-dDocent_Contig_86632
 dDocent_Contig_86635
 dDocent_Contig_86643
 dDocent_Contig_86644
@@ -10891,7 +10734,6 @@ dDocent_Contig_87348
 dDocent_Contig_87354
 dDocent_Contig_87355
 dDocent_Contig_87365
-dDocent_Contig_87375
 dDocent_Contig_87376
 dDocent_Contig_87378
 dDocent_Contig_87389
@@ -10988,8 +10830,6 @@ dDocent_Contig_88238
 dDocent_Contig_88269
 dDocent_Contig_88276
 dDocent_Contig_88297
-dDocent_Contig_88318
-dDocent_Contig_88329
 dDocent_Contig_88331
 dDocent_Contig_88332
 dDocent_Contig_88344
@@ -11012,7 +10852,6 @@ dDocent_Contig_88464
 dDocent_Contig_88468
 dDocent_Contig_88474
 dDocent_Contig_88481
-dDocent_Contig_88497
 dDocent_Contig_88501
 dDocent_Contig_88518
 dDocent_Contig_88527
@@ -11054,7 +10893,6 @@ dDocent_Contig_88931
 dDocent_Contig_88969
 dDocent_Contig_88970
 dDocent_Contig_88973
-dDocent_Contig_88976
 dDocent_Contig_88989
 dDocent_Contig_88990
 dDocent_Contig_89003
@@ -11077,7 +10915,6 @@ dDocent_Contig_89088
 dDocent_Contig_89108
 dDocent_Contig_89112
 dDocent_Contig_89117
-dDocent_Contig_89122
 dDocent_Contig_89133
 dDocent_Contig_89136
 dDocent_Contig_89143
@@ -11140,7 +10977,6 @@ dDocent_Contig_89603
 dDocent_Contig_89611
 dDocent_Contig_89616
 dDocent_Contig_89620
-dDocent_Contig_89623
 dDocent_Contig_89625
 dDocent_Contig_89639
 dDocent_Contig_89647
@@ -11362,7 +11198,6 @@ dDocent_Contig_91627
 dDocent_Contig_91629
 dDocent_Contig_91636
 dDocent_Contig_91663
-dDocent_Contig_91667
 dDocent_Contig_91674
 dDocent_Contig_91684
 dDocent_Contig_91697
@@ -11456,12 +11291,10 @@ dDocent_Contig_92649
 dDocent_Contig_92654
 dDocent_Contig_92655
 dDocent_Contig_92673
-dDocent_Contig_92674
 dDocent_Contig_92735
 dDocent_Contig_92738
 dDocent_Contig_92740
 dDocent_Contig_92756
-dDocent_Contig_92771
 dDocent_Contig_92775
 dDocent_Contig_92786
 dDocent_Contig_92790
@@ -11531,7 +11364,6 @@ dDocent_Contig_93380
 dDocent_Contig_93393
 dDocent_Contig_93408
 dDocent_Contig_93409
-dDocent_Contig_93412
 dDocent_Contig_93418
 dDocent_Contig_93421
 dDocent_Contig_93434
@@ -11619,12 +11451,10 @@ dDocent_Contig_94166
 dDocent_Contig_94167
 dDocent_Contig_94170
 dDocent_Contig_94174
-dDocent_Contig_94179
 dDocent_Contig_94181
 dDocent_Contig_94195
 dDocent_Contig_94213
 dDocent_Contig_94218
-dDocent_Contig_94222
 dDocent_Contig_94242
 dDocent_Contig_94246
 dDocent_Contig_94261
@@ -11710,7 +11540,6 @@ dDocent_Contig_95060
 dDocent_Contig_95062
 dDocent_Contig_95068
 dDocent_Contig_95078
-dDocent_Contig_95088
 dDocent_Contig_95089
 dDocent_Contig_95092
 dDocent_Contig_95093
@@ -11790,7 +11619,6 @@ dDocent_Contig_95915
 dDocent_Contig_95942
 dDocent_Contig_95947
 dDocent_Contig_95981
-dDocent_Contig_95990
 dDocent_Contig_95997
 dDocent_Contig_96001
 dDocent_Contig_96005
@@ -11845,7 +11673,6 @@ dDocent_Contig_96408
 dDocent_Contig_96417
 dDocent_Contig_96433
 dDocent_Contig_96437
-dDocent_Contig_96441
 dDocent_Contig_96451
 dDocent_Contig_96457
 dDocent_Contig_96471

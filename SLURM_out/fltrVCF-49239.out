@@ -1,0 +1,252 @@
+
+
+fltrVCF.bash v4.4 -- a script to filter vcf files repeatably
+
+Dependencies required for fltrVCF to be fully functional:
+	R
+		tidyverse
+		gridExtra
+	vcftools
+	vcflib
+	samtools
+	perl
+	mawk
+	parallel
+	rad_haplotyper.pl https://github.com/cbirdlab/rad_haplotyper.git
+	filter_hwe_by_pop_HPC
+
+Tue Oct 5 11:33:36 CDT 2021 Reading options from command line:
+
+	Settings File:            /work/hobi/jselwyn/Coryphopterus_RAD/config_files/fltrVCF_chya_C.config
+
+	Cutoffs:                  10.1
+	Path to BAM files:        /work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_MiSeq
+	PopMap File:              /work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_MiSeq/mapped.10.1.bed
+	VCF File:                 /work/hobi/jselwyn/Coryphopterus_RAD/fltrVCF_MiSeq/MiSeq_CHYA_Initial.10.1.Fltr02.2.recode.vcf.gz
+	REF File:                 /work/hobi/jselwyn/Coryphopterus_RAD/mkREF_MiSeq/reference.10.1.fasta
+	PopMap File:              /work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_MiSeq/popmap.10.1
+	Output file prefix:       MiSeq_chyaC
+	Path to R scripts and other scripts:        /work/hobi/jselwyn/Coryphopterus_RAD/scripts/fltrVCF/scripts
+	HWE Script:               /work/hobi/jselwyn/Coryphopterus_RAD/scripts/fltrVCF/filter_hwe_by_pop_HPC.pl
+	Rad_Haplotyper script:    /work/hobi/jselwyn/Coryphopterus_RAD/scripts/rad_haplotyper/rad_haplotyper.pl
+	Number of threads:          20
+
+Tue Oct 5 11:33:36 CDT 2021 Reading options from config file and setting defaults
+	SETTINGS are being loaded from file: '/work/hobi/jselwyn/Coryphopterus_RAD/config_files/fltrVCF_chya_C.config'
+	Filters are set to '05 16 01 02 03 04 14 07 05 15 06 11 09 08 10 04 13 07 041 32 05 16 05 16 05 16 05 16 01 21'
+	CutoffCode is set to '.10.1'
+	BAM_PATH is set to '/work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_MiSeq'
+	SCRIPT_PATH is set to '/work/hobi/jselwyn/Coryphopterus_RAD/scripts/fltrVCF/scripts'
+	VCF_FILE is set to '/work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_MiSeq/TotalRawSNPs.10.1.vcf'
+	Bed file is set to '/work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_MiSeq/mapped.10.1.bed'
+	Reference genome is set to '/work/hobi/jselwyn/Coryphopterus_RAD/mkREF_MiSeq/reference.10.1.fasta'
+	PopMap is set to '/work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_MiSeq/popmap.10.1'
+	HWE_SCRIPT is set to '/work/hobi/jselwyn/Coryphopterus_RAD/scripts/fltrVCF/filter_hwe_by_pop_HPC.pl'
+	RADHAP_SCRIPT is set to '/work/hobi/jselwyn/Coryphopterus_RAD/scripts/rad_haplotyper/rad_haplotyper.pl'
+	Output file prefix is set to 'MiSeq_chyaC'
+	The number of threads is set to '1'
+	-P not set by user. Only filters that natively support parallelization will be run in parallel.
+	/work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_MiSeq/TotalRawSNPs.10.1.vcf will be used for serial processing.
+
+Tue Oct 5 11:33:36 CDT 2021 Getting universal chromosome/contig prefix ...
+          Querying /work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_MiSeq/TotalRawSNPs.10.1.vcf ...
+          Prefix: dDocent
+          It is assumed that all values in the CHROM column of vcf begin with dDocent
+          If this is not the case, then fltrVCF will not work properly.
+          The prefix is used to count SNPs/variants, contigs, etc and is used in some filters.
+
+Tue Oct 5 11:33:36 CDT 2021  reading variables into MAIN
+
+Tue Oct 5 11:33:36 CDT 2021 ---------------------------FILTER05: Remove sites called in <X proportion of individuals -----------------------------
+                                                                                                                        
+                                         Histogram of the proportion of genotypes that are missing                      
+                                                                                                                        
+                 80000 +--------------------------------------------------------------------------------------------+   
+                       |             ******   ******        +                  +                 +                  |   
+                       |             *    *   *    ******  'sitemissingness' using (bin($1,binwidth)):(1.0) ******* |   
+                 70000 |-+           *    *   *    *    *                                                         +-|   
+                       |             *    *   *    *    *****                                                       |   
+                       |             *    *   *    *    *   *                                                       |   
+                 60000 |-+           *    *   *    *    *   ******                                                +-|   
+                       |        ******    *   *    *    *   *    *                                                  |   
+                       |        *    *    *   *    *    *   *    ******                               ******        |   
+                 50000 |-+      *    *    *   *    *    *   *    *    **********             **********    *      +-|   
+                       |        *    *    *   *    *    *   *    *    *   *    ***************   *    *    *****    |   
+                 40000 |-+      *    *    *   *    *    *   *    *    *   *    *   *    *    *   *    *    *   *  +-|   
+                       |        *    *    *   *    *    *   *    *    *   *    *   *    *    *   *    *    *   *    |   
+                       |        *    *    *   *    *    *   *    *    *   *    *   *    *    *   *    *    *   *    |   
+                 30000 |-+      *    *    *   *    *    *   *    *    *   *    *   *    *    *   *    *    *   *  +-|   
+                       |        *    *    *   *    *    *   *    *    *   *    *   *    *    *   *    *    *   **** |   
+                       |        *    *    *   *    *    *   *    *    *   *    *   *    *    *   *    *    *   *  * |   
+                 20000 |-+      *    *    *   *    *    *   *    *    *   *    *   *    *    *   *    *    *   *  *-|   
+                       |    *****    *    *   *    *    *   *    *    *   *    *   *    *    *   *    *    *   *  * |   
+                       |    *   *    *    *   *    *    *   *    *    *   *    *   *    *    *   *    *    *   *  * |   
+                 10000 |-+  *   *    *    *   *    *    *   *    *    *   *    *   *    *    *   *    *    *   *  *-|   
+                       |    *   *    *    *   *    *    *   *    *    *   *    *   *    *    *   *    *    *   *  * |   
+                       |    *   *    *    *   *    *    *   *    *    *   *    *   *    *    *   *    *    *   *  * |   
+                     0 +--------------------------------------------------------------------------------------------+   
+                       0                 0.2               0.4                0.6               0.8                 1   
+                                                            Proportion Missing                                          
+                                                                                                                        
+                                                                                                                        
+                                             Scatter plot of the proportion of genotypes that are missing.              
+                                                                                                                        
+                                1 +---------------------------------------------------------------------------------+   
+                                  |***          +            +             +             +            +             |   
+                              0.9 |-+****                                                 'sitemissingness'    *  +-|   
+                                  |     ****                                                                        |   
+                                  |        ****                                                                     |   
+                              0.8 |-+         ****                                                                +-|   
+                                  |              ****                                                               |   
+                              0.7 |-+               ***                                                           +-|   
+                                  |                   ****                                                          |   
+                              0.6 |-+                    ****                                                     +-|   
+                                  |                         ****                                                    |   
+                              0.5 |-+                          ****                                               +-|   
+                                  |                               ****                                              |   
+                                  |                                  ****                                           |   
+                              0.4 |-+                                   *****                                     +-|   
+                                  |                                         *****                                   |   
+                              0.3 |-+                                           ******                            +-|   
+                                  |                                                  *****                          |   
+                              0.2 |-+                                                    ******                   +-|   
+                                  |                                                           *****                 |   
+                                  |                                                               *****             |   
+                              0.1 |-+                                                                 **          +-|   
+                                  |             +            +             +             +            +**           |   
+                                0 +---------------------------------------------------------------------------------+   
+                                  0           200000       400000        600000        800000       1e+06        1.2e+06
+                                                                         Site                                           
+                                                                                                                        
+     vcftools --vcf /work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_MiSeq/TotalRawSNPs.10.1.vcf --max-missing 0.5 --recode --recode-INFO-all --out MiSeq_chyaC.10.1.Fltr05.1.recode.vcf 2> /dev/null
+	Sites remaining:	559019
+	Contigs remaining:	10684
+
+
+Tue Oct 5 12:06:02 CDT 2021 ---------------------------FILTER16: Remove Individuals|Libraries with Too Much Missing Data-----------------------------
+                                                                                                                        
+                      Histogram of % missing data per individual|library before filter. Bars to the left are desireable.
+                                                                                                                        
+                                 70 +-------------------------------------------------------------------------------+   
+                                    |               +               +               +               +               |   
+                                    |                         'totalmissing' using (bin($1,binwidth)):(1.0) ******* |   
+                                 60 |-+   *                                                                       +-|   
+                                    |     **                                                                        |   
+                                    |    ***                                                                        |   
+                                    |    ***                                                                        |   
+                                 50 |-+  ***                                                                      +-|   
+                                    |    ***                                                                        |   
+                                    |   ****                                                                        |   
+                                 40 |-+ ****                                                                      +-|   
+                                    |   ****                                                                        |   
+                                    |   ****                                                                        |   
+                                 30 |-+ ****                                                                      +-|   
+                                    |   *****                                                                       |   
+                                    |   *****                                                                       |   
+                                 20 |-+ *****                                                                     +-|   
+                                    |   ******     ** *     **                                                      |   
+                                    | ********     ****  ** **                                                      |   
+                                    | *********   ****** *****                                                      |   
+                                 10 |-*************************   *                                           *   +-|   
+                                    |***************************************   *** ** ** **   *     **  **    *     |   
+                                    |*******************************************************************************|   
+                                  0 +-------------------------------------------------------------------------------+   
+                                    0              0.2             0.4             0.6             0.8              1   
+                                                                   % missing genotypes                                  
+                                                                                                                        
+                                                                                                                        
+                                          Scatter plot of % missing data per individual|library.                        
+                                                                                                                        
+                     1 +--------------------------------------------------------------------------------------------+   
+                       |**         +           +           +           +           +           +           +        |   
+                       | **                                                                     'imiss.dat'    *    |   
+                       |   **                                                                                       |   
+                       |    ***                                                                                     |   
+                   0.8 |-+    ***                                                                                 +-|   
+                       |        **                                                                                  |   
+                       |         ***                                                                                |   
+                       |           ***                                                                              |   
+                   0.6 |-+           ***                                                                          +-|   
+                       |               ***                                                                          |   
+                       |                 **                                                                         |   
+                       |                  ***                                                                       |   
+                       |                    ****                                                                    |   
+                   0.4 |-+                     ***                                                                +-|   
+                       |                          ***                                                               |   
+                       |                            ******                                                          |   
+                       |                                 ******                                                     |   
+                   0.2 |-+                                    ********                                            +-|   
+                       |                                             *******                                        |   
+                       |                                                   ******                                   |   
+                       |                                                        ************************            |   
+                       |           +           +           +           +           +           +       *************|   
+                     0 +--------------------------------------------------------------------------------------------+   
+                       0          100         200         300         400         500         600         700           
+                                                                Individual                                              
+                                                                                                                        
+ 58 individuals|libraries with too much missing data:
+INDV
+COPE_0472.fp2.repr
+COPE_0486.fp2.repr
+COPE_0487.fp2.repr
+COPE_0489.fp2.repr
+COPE_0502.fp2.repr
+COPE_0540.fp2.repr
+COPE_0553.fp2.repr
+COPE_0562.fp2.repr
+COPE_0571.fp2.repr
+COPE_0578.fp2.repr
+COPE_0598.fp2.repr
+COPE_0628.fp2.repr
+COPE_0641.fp2.repr
+COPE_0679.fp2.repr
+COPE_0698.fp2.repr
+COPE_0707.fp2.repr
+COPE_0745.fp2.repr
+COPE_0777.fp2.repr
+COPE_0779.fp2.repr
+COPE_0792.fp2.repr
+COPE_0811.fp2.repr
+COPE_0817.fp2.repr
+COPE_0827.fp2.repr
+COPE_0835.fp2.repr
+COPE_0839.fp2.repr
+COPE_0858.fp2.repr
+COPE_0869.fp2.repr
+COPE_0880.fp2.repr
+COPE_0884.fp2.repr
+COPE_0905.fp2.repr
+COPE_0935.fp2.repr
+COPE_0946.fp2.repr
+COPE_0957.fp2.repr
+COPE_0978.fp2.repr
+COPE_0984.fp2.repr
+COPE_0986.fp2.repr
+COPE_1012.fp2.repr
+COPE_1013.fp2.repr
+COPE_1033.fp2.repr
+COPE_1052.fp2.repr
+COPE_1066.fp2.repr
+COPE_1077.fp2.repr
+COPE_1082.fp2.repr
+COPE_1088.fp2.repr
+COPE_1090.fp2.repr
+COPE_1113.fp2.repr
+COPE_1147.fp2.repr
+COPE_1151.fp2.repr
+COPE_1162.fp2.repr
+COPE_1182.fp2.repr
+COPE_1192.fp2.repr
+COPE_1193.fp2.repr
+COPE_1204.fp2.repr
+COPE_1213.fp2.repr
+COPE_1214.fp2.repr
+COPE_1217.fp2.repr
+COPE_1228.fp2.repr
+COPE_1239.fp2.repr
+     vcftools --vcf MiSeq_chyaC.10.1.Fltr05.1.recode.vcf --remove MiSeq_chyaC.10.1.Fltr16.2.lowDP-2.indv --recode --recode-INFO-all --out MiSeq_chyaC.10.1.Fltr16.2.recode.vcf 2> /dev/null | vcffixup -
+parallel: Warning: A record was longer than 10485760. Increasing to --blocksize 13631489.
+parallel: Warning: A record was longer than 13631489. Increasing to --blocksize 17720937.
+parallel: Warning: A record was longer than 17720937. Increasing to --blocksize 23037220.
+parallel: Warning: A record was longer than 23037220. Increasing to --blocksize 29948387.
+slurmstepd: error: *** JOB 49239 ON hpcc20 CANCELLED AT 2021-10-05T13:25:11 ***
