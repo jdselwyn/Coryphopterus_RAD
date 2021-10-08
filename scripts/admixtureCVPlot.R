@@ -9,7 +9,8 @@ cv_data <- read_lines(str_c(outNAME, '.CV_error')) %>%
   mutate(K = str_extract(line, '(K=)[0-9]+') %>%
            str_remove('K=') %>% as.integer,
          Error = str_extract(line, '[0-9\\.]+$') %>%
-           as.numeric)
+           as.numeric) %>%
+  arrange(K)
 
 cv_plot <- cv_data %>%
   ggplot(aes(x = K, y = Error)) +

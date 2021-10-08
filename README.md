@@ -12,10 +12,6 @@
 
 ## ToDo
 - Delete and reupload NCBI data - need to change species IDs post ADMIXTURE & NewHybrids
-- Run admixture to identify putatively pure specimens
-  - https://dalexander.github.io/admixture/download.html
-  - https://dalexander.github.io/admixture/admixture-manual.pdf
-  - https://speciationgenomics.github.io/ADMIXTURE/
 - run NewHybrids to identify putatative 1st/2nd generation hybrids
 - Upload data to NCBI
 - Split out only pure CHYA for dispersal analysis
@@ -679,19 +675,36 @@ sbatch -o SLURM_out/dapc_miseq-%j.out \
     MiSeq_lightSpecies2
 49364
 ```
-## Step 16. Species Assignment part 3
+## Step 16. Admixture Analysis
 Use admixture to find pure specimens to use in NewHybrids. From here on just use MiSeq assembly
+
+Test k = 1 - 25 with 10-fold cross validation
 ```
 sbatch scripts/runADMIXTURE.slurm \
   splitSpecies/ADMIXTURE \
   fltrVCF_MiSeq/MiSeq_lightSpecies2.10.1.Fltr20.8.randSNPperLoc.vcf \
-  15 \
-  5
+  25 \
+  10
 
 ```
 
+## Step 17. NewHybrids Analysis
+Use admixture results to identify pure specimens & run NewHybrids to determine recent hybrid status of all other individuals
 
-
+```
+sbatch -o SLURM_out/newHybrids_miseq-%j.out \
+  -p cbirdq \
+  -t 15-00:00:00 \
+  scripts/runRscript.sbatch \
+  scripts/runNewHybrids.R \
+    splitSpecies/newHybrids \
+    fltrVCF_MiSeq/MiSeq_lightSpecies2.10.1.Fltr20.8.randSNPperLoc.vcf \
+    splitSpecies/ADMIXTURE/MiSeq_lightSpecies2.10.1.2.results.csv \
+    100000  \
+    1000000 \
+    100 \
+    10
+```
 
 
 # IGNORE BELOW HERE SAVE FOR LATER
