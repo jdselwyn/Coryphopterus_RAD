@@ -1,0 +1,44 @@
+scripts/runNewHybrids.R
+Scanning file to determine attributes.
+File attributes:
+  meta lines: 59
+  header_line: 60
+  variant count: 1726
+  column count: 787
+Meta line 59 read in.
+All meta lines processed.
+gt matrix initialized.
+Character matrix gt created.
+  Character matrix gt rows: 1726
+  Character matrix gt cols: 787
+  skip: 0
+  nrows: 1726
+  row_num: 0
+Processed variant 1000Processed variant: 1726
+All variants processed
+Extracting gt element GT
+Extracting gt element GQ
+Extracting gt element GL
+Extracting gt element DP
+Extracting gt element AD
+Extracting gt element RO
+Extracting gt element QR
+Extracting gt element AO
+Extracting gt element QA
+Extracting gt element MIN_DP
+# A tibble: 12 × 11
+   prior    variable    mean  median      sd     mad      q5     q95  rhat ess_bulk
+   <chr>    <chr>      <dbl>   <dbl>   <dbl>   <dbl>   <dbl>   <dbl> <dbl>    <dbl>
+ 1 Jeffreys pure_a   0.174   0.174   0.0138  0.0139  1.52e-1 0.198    1.01    993. 
+ 2 Jeffreys pure_b   0.807   0.807   0.0146  0.0146  7.83e-1 0.830    1.02    278. 
+ 3 Jeffreys F1       0.00383 0.00342 0.00231 0.00211 8.67e-4 0.00822  1.03    215. 
+ 4 Jeffreys F2       0.00304 0.00220 0.00310 0.00292 0       0.00917  1.32     23.5
+ 5 Jeffreys a_bx     0.00428 0.00376 0.00276 0.00253 7.92e-4 0.00953  1.07     82.4
+ 6 Jeffreys b_bx     0.00752 0.00699 0.00364 0.00350 2.56e-3 0.0143   1.07     84.5
+ 7 uniform  pure_a   0.173   0.173   0.0139  0.0138  1.51e-1 0.197    1.02    289. 
+ 8 uniform  pure_b   0.804   0.805   0.0144  0.0144  7.80e-1 0.827    1.01    694. 
+ 9 uniform  F1       0.00483 0.00441 0.00258 0.00241 1.41e-3 0.00966  1.02    278. 
+10 uniform  F2       0.00462 0.00400 0.00338 0.00332 4.08e-4 0.0110   1.27     26.7
+11 uniform  a_bx     0.00503 0.00450 0.00317 0.00298 8.62e-4 0.0110   1.20     32.9
+12 uniform  b_bx     0.00781 0.00733 0.00358 0.00345 2.87e-3 0.0144   1.06     94.0
+# … with 1 more variable: ess_tail <dbl>

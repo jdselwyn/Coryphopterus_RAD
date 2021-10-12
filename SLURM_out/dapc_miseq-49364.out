@@ -20,3 +20,15 @@ Character matrix gt created.
   row_num: 0
 Processed variant 1000Processed variant: 1726
 All variants processed
+Number of PCs retained: 6
+, RMSE = 0.136
+
+Warning message:
+Removed 62 rows containing missing values (geom_point). 
+Warning message:
+Removed 13 rows containing missing values (geom_point). 
+Number of PCs retained: 137
+, RMSE = 0.003
+
+Warning message:
+Removed 13 rows containing missing values (geom_point). 
