@@ -673,9 +673,8 @@ sbatch -o SLURM_out/dapc_miseq-%j.out \
     fltrVCF_MiSeq/MiSeq_lightSpecies2.10.1.Fltr20.8.randSNPperLoc.vcf \
     500 \
     MiSeq_lightSpecies2
-
-[Out File](SLURM_out/dapc_miseq-49364.out)
 ```
+[Out File](SLURM_out/dapc_miseq-49364.out)
 ## Step 16. Admixture Analysis
 Use admixture to find pure specimens to use in NewHybrids. From here on just use MiSeq assembly
 
@@ -686,8 +685,8 @@ sbatch scripts/runADMIXTURE.slurm \
   fltrVCF_MiSeq/MiSeq_lightSpecies2.10.1.Fltr20.8.randSNPperLoc.vcf \
   25 \
   10
-[Out File](SLURM_out/admixture-49372.out)
 ```
+[Out File](SLURM_out/admixture-49372.out)
 
 ## Step 17. NewHybrids Analysis
 Use admixture results to identify pure specimens & run NewHybrids to determine recent hybrid status of all other individuals
@@ -706,9 +705,9 @@ sbatch -o SLURM_out/newHybrids_miseq-%j.out \
     1000000 \
     100 \
     10
-
-[Out File](SLURM_out/newHybrids_miseq-49484.out)
 ```
+[Out File](SLURM_out/newHybrids_miseq-49484.out)
+
 
 ## Step 18. Interpret NewHybrids
 `utils/`
