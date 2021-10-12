@@ -1,4 +1,5 @@
 ##TODO - better way to pick loci to use??
+##TODO - fix traceplot reading
 if(!interactive()){
   args <- commandArgs(trailingOnly = TRUE)
   DIR <- args[1]
@@ -11,8 +12,8 @@ if(!interactive()){
   
 } else {
   setwd('..')
-  DIR <- 'splitSpecies/newHybrids'
-  VCF <- 'fltrVCF_MiSeq/MiSeq_lightSpecies2.10.1.Fltr20.8.randSNPperLoc.vcf'
+  DIR <- 'tmp_dir'
+  VCF <- 'tmp_dir/MiSeq_lightSpecies2.10.1.Fltr20.8.randSNPperLoc.vcf'
   ADMIXTURE <- 'splitSpecies/ADMIXTURE/MiSeq_lightSpecies2.10.1.2.results.csv'
   burnin <- 100
   iterations <- 1000
@@ -21,14 +22,18 @@ if(!interactive()){
 }
 
 
-
-
 suppressMessages(library(tidyverse))
 suppressMessages(library(magrittr))
 suppressMessages(library(vcfR))
+suppressMessages(library(adegenet))
+suppressMessages(library(hierfstat))
+suppressMessages(library(pegas))
 suppressMessages(library(furrr))
 suppressMessages(library(posterior))
 suppressMessages(library(patchwork))
+
+strat <- if_else(Sys.info()['sysname'] == 'Windows', 'multisession', 'multicore')
+plan(strategy = strat)
 
 #### Functions ####
 write_newhybrid_data <- function(data, path, loci, missing_cutoff){
@@ -207,6 +212,43 @@ admix_data <- read_csv(ADMIXTURE,
   select(ID, admix_id) %>%
   rename(Indiv = ID)
 
+#### Differentiation in Pure Specimens ####
+pure_specimens <- admix_data %>%
+  filter(admix_id != 'U') %>%
+  pull(Indiv)
+
+pure_genind <- vcfR2genind(raw_vcf)[pure_specimens, ]
+strata(pure_genind) <- admix_data %>%
+  filter(admix_id != 'U') %>%
+  as.data.frame
+setPop(pure_genind) <- ~admix_id
+
+#Remove loci out of HWE
+hwe_test <- hw.test(pure_genind, B = 0) %>%
+  as_tibble(rownames = 'locus') %>%
+  mutate(p_adj = p.adjust(`Pr(chi^2 >)`, 'holm')) %>%
+  mutate(sig = p_adj < 0.05)
+
+hwe_test %>%
+  filter(!sig)
+
+pure_genind_filt <- pure_genind[loc = hwe_test$locus[!hwe_test$sig]]
+
+summary_stats <- basic.stats(pure_genind_filt, diploid = TRUE)
+
+(fst <- fstat(pure_genind_filt, fstonly = TRUE))
+Hs <- summary_stats$overall['Hs']
+(fstMax <- (1 - Hs) / (1 + Hs))
+(fst_prime <- fst * (1 + Hs) / (1 - Hs))
+
+most_differentiating_loci <- summary_stats$perloc %>%
+  as_tibble(rownames = 'locus') %>%
+  arrange(-Fst) %>%
+  slice(1:200) %>%
+  arrange(Fst) %>%
+  sample_n(200) %>%
+  pull(locus)
+
 #### Setup NewHybrids ####
 new_hybrids_data <- full_vcf$gt %>%
   select(ChromKey, POS, Indiv, gt_GT) %>%
@@ -224,11 +266,9 @@ new_hybrids_data <- full_vcf$gt %>%
   mutate(ID = if_else(admix_id != 'U', str_c('z', admix_id), '')) %>%
   select(Indiv, ID, starts_with('L')) 
 
+write_newhybrid_data(new_hybrids_data, path = DIR, loci = NA, missing_cutoff = NA)
+
 #### Run NewHybrids ####
-strat <- if_else(Sys.info()['sysname'] == 'Windows', 'multisession', 'multicore')
-plan(strategy = strat)
-
-
 new_hybrids_results <- expand_grid(.chain = 1:chains,
                                    prior = c('Jeffreys', 'uniform')) %>% 
   mutate(new_hybrids = future_map2_chr(prior, .chain, run_newHybrids,

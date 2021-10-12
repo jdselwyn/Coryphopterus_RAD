@@ -11,8 +11,8 @@
 - NovaSeq only - Finished
 
 ## ToDo
-- Delete and reupload NCBI data - need to change species IDs post ADMIXTURE & NewHybrids
-- run NewHybrids to identify putatative 1st/2nd generation hybrids
+- Delete NCBI data - need to change species IDs post ADMIXTURE & NewHybrids
+- Fix NewHybrids Bug - traceplot = wrong since it reads in both warmup & iterations
 - Upload data to NCBI
 - Split out only pure CHYA for dispersal analysis
 - Rerun SNP filtering
@@ -662,7 +662,7 @@ Genotyping Stats
 | Mean Missing (Loci) | 12% ± 7% | 17% ± 4% | % ± % |
 | Range Missing (Loci) | 0% - 31% | 3.5% - 25% | % - % |
 
-## Step 15. Species Assignment part 2
+## Step 15. DAPC Analysis
 ```
 sbatch -o SLURM_out/dapc_miseq-%j.out \
   -p cbirdq \
@@ -673,7 +673,8 @@ sbatch -o SLURM_out/dapc_miseq-%j.out \
     fltrVCF_MiSeq/MiSeq_lightSpecies2.10.1.Fltr20.8.randSNPperLoc.vcf \
     500 \
     MiSeq_lightSpecies2
-49364
+
+[Out File](SLURM_out/dapc_miseq-49364.out)
 ```
 ## Step 16. Admixture Analysis
 Use admixture to find pure specimens to use in NewHybrids. From here on just use MiSeq assembly
@@ -685,7 +686,7 @@ sbatch scripts/runADMIXTURE.slurm \
   fltrVCF_MiSeq/MiSeq_lightSpecies2.10.1.Fltr20.8.randSNPperLoc.vcf \
   25 \
   10
-
+[Out File](SLURM_out/admixture-49372.out)
 ```
 
 ## Step 17. NewHybrids Analysis
@@ -693,6 +694,7 @@ Use admixture results to identify pure specimens & run NewHybrids to determine r
 
 ```
 sbatch -o SLURM_out/newHybrids_miseq-%j.out \
+  --job-name=NewHybrids \
   -p cbirdq \
   -t 15-00:00:00 \
   scripts/runRscript.sbatch \
@@ -704,7 +706,15 @@ sbatch -o SLURM_out/newHybrids_miseq-%j.out \
     1000000 \
     100 \
     10
+
+[Out File](SLURM_out/newHybrids_miseq-49484.out)
 ```
+
+## Step 18. Interpret NewHybrids
+`utils/`
+
+## Step 19. Split out on *C. hyalinus*
+
 
 
 # IGNORE BELOW HERE SAVE FOR LATER
