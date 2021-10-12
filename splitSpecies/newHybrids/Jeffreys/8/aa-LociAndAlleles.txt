@@ -1,0 +1,801 @@
+200 polymorphic loci from 200 loci in data set
+
+Locus L1256_71
+	1
+	2
+
+Locus L1669_330
+	1
+	2
+
+Locus L46_113
+	1
+	2
+
+Locus L1031_419
+	1
+	2
+
+Locus L1618_436
+	1
+	2
+
+Locus L515_315
+	1
+	2
+
+Locus L1572_115
+	1
+	2
+
+Locus L400_400
+	1
+	2
+
+Locus L1541_456
+	1
+	2
+
+Locus L504_355
+	1
+	2
+
+Locus L1656_335
+	1
+	2
+
+Locus L377_105
+	1
+	2
+
+Locus L1602_11
+	1
+	2
+
+Locus L1416_105
+	1
+	2
+
+Locus L1355_57
+	1
+	2
+
+Locus L1081_273
+	1
+	2
+
+Locus L290_72
+	1
+	2
+
+Locus L1607_367
+	1
+	2
+
+Locus L1635_447
+	1
+	2
+
+Locus L503_19
+	1
+	2
+
+Locus L1437_432
+	1
+	2
+
+Locus L638_350
+	1
+	2
+
+Locus L65_457
+	2
+	1
+
+Locus L532_96
+	1
+	2
+
+Locus L1578_130
+	1
+	2
+
+Locus L834_11
+	1
+	2
+
+Locus L768_389
+	1
+	2
+
+Locus L494_21
+	1
+	2
+
+Locus L1478_467
+	1
+	2
+
+Locus L613_508
+	1
+	2
+
+Locus L1537_34
+	1
+	2
+
+Locus L620_349
+	1
+	2
+
+Locus L1287_362
+	1
+	2
+
+Locus L1429_81
+	1
+	2
+
+Locus L236_367
+	1
+	2
+
+Locus L557_441
+	1
+	2
+
+Locus L67_455
+	1
+	2
+
+Locus L1155_437
+	1
+	2
+
+Locus L15_504
+	1
+	2
+
+Locus L351_55
+	1
+	2
+
+Locus L1570_11
+	1
+	2
+
+Locus L1004_133
+	2
+	1
+
+Locus L1571_456
+	1
+	2
+
+Locus L1407_407
+	1
+	2
+
+Locus L127_35
+	1
+	2
+
+Locus L880_327
+	1
+	2
+
+Locus L1682_92
+	1
+	2
+
+Locus L267_114
+	1
+	2
+
+Locus L1044_375
+	1
+	2
+
+Locus L1232_84
+	1
+	2
+
+Locus L1258_430
+	1
+	2
+
+Locus L1187_480
+	1
+	2
+
+Locus L1350_38
+	1
+	2
+
+Locus L68_447
+	1
+	2
+
+Locus L1374_432
+	1
+	2
+
+Locus L1208_453
+	1
+	2
+
+Locus L1245_113
+	1
+	2
+
+Locus L495_121
+	1
+	2
+
+Locus L1491_95
+	1
+	2
+
+Locus L1228_318
+	1
+	2
+
+Locus L1060_527
+	1
+	2
+
+Locus L72_16
+	1
+	2
+
+Locus L946_24
+	1
+	2
+
+Locus L154_449
+	1
+	2
+
+Locus L616_75
+	1
+	2
+
+Locus L1285_93
+	1
+	2
+
+Locus L747_380
+	1
+	2
+
+Locus L1085_441
+	1
+	2
+
+Locus L217_110
+	1
+	2
+
+Locus L920_82
+	1
+	2
+
+Locus L526_85
+	1
+	2
+
+Locus L341_18
+	2
+	1
+
+Locus L374_371
+	1
+	2
+
+Locus L1132_356
+	1
+	2
+
+Locus L1622_28
+	1
+	2
+
+Locus L325_369
+	1
+	2
+
+Locus L848_30
+	1
+	2
+
+Locus L1506_378
+	1
+	2
+
+Locus L963_109
+	1
+	2
+
+Locus L1069_56
+	1
+	2
+
+Locus L383_48
+	1
+	2
+
+Locus L1567_20
+	1
+	2
+
+Locus L11_140
+	1
+	2
+
+Locus L38_501
+	1
+	2
+
+Locus L1100_352
+	1
+	2
+
+Locus L1381_418
+	1
+	2
+
+Locus L141_312
+	1
+	2
+
+Locus L1424_405
+	1
+	2
+
+Locus L48_8
+	1
+	2
+
+Locus L453_368
+	1
+	2
+
+Locus L17_136
+	1
+	2
+
+Locus L347_138
+	1
+	2
+
+Locus L1115_138
+	1
+	2
+
+Locus L914_139
+	1
+	2
+
+Locus L1422_376
+	1
+	2
+
+Locus L137_496
+	1
+	2
+
+Locus L1001_142
+	1
+	2
+
+Locus L1051_412
+	1
+	2
+
+Locus L1699_394
+	1
+	2
+
+Locus L459_67
+	1
+	2
+
+Locus L547_470
+	1
+	2
+
+Locus L492_410
+	1
+	2
+
+Locus L109_144
+	1
+	2
+
+Locus L777_307
+	1
+	2
+
+Locus L303_68
+	1
+	2
+
+Locus L233_413
+	1
+	2
+
+Locus L902_15
+	1
+	2
+
+Locus L1076_81
+	2
+	1
+
+Locus L651_37
+	1
+	2
+
+Locus L473_398
+	1
+	2
+
+Locus L793_382
+	1
+	2
+
+Locus L99_68
+	1
+	2
+
+Locus L541_375
+	1
+	2
+
+Locus L1377_132
+	1
+	2
+
+Locus L877_138
+	1
+	2
+
+Locus L645_476
+	1
+	2
+
+Locus L852_388
+	1
+	2
+
+Locus L668_83
+	1
+	2
+
+Locus L224_334
+	1
+	2
+
+Locus L1560_464
+	2
+	1
+
+Locus L1133_138
+	1
+	2
+
+Locus L1473_31
+	1
+	2
+
+Locus L93_88
+	1
+	2
+
+Locus L256_122
+	1
+	2
+
+Locus L222_384
+	1
+	2
+
+Locus L1553_369
+	1
+	2
+
+Locus L1351_108
+	1
+	2
+
+Locus L1648_36
+	1
+	2
+
+Locus L704_482
+	1
+	2
+
+Locus L1512_486
+	1
+	2
+
+Locus L1077_64
+	1
+	2
+
+Locus L1601_481
+	1
+	2
+
+Locus L1453_413
+	1
+	2
+
+Locus L1627_72
+	1
+	2
+
+Locus L682_53
+	1
+	2
+
+Locus L214_499
+	1
+	2
+
+Locus L762_8
+	1
+	2
+
+Locus L1359_8
+	1
+	2
+
+Locus L982_106
+	2
+	1
+
+Locus L1088_78
+	1
+	2
+
+Locus L465_379
+	1
+	2
+
+Locus L1181_401
+	1
+	2
+
+Locus L1078_303
+	1
+	2
+
+Locus L147_47
+	1
+	2
+
+Locus L367_408
+	1
+	2
+
+Locus L1214_426
+	1
+	2
+
+Locus L223_72
+	1
+	2
+
+Locus L348_433
+	1
+	2
+
+Locus L352_144
+	1
+	2
+
+Locus L157_120
+	1
+	2
+
+Locus L363_436
+	1
+	2
+
+Locus L639_411
+	1
+	2
+
+Locus L1683_99
+	1
+	2
+
+Locus L1118_15
+	1
+	2
+
+Locus L798_105
+	1
+	2
+
+Locus L1094_75
+	1
+	2
+
+Locus L1304_412
+	1
+	2
+
+Locus L1183_128
+	1
+	2
+
+Locus L1616_102
+	1
+	2
+
+Locus L1049_342
+	1
+	2
+
+Locus L1064_48
+	1
+	2
+
+Locus L501_50
+	2
+	1
+
+Locus L195_362
+	1
+	2
+
+Locus L822_399
+	1
+	2
+
+Locus L1390_485
+	1
+	2
+
+Locus L669_397
+	1
+	2
+
+Locus L1376_346
+	1
+	2
+
+Locus L239_120
+	1
+	2
+
+Locus L206_115
+	2
+	1
+
+Locus L956_143
+	1
+	2
+
+Locus L924_135
+	1
+	2
+
+Locus L1556_523
+	1
+	2
+
+Locus L1592_94
+	2
+	1
+
+Locus L750_389
+	1
+	2
+
+Locus L935_441
+	1
+	2
+
+Locus L513_120
+	1
+	2
+
+Locus L221_391
+	1
+	2
+
+Locus L1371_42
+	1
+	2
+
+Locus L1658_134
+	1
+	2
+
+Locus L19_395
+	1
+	2
+
+Locus L1523_430
+	1
+	2
+
+Locus L1194_458
+	1
+	2
+
+Locus L14_425
+	1
+	2
+
+Locus L111_104
+	1
+	2
+
+Locus L1614_348
+	1
+	2
+
+Locus L1142_330
+	1
+	2
+
+Locus L1242_402
+	1
+	2
+
+Locus L833_322
+	1
+	2
+
+Locus L114_352
+	1
+	2
+
+Locus L1435_113
+	1
+	2
+
+Locus L1370_16
+	1
+	2
+
+Locus L1230_403
+	1
+	2
+
+Locus L868_365
+	1
+	2
+
+Locus L1045_404
+	1
+	2
+
+Locus L1396_385
+	1
+	2
+
+Locus L382_70
+	1
+	2
+
+Locus L725_495
+	1
+	2
+
+Locus L1545_117
+	1
+	2
+
+Locus L570_336
+	1
+	2
+
+Locus L1065_12
+	1
+	2
