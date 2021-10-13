@@ -1,5 +1,5 @@
 ##TODO - better way to pick loci to use??
-##TODO - fix traceplot reading
+
 if(!interactive()){
   args <- commandArgs(trailingOnly = TRUE)
   DIR <- args[1]
@@ -9,6 +9,7 @@ if(!interactive()){
   iterations <- as.integer(args[5])
   thin <- as.integer(args[6])
   chains <- as.integer(args[7])
+  loci <- args[8] #if random then random 200, if all then all, if best then the top 200 Fst
   
 } else {
   setwd('..')
@@ -19,6 +20,7 @@ if(!interactive()){
   iterations <- 1000
   thin <- 100
   chains <- 5
+  loci <- 'random'
 }
 
 
@@ -37,7 +39,12 @@ plan(strategy = strat)
 
 #### Functions ####
 write_newhybrid_data <- function(data, path, loci, missing_cutoff){
-  if(!is.na(loci)){
+
+  if(is.na(loci)){ #Keep all loci
+    out <- data %>%
+      mutate(ID = str_c(row_number(), ID, sep = '\t'))
+    
+  } else if(length(loci) == 1 & is.integer(loci)){ #Pick random subset of loci equal to the value
     out <- data[,c(1,2,sample(ncol(data) - 2, loci) + 2)] %>%
       rowwise %>%
       mutate(missing = rowSums(across(starts_with('L'), ~. == '0')) / loci) %>%
@@ -45,11 +52,19 @@ write_newhybrid_data <- function(data, path, loci, missing_cutoff){
       filter(missing <= missing_cutoff) %>%
       select(-missing) %>%
       mutate(ID = str_c(row_number(), ID, sep = '\t'))
-  } else {
+  } else { #Pick specific set of loci specified in vector
+    loci <- loci[[1]] %>%
+      str_c('L', .)
+    
     out <- data %>%
+      select(Indiv, ID, all_of(loci)) %>%
+      rowwise %>%
+      mutate(missing = rowSums(across(starts_with('L'), ~. == '0')) / length(loci)) %>%
+      ungroup %>%
+      filter(missing <= missing_cutoff) %>%
+      select(-missing) %>%
       mutate(ID = str_c(row_number(), ID, sep = '\t'))
   }
-  
   
   write_csv(out, str_c(path, 'newhybrid_data.csv', sep = '/'))
   
@@ -149,13 +164,24 @@ read_newhybrids_trace <- function(file){
   } else {
     out <- out_file[str_which(out_file, 'PI_TRACE:')] %>%
       tibble(lines = .) %>%
-      slice(-1:-2) %>%
+      slice(-1) %>%
       separate(lines, sep = '\t', 
                into = c('sweep', 'pure_a', 'pure_b', 
                         'F1', 'F2', 'a_bx', 'b_bx')) %>%
       mutate(sweep = str_remove(sweep, 'PI_TRACE:')) %>%
       mutate(across(everything(), parse_number),
-             sweep = as.integer(sweep))
+             sweep = as.integer(sweep)) %>%
+      group_by(sweep) %>%
+      mutate(which_iter = row_number(),
+             n = n()) %>%
+      ungroup %>%
+      mutate(phase = case_when(n == 1 ~ 'sampling',
+                               which_iter == 1 & n == 2 ~ 'burnin',
+                               which_iter == 2 & n == 2 ~ 'sampling',
+                               TRUE ~ 'error')) %>%
+      select(-which_iter, -n) %>%
+      filter(phase == 'sampling') %>%
+      select(-phase)
   }
   
 }
@@ -223,23 +249,7 @@ strata(pure_genind) <- admix_data %>%
   as.data.frame
 setPop(pure_genind) <- ~admix_id
 
-#Remove loci out of HWE
-hwe_test <- hw.test(pure_genind, B = 0) %>%
-  as_tibble(rownames = 'locus') %>%
-  mutate(p_adj = p.adjust(`Pr(chi^2 >)`, 'holm')) %>%
-  mutate(sig = p_adj < 0.05)
-
-hwe_test %>%
-  filter(!sig)
-
-pure_genind_filt <- pure_genind[loc = hwe_test$locus[!hwe_test$sig]]
-
-summary_stats <- basic.stats(pure_genind_filt, diploid = TRUE)
-
-(fst <- fstat(pure_genind_filt, fstonly = TRUE))
-Hs <- summary_stats$overall['Hs']
-(fstMax <- (1 - Hs) / (1 + Hs))
-(fst_prime <- fst * (1 + Hs) / (1 - Hs))
+summary_stats <- basic.stats(pure_genind, diploid = TRUE)
 
 most_differentiating_loci <- summary_stats$perloc %>%
   as_tibble(rownames = 'locus') %>%
@@ -249,10 +259,31 @@ most_differentiating_loci <- summary_stats$perloc %>%
   sample_n(200) %>%
   pull(locus)
 
+#Remove loci out of HWE
+# hwe_test <- hw.test(pure_genind, B = 0) %>%
+#   as_tibble(rownames = 'locus') %>%
+#   mutate(p_adj = p.adjust(`Pr(chi^2 >)`, 'holm')) %>%
+#   mutate(sig = p_adj < 0.05)
+# 
+# hwe_test %>%
+#   filter(!sig)
+# 
+# pure_genind_filt <- pure_genind[loc = hwe_test$locus[!hwe_test$sig]]
+# 
+# summary_stats <- basic.stats(pure_genind_filt, diploid = TRUE)
+
+(fst <- fstat(pure_genind, fstonly = TRUE))
+Hs <- summary_stats$overall['Hs']
+(fstMax <- (1 - Hs) / (1 + Hs))
+(fst_prime <- fst * (1 + Hs) / (1 - Hs))
+
 #### Setup NewHybrids ####
 new_hybrids_data <- full_vcf$gt %>%
   select(ChromKey, POS, Indiv, gt_GT) %>%
-  unite(locus, ChromKey, POS, sep = '_') %>%
+  left_join(select(full_vcf$fix, ChromKey, CHROM, POS), 
+            by = c('ChromKey', 'POS')) %>%
+  unite(locus, CHROM, POS, sep = '_') %>%
+  select(-ChromKey) %>%
   mutate(locus = str_c('L', locus)) %>%
   separate(gt_GT, into = c('A1', 'A2'), sep = '/') %>%
   mutate(across(c(A1, A2), ~as.integer(.) + 1L)) %>%
@@ -270,7 +301,7 @@ write_newhybrid_data(new_hybrids_data, path = DIR, loci = NA, missing_cutoff = N
 
 #### Run NewHybrids ####
 new_hybrids_results <- expand_grid(.chain = 1:chains,
-                                   prior = c('Jeffreys', 'uniform')) %>% 
+                                   prior = c('Jeffreys')) %>% 
   mutate(new_hybrids = future_map2_chr(prior, .chain, run_newHybrids,
                                        data = new_hybrids_data,
                                        newHybrids_path = if_else(Sys.info()['sysname'] == 'Windows', 'scripts/NewHybrids_PC_1_1_WOG.exe', NULL),
@@ -278,7 +309,7 @@ new_hybrids_results <- expand_grid(.chain = 1:chains,
                                        burn = burnin,
                                        iter = iterations,
                                        thin = thin,
-                                       loci = 200,
+                                       loci = ifelse(loci == 'all', NA_character_, ifelse(loci == 'random', 200L, list(most_differentiating_loci))),
                                        missing_cutoff = 0.99,
                                        .progress = Sys.info()['sysname'] == 'Windows',
                                        .options = furrr_options(seed = TRUE))) %>%

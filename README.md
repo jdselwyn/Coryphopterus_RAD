@@ -698,16 +698,32 @@ sbatch -o SLURM_out/newHybrids_miseq-%j.out \
   -t 15-00:00:00 \
   scripts/runRscript.sbatch \
   scripts/runNewHybrids.R \
-    splitSpecies/newHybrids \
+    splitSpecies/newHybrids_random \
     fltrVCF_MiSeq/MiSeq_lightSpecies2.10.1.Fltr20.8.randSNPperLoc.vcf \
     splitSpecies/ADMIXTURE/MiSeq_lightSpecies2.10.1.2.results.csv \
     100000  \
     1000000 \
     100 \
-    10
-```
-[Out File](SLURM_out/newHybrids_miseq-49484.out)
+    100 \
+    random
 
+sbatch -o SLURM_out/newHybrids_miseq-%j.out \
+  --job-name=NewHybrids \
+  -p normal \
+  -t 4-00:00:00 \
+  scripts/runRscript.sbatch \
+  scripts/runNewHybrids.R \
+    splitSpecies/newHybrids_best \
+    fltrVCF_MiSeq/MiSeq_lightSpecies2.10.1.Fltr20.8.randSNPperLoc.vcf \
+    splitSpecies/ADMIXTURE/MiSeq_lightSpecies2.10.1.2.results.csv \
+    100000  \
+    1000000 \
+    100 \
+    5 \
+    all
+```
+[Initial File](SLURM_out/newHybrids_miseq-49484.out)
+[Random 100 Samples 200 Loci File](SLURM_out/newHybrids_miseq-.out)
 
 ## Step 18. Interpret NewHybrids
 `utils/`
