@@ -296,7 +296,7 @@ new_hybrids_data <- full_vcf$gt %>%
   mutate(ID = if_else(admix_id != 'U', str_c('z', admix_id), '')) %>%
   select(Indiv, ID, starts_with('L')) 
 
-write_newhybrid_data(new_hybrids_data, path = DIR, loci = NA, missing_cutoff = NA)
+# write_newhybrid_data(new_hybrids_data, path = DIR, loci = NA, missing_cutoff = NA)
 
 #### Run NewHybrids ####
 new_hybrids_results <- expand_grid(.chain = 1:chains,

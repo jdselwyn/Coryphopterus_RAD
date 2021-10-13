@@ -721,9 +721,13 @@ sbatch -o SLURM_out/newHybrids_miseq-%j.out \
     100 \
     5 \
     best
+
 ```
 [Initial File](SLURM_out/newHybrids_miseq-49484.out)
-[Random 100 Samples 200 Loci File](SLURM_out/newHybrids_miseq-.out)
+
+[Random 100 Samples 200 Loci File](SLURM_out/newHybrids_miseq-49795.out)
+
+[Largest Fst 200 Loci File](SLURM_out/newHybrids_miseq-49796.out)
 
 ## Step 18. Interpret NewHybrids
 `utils/`
