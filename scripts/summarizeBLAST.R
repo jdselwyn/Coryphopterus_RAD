@@ -37,14 +37,17 @@ blast_results <- blast_out %>%
   ungroup %T>%
   write_csv('Mitochondrial_Mapping/raw_blast_results.csv')
 
+blast_results <- read_csv('Mitochondrial_Mapping/raw_blast_results.csv')
 
 #### Identify Species ####
 species_id <- blast_results %>%
   arrange(ID) %>%
+  mutate(evalue = log(evalue, base = 10)) %>%
+  filter(evalue < -65) %>%
   group_by(ID) %>%
   mutate(certainty = if_else(n_distinct(ScientificName) == 1, 'certain', 'uncertain')) %>%
   ungroup %>%
-  mutate(evalue = log(evalue, base = 10)) %>%
+  
   select(ID, ScientificName, sseqid, certainty, 
          bitscore, evalue, pident, length) %>%
   group_by(ID, ScientificName, certainty, sseqid) %>%
