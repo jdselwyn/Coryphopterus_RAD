@@ -47,9 +47,9 @@ touch blast_out/${prefix}.tsv
 blastn \
   -query fastqfiles/${prefix}.fasta \
   -db ${BLASTDB} \
-  -evalue 1e-6 \
+  -evalue 1e-60 \
   -outfmt 6 \
-  -max_target_seqs 100 \
+  -max_target_seqs 25 \
   -max_hsps 100 \
   -out blast_out/${prefix}.tsv \
   -num_threads ${SLURM_CPUS_ON_NODE}

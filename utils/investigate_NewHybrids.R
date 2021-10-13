@@ -23,7 +23,7 @@ newhybrids_subsetLoci %>%
   filter(str_detect(hybrid_type, 'pure', negate = TRUE))
 
 
-tmp <- newhybrids_subsetLoci %>%
+newHybrids_mtdna <- newhybrids_subsetLoci %>%
   filter(prior == 'Jeffreys') %>%
   select(-prior) %>%
   mutate(Indiv = str_remove(Indiv, '.fp2.repr')) %>%
@@ -36,10 +36,10 @@ tmp <- newhybrids_subsetLoci %>%
   left_join(mtdna, by = c('Indiv' = 'ID')) 
 
 
-tmp %>%
-  filter(evalue < -65) %>%
+newHybrids_mtdna %>%
   filter(!is.na(species),
-         str_detect(hybrid_type, 'pure')) %>%
+         str_detect(hybrid_type, 'pure'),
+         certainty == 'certain') %>%
   # count(species, hybrid_type)
   mutate(match = case_when(hybrid_type == 'pure_b' & species == 'Coryphopterus hyalinus' ~ 'match_chya',
                            hybrid_type == 'pure_a' & species == 'Coryphopterus personatus' ~ 'match_cper',
@@ -50,5 +50,12 @@ tmp %>%
   ggplot(aes(x = match, y = bitscore)) +
   geom_boxplot()
 
-  
+
+newHybrids_mtdna %>%
+  mutate(hybrid = case_when(hybrid_type == 'pure_b' ~ 'chya',
+                            hybrid_type == 'pure_a' ~ 'cper',
+                            hybrid_type == 'a_bx' ~ 'cper_bx',
+                            hybrid_type == 'b_bx' ~ 'chya_bx',
+                            TRUE ~ hybrid_type)) %>%
+  count(hybrid, species)
   
