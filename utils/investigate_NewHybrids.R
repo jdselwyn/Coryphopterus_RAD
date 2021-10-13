@@ -40,14 +40,14 @@ tmp %>%
   filter(evalue < -65) %>%
   filter(!is.na(species),
          str_detect(hybrid_type, 'pure')) %>%
-  count(species, hybrid_type)
+  # count(species, hybrid_type)
   mutate(match = case_when(hybrid_type == 'pure_b' & species == 'Coryphopterus hyalinus' ~ 'match_chya',
                            hybrid_type == 'pure_a' & species == 'Coryphopterus personatus' ~ 'match_cper',
                            hybrid_type == 'pure_a' & species == 'Coryphopterus hyalinus' ~ 'mtDNA_chya-nuc_cper',
                            hybrid_type == 'pure_b' & species == 'Coryphopterus personatus' ~ 'mtDNA_cper-nuc_chya',
                            TRUE ~ 'error')) %>%
   
-  ggplot(aes(x = match, y = evalue)) +
+  ggplot(aes(x = match, y = bitscore)) +
   geom_boxplot()
 
   

@@ -37,7 +37,7 @@ blast_results <- blast_out %>%
   ungroup %T>%
   write_csv('Mitochondrial_Mapping/raw_blast_results.csv')
 
-blast_results <- read_csv('Mitochondrial_Mapping/raw_blast_results.csv')
+# blast_results <- read_csv('Mitochondrial_Mapping/raw_blast_results.csv')
 
 #### Identify Species ####
 species_id <- blast_results %>%
