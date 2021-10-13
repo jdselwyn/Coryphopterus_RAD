@@ -33,19 +33,25 @@ newHybrids_mtdna <- newhybrids_subsetLoci %>%
   ungroup %>%
   select(-starts_with('C'), -sd_posterior_probability, -cv_posterior_probability) %>%
   pivot_wider(names_from = hybrid_class, values_from = mean_posterior_probability) %>%
-  left_join(mtdna, by = c('Indiv' = 'ID')) 
+  left_join(mtdna, by = c('Indiv' = 'ID')) %>%
+  mutate(match = case_when(is.na(species) ~ NA_character_,
+                           hybrid_type == 'pure_b' & species == 'Coryphopterus hyalinus' ~ 'match_chya',
+                           hybrid_type == 'pure_a' & species == 'Coryphopterus personatus' ~ 'match_cper',
+                           hybrid_type == 'pure_a' & species == 'Coryphopterus hyalinus' ~ 'mtDNA_chya-nuc_cper',
+                           hybrid_type == 'pure_b' & species == 'Coryphopterus personatus' ~ 'mtDNA_cper-nuc_chya',
+                           TRUE ~ 'hybrid'))
+
+
+newHybrids_mtdna %>%
+  count(match)
+
+newHybrids_mtdna %>%
+  filter(str_detect(match, 'mtDNA'))
 
 
 newHybrids_mtdna %>%
   filter(!is.na(species),
-         str_detect(hybrid_type, 'pure'),
-         certainty == 'certain') %>%
-  # count(species, hybrid_type)
-  mutate(match = case_when(hybrid_type == 'pure_b' & species == 'Coryphopterus hyalinus' ~ 'match_chya',
-                           hybrid_type == 'pure_a' & species == 'Coryphopterus personatus' ~ 'match_cper',
-                           hybrid_type == 'pure_a' & species == 'Coryphopterus hyalinus' ~ 'mtDNA_chya-nuc_cper',
-                           hybrid_type == 'pure_b' & species == 'Coryphopterus personatus' ~ 'mtDNA_cper-nuc_chya',
-                           TRUE ~ 'error')) %>%
+         str_detect(hybrid_type, 'pure')) %>%
   
   ggplot(aes(x = match, y = bitscore)) +
   geom_boxplot()
