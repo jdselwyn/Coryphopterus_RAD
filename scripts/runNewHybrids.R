@@ -1,7 +1,6 @@
-##TODO - better way to pick loci to use??
-
 if(!interactive()){
   args <- commandArgs(trailingOnly = TRUE)
+  print(args)
   DIR <- args[1]
   VCF <- args[2]
   ADMIXTURE <- args[3]
