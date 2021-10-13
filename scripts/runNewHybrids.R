@@ -271,7 +271,7 @@ most_differentiating_loci <- summary_stats$perloc %>%
 # 
 # summary_stats <- basic.stats(pure_genind_filt, diploid = TRUE)
 
-(fst <- hierfstat::fstat(pure_genind, fstonly = TRUE))
+(fst <-wc(pure_genind)$FST)
 Hs <- summary_stats$overall['Hs']
 (fstMax <- (1 - Hs) / (1 + Hs))
 (fst_prime <- fst * (1 + Hs) / (1 - Hs))
