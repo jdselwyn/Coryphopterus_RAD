@@ -1,0 +1,801 @@
+200 polymorphic loci from 200 loci in data set
+
+Locus LdDocent_Contig_1276_33
+	1
+	2
+
+Locus LdDocent_Contig_13985_367
+	1
+	2
+
+Locus LdDocent_Contig_62739_33
+	1
+	2
+
+Locus LdDocent_Contig_6588_437
+	1
+	2
+
+Locus LdDocent_Contig_66458_63
+	1
+	2
+
+Locus LdDocent_Contig_74577_57
+	1
+	2
+
+Locus LdDocent_Contig_5099_92
+	1
+	2
+
+Locus LdDocent_Contig_51286_373
+	1
+	2
+
+Locus LdDocent_Contig_1583_367
+	1
+	2
+
+Locus LdDocent_Contig_77839_91
+	2
+	1
+
+Locus LdDocent_Contig_7184_46
+	1
+	2
+
+Locus LdDocent_Contig_6898_461
+	1
+	2
+
+Locus LdDocent_Contig_254_411
+	1
+	2
+
+Locus LdDocent_Contig_95222_129
+	1
+	2
+
+Locus LdDocent_Contig_24317_315
+	1
+	2
+
+Locus LdDocent_Contig_17847_465
+	2
+	1
+
+Locus LdDocent_Contig_66889_29
+	1
+	2
+
+Locus LdDocent_Contig_5672_442
+	1
+	2
+
+Locus LdDocent_Contig_98_468
+	1
+	2
+
+Locus LdDocent_Contig_3159_380
+	1
+	2
+
+Locus LdDocent_Contig_88450_464
+	2
+	1
+
+Locus LdDocent_Contig_84063_14
+	1
+	2
+
+Locus LdDocent_Contig_6037_101
+	1
+	2
+
+Locus LdDocent_Contig_5307_467
+	1
+	2
+
+Locus LdDocent_Contig_73_392
+	1
+	2
+
+Locus LdDocent_Contig_1236_34
+	1
+	2
+
+Locus LdDocent_Contig_83082_314
+	1
+	2
+
+Locus LdDocent_Contig_67620_119
+	1
+	2
+
+Locus LdDocent_Contig_7538_103
+	1
+	2
+
+Locus LdDocent_Contig_72874_463
+	1
+	2
+
+Locus LdDocent_Contig_718_137
+	1
+	2
+
+Locus LdDocent_Contig_5574_400
+	1
+	2
+
+Locus LdDocent_Contig_1438_37
+	1
+	2
+
+Locus LdDocent_Contig_2059_130
+	1
+	2
+
+Locus LdDocent_Contig_7192_363
+	1
+	2
+
+Locus LdDocent_Contig_55008_490
+	1
+	2
+
+Locus LdDocent_Contig_608_527
+	1
+	2
+
+Locus LdDocent_Contig_92672_101
+	1
+	2
+
+Locus LdDocent_Contig_95088_379
+	1
+	2
+
+Locus LdDocent_Contig_1402_439
+	1
+	2
+
+Locus LdDocent_Contig_7170_403
+	1
+	2
+
+Locus LdDocent_Contig_2942_110
+	1
+	2
+
+Locus LdDocent_Contig_80797_118
+	1
+	2
+
+Locus LdDocent_Contig_79592_414
+	1
+	2
+
+Locus LdDocent_Contig_69533_417
+	1
+	2
+
+Locus LdDocent_Contig_5362_82
+	1
+	2
+
+Locus LdDocent_Contig_2564_66
+	1
+	2
+
+Locus LdDocent_Contig_36993_35
+	1
+	2
+
+Locus LdDocent_Contig_1050_136
+	1
+	2
+
+Locus LdDocent_Contig_18290_404
+	1
+	2
+
+Locus LdDocent_Contig_20036_452
+	1
+	2
+
+Locus LdDocent_Contig_91609_11
+	1
+	2
+
+Locus LdDocent_Contig_7306_383
+	1
+	2
+
+Locus LdDocent_Contig_88_383
+	1
+	2
+
+Locus LdDocent_Contig_13051_144
+	1
+	2
+
+Locus LdDocent_Contig_15237_23
+	1
+	2
+
+Locus LdDocent_Contig_5879_36
+	1
+	2
+
+Locus LdDocent_Contig_15456_449
+	1
+	2
+
+Locus LdDocent_Contig_95152_97
+	1
+	2
+
+Locus LdDocent_Contig_20806_397
+	1
+	2
+
+Locus LdDocent_Contig_2287_379
+	1
+	2
+
+Locus LdDocent_Contig_57504_43
+	1
+	2
+
+Locus LdDocent_Contig_3868_38
+	1
+	2
+
+Locus LdDocent_Contig_35977_139
+	1
+	2
+
+Locus LdDocent_Contig_3698_393
+	1
+	2
+
+Locus LdDocent_Contig_1722_466
+	2
+	1
+
+Locus LdDocent_Contig_292_140
+	1
+	2
+
+Locus LdDocent_Contig_72998_14
+	1
+	2
+
+Locus LdDocent_Contig_2465_75
+	1
+	2
+
+Locus LdDocent_Contig_8505_368
+	1
+	2
+
+Locus LdDocent_Contig_18297_138
+	1
+	2
+
+Locus LdDocent_Contig_22442_427
+	1
+	2
+
+Locus LdDocent_Contig_20128_26
+	1
+	2
+
+Locus LdDocent_Contig_93405_379
+	1
+	2
+
+Locus LdDocent_Contig_93561_362
+	1
+	2
+
+Locus LdDocent_Contig_13900_389
+	1
+	2
+
+Locus LdDocent_Contig_168_103
+	1
+	2
+
+Locus LdDocent_Contig_935_140
+	1
+	2
+
+Locus LdDocent_Contig_6407_358
+	1
+	2
+
+Locus LdDocent_Contig_15025_409
+	1
+	2
+
+Locus LdDocent_Contig_7902_345
+	1
+	2
+
+Locus LdDocent_Contig_1289_121
+	1
+	2
+
+Locus LdDocent_Contig_5278_119
+	1
+	2
+
+Locus LdDocent_Contig_3155_425
+	1
+	2
+
+Locus LdDocent_Contig_66759_112
+	1
+	2
+
+Locus LdDocent_Contig_1118_8
+	1
+	2
+
+Locus LdDocent_Contig_79960_434
+	1
+	2
+
+Locus LdDocent_Contig_359_399
+	1
+	2
+
+Locus LdDocent_Contig_34076_10
+	1
+	2
+
+Locus LdDocent_Contig_20999_406
+	1
+	2
+
+Locus LdDocent_Contig_954_459
+	1
+	2
+
+Locus LdDocent_Contig_1949_86
+	1
+	2
+
+Locus LdDocent_Contig_1419_120
+	1
+	2
+
+Locus LdDocent_Contig_57890_429
+	1
+	2
+
+Locus LdDocent_Contig_27577_415
+	1
+	2
+
+Locus LdDocent_Contig_790_438
+	1
+	2
+
+Locus LdDocent_Contig_22136_393
+	1
+	2
+
+Locus LdDocent_Contig_1585_417
+	1
+	2
+
+Locus LdDocent_Contig_30158_257
+	1
+	2
+
+Locus LdDocent_Contig_13_96
+	1
+	2
+
+Locus LdDocent_Contig_1852_85
+	1
+	2
+
+Locus LdDocent_Contig_68801_463
+	1
+	2
+
+Locus LdDocent_Contig_64815_411
+	1
+	2
+
+Locus LdDocent_Contig_503_92
+	1
+	2
+
+Locus LdDocent_Contig_686_403
+	1
+	2
+
+Locus LdDocent_Contig_55045_105
+	1
+	2
+
+Locus LdDocent_Contig_3899_397
+	1
+	2
+
+Locus LdDocent_Contig_16527_454
+	1
+	2
+
+Locus LdDocent_Contig_368_104
+	1
+	2
+
+Locus LdDocent_Contig_72344_144
+	1
+	2
+
+Locus LdDocent_Contig_58707_436
+	1
+	2
+
+Locus LdDocent_Contig_88440_85
+	2
+	1
+
+Locus LdDocent_Contig_91112_94
+	2
+	1
+
+Locus LdDocent_Contig_172_60
+	1
+	2
+
+Locus LdDocent_Contig_2767_425
+	1
+	2
+
+Locus LdDocent_Contig_30350_410
+	1
+	2
+
+Locus LdDocent_Contig_65043_38
+	1
+	2
+
+Locus LdDocent_Contig_69820_346
+	1
+	2
+
+Locus LdDocent_Contig_670_478
+	1
+	2
+
+Locus LdDocent_Contig_8487_141
+	1
+	2
+
+Locus LdDocent_Contig_1935_91
+	1
+	2
+
+Locus LdDocent_Contig_6886_108
+	1
+	2
+
+Locus LdDocent_Contig_61650_466
+	1
+	2
+
+Locus LdDocent_Contig_68168_309
+	1
+	2
+
+Locus LdDocent_Contig_50531_445
+	1
+	2
+
+Locus LdDocent_Contig_34273_350
+	1
+	2
+
+Locus LdDocent_Contig_87910_402
+	1
+	2
+
+Locus LdDocent_Contig_96111_324
+	1
+	2
+
+Locus LdDocent_Contig_1523_70
+	1
+	2
+
+Locus LdDocent_Contig_1827_336
+	1
+	2
+
+Locus LdDocent_Contig_88403_16
+	1
+	2
+
+Locus LdDocent_Contig_74432_382
+	1
+	2
+
+Locus LdDocent_Contig_83889_467
+	1
+	2
+
+Locus LdDocent_Contig_61554_18
+	1
+	2
+
+Locus LdDocent_Contig_50102_11
+	1
+	2
+
+Locus LdDocent_Contig_22232_67
+	1
+	2
+
+Locus LdDocent_Contig_3166_66
+	1
+	2
+
+Locus LdDocent_Contig_314_39
+	1
+	2
+
+Locus LdDocent_Contig_50611_479
+	1
+	2
+
+Locus LdDocent_Contig_814_432
+	1
+	2
+
+Locus LdDocent_Contig_29486_72
+	1
+	2
+
+Locus LdDocent_Contig_95108_34
+	1
+	2
+
+Locus LdDocent_Contig_650_40
+	1
+	2
+
+Locus LdDocent_Contig_35672_447
+	1
+	2
+
+Locus LdDocent_Contig_92358_102
+	1
+	2
+
+Locus LdDocent_Contig_1328_36
+	1
+	2
+
+Locus LdDocent_Contig_6059_390
+	1
+	2
+
+Locus LdDocent_Contig_1011_519
+	1
+	2
+
+Locus LdDocent_Contig_69562_71
+	1
+	2
+
+Locus LdDocent_Contig_34609_429
+	1
+	2
+
+Locus LdDocent_Contig_555_371
+	1
+	2
+
+Locus LdDocent_Contig_58774_132
+	1
+	2
+
+Locus LdDocent_Contig_24682_102
+	1
+	2
+
+Locus LdDocent_Contig_71514_401
+	1
+	2
+
+Locus LdDocent_Contig_1629_400
+	1
+	2
+
+Locus LdDocent_Contig_12602_422
+	1
+	2
+
+Locus LdDocent_Contig_23010_476
+	1
+	2
+
+Locus LdDocent_Contig_73912_413
+	1
+	2
+
+Locus LdDocent_Contig_9155_368
+	1
+	2
+
+Locus LdDocent_Contig_6920_137
+	1
+	2
+
+Locus LdDocent_Contig_71998_388
+	1
+	2
+
+Locus LdDocent_Contig_86476_29
+	1
+	2
+
+Locus LdDocent_Contig_14851_408
+	1
+	2
+
+Locus LdDocent_Contig_18493_369
+	1
+	2
+
+Locus LdDocent_Contig_63069_410
+	1
+	2
+
+Locus LdDocent_Contig_5961_352
+	1
+	2
+
+Locus LdDocent_Contig_1759_312
+	1
+	2
+
+Locus LdDocent_Contig_879_336
+	1
+	2
+
+Locus LdDocent_Contig_7945_395
+	1
+	2
+
+Locus LdDocent_Contig_73527_499
+	1
+	2
+
+Locus LdDocent_Contig_90285_342
+	1
+	2
+
+Locus LdDocent_Contig_81828_436
+	1
+	2
+
+Locus LdDocent_Contig_92_51
+	1
+	2
+
+Locus LdDocent_Contig_68815_372
+	1
+	2
+
+Locus LdDocent_Contig_2016_435
+	1
+	2
+
+Locus LdDocent_Contig_10432_143
+	1
+	2
+
+Locus LdDocent_Contig_1756_66
+	1
+	2
+
+Locus LdDocent_Contig_19136_144
+	1
+	2
+
+Locus LdDocent_Contig_34180_70
+	1
+	2
+
+Locus LdDocent_Contig_53109_28
+	1
+	2
+
+Locus LdDocent_Contig_38846_389
+	1
+	2
+
+Locus LdDocent_Contig_1334_465
+	1
+	2
+
+Locus LdDocent_Contig_1745_380
+	1
+	2
+
+Locus LdDocent_Contig_20299_482
+	1
+	2
+
+Locus LdDocent_Contig_14643_33
+	1
+	2
+
+Locus LdDocent_Contig_61311_421
+	1
+	2
+
+Locus LdDocent_Contig_1657_34
+	1
+	2
+
+Locus LdDocent_Contig_1183_492
+	1
+	2
+
+Locus LdDocent_Contig_6342_311
+	1
+	2
+
+Locus LdDocent_Contig_1040_425
+	1
+	2
+
+Locus LdDocent_Contig_52123_371
+	1
+	2
+
+Locus LdDocent_Contig_715_109
+	1
+	2
+
+Locus LdDocent_Contig_27161_35
+	1
+	2
+
+Locus LdDocent_Contig_12377_140
+	1
+	2
+
+Locus LdDocent_Contig_65614_7
+	1
+	2
+
+Locus LdDocent_Contig_265_37
+	1
+	2
+
+Locus LdDocent_Contig_1307_442
+	1
+	2
+
+Locus LdDocent_Contig_6436_40
+	1
+	2
+
+Locus LdDocent_Contig_1740_404
+	1
+	2
+
+Locus LdDocent_Contig_57974_380
+	1
+	2
