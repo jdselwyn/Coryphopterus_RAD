@@ -41,6 +41,17 @@ newhybrids_subsetLoci <- read_csv('../splitSpecies/newHybrids/newHybrids_fullRes
   select(-starts_with('C'), -sd_posterior_probability, -cv_posterior_probability) %>%
   pivot_wider(names_from = hybrid_class, values_from = mean_posterior_probability) 
 
+newhybrids_bestLoci <- read_csv('../splitSpecies/newHybrids_best/newHybrids_fullResults.csv') %>%
+  filter(prior == 'Jeffreys') %>%
+  select(-prior) %>%
+  mutate(Indiv = str_remove(Indiv, '.fp2.repr')) %>%
+  group_by(Indiv) %>%
+  mutate(hybrid_type = hybrid_class[mean_posterior_probability == max(mean_posterior_probability)],
+         post_prob = max(mean_posterior_probability)) %>%
+  ungroup %>%
+  select(-starts_with('C'), -sd_posterior_probability, -cv_posterior_probability) %>%
+  pivot_wider(names_from = hybrid_class, values_from = mean_posterior_probability) 
+
 
 newhybrids_allLoci <- full_join(read_csv('../splitSpecies/newHybrids/All Loci/newhybrid_data.csv') %>%
             # select(-starts_with('L')) %>%
@@ -64,22 +75,18 @@ newhybrids_allLoci <- full_join(read_csv('../splitSpecies/newHybrids/All Loci/ne
   pivot_wider()
 
 #### Compare 200 loci vs All loci ####
-mixup_ind <- newhybrids_subsetLoci %>%
-  pivot_longer(cols = -c(Indiv, Z, hybrid_type, post_prob)) %>%
+mixup_ind_all <- newhybrids_subsetLoci %>%
   
   full_join(newhybrids_allLoci %>% 
-              select(-starts_with('L')) %>%
-              pivot_longer(cols = -c(Indiv, Z, hybrid_type, post_prob)), 
-            by = c('Indiv', 'Z', 'name'),
-            suffix = c('.subset', '.all')) %>%
-  mutate(diff = abs(value.subset - value.all)) %>%
-  filter(hybrid_type.all != hybrid_type.subset) %>%
-  
-  group_by(Indiv) %>%
-  filter(value.subset != post_prob.subset) %>%
-  filter(value.subset == max(value.subset)) %>%
+              select(-starts_with('L')), 
+            by = c('Indiv', 'Z'),
+            suffix = c('.best', '.all')) %>%
+  filter(hybrid_type.all != hybrid_type.best) %>%
   pull(Indiv)
 
+all_nan <- newhybrids_allLoci %>%
+  filter(is.nan(post_prob)) %>%
+  pull(Indiv)
 
 full_join(
   select(newhybrids_subsetLoci, Indiv, hybrid_type, post_prob),
@@ -107,47 +114,123 @@ newhybrids_allLoci %>%
   arrange(-missing)
 
 
+#### Compare 200 loci vs Best loci ####
+mixup_ind_best <- newhybrids_subsetLoci %>%
   
+  full_join(newhybrids_bestLoci, 
+            by = c('Indiv', 'Z'),
+            suffix = c('.subset', '.best')) %>%
+  select(-Z) %>%
+  filter(hybrid_type.best != hybrid_type.subset) %>%
+  pull(Indiv)
+
+mixup_best_all <- newhybrids_bestLoci %>%
   
+  full_join(newhybrids_allLoci %>% 
+              select(-starts_with('L')), 
+            by = c('Indiv', 'Z'),
+            suffix = c('.best', '.all')) %>%
+  filter(hybrid_type.all != hybrid_type.best) %>%
+  pull(Indiv)
+
+#### PCA ####
+library(adegenet)
+library(vcfR)
+vcf <- read.vcfR('../tmp_dir/MiSeq_lightSpecies2.10.1.Fltr20.8.randSNPperLoc.vcf', verbose = TRUE)
+
+vcf_genind <- vcfR2genind(vcf)
+
+full_pca <- dudi.pca(tab(vcf_genind, NA.method = "mean"), scannf=FALSE, 
+                     center = TRUE, scale=TRUE, nf = nLoc(vcf_genind) - 1)
+
 #### Join Data ####
-full_data <- newhybrids_allLoci %>%
+full_data <- newhybrids_subsetLoci %>%
+  full_join(newhybrids_bestLoci, 
+            by = c('Indiv'),
+            suffix = c('.subset', '.best')) %>%
+  full_join(select(newhybrids_allLoci, -starts_with('L')) %>%
+              rename_with(~str_c(., '.all'), -c(Indiv)),
+            by = c('Indiv')) %>%
   left_join(mtdna, by = c('Indiv' = 'ID')) %>%
   left_join(preprocess_data, by = c('Indiv' = 'sample')) %>%
   left_join(admix_data, by = c('Indiv' = 'ID')) %>%
-  mutate(match = case_when(is.na(mt_species) ~ NA_character_,
-                           hybrid_type == 'pure_b' & mt_species == 'Coryphopterus hyalinus' ~ 'match_chya',
-                           hybrid_type == 'pure_a' & mt_species == 'Coryphopterus personatus' ~ 'match_cper',
-                           hybrid_type == 'pure_a' & mt_species == 'Coryphopterus hyalinus' ~ 'mtDNA_chya-nuc_cper',
-                           hybrid_type == 'pure_b' & mt_species == 'Coryphopterus personatus' ~ 'mtDNA_cper-nuc_chya',
-                           TRUE ~ 'hybrid')) %>%
-  mutate(hybrid = case_when(hybrid_type == 'pure_b' ~ 'chya',
-                            hybrid_type == 'pure_a' ~ 'cper',
-                            hybrid_type == 'a_bx' ~ 'cper_bx',
-                            hybrid_type == 'b_bx' ~ 'chya_bx',
-                            TRUE ~ hybrid_type)) 
+  mutate(mixup_mt_best = case_when(is.na(mt_species) ~ NA,
+                           hybrid_type.best == 'pure_b' & mt_species == 'Coryphopterus hyalinus' ~ FALSE,
+                           hybrid_type.best == 'pure_a' & mt_species == 'Coryphopterus personatus' ~ FALSE,
+                           hybrid_type.best == 'pure_a' & mt_species == 'Coryphopterus hyalinus' ~ TRUE,
+                           hybrid_type.best == 'pure_b' & mt_species == 'Coryphopterus personatus' ~ TRUE,
+                           TRUE ~ NA),
+         mixup_mt_sub = case_when(is.na(mt_species) ~ NA,
+                                   hybrid_type.subset == 'pure_b' & mt_species == 'Coryphopterus hyalinus' ~ FALSE,
+                                  hybrid_type.subset == 'pure_a' & mt_species == 'Coryphopterus personatus' ~ FALSE,
+                                  hybrid_type.subset == 'pure_a' & mt_species == 'Coryphopterus hyalinus' ~ TRUE,
+                                  hybrid_type.subset == 'pure_b' & mt_species == 'Coryphopterus personatus' ~ TRUE,
+                                   TRUE ~ NA),
+         mixup_mt_all = case_when(is.na(mt_species) ~ NA,
+                                  hybrid_type.all == 'pure_b' & mt_species == 'Coryphopterus hyalinus' ~ FALSE,
+                                  hybrid_type.all == 'pure_a' & mt_species == 'Coryphopterus personatus' ~ FALSE,
+                                  hybrid_type.all == 'pure_a' & mt_species == 'Coryphopterus hyalinus' ~ TRUE,
+                                  hybrid_type.all == 'pure_b' & mt_species == 'Coryphopterus personatus' ~ TRUE,
+                                  TRUE ~ NA),
+         nan_all = is.nan(post_prob.all),
+         mixup_all_sub = hybrid_type.subset != hybrid_type.all,
+         mixup_best_sub = hybrid_type.best != hybrid_type.subset,
+         mixup_best_all = hybrid_type.best != hybrid_type.all) %>%
+  inner_join(as_tibble(full_pca$li, rownames = 'Indiv') %>%
+               mutate(Indiv = str_remove(Indiv, '.fp2.repr')) %>%
+               select(Indiv, Axis1, Axis2), 
+             by = 'Indiv')
+
+#### Plot of interesting/disagreements ####
+full_data %>%
+  select(Indiv, Axis1, Axis2, nan_all, starts_with('mixup')) %>%
+  pivot_longer(cols = c(nan_all, starts_with('mixup'))) %>%
+  mutate(order_var = if_else(!value | is.na(value), 1, 2)) %>%
+  arrange(order_var) %>%
+  filter(Axis2 > -20) %>%
   
+  ggplot(aes(x = Axis1, y = Axis2, colour = value, size = value)) +
+  geom_point(show.legend = FALSE) +
+  scale_colour_manual(values = c('TRUE' = 'red', 'FALSE' = 'gray25'), na.value = 'grey75') +
+  scale_size_manual(values = c('TRUE' = 3, 'FALSE' = 1), na.value = 1) +
+  facet_wrap(~name) +
+  theme_classic()
+
+
 full_data %>%
-  ggplot(aes(x = hybrid_type, y = NovaSeq)) +
-  geom_boxplot() +
-  scale_y_log10() +
-  labs(y = 'Number of Reads')
+  filter(mixup_mt_best | mixup_mt_sub | mixup_mt_all) %>%
+  select(Indiv, starts_with('hybrid_type'), starts_with('mixup'))
+
+#### Plot Hybrid types ####
+full_data %>%
+  select(Indiv, Axis1, Axis2, starts_with('hybrid_type')) %>%
+  pivot_longer(cols = starts_with('hybrid_type')) %>%
+  mutate(name = str_remove(name, 'hybrid_type.')) %>%
+  filter(Axis2 > -20) %>%
+  ggplot(aes(x = Axis1, y = Axis2, colour = value, size = value)) +
+  geom_point(show.legend = TRUE) +
+  scale_colour_manual(values = c('a_bx' = 'red', 'b_bx' = 'green', 
+                                 'F1' = 'blue', 'F2' = 'purple',
+                                 'pure_a' = 'gray10', 'pure_b' = 'gray70'), 
+                      na.value = 'pink') +
+  scale_size_manual(values = c('a_bx' = 2, 'b_bx' = 2, 
+                               'F1' = 2, 'F2' = 2,
+                               'pure_a' = 1, 'pure_b' = 1), 
+                    na.value = 2) +
   
-full_data %>%
-  filter(!is.na(mt_species)) %>%
-  ggplot(aes(x = match, y = NovaSeq)) +
-  geom_boxplot() +
-  scale_y_log10() +
-  labs(y = 'Number of Reads')
+  facet_wrap(~name) +
+  theme_classic()
+
+
 
 full_data %>%
-  filter(!is.na(mt_species)) %>%
-  ggplot(aes(x = match, y = evalue)) +
-  geom_boxplot() +
-  labs(y = 'log10(E-Value)')
+  filter(is.na(hybrid_type.best))
 
 full_data %>%
-  count(match)
+  group_by(Indiv) %>%
+  filter(n() > 1) %>%
+  select(-ends_with('subset'), -ends_with('best'), -ends_with('all'))
 
-full_data %>%
-  filter(is.na(hybrid))
-  count(hybrid)
+
+newhybrids_bestLoci %>%
+  filter(Indiv == c('COPE_1192'))
