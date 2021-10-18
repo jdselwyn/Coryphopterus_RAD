@@ -730,14 +730,9 @@ sbatch -o SLURM_out/newHybrids_miseq-%j.out \
 [Largest Fst 200 Loci File](SLURM_out/newHybrids_miseq-49798.out)
 
 ## Step 18. Interpret NewHybrids
-`utils/`
+`utils/investigate_NewHybrids.R`
 
-## Step 19. Split out on *C. hyalinus*
-
-
-
-# IGNORE BELOW HERE SAVE FOR LATER
-## Step 16. Upload to NCBI
+## Step 17. Upload to NCBI
 Go to: https://submit.ncbi.nlm.nih.gov/subs/sra/ and click 'Aspera command line and FTP upload options' to request a preload folder
 This is a helpful page: https://meschedl.github.io/MESPutnam_Open_Lab_Notebook/SRA-Upload_Protocol/
   1. Make Folder with all files to upload
@@ -751,7 +746,7 @@ This is a helpful page: https://meschedl.github.io/MESPutnam_Open_Lab_Notebook/S
   cp mkREF_NovaSeq/COPE*gz NCBI_upload/
   rename fp2.repr novaseq NCBI_upload/*gz
   ```
-  2. Rename `COPE` portion to species ID from DAPC
+  2. Rename `COPE` portion to species ID from newHybrids
   ```
   module load R/gcc/64/3.5.1
   Rscript scripts/rename_ncbi.R
@@ -767,7 +762,14 @@ This is a helpful page: https://meschedl.github.io/MESPutnam_Open_Lab_Notebook/S
   mput *fq.gz
 
   ```
+  4. Make metadata using `Create NCBI metadata.R`
 
+
+
+
+
+
+#IGNORE
 ## Step 17. Remove CPERS and Filter Genotypes
 ```
 module load bcftools

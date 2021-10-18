@@ -96,24 +96,6 @@ full_join(
 ) %>%
   filter(hybrid_type.all != hybrid_type.subset)
 
-
-read_csv('../splitSpecies/newHybrids/newHybrids_fullResults.csv') %>%
-  filter(prior == 'Jeffreys') %>%
-  select(-prior) %>%
-  mutate(Indiv = str_remove(Indiv, '.fp2.repr')) %>%
-  filter(Indiv %in% c(tmp))
-  
-
-newhybrids_allLoci %>%
-  filter(Indiv %in% tmp) %>%
-  rowwise %>%
-  mutate(missing = rowSums(across(starts_with('L'), ~. == '0'))) %>%
-  ungroup %>%
-  select(Indiv, missing) %>%
-  mutate(missing = missing / length(colnames(select(newhybrids_allLoci, starts_with('L')))) * 100) %>%
-  arrange(-missing)
-
-
 #### Compare 200 loci vs Best loci ####
 mixup_ind_best <- newhybrids_subsetLoci %>%
   
@@ -202,11 +184,12 @@ full_data %>%
   select(Indiv, starts_with('hybrid_type'), starts_with('mixup'))
 
 #### Plot Hybrid types ####
-full_data %>%
+full_data %>% 
   select(Indiv, Axis1, Axis2, starts_with('hybrid_type')) %>%
   pivot_longer(cols = starts_with('hybrid_type')) %>%
   mutate(name = str_remove(name, 'hybrid_type.')) %>%
   filter(Axis2 > -20) %>%
+  filter(name == 'best') %>%
   ggplot(aes(x = Axis1, y = Axis2, colour = value, size = value)) +
   geom_point(show.legend = TRUE) +
   scale_colour_manual(values = c('a_bx' = 'red', 'b_bx' = 'green', 
@@ -218,19 +201,41 @@ full_data %>%
                                'pure_a' = 1, 'pure_b' = 1), 
                     na.value = 2) +
   
-  facet_wrap(~name) +
+  # facet_wrap(~name) +
   theme_classic()
 
+full_data %>%
+  select(Indiv, ends_with('best')) %>%
+  count(hybrid_type.best)
+
+full_data %>%
+  select(Indiv, mt_species, ends_with('best')) %>%
+  filter(!is.na(mt_species),
+         str_detect(hybrid_type.best, 'pure')) %>%
+  count(hybrid_type.best, mt_species)
+
+full_data %>%
+  select(Indiv, ends_with('best')) %>%
+  filter(mixup_mt_best)
 
 
 full_data %>%
+  select(Indiv, ends_with('best')) %>%
   filter(is.na(hybrid_type.best))
 
+
 full_data %>%
-  group_by(Indiv) %>%
-  filter(n() > 1) %>%
-  select(-ends_with('subset'), -ends_with('best'), -ends_with('all'))
+  select(Indiv, ends_with('best')) %>%
+  select(-Z.best)
+
+full_data %>%
+  select(Indiv, ends_with('best')) %>%
+  arrange(post_prob.best)
+
+(4+4+3+7) / (4+4+3+7+133+625)
 
 
-newhybrids_bestLoci %>%
-  filter(Indiv == c('COPE_1192'))
+
+full_data %>%
+  filter(!is.na(MiSeq)) %>%
+  select(Indiv, MiSeq, ends_with('best'))
