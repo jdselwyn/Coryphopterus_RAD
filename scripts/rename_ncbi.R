@@ -34,10 +34,12 @@ hybrid_match <- read_csv('splitSpecies/newHybrids_best/newHybrids_fullResults.cs
 
 all_files <- list.files(path = "NCBI_upload", pattern = '*gz', full.names = TRUE) %>%
   tibble(file = .) %>%
-  mutate(ID = str_extract(file, 'COPE_[0-9]+'))
+  mutate(ID = str_extract(file, '[CF][A-Z0-9]+_[0-9]+'))
 
-rename_scheme <- full_join(all_files, hybrid_match, by = c('ID' = 'Indiv')) %>%
-  filter(hybrid_type == 'F2') %>%
+rename_scheme %>%
+  filter(str_detect(file, '0489'))
+
+rename_scheme <- full_join(all_files, hybrid_match, by = c('ID' = 'Indiv')) %>% 
   mutate(hybrid = if_else(is.na(hybrid_type), 'CSP', hybrid_type),
          new_file = str_replace(file, 'COPE', hybrid)) %>%
   select(-ID, -contains('hybrid'))
