@@ -36,8 +36,6 @@ all_files <- list.files(path = "NCBI_upload", pattern = '*gz', full.names = TRUE
   tibble(file = .) %>%
   mutate(ID = str_extract(file, '[CF][A-Z0-9bx]+_[0-9]+'))
 
-rename_scheme %>%
-  filter(str_detect(file, '0489'))
 
 rename_scheme <- full_join(all_files, hybrid_match, by = c('ID' = 'Indiv')) %>% 
   mutate(hybrid = if_else(is.na(hybrid_type), 'CSP', hybrid_type),
