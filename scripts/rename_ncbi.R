@@ -43,3 +43,7 @@ rename_scheme <- full_join(all_files, hybrid_match, by = c('ID' = 'Indiv')) %>%
   select(-ID, -contains('hybrid'))
 
 with(rename_scheme, file.rename(from = file, to = new_file))
+
+list.files(path = "NCBI_upload", pattern = '*gz', full.names = FALSE) %>%
+  tibble(file_name = .) %>%
+  write_delim('sample_list.txt', delim = '\t', col_names = FALSE)
