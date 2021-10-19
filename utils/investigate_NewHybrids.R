@@ -239,3 +239,20 @@ full_data %>%
 full_data %>%
   filter(!is.na(MiSeq)) %>%
   select(Indiv, MiSeq, ends_with('best'))
+
+#### Output dataframe with ID/Hybrid type ####
+full_data %>%
+  select(Indiv, hybrid_type.best) %>%
+  rename(ID = Indiv,
+         hybrid = hybrid_type.best) %>%
+  mutate(hybrid = case_when(hybrid == 'pure_a' ~ 'CPER',
+                            hybrid == 'pure_b' ~ 'CHYA',
+                            
+                            hybrid == 'a_bx' ~ 'CPERbx',
+                            hybrid == 'b_bx' ~ 'CHYAbx',
+                            
+                            hybrid == 'F1' ~ 'F1',
+                            hybrid == 'F2' ~ 'F2',
+                            TRUE ~ NA_character_),
+         ID = str_c(ID, '.fp2.repr')) %>%
+  write_csv('../splitSpecies/hybrid_types.csv')
