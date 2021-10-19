@@ -6,8 +6,8 @@ library(lubridate)
 
 #### Gather all the data together ####
 reads <- read_delim('sample_list.txt', delim = '\t', col_names = 'file_name', col_types = cols(file_name = col_character())) %>%
-  mutate(ID = str_extract(file_name, '[0-9]+'),
-         species = str_extract(file_name, '^C[A-Z]+'),
+  mutate(ID = str_extract(file_name, '[0-9]{4}'),
+         species = str_extract(file_name, '^[FC][A-Z12bx]+'),
          sequencing_type = str_extract(file_name, 'miseq|novaseq'),
          read = str_extract(file_name, 'r[12]')) 
 
@@ -73,7 +73,11 @@ ncbi_data <- right_join(individual_data, reads, by = 'ID') %>%
   mutate(lat_lon = str_c(lat, ' N ', abs(lon), ' W'),
          species = case_when(species == 'CHYA' ~ 'Coryphopterus hyalinus',
                              species == 'CPER' ~ 'Coryphopterus personatus',
-                             species == 'CSP' ~ 'Coryphopterus sp.'),
+                             species == 'CSP' ~ 'Coryphopterus sp.',
+                             species == 'CHYAbx' ~ 'Coryphopterus hyalinus backcross',
+                             species == 'CPERbx' ~ 'Coryphopterus personatus backcross',
+                             species == 'F1' ~ 'F1 hybrid Coryphopterus hyalinus & Coryphopterus personatus',
+                             species == 'F2' ~ 'F2 hybrid Coryphopterus hyalinus & Coryphopterus personatus',),
          site = str_c('Belize: Turneffe Atoll, ', site),
          tl_mm = case_when(is.na(tl_mm) & !is.na(sl_mm) ~ predict(get_tl, newdata = data.frame(sl_mm)),
                            TRUE ~ tl_mm),
@@ -104,3 +108,5 @@ sra_info <- ncbi_data %>%
   arrange(sequencing_type, sample_name) %>%
   select(sample_name, library_id, title, r1, r2)
 write_csv(sra_info, 'for_ncbi.csv')
+
+file.remove('for_ncbi.csv')

@@ -766,9 +766,6 @@ This is a helpful page: https://meschedl.github.io/MESPutnam_Open_Lab_Notebook/S
 
 
 
-
-
-
 #IGNORE
 ## Step 17. Remove CPERS and Filter Genotypes
 ```
