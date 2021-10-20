@@ -606,8 +606,6 @@ Genotyping Stats
 | Mean Missing (Loci) | 11% ± 7% | 16% ± 4.7% | 16.3% ± 4.8% |
 | Range Missing (Loci) | 0% - 29% | 1.8% - 25% | 1.7% - 25% |
 
-
-
 ### Filter genotypes of reads mapped to NovaSeq reference
 ```
 sbatch scripts/fltrVCF.sbatch \
@@ -673,6 +671,7 @@ sbatch -o SLURM_out/dapc_miseq-%j.out \
     MiSeq_lightSpecies2
 ```
 [Out File](SLURM_out/dapc_miseq-49364.out)
+
 ## Step 16. Admixture Analysis
 Use admixture to find pure specimens to use in NewHybrids. From here on just use MiSeq assembly
 
@@ -763,7 +762,7 @@ This is a helpful page: https://meschedl.github.io/MESPutnam_Open_Lab_Notebook/S
   ```
   4. Make metadata using `Create NCBI metadata.R`
 
-## Step 17. Remove CPERS and Filter Genotypes
+## Step 20. Remove CPERS and Filter Genotypes
 ```
 module load vcftools
 vcftools --vcf mkVCF_MiSeq/TotalRawSNPs.10.1.vcf --keep splitSpecies/CHYA.list --recode-INFO-all --recode --out fltrVCF_MiSeq/MiSeq_CHYA.10.1
@@ -801,7 +800,6 @@ Rscript scripts/summarizeVCF.R fltrVCF_MiSeq/MiSeq_chyaB.10.1.Fltr21.28.MostInfo
 Rscript scripts/summarizeVCF.R fltrVCF_MiSeq/MiSeq_chyaC.10.1.Fltr21.30.MostInformativeSNP.vcf
 ```
 
-
 Genotyping Stats
 | Metric | [Initial](config_files/fltrVCF_initial.config) | [chyaA](config_files/fltrVCF_chya_A.config) | [chyaB](config_files/fltrVCF_chya_B.config) | [chyaC](config_files/fltrVCF_chya_C.config) |
 | --- | ----- | ----- | ----- | ----- |
@@ -821,4 +819,50 @@ Genotyping Stats
 | Mean Missing (Loci) | 48% ± 27% | 6% ± 4% | 6% ± 4% | 8% ± 4% |
 | Range Missing (Loci) | 1% - 100% | 0% - 15% | 0% - 15% | 0% - 15% |
 
-Variant C seems like a marginally better "filter" in that it retains more individuals and more loci. However the starting point is low with only ~1/2 the contigs as we had before removing non CHYA. 
+Variant C seems like a marginally better "filter" in that it retains more individuals and more loci. However the starting point is low with only ~1/2 the contigs as we had before removing non CHYA. Remap to 2.1 MiSeq Reference
+
+## Step 21. Redo Mapping -> genotyping with only CHYA
+### Mapping
+```
+sbatch scripts/mkBAM.sbatch \
+  mkBAM_MiSeq \
+  config_files/MiSeq.config \
+  mkREF_MiSeq/reference.2.1.fasta
+
+50324
+
+sbatch -o SLURM_out/bam_summary-%j.out \
+  scripts/runRscript.sbatch \
+  scripts/checkBAM.R \
+  mkBAM_MiSeq RAW
+```
+Mapping Stats
+| Metric | # Reads Mapped |
+| --- | ----- |
+| Mean | 6,891,175 ± 8,686,655 SD |
+| Range | 31,687 - 119,213,337 |
+
+
+### Filtering
+```
+mkdir fltrBAM_MiSeq
+mv mkBAM_MiSeq/*RAW* fltrBAM_MiSeq
+
+sbatch scripts/fltrBAM.sbatch \
+  fltrBAM_MiSeq \
+  config_files/MiSeq.config \
+  mkREF_MiSeq/reference.10.1.fasta
+
+sbatch -o SLURM_out/bam_summary-%j.out \
+  scripts/runRscript.sbatch \
+  scripts/checkBAM.R \
+  fltrBAM_MiSeq RG
+```
+
+Mapping Stats
+| Metric | Value |
+| --- | ----- |
+| Mean Reads Mapped | 1,850,867 ± 2,265,530 SD |
+| Range Reads Mapped | 1,990 - 20,326,650 |
+
+### Genotyping
