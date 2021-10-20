@@ -12,9 +12,7 @@
 
 ## ToDo
 - Delete NCBI data - need to change species IDs post ADMIXTURE & NewHybrids
-- Fix NewHybrids Bug - traceplot = wrong since it reads in both warmup & iterations
 - Upload data to NCBI
-- Split out only pure CHYA for dispersal analysis
 - Rerun SNP filtering
 
 ## Step 1.  Demultiplex Sequences
@@ -732,7 +730,8 @@ sbatch -o SLURM_out/newHybrids_miseq-%j.out \
 ## Step 18. Interpret NewHybrids
 `utils/investigate_NewHybrids.R`
 
-## Step 17. Upload to NCBI
+
+## Step 19. Upload to NCBI
 Go to: https://submit.ncbi.nlm.nih.gov/subs/sra/ and click 'Aspera command line and FTP upload options' to request a preload folder
 This is a helpful page: https://meschedl.github.io/MESPutnam_Open_Lab_Notebook/SRA-Upload_Protocol/
   1. Make Folder with all files to upload
@@ -764,63 +763,51 @@ This is a helpful page: https://meschedl.github.io/MESPutnam_Open_Lab_Notebook/S
   ```
   4. Make metadata using `Create NCBI metadata.R`
 
-
-
-#IGNORE
 ## Step 17. Remove CPERS and Filter Genotypes
 ```
-module load bcftools
-bgzip -c fltrVCF_MiSeq/MiSeq_Initial.10.1.Fltr02.2.recode.vcf > fltrVCF_MiSeq/MiSeq_Initial.10.1.Fltr02.2.recode.vcf.gz
-tabix -p vcf fltrVCF_MiSeq/MiSeq_Initial.10.1.Fltr02.2.recode.vcf.gz
-bcftools view -S splitSpecies/CHYA.list fltrVCF_MiSeq/MiSeq_Initial.10.1.Fltr02.2.recode.vcf.gz > fltrVCF_MiSeq/MiSeq_CHYA_Initial.10.1.Fltr02.2.recode.vcf.gz
-bgzip -d fltrVCF_MiSeq/MiSeq_CHYA_Initial.10.1.Fltr02.2.recode.vcf.gz > fltrVCF_MiSeq/MiSeq_CHYA_Initial.10.1.Fltr02.2.recode.vcf
-
-sbatch -o SLURM_out/vcf_summary-%j.out \
-  scripts/runRscript.sbatch \
-  scripts/summarizeVCF.R \
-  fltrVCF_MiSeq/MiSeq_CHYA_Initial.10.1.Fltr02.2.recode.vcf.gz
-49230
+module load vcftools
+vcftools --vcf mkVCF_MiSeq/TotalRawSNPs.10.1.vcf --keep splitSpecies/CHYA.list --recode-INFO-all --recode --out fltrVCF_MiSeq/MiSeq_CHYA.10.1
 ```
 
 ```
 sbatch scripts/fltrVCF.sbatch \
 	fltrVCF_MiSeq \
-	fltrVCF_MiSeq/MiSeq_CHYA_Initial.10.1.Fltr02.2.recode.vcf \
+	fltrVCF_MiSeq/MiSeq_CHYA.10.1.recode.vcf \
 	config_files/fltrVCF_chya_A.config \
 	chyaA
-
+50250
 
 sbatch scripts/fltrVCF.sbatch \
 	fltrVCF_MiSeq2 \
-	fltrVCF_MiSeq/MiSeq_CHYA_Initial.10.1.Fltr02.2.recode.vcf \
+	fltrVCF_MiSeq/MiSeq_CHYA.10.1.recode.vcf  \
 	config_files/fltrVCF_chya_B.config \
 	chyaB
-
+50251
 
 sbatch scripts/fltrVCF.sbatch \
 	fltrVCF_MiSeq3 \
-	fltrVCF_MiSeq/MiSeq_CHYA_Initial.10.1.Fltr02.2.recode.vcf \
+	fltrVCF_MiSeq/MiSeq_CHYA.10.1.recode.vcf  \
 	config_files/fltrVCF_chya_C.config \
 	chyaC
-
+50252
 ```
 
 
 Genotyping Stats
 | Metric | [Initial](config_files/fltrVCF_initial.config) | [chyaA](config_files/fltrVCF_chya_A.config) | [chyaB](config_files/fltrVCF_chya_B.config) | [chyaC](config_files/fltrVCF_chya_C.config) |
 | --- | ----- | ----- | ----- | ----- |
-| JobID | [`48339`](SLURM_out/fltrVCF-48339.out) | [`49267`](SLURM_out/fltrVCF-49267.out) | [`49268`](SLURM_out/fltrVCF-49268.out) | [`49266`](SLURM_out/fltrVCF-49266.out) |
+| JobID | [`48339`](SLURM_out/fltrVCF-48339.out) | [`50250`](SLURM_out/fltrVCF-50250.out) | [`50251`](SLURM_out/fltrVCF-50251.out) | [`50252`](SLURM_out/fltrVCF-50252.out) |
 | Summary Graph | [Initial](fltrVCF_MiSeq/MiSeq_Initial.fltrStats2.plots.pdf) | [chyaA](fltrVCF_MiSeq/MiSeq_chyaA.fltrStats2.plots.pdf) | [chyaB](fltrVCF_MiSeq/MiSeq_chyaB.fltrStats2.plots.pdf) | [chyaC](fltrVCF_MiSeq/MiSeq_chyaC.fltrStats2.plots.pdf) |
-| Number Individuals | 645 |  |  |  |
+| Number Individuals | 625 |  |  |  |
 | Number SNPs | 802,220 |  |  |  |
 | Number Contigs | 22,196 |  |  |  |
-| Mean SNPs/Contig | 36.1  ± 18.9 SD |  ±  SD |   ±  SD  |   ±  SD  |
+| Mean SNPs/Contig | 36.1 ± 18.9 SD |  ±  SD |   ±  SD  |   ±  SD  |
 | Range SNPs/Contig | 1 - 113 | - | - | - |
 | Mean Coverage | 30,097 ± 33,587 SD |  ±  SD |  ±  SD |  ±  SD |
 | Range Coverage | 20 - 708,357 |  -  |  -  |  -  |
 | Mean PHRED | 26,029 ± 123,271 SD |  ±  SD |  ±  SD |  ±  SD |
 | Range PHRED | 0 - 16,289,400 |  -  |  -  |  -  |
-| Mean Missing (Ind) | 49.4% ± 20.8% | % ± % | % ± % | % ± % |
-| Range Missing (Ind) | 18.6% - 99.8% | % - % | % - % | % - % |
-| Mean Missing (Loci) | 49.4% ± 26.4% | % ± % | % ± % | % ± % |
-| Range Missing (Loci) | 1.4% - 100% | % - % | % - % | % - % |
+| Mean Missing (Ind) | 48% ± 20% | % ± % | % ± % | % ± % |
+| Range Missing (Ind) | 19% - 98% | % - % | % - % | % - % |
+| Mean Missing (Loci) | 48% ± 27% | % ± % | % ± % | % ± % |
+| Range Missing (Loci) | 1% - 100% | % - % | % - % | % - % |

@@ -25,3 +25,14 @@ right_hybrid_type <- read_csv(DECODER, col_types = cols(.default = col_character
 
 
 
+str_c()
+
+c('module load bcftools')
+
+str_c('bgzip -c ', VCF, ' > ', VCF, '.gz')
+str_c('tabix -p vcf ', VCF, '.gz')
+
+str_c('bcftools view -S ', 
+'splitSpecies/', HYBRID_TYPE, '.list ',
+VCF, '.gz > ')
+fltrVCF_MiSeq/MiSeq_CHYA_Initial.10.1.Fltr02.2.recode.vcf
