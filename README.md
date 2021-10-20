@@ -775,21 +775,30 @@ sbatch scripts/fltrVCF.sbatch \
 	fltrVCF_MiSeq/MiSeq_CHYA.10.1.recode.vcf \
 	config_files/fltrVCF_chya_A.config \
 	chyaA
-50250
 
 sbatch scripts/fltrVCF.sbatch \
 	fltrVCF_MiSeq2 \
 	fltrVCF_MiSeq/MiSeq_CHYA.10.1.recode.vcf  \
 	config_files/fltrVCF_chya_B.config \
 	chyaB
-50251
 
 sbatch scripts/fltrVCF.sbatch \
 	fltrVCF_MiSeq3 \
 	fltrVCF_MiSeq/MiSeq_CHYA.10.1.recode.vcf  \
 	config_files/fltrVCF_chya_C.config \
 	chyaC
-50252
+
+mv fltrVCF_MiSeq2/* fltrVCF_MiSeq/; rmdir fltrVCF_MiSeq2
+mv fltrVCF_MiSeq3/* fltrVCF_MiSeq/; rmdir fltrVCF_MiSeq3
+
+ls fltrVCF_MiSeq/MiSeq_chya*MostInformativeSNP.vcf
+
+module load R/gcc/64/3.5.1
+Rscript scripts/summarizeVCF.R fltrVCF_MiSeq/MiSeq_chyaA.10.1.Fltr21.26.MostInformativeSNP.vcf
+
+Rscript scripts/summarizeVCF.R fltrVCF_MiSeq/MiSeq_chyaB.10.1.Fltr21.28.MostInformativeSNP.vcf
+
+Rscript scripts/summarizeVCF.R fltrVCF_MiSeq/MiSeq_chyaC.10.1.Fltr21.30.MostInformativeSNP.vcf
 ```
 
 
@@ -798,16 +807,16 @@ Genotyping Stats
 | --- | ----- | ----- | ----- | ----- |
 | JobID | [`48339`](SLURM_out/fltrVCF-48339.out) | [`50250`](SLURM_out/fltrVCF-50250.out) | [`50251`](SLURM_out/fltrVCF-50251.out) | [`50252`](SLURM_out/fltrVCF-50252.out) |
 | Summary Graph | [Initial](fltrVCF_MiSeq/MiSeq_Initial.fltrStats2.plots.pdf) | [chyaA](fltrVCF_MiSeq/MiSeq_chyaA.fltrStats2.plots.pdf) | [chyaB](fltrVCF_MiSeq/MiSeq_chyaB.fltrStats2.plots.pdf) | [chyaC](fltrVCF_MiSeq/MiSeq_chyaC.fltrStats2.plots.pdf) |
-| Number Individuals | 625 |  |  |  |
-| Number SNPs | 802,220 |  |  |  |
-| Number Contigs | 22,196 |  |  |  |
-| Mean SNPs/Contig | 36.1 ± 18.9 SD |  ±  SD |   ±  SD  |   ±  SD  |
-| Range SNPs/Contig | 1 - 113 | - | - | - |
-| Mean Coverage | 30,097 ± 33,587 SD |  ±  SD |  ±  SD |  ±  SD |
-| Range Coverage | 20 - 708,357 |  -  |  -  |  -  |
-| Mean PHRED | 26,029 ± 123,271 SD |  ±  SD |  ±  SD |  ±  SD |
-| Range PHRED | 0 - 16,289,400 |  -  |  -  |  -  |
-| Mean Missing (Ind) | 48% ± 20% | % ± % | % ± % | % ± % |
-| Range Missing (Ind) | 19% - 98% | % - % | % - % | % - % |
-| Mean Missing (Loci) | 48% ± 27% | % ± % | % ± % | % ± % |
-| Range Missing (Loci) | 1% - 100% | % - % | % - % | % - % |
+| Number Individuals | 625 | 471 | 471 | 489 |
+| Number SNPs | 802,220 | 2,366 | 2,315 | 2,476 |
+| Number Contigs | 22,196 | 2,366 | 2,315 | 2,476 |
+| Mean SNPs/Contig | 36.1 ± 18.9 SD | 1 ± 0 SD | 1 ± 0 SD  | 1 ± 0 SD  |
+| Range SNPs/Contig | 1 - 113 | 1 - 1 | 1 - 1 | 1 - 1 |
+| Mean Coverage | 30,097 ± 33,587 SD | 63,151 ± 20,366 SD | 62,872 ± 19,912 SD | 60,284 ± 19,318 SD |
+| Range Coverage | 20 - 708,357 | 18,748 - 128,679 | 24,604 - 128,679 | 22,997 - 110,017 |
+| Mean PHRED | 26,029 ± 123,271 SD | 352,606 ± 373,493 SD | 353,785 ± 374,820 SD | 337,504 ± 355,630 SD |
+| Range PHRED | 0 - 16,289,400 | 6,608 - 2,463,370 | 6,608 - 2,463,370 | 5,909 - 2,463,370 |
+| Mean Missing (Ind) | 48% ± 20% | 6% ± 8% | 6% ± 8% | 8% ± 11% |
+| Range Missing (Ind) | 19% - 98% | 0% - 39% | 0% - 38% | 0% - 50% |
+| Mean Missing (Loci) | 48% ± 27% | 6% ± 4% | 6% ± 4% | 8% ± 4% |
+| Range Missing (Loci) | 1% - 100% | 0% - 15% | 0% - 15% | 0% - 15% |
