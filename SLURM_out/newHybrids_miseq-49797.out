@@ -39,3 +39,13 @@ Extracting gt element MIN_DP
 0.8851918 
        Hs 
 0.5919118 
+# A tibble: 6 × 11
+  prior    variable    mean  median      sd     mad       q5     q95  rhat ess_bulk
+  <chr>    <chr>      <dbl>   <dbl>   <dbl>   <dbl>    <dbl>   <dbl> <dbl>    <dbl>
+1 Jeffreys pure_a   0.174   0.174   0.0138  0.0138  0.152    0.197    1.01    5835.
+2 Jeffreys pure_b   0.807   0.807   0.0145  0.0145  0.783    0.831    1.02    3206.
+3 Jeffreys F1       0.00382 0.00341 0.00242 0.00221 0.000655 0.00837  1.10     591.
+4 Jeffreys F2       0.00358 0.00274 0.00349 0.00342 0        0.0104   1.43     196.
+5 Jeffreys a_bx     0.00389 0.00336 0.00283 0.00262 0.000266 0.00928  1.18     359.
+6 Jeffreys b_bx     0.00739 0.00687 0.00377 0.00357 0.00223  0.0144   1.12     508.
+# … with 1 more variable: ess_tail <dbl>

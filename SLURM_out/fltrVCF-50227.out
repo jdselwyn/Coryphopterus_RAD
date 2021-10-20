@@ -1,0 +1,187 @@
+
+
+fltrVCF.bash v4.4 -- a script to filter vcf files repeatably
+
+Dependencies required for fltrVCF to be fully functional:
+	R
+		tidyverse
+		gridExtra
+	vcftools
+	vcflib
+	samtools
+	perl
+	mawk
+	parallel
+	rad_haplotyper.pl https://github.com/cbirdlab/rad_haplotyper.git
+	filter_hwe_by_pop_HPC
+
+Tue Oct 19 11:27:32 CDT 2021 Reading options from command line:
+
+	Settings File:            /work/hobi/jselwyn/Coryphopterus_RAD/config_files/fltrVCF_chya_A.config
+
+	Cutoffs:                  10.1
+	Path to BAM files:        /work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_MiSeq
+	PopMap File:              /work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_MiSeq/mapped.10.1.bed
+	VCF File:                 /work/hobi/jselwyn/Coryphopterus_RAD/fltrVCF_MiSeq/MiSeq_CHYA_Initial.10.1.Fltr02.2.recode.vcf
+	REF File:                 /work/hobi/jselwyn/Coryphopterus_RAD/mkREF_MiSeq/reference.10.1.fasta
+	PopMap File:              /work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_MiSeq/popmap.10.1
+	Output file prefix:       MiSeq_chyaA
+	Path to R scripts and other scripts:        /work/hobi/jselwyn/Coryphopterus_RAD/scripts/fltrVCF/scripts
+	HWE Script:               /work/hobi/jselwyn/Coryphopterus_RAD/scripts/fltrVCF/filter_hwe_by_pop_HPC.pl
+	Rad_Haplotyper script:    /work/hobi/jselwyn/Coryphopterus_RAD/scripts/rad_haplotyper/rad_haplotyper.pl
+	Number of threads:          20
+
+Tue Oct 19 11:27:32 CDT 2021 Reading options from config file and setting defaults
+	SETTINGS are being loaded from file: '/work/hobi/jselwyn/Coryphopterus_RAD/config_files/fltrVCF_chya_A.config'
+	Filters are set to '01 02 03 04 14 07 05 15 06 11 09 08 10 04 13 07 05 16 05 16 05 16 05 16 01 21'
+	CutoffCode is set to '.10.1'
+	BAM_PATH is set to '/work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_MiSeq'
+	SCRIPT_PATH is set to '/work/hobi/jselwyn/Coryphopterus_RAD/scripts/fltrVCF/scripts'
+	VCF_FILE is set to '/work/hobi/jselwyn/Coryphopterus_RAD/fltrVCF_MiSeq/MiSeq_CHYA_Initial.10.1.Fltr02.2.recode.vcf'
+	Bed file is set to '/work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_MiSeq/mapped.10.1.bed'
+	Reference genome is set to '/work/hobi/jselwyn/Coryphopterus_RAD/mkREF_MiSeq/reference.10.1.fasta'
+	PopMap is set to '/work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_MiSeq/popmap.10.1'
+	HWE_SCRIPT is set to '/work/hobi/jselwyn/Coryphopterus_RAD/scripts/fltrVCF/filter_hwe_by_pop_HPC.pl'
+	RADHAP_SCRIPT is set to '/work/hobi/jselwyn/Coryphopterus_RAD/scripts/rad_haplotyper/rad_haplotyper.pl'
+	Output file prefix is set to 'MiSeq_chyaA'
+	The number of threads is set to '1'
+	-P not set by user. Only filters that natively support parallelization will be run in parallel.
+	/work/hobi/jselwyn/Coryphopterus_RAD/fltrVCF_MiSeq/MiSeq_CHYA_Initial.10.1.Fltr02.2.recode.vcf will be used for serial processing.
+
+Tue Oct 19 11:27:32 CDT 2021 Getting universal chromosome/contig prefix ...
+          Querying /work/hobi/jselwyn/Coryphopterus_RAD/fltrVCF_MiSeq/MiSeq_CHYA_Initial.10.1.Fltr02.2.recode.vcf ...
+          Prefix: ##contig=<ID=dDocent
+          It is assumed that all values in the CHROM column of vcf begin with ##contig=<ID=dDocent
+          If this is not the case, then fltrVCF will not work properly.
+          The prefix is used to count SNPs/variants, contigs, etc and is used in some filters.
+
+Tue Oct 19 11:27:32 CDT 2021  reading variables into MAIN
+
+Tue Oct 19 11:27:34 CDT 2021 ---------------------------FILTER01: Remove sites with Y < alleles < X -----------------------------
+     vcftools --vcf /work/hobi/jselwyn/Coryphopterus_RAD/fltrVCF_MiSeq/MiSeq_CHYA_Initial.10.1.Fltr02.2.recode.vcf --min-alleles 2 --max-alleles 2 --recode --recode-INFO-all --out MiSeq_chyaA.10.1.Fltr01.1.recode.vcf 2> /dev/null
+	Sites remaining:	0
+	Contigs remaining:	0
+
+
+Tue Oct 19 12:00:22 CDT 2021 ---------------------------FILTER02: Remove Sites with Indels -----------------------------
+     vcftools --vcf MiSeq_chyaA.10.1.Fltr01.1.recode.vcf --remove-indels --recode --recode-INFO-all --out MiSeq_chyaA.10.1.Fltr02.2.recode.vcf 2> /dev/null
+	Sites remaining:	0
+	Contigs remaining:	0
+
+
+Tue Oct 19 12:30:31 CDT 2021 ---------------------------FILTER03: Remove Sites with QUAL < minQ -----------------------------
+         line 0: warning: Skipping data file with no valid points
+
+gnuplot> plot 'QUALbefore' using (bin($1,binwidth)):(1.0) smooth freq with boxes
+                                                                                ^
+         line 0: all points y value undefined!
+
+         line 0: warning: Skipping data file with no valid points
+
+gnuplot> plot 'QUALbefore' pt "*"
+                                 ^
+         line 0: x range is invalid
+
+     vcftools --vcf MiSeq_chyaA.10.1.Fltr02.2.recode.vcf --minQ 40 --recode --recode-INFO-all --out MiSeq_chyaA.10.1.Fltr03.3.recode.vcf 2> /dev/null
+	Sites remaining:	0
+	Contigs remaining:	0
+
+
+Tue Oct 19 13:01:08 CDT 2021 ---------------------------FILTER04: Remove Sites With Mean Depth of Coverage < min-meanDP -----------------------------
+                                                                                                                        
+                                             Histogram of mean depth per site before FILTER04                           
+                                                                                                                        
+                 12000 +--------------------------------------------------------------------------------------------+   
+                       |               +              +               +              +               +              |   
+                       |  *                            'sitedepthmeanbefore' using (bin($1,binwidth)):(1.0) ******* |   
+                       |  **                                                                                        |   
+                 10000 |-***                                                                                      +-|   
+                       | ***                                                                                        |   
+                       | ****                                                                                       |   
+                       | ****                                                                                       |   
+                  8000 |-****                                                                                     +-|   
+                       | ****                                                                                       |   
+                       | *****                                                                                      |   
+                  6000 |******                                                                                    +-|   
+                       |******                                                                                      |   
+                       |*******                                                                                     |   
+                       |*******                                                                                     |   
+                  4000 |*******                                                                                   +-|   
+                       |********                                                                                    |   
+                       |*********                                                                                   |   
+                       |*********                                                                                   |   
+                  2000 |**********                                                                                +-|   
+                       |***********                                                                                 |   
+                       |************                                                                                |   
+                       |*****************             +               +              +               +              |   
+                     0 +--------------------------------------------------------------------------------------------+   
+                       0              200            400             600            800             1000           1200 
+                                                                Mean Depth                                              
+                                                                                                                        
+                                                                                                                        
+                                        Scatter plot of mean depth per site before FILTER04.                            
+                                                                                                                        
+            1200 +--------------------------------------------------------------------------------------------------+   
+                 |          +          +          +          +          +          +          +          +          |   
+                 |                                                                    'sitedepthmeanbefore'    *    |   
+                 |                                                                                                  |   
+            1000 |-+                                                                                              +-|   
+                 |                                                                                                  |   
+                 |                                                                                                  |   
+                 |                                                                                                  |   
+             800 |-+                                                                                              +-|   
+                 |                                                                                                  |   
+                 |                                                                                                  |   
+             600 |-+                                                                                              +-|   
+                 |                                                                                                  |   
+                 |                                                                                                  |   
+                 |                                                                                                  |   
+             400 |-+                                                                                              +-|   
+                 |                                                                                                  |   
+                 |                                                                                                  |   
+                 |*                                                                                                 |   
+             200 |**                                                                                              +-|   
+                 | ******                                                                                           |   
+                 |      ********************                                                                        |   
+                 |          +          +   ****************************************************          +          |   
+               0 +--------------------------------------------------------------------------------------------------+   
+                 0        100000     200000     300000     400000     500000     600000     700000     800000     900000
+                                                                Site                                                    
+                                                                                                                        
+                                                                                                                        
+                                   Scatter plot of depth variance vs mean depth per site before FILTER04.               
+                                                                                                                        
+                   7e+06 +------------------------------------------------------------------------------------------+   
+                         |              +              +               +              +              +              |   
+                         |                                                            'meandepthVSvariance'    *    |   
+                   6e+06 |-+                                        *                                             +-|   
+                         |                                         **                                               |   
+                         |                                       **                                                 |   
+                         |                                                                                          |   
+                   5e+06 |-+                                    *                                                 +-|   
+                         |                                                                                          |   
+                         |                                                                                          |   
+                   4e+06 |-+                                                                 **        *          +-|   
+                         |                                                                   *        **            |   
+                         |                                          ***                          **  ***            |   
+                   3e+06 |-+                   *     **                                         *****             +-|   
+                         |                    *                                              *                      |   
+                         |                        **                           **   ***   *             **          |   
+                   2e+06 |-+                     *                          *** *****                             +-|   
+                         |                                           **    **  **              ****                 |   
+                         |                                     ***       * *              *                         |   
+                         |                    ****    ***********     ******                                        |   
+                   1e+06 |-+              ** *  * **** ****** ******* *                                           +-|   
+                         |       **  *********  **********************  *                                           |   
+                         |     ******************************   *  **  +*             +              +              |   
+                       0 +------------------------------------------------------------------------------------------+   
+                         0             200            400             600            800            1000           1200 
+                                                                 Mean Depth                                             
+                                                                                                                        
+     vcftools --vcf MiSeq_chyaA.10.1.Fltr03.3.recode.vcf --min-meanDP 10 --recode --recode-INFO-all --out MiSeq_chyaA.10.1.Fltr04.4.recode.vcf 2> /dev/null
+	Sites remaining:	0
+	Contigs remaining:	0
+
+
+Tue Oct 19 13:28:19 CDT 2021 ---------------------------FILTER14: If individual's genotype has DP < X, convert to missing data -----------------------------
+slurmstepd: error: *** JOB 50227 ON hpcc20 CANCELLED AT 2021-10-19T13:56:32 ***

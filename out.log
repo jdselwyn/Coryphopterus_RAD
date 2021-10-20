@@ -1,0 +1,13 @@
+
+VCFtools - 0.1.15
+(C) Adam Auton and Anthony Marcketta 2009
+
+Parameters as interpreted:
+	--vcf fltrVCF_MiSeq/MiSeq_Initial.10.1.Fltr02.2.recode.vcf
+	--keep splitSpecies/CHYA.list
+
+Keeping individuals in 'keep' list
+After filtering, kept 0 out of 0 Individuals
+After filtering, kept 0 out of a possible 0 Sites
+File does not contain any sites
+Run Time = 1.00 seconds
