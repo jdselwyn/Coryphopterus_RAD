@@ -820,3 +820,5 @@ Genotyping Stats
 | Range Missing (Ind) | 19% - 98% | 0% - 39% | 0% - 38% | 0% - 50% |
 | Mean Missing (Loci) | 48% ± 27% | 6% ± 4% | 6% ± 4% | 8% ± 4% |
 | Range Missing (Loci) | 1% - 100% | 0% - 15% | 0% - 15% | 0% - 15% |
+
+Variant C seems like a marginally better "filter" in that it retains more individuals and more loci. However the starting point is low with only ~1/2 the contigs as we had before removing non CHYA. 
