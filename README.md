@@ -888,7 +888,9 @@ sbatch -o SLURM_out/vcf_summary-%j.out \
 50580
 ```
 
+
 Error: Internal error in `dict_hash_with()`: Dictionary is full.
+```
 Backtrace:
     █
  1. ├─`%>%`(...)
@@ -901,25 +903,7 @@ Backtrace:
  8.         └─(function () ...
 Execution halted
 Too big
-
-
-
-Genotyping Stats
-| Metric | Unfiltered VCF |
-| --- | ----- |
-| Number Individuals |  |
-| Number SNPs |  |
-| Number Contigs |  |
-| Mean SNPs/Contig |  ±  SD |
-| Range SNPs/Contig |  -  |
-| Mean Coverage |  ±  SD |
-| Range Coverage |  -  |
-| Mean PHRED |  ±  SD |
-| Range PHRED |  -  |
-| Mean Missing (Ind) | % ± % |
-| Range Missing (Ind) | % - % |
-| Mean Missing (Loci) | % ± % |
-| Range Missing (Loci) | % - % |
+```
 
 ### Filter VCF
 ```
@@ -947,7 +931,7 @@ sbatch scripts/fltrVCF.sbatch \
 mv fltrVCF_MiSeq_CHYA2/* fltrVCF_MiSeq_CHYA/; rmdir fltrVCF_MiSeq_CHYA2
 mv fltrVCF_MiSeq_CHYA3/* fltrVCF_MiSeq_CHYA/; rmdir fltrVCF_MiSeq_CHYA3
 
-ls fltrVCF_MiSeq_CHYA/MiSeq_chya*MostInformativeSNP.vcf
+ls fltrVCF_MiSeq_CHYA/MiSeq*MostInformativeSNP.vcf
 
 module load R/gcc/64/3.5.1
 Rscript scripts/summarizeVCF.R fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaA.2.1.Fltr21.26.MostInformativeSNP.vcf
@@ -961,7 +945,7 @@ Genotyping Stats
 | Metric | [chyaA](config_files/fltrVCF_chya_A.config) | [chyaB](config_files/fltrVCF_chya_B.config) | [chyaC](config_files/fltrVCF_chya_C.config) |  |
 | --- | ----- | ----- | ----- | ----- |
 | JobID | [`50250`](SLURM_out/fltrVCF-50250.out) | [`50251`](SLURM_out/fltrVCF-50251.out) | [`50252`](SLURM_out/fltrVCF-50252.out) |  |
-| Summary Graph | [chyaA](fltrVCF_MiSeq_CHYA/MiSeq_chyaA.fltrStats2.plots.pdf) | [chyaB](fltrVCF_MiSeq_CHYA/MiSeq_chyaB.fltrStats2.plots.pdf) | [chyaC](fltrVCF_MiSeq_CHYA/MiSeq_chyaC.fltrStats2.plots.pdf) |  |
+| Summary Graph | [chyaA](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaA.fltrStats2.plots.pdf) | [chyaB](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaB.fltrStats2.plots.pdf) | [chyaC](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaC.fltrStats2.plots.pdf) |  |
 | Number Individuals | 473 | 473 | 490 |  |
 | Number SNPs | 2,405 | 2,365 | 2,412 |  |
 | Number Contigs | 2,405 | 2,365 | 2,412 |  |
@@ -974,4 +958,4 @@ Genotyping Stats
 | Mean Missing (Loci) | 6.5% ± 3.6% | 6.5% ± 3.6% | 8% ± 4% | % ± % |
 | Range Missing (Loci) | 0% - 15% | 0% - 15% | 0% - 15% | % - % |
 
-A and B are for all intents and purposes identical. C is better than either.
+A and B are for all intents and purposes identical. C is better than either. Try going harder earlier on the SNPs?? - but still not keeping as many as I'd like....
