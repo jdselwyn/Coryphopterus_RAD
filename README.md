@@ -959,3 +959,12 @@ Genotyping Stats
 | Range Missing (Loci) | 0% - 15% | 0% - 15% | 0% - 15% | % - % |
 
 A and B are for all intents and purposes identical. C is better than either. Try going harder earlier on the SNPs?? - but still not keeping as many as I'd like....
+
+Change for D.
+- Increase required PHRED to be >200 (from 40 - fltr03)
+- Require average depth across all individuals to keep a locus to be >25
+- Reduce filter 14 to call an individual with 3 reads (from 5)
+- Remove entire contigs if loci fail (using fltr86) since at the end I'll only be using one contig per SNP
+  - this happens after a variety of steps
+- Keep only loci with MAF > 0.1 (previously was 0.005)
+- Remove contigs where any loci out of HWE (p < 0.01)
