@@ -824,45 +824,154 @@ Variant C seems like a marginally better "filter" in that it retains more indivi
 ## Step 21. Redo Mapping -> genotyping with only CHYA
 ### Mapping
 ```
-sbatch scripts/mkBAM.sbatch \
+module load R/gcc/64/3.5.1
+Rscript scripts/pullSpecies.R \
   mkBAM_MiSeq \
+  splitSpecies/hybrid_types.csv \
+  CHYA
+
+sbatch scripts/mkBAM.sbatch \
+  mkBAM_MiSeq_CHYA \
   config_files/MiSeq.config \
   mkREF_MiSeq/reference.2.1.fasta
-
-50324
 
 sbatch -o SLURM_out/bam_summary-%j.out \
   scripts/runRscript.sbatch \
   scripts/checkBAM.R \
-  mkBAM_MiSeq RAW
+  mkBAM_MiSeq_CHYA RAW
 ```
 Mapping Stats
 | Metric | # Reads Mapped |
 | --- | ----- |
-| Mean | 6,891,175 ± 8,686,655 SD |
-| Range | 31,687 - 119,213,337 |
+| Mean | 7,072,244 ± 8,730,970 SD |
+| Range | 33,464 - 111,946,159 |
 
-
-### Filtering
+### Filter BAM
 ```
-mkdir fltrBAM_MiSeq
-mv mkBAM_MiSeq/*RAW* fltrBAM_MiSeq
+mkdir fltrBAM_MiSeq_CHYA
+mv mkBAM_MiSeq_CHYA/*RAW* fltrBAM_MiSeq_CHYA
 
 sbatch scripts/fltrBAM.sbatch \
-  fltrBAM_MiSeq \
+  fltrBAM_MiSeq_CHYA \
   config_files/MiSeq.config \
-  mkREF_MiSeq/reference.10.1.fasta
+  mkREF_MiSeq/reference.2.1.fasta
 
 sbatch -o SLURM_out/bam_summary-%j.out \
   scripts/runRscript.sbatch \
   scripts/checkBAM.R \
-  fltrBAM_MiSeq RG
+  fltrBAM_MiSeq_CHYA RG
 ```
 
 Mapping Stats
 | Metric | Value |
 | --- | ----- |
-| Mean Reads Mapped | 1,850,867 ± 2,265,530 SD |
-| Range Reads Mapped | 1,990 - 20,326,650 |
+| Mean Reads Mapped | 2,624,607 ± 2,907,942 SD |
+| Range Reads Mapped | 10,216 - 24,371,260 |
 
 ### Genotyping
+```
+mkdir mkVCF_MiSeq_CHYA
+mv fltrBAM_MiSeq_CHYA/*RG* mkVCF_MiSeq_CHYA
+
+sbatch -p cbirdq,long -t 15-00:00:00 scripts/mkVCF.sbatch \
+  mkVCF_MiSeq_CHYA \
+  config_files/MiSeq.config \
+  mkREF_MiSeq/reference.2.1.fasta
+50369
+
+#Run on Node
+sbatch -o SLURM_out/vcf_summary-%j.out \
+  --job-name=VCFsummary \
+  scripts/runRscript.sbatch \
+  scripts/summarizeVCF.R \
+  mkVCF_MiSeq_CHYA/TotalRawSNPs.2.1.vcf
+50580
+```
+
+Error: Internal error in `dict_hash_with()`: Dictionary is full.
+Backtrace:
+    █
+ 1. ├─`%>%`(...)
+ 2. ├─tidyr::pivot_wider(., names_from = Indiv, values_from = gt_GT)
+ 3. └─tidyr:::pivot_wider.data.frame(., names_from = Indiv, values_from = gt_GT)
+ 4.   └─tidyr::build_wider_spec(...)
+ 5.     └─vctrs::vec_unique(data[names_from])
+ 6.       ├─vctrs::vec_slice(x, vec_unique_loc(x))
+ 7.       └─vctrs::vec_unique_loc(x)
+ 8.         └─(function () ...
+Execution halted
+Too big
+
+
+
+Genotyping Stats
+| Metric | Unfiltered VCF |
+| --- | ----- |
+| Number Individuals |  |
+| Number SNPs |  |
+| Number Contigs |  |
+| Mean SNPs/Contig |  ±  SD |
+| Range SNPs/Contig |  -  |
+| Mean Coverage |  ±  SD |
+| Range Coverage |  -  |
+| Mean PHRED |  ±  SD |
+| Range PHRED |  -  |
+| Mean Missing (Ind) | % ± % |
+| Range Missing (Ind) | % - % |
+| Mean Missing (Loci) | % ± % |
+| Range Missing (Loci) | % - % |
+
+### Filter VCF
+```
+sbatch scripts/fltrVCF.sbatch \
+	fltrVCF_MiSeq_CHYA \
+	mkVCF_MiSeq_CHYA/TotalRawSNPs.2.1.vcf \
+	config_files/fltrVCF_chya_A.config \
+	chyaA
+50581
+
+sbatch scripts/fltrVCF.sbatch \
+	fltrVCF_MiSeq_CHYA2 \
+	mkVCF_MiSeq_CHYA/TotalRawSNPs.2.1.vcf \
+	config_files/fltrVCF_chya_B.config \
+	chyaB
+50582
+
+sbatch scripts/fltrVCF.sbatch \
+	fltrVCF_MiSeq_CHYA3 \
+	mkVCF_MiSeq_CHYA/TotalRawSNPs.2.1.vcf \
+	config_files/fltrVCF_chya_C.config \
+	chyaC
+50583
+
+mv fltrVCF_MiSeq_CHYA2/* fltrVCF_MiSeq_CHYA/; rmdir fltrVCF_MiSeq_CHYA2
+mv fltrVCF_MiSeq_CHYA3/* fltrVCF_MiSeq_CHYA/; rmdir fltrVCF_MiSeq_CHYA3
+
+ls fltrVCF_MiSeq_CHYA/MiSeq_chya*MostInformativeSNP.vcf
+
+module load R/gcc/64/3.5.1
+Rscript scripts/summarizeVCF.R fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaA.2.1.Fltr21.26.MostInformativeSNP.vcf
+
+Rscript scripts/summarizeVCF.R fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaB.2.1.Fltr21.28.MostInformativeSNP.vcf
+
+Rscript scripts/summarizeVCF.R fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaC.2.1.Fltr21.30.MostInformativeSNP.vcf
+```
+
+Genotyping Stats
+| Metric | [chyaA](config_files/fltrVCF_chya_A.config) | [chyaB](config_files/fltrVCF_chya_B.config) | [chyaC](config_files/fltrVCF_chya_C.config) |  |
+| --- | ----- | ----- | ----- | ----- |
+| JobID | [`50250`](SLURM_out/fltrVCF-50250.out) | [`50251`](SLURM_out/fltrVCF-50251.out) | [`50252`](SLURM_out/fltrVCF-50252.out) |  |
+| Summary Graph | [chyaA](fltrVCF_MiSeq_CHYA/MiSeq_chyaA.fltrStats2.plots.pdf) | [chyaB](fltrVCF_MiSeq_CHYA/MiSeq_chyaB.fltrStats2.plots.pdf) | [chyaC](fltrVCF_MiSeq_CHYA/MiSeq_chyaC.fltrStats2.plots.pdf) |  |
+| Number Individuals | 473 | 473 | 490 |  |
+| Number SNPs | 2,405 | 2,365 | 2,412 |  |
+| Number Contigs | 2,405 | 2,365 | 2,412 |  |
+| Mean Coverage | 54,131 ± 17,251 SD | 53,856 ± 16,843 SD | 52,881 ± 16,676 SD |  ±  SD |
+| Range Coverage | 14,423 - 93,710 | 22,233 - 93,587 | 18,516 - 90,213 |  -  |
+| Mean PHRED | 311,290 ± 315,927 SD | 311,922 ± 315,777 SD | 308,786 ± 314,114 SD |  ±  SD |
+| Range PHRED | 3,708 - 2,196,180 | 5,882 - 2,196,180 | 7,287 - 2,196,180 |  -  |
+| Mean Missing (Ind) | 6.5% ± 8.5% | 6.5% ± 8.5% | 8% ± 11% | % ± % |
+| Range Missing (Ind) | 0% - 39% | 0% - 40% | 0% - 49% | % - % |
+| Mean Missing (Loci) | 6.5% ± 3.6% | 6.5% ± 3.6% | 8% ± 4% | % ± % |
+| Range Missing (Loci) | 0% - 15% | 0% - 15% | 0% - 15% | % - % |
+
+A and B are for all intents and purposes identical. C is better than either.
