@@ -589,22 +589,22 @@ sbatch -o SLURM_out/vcf_summary-%j.out \
 
 Genotyping Stats
 | Metric | [Filter Set A](config_files/fltrVCF_A.config) | [Species Filter](config_files/fltrVCF_lightSpecies.config) | [Species Filter 2](config_files/fltrVCF_lightSpecies2.config) |
-| --- | ----- | ----- | ----- | ----- |
+| --- | ----- | ----- | ----- |
 | JobID | [`48279`](SLURM_out/fltrVCF-48279.out) | [`48336`](SLURM_out/fltrVCF-48336.out) | [`49316`](SLURM_out/fltrVCF-49316.out) |
 | Summary Graph | [A](fltrVCF_MiSeq/MiSeq_A.fltrStats2.plots.pdf) | [Species](fltrVCF_MiSeq/MiSeq_lightSpecies.fltrStats2.plots.pdf) | [Species Filter 2](fltrVCF_MiSeq/MiSeq_lightSpecies2.fltrStats2.plots.pdf) |
-| Number Individuals | 516 | 778 | 778 |
-| Number SNPs | 3,372 | 1,575 | 1,726 |
-| Number Contigs | 3,372 | 1,575 | 1,726 |
-| Mean SNPs/Contig | - | - | - |
-| Range SNPs/Contig | - | - | - |
-| Mean Coverage | 68,920 ± 27,365 SD | 76,556 ± 49,534 SD | 75,158 ± 48,132 SD |
-| Range Coverage | 18,326 - 156,828 | 10,101 - 706,622 | 9,804 - 646,358 |
-| Mean PHRED | 209,170 ± 376,042 SD | 485,037 ± 22,468 SD | 461,508 ± 52,904 SD |
-| Range PHRED | 258 - 3,264,620 | 82,979 - 500,000 | 13,985 - 500,000 |
-| Mean Missing (Ind) | 11% ± 10% | 16% ± 25% | 16.3% ± 24.9% |
-| Range Missing (Ind) | 4.5% - 42% | 0% - 99.5% | 0% - 99.5% |
-| Mean Missing (Loci) | 11% ± 7% | 16% ± 4.7% | 16.3% ± 4.8% |
-| Range Missing (Loci) | 0% - 29% | 1.8% - 25% | 1.7% - 25% |
+| Number Individuals | 516 | 778 | 778 |  |
+| Number SNPs | 3,372 | 1,575 | 1,726 |  |
+| Number Contigs | 3,372 | 1,575 | 1,726 |  |
+| Mean SNPs/Contig | - | - | - |  |
+| Range SNPs/Contig | - | - | - |  |
+| Mean Coverage | 68,920 ± 27,365 SD | 76,556 ± 49,534 SD | 75,158 ± 48,132 SD |  |
+| Range Coverage | 18,326 - 156,828 | 10,101 - 706,622 | 9,804 - 646,358 |  |
+| Mean PHRED | 209,170 ± 376,042 SD | 485,037 ± 22,468 SD | 461,508 ± 52,904 SD |  |
+| Range PHRED | 258 - 3,264,620 | 82,979 - 500,000 | 13,985 - 500,000 |  |
+| Mean Missing (Ind) | 11% ± 10% | 16% ± 25% | 16.3% ± 24.9% |  |
+| Range Missing (Ind) | 4.5% - 42% | 0% - 99.5% | 0% - 99.5% |  |
+| Mean Missing (Loci) | 11% ± 7% | 16% ± 4.7% | 16.3% ± 4.8% |  |
+| Range Missing (Loci) | 0% - 29% | 1.8% - 25% | 1.7% - 25% |  |
 
 ### Filter genotypes of reads mapped to NovaSeq reference
 ```
@@ -942,21 +942,21 @@ Rscript scripts/summarizeVCF.R fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaC.2.1.Fltr21.30
 ```
 
 Genotyping Stats
-| Metric | [chyaA](config_files/fltrVCF_chya_A.config) | [chyaB](config_files/fltrVCF_chya_B.config) | [chyaC](config_files/fltrVCF_chya_C.config) | [chyaD](config_files/fltrVCF_chya_D.config) |
-| --- | ----- | ----- | ----- | ----- |
-| JobID | [`50250`](SLURM_out/fltrVCF-50250.out) | [`50251`](SLURM_out/fltrVCF-50251.out) | [`50252`](SLURM_out/fltrVCF-50252.out) | [`50665`](SLURM_out/fltrVCF-50665.out) |
-| Summary Graph | [chyaA](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaA.fltrStats2.plots.pdf) | [chyaB](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaB.fltrStats2.plots.pdf) | [chyaC](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaC.fltrStats2.plots.pdf) | [chyaD](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaD.fltrStats2.plots.pdf) |
-| Number Individuals | 473 | 473 | 490 | 495 |
-| Number SNPs | 2,405 | 2,365 | 2,412 | 502 |
-| Number Contigs | 2,405 | 2,365 | 2,412 | 502 |
-| Mean Coverage | 54,131 ± 17,251 SD | 53,856 ± 16,843 SD | 52,881 ± 16,676 SD | 49,486 ± 17,499 SD |
-| Range Coverage | 14,423 - 93,710 | 22,233 - 93,587 | 18,516 - 90,213 | 16,809 - 86,397 |
-| Mean PHRED | 311,290 ± 315,927 SD | 311,922 ± 315,777 SD | 308,786 ± 314,114 SD | 347,059 ± 275,062 SD |
-| Range PHRED | 3,708 - 2,196,180 | 5,882 - 2,196,180 | 7,287 - 2,196,180 | 30,008 - 1,563,150 |
-| Mean Missing (Ind) | 6.5% ± 8.5% | 6.5% ± 8.5% | 8% ± 11% | 5.6% ± 9% |
-| Range Missing (Ind) | 0% - 39% | 0% - 40% | 0% - 49% | 0% - 40% |
-| Mean Missing (Loci) | 6.5% ± 3.6% | 6.5% ± 3.6% | 8% ± 4% | 5.6% ± 3.7% |
-| Range Missing (Loci) | 0% - 15% | 0% - 15% | 0% - 15% | 0% - 14% |
+| Metric | [chyaA](config_files/fltrVCF_chya_A.config) | [chyaB](config_files/fltrVCF_chya_B.config) | [chyaC](config_files/fltrVCF_chya_C.config) | [chyaD](config_files/fltrVCF_chya_D.config) | [chyaE](config_files/fltrVCF_chya_E.config) |  |
+| --- | ----- | ----- | ----- | ----- | ----- | ----- |
+| JobID | [`50250`](SLURM_out/fltrVCF-50250.out) | [`50251`](SLURM_out/fltrVCF-50251.out) | [`50252`](SLURM_out/fltrVCF-50252.out) | [`50665`](SLURM_out/fltrVCF-50665.out) | [`50677`](SLURM_out/fltrVCF-50677.out) |  |
+| Summary Graph | [chyaA](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaA.fltrStats2.plots.pdf) | [chyaB](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaB.fltrStats2.plots.pdf) | [chyaC](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaC.fltrStats2.plots.pdf) | [chyaD](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaD.fltrStats2.plots.pdf) | [chyaE](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaE.fltrStats2.plots.pdf) |  |
+| Number Individuals | 473 | 473 | 490 | 495 |  |  |
+| Number SNPs | 2,405 | 2,365 | 2,412 | 502 |  |  |
+| Number Contigs | 2,405 | 2,365 | 2,412 | 502 |  |  |
+| Mean Coverage | 54,131 ± 17,251 SD | 53,856 ± 16,843 SD | 52,881 ± 16,676 SD | 49,486 ± 17,499 SD | ±  SD | ±  SD |
+| Range Coverage | 14,423 - 93,710 | 22,233 - 93,587 | 18,516 - 90,213 | 16,809 - 86,397 |  -  |  -  |
+| Mean PHRED | 311,290 ± 315,927 SD | 311,922 ± 315,777 SD | 308,786 ± 314,114 SD | 347,059 ± 275,062 SD | ±  SD | ±  SD |
+| Range PHRED | 3,708 - 2,196,180 | 5,882 - 2,196,180 | 7,287 - 2,196,180 | 30,008 - 1,563,150 |  -  |  -  |
+| Mean Missing (Ind) | 6.5% ± 8.5% | 6.5% ± 8.5% | 8% ± 11% | 5.6% ± 9% | % ± % | % ± % |
+| Range Missing (Ind) | 0% - 39% | 0% - 40% | 0% - 49% | 0% - 40% | % - % | % - % |
+| Mean Missing (Loci) | 6.5% ± 3.6% | 6.5% ± 3.6% | 8% ± 4% | 5.6% ± 3.7% | % ± % | % ± % |
+| Range Missing (Loci) | 0% - 15% | 0% - 15% | 0% - 15% | 0% - 14% | % - % | % - % |
 
 A and B are for all intents and purposes identical. C is better than either. Try going harder earlier on the SNPs?? - but still not keeping as many as I'd like....
 
@@ -981,9 +981,9 @@ Changes for E.
 sbatch scripts/fltrVCF.sbatch \
 	fltrVCF_MiSeq_CHYA \
 	mkVCF_MiSeq_CHYA/TotalRawSNPs.2.1.vcf \
-	config_files/fltrVCF_chya_D.config \
-	chyaD
-50665
+	config_files/fltrVCF_chya_E.config \
+	chyaE
+50677
 
 Rscript scripts/summarizeVCF.R fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaD.2.1.Fltr21.37.MostInformativeSNP.vcf
 ```
