@@ -978,7 +978,8 @@ Changes for E.
 - Swap tail of individual/loci missing data
 
 Changes for F.
-- Remove HWE filter - far too restrictive - leads to loss of
+- Remove HWE filter - far too restrictive and based solely on p-value (unadjusted)
+  - can incorporate into a later filter with p-values adjusted so as to not whily nilly remove all the loci
 - add final filter for missing data in individuals
 
 ```
