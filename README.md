@@ -944,7 +944,7 @@ Rscript scripts/summarizeVCF.R fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaC.2.1.Fltr21.30
 Genotyping Stats
 | Metric | [chyaA](config_files/fltrVCF_chya_A.config) | [chyaB](config_files/fltrVCF_chya_B.config) | [chyaC](config_files/fltrVCF_chya_C.config) | [chyaD](config_files/fltrVCF_chya_D.config) |
 | --- | ----- | ----- | ----- | ----- |
-| JobID | [`50250`](SLURM_out/fltrVCF-50250.out) | [`50251`](SLURM_out/fltrVCF-50251.out) | [`50252`](SLURM_out/fltrVCF-50252.out) | [`50639`](SLURM_out/fltrVCF-50639.out) |
+| JobID | [`50250`](SLURM_out/fltrVCF-50250.out) | [`50251`](SLURM_out/fltrVCF-50251.out) | [`50252`](SLURM_out/fltrVCF-50252.out) | [`50649`](SLURM_out/fltrVCF-50649.out) |
 | Summary Graph | [chyaA](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaA.fltrStats2.plots.pdf) | [chyaB](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaB.fltrStats2.plots.pdf) | [chyaC](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaC.fltrStats2.plots.pdf) | [chyaD](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaD.fltrStats2.plots.pdf) |
 | Number Individuals | 473 | 473 | 490 |  |
 | Number SNPs | 2,405 | 2,365 | 2,412 |  |
@@ -975,5 +975,5 @@ sbatch scripts/fltrVCF.sbatch \
 	mkVCF_MiSeq_CHYA/TotalRawSNPs.2.1.vcf \
 	config_files/fltrVCF_chya_D.config \
 	chyaD
-50639
+50649
 ```
