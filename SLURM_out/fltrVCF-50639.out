@@ -1,0 +1,708 @@
+
+
+fltrVCF.bash v4.4 -- a script to filter vcf files repeatably
+
+Dependencies required for fltrVCF to be fully functional:
+	R
+		tidyverse
+		gridExtra
+	vcftools
+	vcflib
+	samtools
+	perl
+	mawk
+	parallel
+	rad_haplotyper.pl https://github.com/cbirdlab/rad_haplotyper.git
+	filter_hwe_by_pop_HPC
+
+Mon Oct 25 11:17:50 CDT 2021 Reading options from command line:
+
+	Settings File:            /work/hobi/jselwyn/Coryphopterus_RAD/config_files/fltrVCF_chya_D.config
+
+	Cutoffs:                  2.1
+	Path to BAM files:        /work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_MiSeq_CHYA
+	PopMap File:              /work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_MiSeq_CHYA/mapped.2.1.bed
+	VCF File:                 /work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_MiSeq_CHYA/TotalRawSNPs.2.1.vcf
+	REF File:                 /work/hobi/jselwyn/Coryphopterus_RAD/mkREF_MiSeq_CHYA/reference.2.1.fasta
+	PopMap File:              /work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_MiSeq_CHYA/popmap.2.1
+	Output file prefix:       MiSeq_CHYA_chyaD
+	Path to R scripts and other scripts:        /work/hobi/jselwyn/Coryphopterus_RAD/scripts/fltrVCF/scripts
+	HWE Script:               /work/hobi/jselwyn/Coryphopterus_RAD/scripts/fltrVCF/filter_hwe_by_pop_HPC.pl
+	Rad_Haplotyper script:    /work/hobi/jselwyn/Coryphopterus_RAD/scripts/rad_haplotyper/rad_haplotyper.pl
+	Number of threads:          20
+
+Mon Oct 25 11:17:50 CDT 2021 Reading options from config file and setting defaults
+	SETTINGS are being loaded from file: '/work/hobi/jselwyn/Coryphopterus_RAD/config_files/fltrVCF_chya_D.config'
+	Filters are set to '05 86 16 01 02 03 04 14 86 07 15 06 86 11 09 08 10 04 13 86 07 041 32 181 05 86 16 05 86 16 05 86 16 05 86 16 01 21'
+	CutoffCode is set to '.2.1'
+	BAM_PATH is set to '/work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_MiSeq_CHYA'
+	SCRIPT_PATH is set to '/work/hobi/jselwyn/Coryphopterus_RAD/scripts/fltrVCF/scripts'
+	VCF_FILE is set to '/work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_MiSeq_CHYA/TotalRawSNPs.2.1.vcf'
+	Bed file is set to '/work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_MiSeq_CHYA/mapped.2.1.bed'
+	Reference genome is set to '/work/hobi/jselwyn/Coryphopterus_RAD/mkREF_MiSeq_CHYA/reference.2.1.fasta'
+	PopMap is set to '/work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_MiSeq_CHYA/popmap.2.1'
+	HWE_SCRIPT is set to '/work/hobi/jselwyn/Coryphopterus_RAD/scripts/fltrVCF/filter_hwe_by_pop_HPC.pl'
+	RADHAP_SCRIPT is set to '/work/hobi/jselwyn/Coryphopterus_RAD/scripts/rad_haplotyper/rad_haplotyper.pl'
+	Output file prefix is set to 'MiSeq_CHYA_chyaD'
+	The number of threads is set to '1'
+	-P not set by user. Only filters that natively support parallelization will be run in parallel.
+	/work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_MiSeq_CHYA/TotalRawSNPs.2.1.vcf will be used for serial processing.
+
+Mon Oct 25 11:17:50 CDT 2021 Getting universal chromosome/contig prefix ...
+          Querying /work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_MiSeq_CHYA/TotalRawSNPs.2.1.vcf ...
+          Prefix: dDocent
+          It is assumed that all values in the CHROM column of vcf begin with dDocent
+          If this is not the case, then fltrVCF will not work properly.
+          The prefix is used to count SNPs/variants, contigs, etc and is used in some filters.
+
+Mon Oct 25 11:17:50 CDT 2021  reading variables into MAIN
+
+Mon Oct 25 11:17:51 CDT 2021 ---------------------------FILTER05: Remove sites called in <X proportion of individuals -----------------------------
+                                                                                                                        
+                                          Histogram of the proportion of genotypes that are missing                     
+                                                                                                                        
+                 120000 +-------------------------------------------------------------------------------------------+   
+                        |                 +                  +                 +                  +                 |   
+                        |             **********           'sitemissingness' using (bin($1,binwidth)):(1.0) ******* |   
+                        |             *   *    *                                                                    |   
+                 100000 |-+           *   *    ******                                                             +-|   
+                        |             *   *    *    *                                                               |   
+                        |             *   *    *    **************                                *****             |   
+                        |        ******   *    *    *   *    *   ***************                  *   ******        |   
+                  80000 |-+      *    *   *    *    *   *    *   *    *    *   ********************   *    *      +-|   
+                        |        *    *   *    *    *   *    *   *    *    *   *    *   *    *    *   *    *****    |   
+                        |        *    *   *    *    *   *    *   *    *    *   *    *   *    *    *   *    *   *    |   
+                  60000 |-+      *    *   *    *    *   *    *   *    *    *   *    *   *    *    *   *    *   *  +-|   
+                        |        *    *   *    *    *   *    *   *    *    *   *    *   *    *    *   *    *   *    |   
+                        |        *    *   *    *    *   *    *   *    *    *   *    *   *    *    *   *    *   *    |   
+                        |        *    *   *    *    *   *    *   *    *    *   *    *   *    *    *   *    *   *    |   
+                  40000 |-+      *    *   *    *    *   *    *   *    *    *   *    *   *    *    *   *    *   *  +-|   
+                        |        *    *   *    *    *   *    *   *    *    *   *    *   *    *    *   *    *   **** |   
+                        |        *    *   *    *    *   *    *   *    *    *   *    *   *    *    *   *    *   *  * |   
+                        |    *****    *   *    *    *   *    *   *    *    *   *    *   *    *    *   *    *   *  * |   
+                  20000 |-+  *   *    *   *    *    *   *    *   *    *    *   *    *   *    *    *   *    *   *  *-|   
+                        |    *   *    *   *    *    *   *    *   *    *    *   *    *   *    *    *   *    *   *  * |   
+                        |    *   *    *   *    *    *   *    *   *    *    *   *    *   *    *    *   *    *   *  * |   
+                        |    *   *    *   *    *    *   *    *   *    *    *   *    *   *    *    *   *    *   *  * |   
+                      0 +-------------------------------------------------------------------------------------------+   
+                        0                0.2                0.4               0.6                0.8                1   
+                                                             Proportion Missing                                         
+                                                                                                                        
+                                                                                                                        
+                                             Scatter plot of the proportion of genotypes that are missing.              
+                                                                                                                        
+                                1 +---------------------------------------------------------------------------------+   
+                                  |***      +          +         +         +         +          +         +         |   
+                              0.9 |-+****                                                 'sitemissingness'    *  +-|   
+                                  |     *****                                                                       |   
+                                  |         *****                                                                   |   
+                              0.8 |-+           ****                                                              +-|   
+                                  |                *****                                                            |   
+                              0.7 |-+                  ****                                                       +-|   
+                                  |                       *****                                                     |   
+                              0.6 |-+                         *****                                               +-|   
+                                  |                               ****                                              |   
+                              0.5 |-+                                *****                                        +-|   
+                                  |                                      *****                                      |   
+                                  |                                          ****                                   |   
+                              0.4 |-+                                           *****                             +-|   
+                                  |                                                 ******                          |   
+                              0.3 |-+                                                    *****                    +-|   
+                                  |                                                          *****                  |   
+                              0.2 |-+                                                            ******           +-|   
+                                  |                                                                   ******        |   
+                                  |                                                                        *****    |   
+                              0.1 |-+                                                                          ** +-|   
+                                  |         +          +         +         +         +          +         +     **  |   
+                                0 +---------------------------------------------------------------------------------+   
+                                  0       200000     400000    600000    800000    1e+06     1.2e+06   1.4e+06   1.6e+06
+                                                                         Site                                           
+                                                                                                                        
+     vcftools --vcf /work/hobi/jselwyn/Coryphopterus_RAD/mkVCF_MiSeq_CHYA/TotalRawSNPs.2.1.vcf --max-missing 0.5 --recode --recode-INFO-all --out MiSeq_CHYA_chyaD.2.1.Fltr05.1.recode.vcf 2> /dev/null
+	Sites remaining:	778377
+	Contigs remaining:	19862
+
+
+Mon Oct 25 12:00:09 CDT 2021 ---------------------------FILTER 86: Remove contigs -----------------------------
+	Before site filter: 
+	After site filter: MiSeq_CHYA_chyaD.2.1.Fltr05.1.recode.vcf
+	After contig filter: MiSeq_CHYA_chyaD.2.1.Fltr05.1.recode.Fltr86.rmCONTIGS.2.vcf
+	0 rmCONTIGS.txt contigs filtered
+
+Mon Oct 25 12:17:23 CDT 2021 ---------------------------FILTER16: Remove Individuals|Libraries with Too Much Missing Data-----------------------------
+mawk: cannot open MiSeq_CHYA_chyaD.2.1.Fltr16.3.imiss (No such file or directory)
+         line 0: warning: Skipping data file with no valid points
+
+gnuplot> plot 'totalmissing' using (bin($1,binwidth)):(1.0) smooth freq with boxes
+                                                                                  ^
+         line 0: all points y value undefined!
+
+         line 0: Non-numeric string found where a numeric expression was expected
+
+         line 0: warning: Skipping data file with no valid points
+         line 0: Can't plot with an empty x range!
+
+mawk: cannot open MiSeq_CHYA_chyaD.2.1.Fltr16.3.imiss (No such file or directory)
+ 0 individuals|libraries with too much missing data:
+     vcftools --vcf MiSeq_CHYA_chyaD.2.1.Fltr05.1.recode.Fltr86.rmCONTIGS.2.vcf --remove MiSeq_CHYA_chyaD.2.1.Fltr16.3.lowDP-2.indv --recode --recode-INFO-all --out MiSeq_CHYA_chyaD.2.1.Fltr16.3.recode.vcf 2> /dev/null | vcffixup -
+	Sites remaining:	0
+	Contigs remaining:	0
+
+
+ Individuals|Libraries Remaining Per Sample
+
+Mon Oct 25 12:17:24 CDT 2021 ---------------------------FILTER01: Remove sites with Y < alleles < X -----------------------------
+     vcftools --vcf MiSeq_CHYA_chyaD.2.1.Fltr16.3.recode.vcf --min-alleles 2 --max-alleles 2 --recode --recode-INFO-all --out MiSeq_CHYA_chyaD.2.1.Fltr01.4.recode.vcf 2> /dev/null
+	Sites remaining:	0
+	Contigs remaining:	0
+
+
+Mon Oct 25 12:17:25 CDT 2021 ---------------------------FILTER02: Remove Sites with Indels -----------------------------
+     vcftools --vcf MiSeq_CHYA_chyaD.2.1.Fltr01.4.recode.vcf --remove-indels --recode --recode-INFO-all --out MiSeq_CHYA_chyaD.2.1.Fltr02.5.recode.vcf 2> /dev/null
+	Sites remaining:	0
+	Contigs remaining:	0
+
+
+Mon Oct 25 12:17:25 CDT 2021 ---------------------------FILTER03: Remove Sites with QUAL < minQ -----------------------------
+         line 0: warning: Skipping data file with no valid points
+
+gnuplot> plot 'QUALbefore' using (bin($1,binwidth)):(1.0) smooth freq with boxes
+                                                                                ^
+         line 0: all points y value undefined!
+
+         line 0: warning: Skipping data file with no valid points
+
+gnuplot> plot 'QUALbefore' pt "*"
+                                 ^
+         line 0: x range is invalid
+
+     vcftools --vcf MiSeq_CHYA_chyaD.2.1.Fltr02.5.recode.vcf --minQ 200 --recode --recode-INFO-all --out MiSeq_CHYA_chyaD.2.1.Fltr03.6.recode.vcf 2> /dev/null
+	Sites remaining:	0
+	Contigs remaining:	0
+
+
+Mon Oct 25 12:17:25 CDT 2021 ---------------------------FILTER04: Remove Sites With Mean Depth of Coverage < min-meanDP -----------------------------
+cut: MiSeq_CHYA_chyaD.2.1.Fltr04.7.ldepth.mean: No such file or directory
+cut: MiSeq_CHYA_chyaD.2.1.Fltr04.7.ldepth.mean: No such file or directory
+         line 0: warning: Skipping data file with no valid points
+
+gnuplot> plot 'sitedepthmeanbefore' using (bin($1,binwidth)):(1.0) smooth freq with boxes
+                                                                                         ^
+         line 0: x range is invalid
+
+         line 0: warning: Skipping data file with no valid points
+
+gnuplot> plot 'sitedepthmeanbefore' pt "*"
+                                          ^
+         line 0: x range is invalid
+
+         line 0: warning: Skipping data file with no valid points
+
+gnuplot> plot 'meandepthVSvariance' pt "*"
+                                          ^
+         line 0: x range is invalid
+
+     vcftools --vcf MiSeq_CHYA_chyaD.2.1.Fltr03.6.recode.vcf --min-meanDP 25 --recode --recode-INFO-all --out MiSeq_CHYA_chyaD.2.1.Fltr04.7.recode.vcf 2> /dev/null
+	Sites remaining:	0
+	Contigs remaining:	0
+
+
+Mon Oct 25 12:17:26 CDT 2021 ---------------------------FILTER14: If individual's genotype has DP < X, convert to missing data -----------------------------
+cut: MiSeq_CHYA_chyaD.2.1.Fltr14.8.gdepth: No such file or directory
+         line 0: warning: Skipping data file with no valid points
+
+gnuplot> plot 'genotypedepthbefore' using (bin($1,binwidth)):(1.0) smooth freq with boxes
+                                                                                         ^
+         line 0: all points y value undefined!
+
+         line 0: warning: Skipping data file with no valid points
+
+gnuplot> plot 'genotypedepthbefore' pt "*"
+                                          ^
+         line 0: x range is invalid
+
+     vcftools --vcf MiSeq_CHYA_chyaD.2.1.Fltr04.7.recode.vcf --minDP 3 --recode --recode-INFO-all --out MiSeq_CHYA_chyaD.2.1.Fltr14.8.recode.vcf 2> /dev/null | vcffixup -
+	Sites remaining:	0
+	Contigs remaining:	0
+
+
+Mon Oct 25 12:17:27 CDT 2021 ---------------------------FILTER 86: Remove contigs -----------------------------
+	Before site filter: MiSeq_CHYA_chyaD.2.1.Fltr04.7.recode.vcf
+	After site filter: MiSeq_CHYA_chyaD.2.1.Fltr14.8.recode.vcf
+	After contig filter: MiSeq_CHYA_chyaD.2.1.Fltr14.8.recode.Fltr86.rmCONTIGS.9.vcf
+	0 rmCONTIGS.txt contigs filtered
+
+Mon Oct 25 12:17:27 CDT 2021 ---------------------------FILTER07: Remove sites with Alternate Allele Count <=X -----------------------------
+     vcffixup MiSeq_CHYA_chyaD.2.1.Fltr14.8.recode.Fltr86.rmCONTIGS.9.vcf | vcffilter -s -f "AC > 3 & AN - AC > 3"  > MiSeq_CHYA_chyaD.2.1.Fltr07.10.vcf
+	Sites remaining:	0
+	Contigs remaining:	0
+
+Mon Oct 25 12:17:27 CDT 2021 ---------------------------FILTER15: Remove sites with maf > minor allele frequency > max-maf -----------------------------
+     vcftools --vcf MiSeq_CHYA_chyaD.2.1.Fltr07.10.vcf --maf 0.1 --max-maf 0.9 --recode --recode-INFO-all --out MiSeq_CHYA_chyaD.2.1.Fltr15.11.recode.vcf 2> /dev/null
+	Sites remaining:	0
+	Contigs remaining:	0
+
+
+Mon Oct 25 12:17:28 CDT 2021 ---------------------------FILTER06: Remove sites with Average Allele Balance deviating too far from 0.5 while keeping those with AB=0  -----------------------------
+Broken VCF header, no column names?
+ at /home/apps/vcftools/0.1.15/lib/site_perl/5.22.0/Vcf.pm line 172.
+	Vcf::throw(Vcf4_2=HASH(0xc379e0), "Broken VCF header, no column names?") called at /home/apps/vcftools/0.1.15/lib/site_perl/5.22.0/Vcf.pm line 867
+	VcfReader::_read_column_names(Vcf4_2=HASH(0xc379e0)) called at /home/apps/vcftools/0.1.15/lib/site_perl/5.22.0/Vcf.pm line 602
+	VcfReader::parse_header(Vcf4_2=HASH(0xc379e0)) called at /home/apps/vcftools/0.1.15/bin/vcf-query line 212
+	main::read_data(HASH(0x7c9f30)) called at /home/apps/vcftools/0.1.15/bin/vcf-query line 12
+         line 0: warning: Skipping data file with no valid points
+
+gnuplot> plot 'siteAB.dat' using (bin($1,binwidth)):(1.0) smooth freq with boxes
+                                                                                ^
+         line 0: all points y value undefined!
+
+         line 0: warning: Skipping data file with no valid points
+
+gnuplot> plot 'siteAB.dat' pt "*"
+                                 ^
+         line 0: x range is invalid
+
+     vcffixup MiSeq_CHYA_chyaD.2.1.Fltr15.11.recode.vcf | vcffilter -s -f "AB > 0.2 & AB < 0.8 | AB = 0"  > MiSeq_CHYA_chyaD.2.1.Fltr06.12.vcf
+	Sites remaining:	0
+	Contigs remaining:	0
+
+Mon Oct 25 12:17:28 CDT 2021 ---------------------------FILTER 86: Remove contigs -----------------------------
+	Before site filter: MiSeq_CHYA_chyaD.2.1.Fltr15.11.recode.vcf
+	After site filter: MiSeq_CHYA_chyaD.2.1.Fltr06.12.vcf
+	After contig filter: MiSeq_CHYA_chyaD.2.1.Fltr06.12.Fltr86.rmCONTIGS.13.vcf
+	0 rmCONTIGS.txt contigs filtered
+
+Mon Oct 25 12:17:28 CDT 2021 ---------------------------FILTER11: Remove sites with Quality/DP ratio < X -----------------------------
+     vcffilter -s -f "QUAL / DP > 0.2" MiSeq_CHYA_chyaD.2.1.Fltr06.12.Fltr86.rmCONTIGS.13.vcf > MiSeq_CHYA_chyaD.2.1.Fltr11.14.vcf
+	Sites remaining:	0
+	Contigs remaining:	0
+
+Mon Oct 25 12:17:29 CDT 2021 ---------------------------FILTER09: Remove sites with low/high ratio of mean mapping quality of alt to ref -----------------------------
+     vcffilter -s -f "MQM / MQMR > 0.75 & MQM / MQMR < 1.33333" MiSeq_CHYA_chyaD.2.1.Fltr11.14.vcf > MiSeq_CHYA_chyaD.2.1.Fltr09.15.vcf
+	Sites remaining:	0
+	Contigs remaining:	0
+
+Mon Oct 25 12:17:29 CDT 2021 ---------------------------FILTER08: Remove sites covered by both F and R reads-----------------------------
+     vcffilter -s -f "SAF / SAR > 10 & SRF / SRR > 10 | SAR / SAF > 10 & SRR / SRF > 10" MiSeq_CHYA_chyaD.2.1.Fltr09.15.vcf > MiSeq_CHYA_chyaD.2.1.Fltr08.16.vcf
+	Sites remaining:	0
+	Contigs remaining:	0
+
+Mon Oct 25 12:17:29 CDT 2021 ---------------------------FILTER10: Remove sites with one allele only supported by reads not properly paired -----------------------------
+     vcffilter -s -f "PAIRED > 0.05 & PAIREDR > 0.05 & PAIREDR / PAIRED < 1.75 & PAIREDR / PAIRED > 0.25 | PAIRED < 0.05 & PAIREDR < 0.05" MiSeq_CHYA_chyaD.2.1.Fltr08.16.vcf > MiSeq_CHYA_chyaD.2.1.Fltr10.17.vcf
+	Sites remaining:	0
+	Contigs remaining:	0
+
+Mon Oct 25 12:17:29 CDT 2021 ---------------------------FILTER04: Remove Sites With Mean Depth of Coverage < min-meanDP -----------------------------
+cut: MiSeq_CHYA_chyaD.2.1.Fltr04.18.ldepth.mean: No such file or directory
+cut: MiSeq_CHYA_chyaD.2.1.Fltr04.18.ldepth.mean: No such file or directory
+         line 0: warning: Skipping data file with no valid points
+
+gnuplot> plot 'sitedepthmeanbefore' using (bin($1,binwidth)):(1.0) smooth freq with boxes
+                                                                                         ^
+         line 0: x range is invalid
+
+         line 0: warning: Skipping data file with no valid points
+
+gnuplot> plot 'sitedepthmeanbefore' pt "*"
+                                          ^
+         line 0: x range is invalid
+
+         line 0: warning: Skipping data file with no valid points
+
+gnuplot> plot 'meandepthVSvariance' pt "*"
+                                          ^
+         line 0: x range is invalid
+
+     vcftools --vcf MiSeq_CHYA_chyaD.2.1.Fltr10.17.vcf --min-meanDP 25 --recode --recode-INFO-all --out MiSeq_CHYA_chyaD.2.1.Fltr04.18.recode.vcf 2> /dev/null
+	Sites remaining:	0
+	Contigs remaining:	0
+
+
+Mon Oct 25 12:17:30 CDT 2021 ---------------------------FILTER13: Remove sites with mean DP greater than X  -----------------------------
+cut: MiSeq_CHYA_chyaD.2.1.Fltr13.19.ldepth: No such file or directory
+         line 0: warning: Skipping data file with no valid points
+
+gnuplot> plot 'meandepthpersitebefore' using (bin($1,binwidth)):(1.0) smooth freq with boxes
+                                                                                            ^
+         line 0: x range is invalid
+
+     vcftools --vcf MiSeq_CHYA_chyaD.2.1.Fltr04.18.recode.vcf --max-meanDP 150 --recode --recode-INFO-all --out MiSeq_CHYA_chyaD.2.1.Fltr13.19.recode.vcf 2> /dev/null
+	Sites remaining:	0
+	Contigs remaining:	0
+
+
+Mon Oct 25 12:17:31 CDT 2021 ---------------------------FILTER 86: Remove contigs -----------------------------
+	Before site filter: MiSeq_CHYA_chyaD.2.1.Fltr04.18.recode.vcf
+	After site filter: MiSeq_CHYA_chyaD.2.1.Fltr13.19.recode.vcf
+	After contig filter: MiSeq_CHYA_chyaD.2.1.Fltr13.19.recode.Fltr86.rmCONTIGS.20.vcf
+	0 rmCONTIGS.txt contigs filtered
+
+Mon Oct 25 12:17:31 CDT 2021 ---------------------------FILTER07: Remove sites with Alternate Allele Count <=X -----------------------------
+     vcffixup MiSeq_CHYA_chyaD.2.1.Fltr13.19.recode.Fltr86.rmCONTIGS.20.vcf | vcffilter -s -f "AC > 3 & AN - AC > 3"  > MiSeq_CHYA_chyaD.2.1.Fltr07.21.vcf
+	Sites remaining:	0
+	Contigs remaining:	0
+
+Mon Oct 25 12:17:31 CDT 2021 ---------------------------FILTER041: Remove Contigs With Extreme DP -----------------------------
+tail: cannot open ‘MiSeq_CHYA_chyaD.2.1.Fltr041.22.ldepth.mean’ for reading: No such file or directory
+── Attaching packages ────────────────────────────────── tidyverse 1.3.0.9000 ──
+✔ ggplot2 3.3.5     ✔ purrr   0.3.4
+✔ tibble  3.1.4     ✔ dplyr   1.0.7
+✔ tidyr   1.1.3     ✔ stringr 1.4.0
+✔ readr   1.3.1     ✔ forcats 0.5.0
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+
+Attaching package: ‘gridExtra’
+
+The following object is masked from ‘package:dplyr’:
+
+    combine
+
+Error in read.table(inputFile, header = FALSE, sep = "\t") : 
+  no lines available in input
+Execution halted
+ The following contigs have been filtered:
+
+ Plots output to MiSeq_CHYA_chyaD.2.1.Fltr041.22.ldepth.mean.contigs.pdf
+
+Mon Oct 25 12:17:35 CDT 2021 ---------------------------FILTER32: Keep Contigs w Fewer Heterozygotes -----------------------------
+MiSeq_CHYA_chyaD.2.1.Fltr041.22.vcf
+0.67
+Broken VCF header, no column names?
+ at /home/apps/vcftools/0.1.15/lib/site_perl/5.22.0/Vcf.pm line 172.
+	Vcf::throw(Vcf4_2=HASH(0x804778), "Broken VCF header, no column names?") called at /home/apps/vcftools/0.1.15/lib/site_perl/5.22.0/Vcf.pm line 867
+	VcfReader::_read_column_names(Vcf4_2=HASH(0x804778)) called at /home/apps/vcftools/0.1.15/lib/site_perl/5.22.0/Vcf.pm line 602
+	VcfReader::parse_header(Vcf4_2=HASH(0x804778)) called at /home/apps/vcftools/0.1.15/bin/vcf-query line 212
+	main::read_data(HASH(0x7c9f30)) called at /home/apps/vcftools/0.1.15/bin/vcf-query line 12
+Broken VCF header, no column names?
+ at /home/apps/vcftools/0.1.15/lib/site_perl/5.22.0/Vcf.pm line 172.
+	Vcf::throw(Vcf4_2=HASH(0x804778), "Broken VCF header, no column names?") called at /home/apps/vcftools/0.1.15/lib/site_perl/5.22.0/Vcf.pm line 867
+	VcfReader::_read_column_names(Vcf4_2=HASH(0x804778)) called at /home/apps/vcftools/0.1.15/lib/site_perl/5.22.0/Vcf.pm line 602
+	VcfReader::parse_header(Vcf4_2=HASH(0x804778)) called at /home/apps/vcftools/0.1.15/bin/vcf-query line 212
+	main::read_data(HASH(0x7c9f30)) called at /home/apps/vcftools/0.1.15/bin/vcf-query line 12
+Error: Can't rename columns that don't exist.
+✖ Column `X1` doesn't exist.
+Backtrace:
+     █
+  1. ├─`%>%`(...)
+  2. ├─tidyr::separate(...)
+  3. ├─dplyr::filter(., str_detect(value, "\\.", negate = TRUE))
+  4. ├─dplyr::mutate(., value = str_remove(value, "\\]"))
+  5. ├─tidyr::separate(., value, sep = "=", into = c("id", "value"))
+  6. ├─dplyr::select(., -name)
+  7. ├─tidyr::pivot_longer(., cols = starts_with("X"))
+  8. ├─dplyr::rename(., locus = X1, ref_allele = X2)
+  9. └─dplyr:::rename.data.frame(., locus = X1, ref_allele = X2)
+ 10.   └─tidyselect::eval_rename(expr(c(...)), .data)
+ 11.     └─tidyselect:::rename_impl(...)
+ 12.       └─tidyselect:::eval_select_impl(...)
+ 13.         ├─tidyselect:::with_subscript_errors(...)
+ 14.         │ ├─base::tryCatch(...)
+ 15.         │ │ └─base:::tryCatchList(expr, classes, parentenv, handlers)
+ 16.         │ │   └─base:::tryCatchOne(expr, names, parentenv, handlers[[1L]])
+ 17.         │ │     └─base:::doTryCatch(return(expr), name, parentenv, handler)
+ 18.         │ └─tidyselect:::instrument_base_errors(expr)
+ 19.         │   └─base::withCallingHandlers(...)
+ 20.         └─tidyselect:::vars_select_eval(...)
+ 21.           └─tidyselect:::walk_data_tree(expr, data_mask, context_mask)
+ 22.             └─tidyselect:::eval_c(expr, data_mask, context_mask)
+ 23.               └─tidyselect:::reduce_sels(node, data_mask, context_mask, init = init)
+ 24.                 └─tidyselect:::walk_data_tree(new, data_mask, context_mask)
+ 25.                   └─tidyselect:::as_indices_sel_impl(...)
+ 26.                     └─tidyselect:::as_indices_impl(x, vars, strict = strict)
+ 27.                       └─tidyselect:::chr_as_locations(x, vars)
+ 28.                         └─vctrs::vec_as_location(x, n = length(vars), names = vars)
+ 29.                           └─(function () ...
+ 30.                             └─vctrs:::stop_subscript_oob(...)
+ 31.                               └─vctrs:::stop_subscript(...)
+Warning message:
+`data_frame()` was deprecated in tibble 1.1.0.
+Please use `tibble()` instead.
+This warning is displayed once every 8 hours.
+Call `lifecycle::last_warnings()` to see where this warning was generated. 
+Execution halted
+── Attaching packages ────────────────────────────────── tidyverse 1.3.0.9000 ──
+✔ ggplot2 3.3.5     ✔ purrr   0.3.4
+✔ tibble  3.1.4     ✔ dplyr   1.0.7
+✔ tidyr   1.1.3     ✔ stringr 1.4.0
+✔ readr   1.3.1     ✔ forcats 0.5.0
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+
+Attaching package: ‘gridExtra’
+
+The following object is masked from ‘package:dplyr’:
+
+    combine
+
+Error in read.table(inputFile, header = FALSE, sep = "\t") : 
+  no lines available in input
+Execution halted
+
+ The following contigs have been filtered:
+
+ Plots output to MiSeq_CHYA_chyaD.2.1.Fltr32.23.hetero.contigs.plots.pdf
+
+	Sites remaining:	0
+	Contigs remaining:	0
+
+Mon Oct 25 12:17:39 CDT 2021 ---------------------------FILTER181: Remove sites & contigs in & not in HWE p<X) -----------------------------
+Processing population: COPE (625 inds)
+No such file or directory at /work/hobi/jselwyn/Coryphopterus_RAD/scripts/fltrVCF/filter_hwe_by_pop_HPC.pl line 72.
+grep: MiSeq_CHYA_chyaD.2.1.Fltr181.24.HWE.recode.vcf: No such file or directory
+
+Contigs in HWE:
+	Sites remaining:	0
+	Contigs remaining:	0
+
+Contigs not in HWE:
+	Sites remaining:	0
+	Contigs remaining:	0
+
+Mon Oct 25 12:17:40 CDT 2021 ---------------------------FILTER05: Remove sites called in <X proportion of individuals -----------------------------
+cut: MiSeq_CHYA_chyaD.2.1.Fltr05.25.lmiss: No such file or directory
+         line 0: warning: Skipping data file with no valid points
+
+gnuplot> plot 'sitemissingness' using (bin($1,binwidth)):(1.0) smooth freq with boxes
+                                                                                     ^
+         line 0: all points y value undefined!
+
+         line 0: warning: Skipping data file with no valid points
+
+gnuplot> plot 'sitemissingness' pt "*"
+                                      ^
+         line 0: x range is invalid
+
+     vcftools --vcf MiSeq_CHYA_chyaD.2.1.Fltr181.24.CONTIGS.IN.HWE.vcf --max-missing 0.7 --recode --recode-INFO-all --out MiSeq_CHYA_chyaD.2.1.Fltr05.25.recode.vcf 2> /dev/null
+	Sites remaining:	0
+	Contigs remaining:	0
+
+
+Mon Oct 25 12:17:41 CDT 2021 ---------------------------FILTER 86: Remove contigs -----------------------------
+	Before site filter: MiSeq_CHYA_chyaD.2.1.Fltr181.24.CONTIGS.IN.HWE.vcf
+	After site filter: MiSeq_CHYA_chyaD.2.1.Fltr05.25.recode.vcf
+	After contig filter: MiSeq_CHYA_chyaD.2.1.Fltr05.25.recode.Fltr86.rmCONTIGS.26.vcf
+	0 rmCONTIGS.txt contigs filtered
+
+Mon Oct 25 12:17:41 CDT 2021 ---------------------------FILTER16: Remove Individuals|Libraries with Too Much Missing Data-----------------------------
+mawk: cannot open MiSeq_CHYA_chyaD.2.1.Fltr16.27.imiss (No such file or directory)
+         line 0: warning: Skipping data file with no valid points
+
+gnuplot> plot 'totalmissing' using (bin($1,binwidth)):(1.0) smooth freq with boxes
+                                                                                  ^
+         line 0: all points y value undefined!
+
+         line 0: Non-numeric string found where a numeric expression was expected
+
+         line 0: warning: Skipping data file with no valid points
+         line 0: Can't plot with an empty x range!
+
+mawk: cannot open MiSeq_CHYA_chyaD.2.1.Fltr16.27.imiss (No such file or directory)
+ 0 individuals|libraries with too much missing data:
+     vcftools --vcf MiSeq_CHYA_chyaD.2.1.Fltr05.25.recode.Fltr86.rmCONTIGS.26.vcf --remove MiSeq_CHYA_chyaD.2.1.Fltr16.27.lowDP-2.indv --recode --recode-INFO-all --out MiSeq_CHYA_chyaD.2.1.Fltr16.27.recode.vcf 2> /dev/null | vcffixup -
+	Sites remaining:	0
+	Contigs remaining:	0
+
+
+ Individuals|Libraries Remaining Per Sample
+
+Mon Oct 25 12:17:42 CDT 2021 ---------------------------FILTER05: Remove sites called in <X proportion of individuals -----------------------------
+cut: MiSeq_CHYA_chyaD.2.1.Fltr05.28.lmiss: No such file or directory
+         line 0: warning: Skipping data file with no valid points
+
+gnuplot> plot 'sitemissingness' using (bin($1,binwidth)):(1.0) smooth freq with boxes
+                                                                                     ^
+         line 0: all points y value undefined!
+
+         line 0: warning: Skipping data file with no valid points
+
+gnuplot> plot 'sitemissingness' pt "*"
+                                      ^
+         line 0: x range is invalid
+
+     vcftools --vcf MiSeq_CHYA_chyaD.2.1.Fltr16.27.recode.vcf --max-missing 0.75 --recode --recode-INFO-all --out MiSeq_CHYA_chyaD.2.1.Fltr05.28.recode.vcf 2> /dev/null
+	Sites remaining:	0
+	Contigs remaining:	0
+
+
+Mon Oct 25 12:17:42 CDT 2021 ---------------------------FILTER 86: Remove contigs -----------------------------
+	Before site filter: MiSeq_CHYA_chyaD.2.1.Fltr16.27.recode.vcf
+	After site filter: MiSeq_CHYA_chyaD.2.1.Fltr05.28.recode.vcf
+	After contig filter: MiSeq_CHYA_chyaD.2.1.Fltr05.28.recode.Fltr86.rmCONTIGS.29.vcf
+	0 rmCONTIGS.txt contigs filtered
+
+Mon Oct 25 12:17:43 CDT 2021 ---------------------------FILTER16: Remove Individuals|Libraries with Too Much Missing Data-----------------------------
+mawk: cannot open MiSeq_CHYA_chyaD.2.1.Fltr16.30.imiss (No such file or directory)
+         line 0: warning: Skipping data file with no valid points
+
+gnuplot> plot 'totalmissing' using (bin($1,binwidth)):(1.0) smooth freq with boxes
+                                                                                  ^
+         line 0: all points y value undefined!
+
+         line 0: Non-numeric string found where a numeric expression was expected
+
+         line 0: warning: Skipping data file with no valid points
+         line 0: Can't plot with an empty x range!
+
+mawk: cannot open MiSeq_CHYA_chyaD.2.1.Fltr16.30.imiss (No such file or directory)
+ 0 individuals|libraries with too much missing data:
+     vcftools --vcf MiSeq_CHYA_chyaD.2.1.Fltr05.28.recode.Fltr86.rmCONTIGS.29.vcf --remove MiSeq_CHYA_chyaD.2.1.Fltr16.30.lowDP-2.indv --recode --recode-INFO-all --out MiSeq_CHYA_chyaD.2.1.Fltr16.30.recode.vcf 2> /dev/null | vcffixup -
+	Sites remaining:	0
+	Contigs remaining:	0
+
+
+ Individuals|Libraries Remaining Per Sample
+
+Mon Oct 25 12:17:44 CDT 2021 ---------------------------FILTER05: Remove sites called in <X proportion of individuals -----------------------------
+cut: MiSeq_CHYA_chyaD.2.1.Fltr05.31.lmiss: No such file or directory
+         line 0: warning: Skipping data file with no valid points
+
+gnuplot> plot 'sitemissingness' using (bin($1,binwidth)):(1.0) smooth freq with boxes
+                                                                                     ^
+         line 0: all points y value undefined!
+
+         line 0: warning: Skipping data file with no valid points
+
+gnuplot> plot 'sitemissingness' pt "*"
+                                      ^
+         line 0: x range is invalid
+
+     vcftools --vcf MiSeq_CHYA_chyaD.2.1.Fltr16.30.recode.vcf --max-missing 0.8 --recode --recode-INFO-all --out MiSeq_CHYA_chyaD.2.1.Fltr05.31.recode.vcf 2> /dev/null
+	Sites remaining:	0
+	Contigs remaining:	0
+
+
+Mon Oct 25 12:17:44 CDT 2021 ---------------------------FILTER 86: Remove contigs -----------------------------
+	Before site filter: MiSeq_CHYA_chyaD.2.1.Fltr16.30.recode.vcf
+	After site filter: MiSeq_CHYA_chyaD.2.1.Fltr05.31.recode.vcf
+	After contig filter: MiSeq_CHYA_chyaD.2.1.Fltr05.31.recode.Fltr86.rmCONTIGS.32.vcf
+	0 rmCONTIGS.txt contigs filtered
+
+Mon Oct 25 12:17:44 CDT 2021 ---------------------------FILTER16: Remove Individuals|Libraries with Too Much Missing Data-----------------------------
+mawk: cannot open MiSeq_CHYA_chyaD.2.1.Fltr16.33.imiss (No such file or directory)
+         line 0: warning: Skipping data file with no valid points
+
+gnuplot> plot 'totalmissing' using (bin($1,binwidth)):(1.0) smooth freq with boxes
+                                                                                  ^
+         line 0: all points y value undefined!
+
+         line 0: Non-numeric string found where a numeric expression was expected
+
+         line 0: warning: Skipping data file with no valid points
+         line 0: Can't plot with an empty x range!
+
+mawk: cannot open MiSeq_CHYA_chyaD.2.1.Fltr16.33.imiss (No such file or directory)
+ 0 individuals|libraries with too much missing data:
+     vcftools --vcf MiSeq_CHYA_chyaD.2.1.Fltr05.31.recode.Fltr86.rmCONTIGS.32.vcf --remove MiSeq_CHYA_chyaD.2.1.Fltr16.33.lowDP-2.indv --recode --recode-INFO-all --out MiSeq_CHYA_chyaD.2.1.Fltr16.33.recode.vcf 2> /dev/null | vcffixup -
+	Sites remaining:	0
+	Contigs remaining:	0
+
+
+ Individuals|Libraries Remaining Per Sample
+
+Mon Oct 25 12:17:46 CDT 2021 ---------------------------FILTER05: Remove sites called in <X proportion of individuals -----------------------------
+cut: MiSeq_CHYA_chyaD.2.1.Fltr05.34.lmiss: No such file or directory
+         line 0: warning: Skipping data file with no valid points
+
+gnuplot> plot 'sitemissingness' using (bin($1,binwidth)):(1.0) smooth freq with boxes
+                                                                                     ^
+         line 0: all points y value undefined!
+
+         line 0: warning: Skipping data file with no valid points
+
+gnuplot> plot 'sitemissingness' pt "*"
+                                      ^
+         line 0: x range is invalid
+
+     vcftools --vcf MiSeq_CHYA_chyaD.2.1.Fltr16.33.recode.vcf --max-missing 0.85 --recode --recode-INFO-all --out MiSeq_CHYA_chyaD.2.1.Fltr05.34.recode.vcf 2> /dev/null
+	Sites remaining:	0
+	Contigs remaining:	0
+
+
+Mon Oct 25 12:17:46 CDT 2021 ---------------------------FILTER 86: Remove contigs -----------------------------
+	Before site filter: MiSeq_CHYA_chyaD.2.1.Fltr16.33.recode.vcf
+	After site filter: MiSeq_CHYA_chyaD.2.1.Fltr05.34.recode.vcf
+	After contig filter: MiSeq_CHYA_chyaD.2.1.Fltr05.34.recode.Fltr86.rmCONTIGS.35.vcf
+	0 rmCONTIGS.txt contigs filtered
+
+Mon Oct 25 12:17:46 CDT 2021 ---------------------------FILTER16: Remove Individuals|Libraries with Too Much Missing Data-----------------------------
+mawk: cannot open MiSeq_CHYA_chyaD.2.1.Fltr16.36.imiss (No such file or directory)
+         line 0: warning: Skipping data file with no valid points
+
+gnuplot> plot 'totalmissing' using (bin($1,binwidth)):(1.0) smooth freq with boxes
+                                                                                  ^
+         line 0: all points y value undefined!
+
+         line 0: Non-numeric string found where a numeric expression was expected
+
+         line 0: warning: Skipping data file with no valid points
+         line 0: Can't plot with an empty x range!
+
+mawk: cannot open MiSeq_CHYA_chyaD.2.1.Fltr16.36.imiss (No such file or directory)
+ 0 individuals|libraries with too much missing data:
+     vcftools --vcf MiSeq_CHYA_chyaD.2.1.Fltr05.34.recode.Fltr86.rmCONTIGS.35.vcf --remove MiSeq_CHYA_chyaD.2.1.Fltr16.36.lowDP-2.indv --recode --recode-INFO-all --out MiSeq_CHYA_chyaD.2.1.Fltr16.36.recode.vcf 2> /dev/null | vcffixup -
+	Sites remaining:	0
+	Contigs remaining:	0
+
+
+ Individuals|Libraries Remaining Per Sample
+
+Mon Oct 25 12:17:48 CDT 2021 ---------------------------FILTER01: Remove sites with Y < alleles < X -----------------------------
+     vcftools --vcf MiSeq_CHYA_chyaD.2.1.Fltr16.36.recode.vcf --min-alleles 2 --max-alleles 2 --recode --recode-INFO-all --out MiSeq_CHYA_chyaD.2.1.Fltr01.37.recode.vcf 2> /dev/null
+	Sites remaining:	0
+	Contigs remaining:	0
+
+
+Mon Oct 25 12:17:48 CDT 2021 ---------------------------FILTER21: Select Most Informative SNP per Contig -----------------------------
+Broken VCF header, no column names?
+ at /home/apps/vcftools/0.1.15/lib/site_perl/5.22.0/Vcf.pm line 172.
+	Vcf::throw(Vcf4_2=HASH(0xc375d0), "Broken VCF header, no column names?") called at /home/apps/vcftools/0.1.15/lib/site_perl/5.22.0/Vcf.pm line 867
+	VcfReader::_read_column_names(Vcf4_2=HASH(0xc375d0)) called at /home/apps/vcftools/0.1.15/lib/site_perl/5.22.0/Vcf.pm line 602
+	VcfReader::parse_header(Vcf4_2=HASH(0xc375d0)) called at /home/apps/vcftools/0.1.15/bin/vcf-query line 212
+	main::read_data(HASH(0x7c9f30)) called at /home/apps/vcftools/0.1.15/bin/vcf-query line 12
+-1
+-1
+0
+
+Mon Oct 25 12:17:48 CDT 2021  --------------------------- Filtering complete! ---------------------------
+
+
+Mon Oct 25 12:17:48 CDT 2021 Running fltrVCFstats2 with the following settings...
+          DIRECTORY: /work/hobi/jselwyn/Coryphopterus_RAD/fltrVCF_MiSeq_CHYA
+          THREADS: 20
+          FILE PREFIX: MiSeq_CHYA_chyaD
+
+Mon Oct 25 12:17:48 CDT 2021 Getting universal chromosome/contig prefix ...
+          Querying  ...
+          Prefix: dDocent
+          It is assumed that all values in the CHROM column of vcf begin with dDocent
+          If this is not the case, then fltrVCF will not work properly.
+
+Mon Oct 25 12:17:48 CDT 2021 Making column 1 of 19 ...
+
+Mon Oct 25 12:17:49 CDT 2021 Making column 2 of 19 ...
+
+Mon Oct 25 12:17:49 CDT 2021 Making column 3 of 19 ...
+
+Mon Oct 25 12:18:08 CDT 2021 Making column 4 of 19 ...
+
+Mon Oct 25 12:19:23 CDT 2021 Making column 5 of 19 ...
+
+Mon Oct 25 12:20:38 CDT 2021 Making column 6 of 19 ...
+
+Mon Oct 25 12:20:38 CDT 2021 Making column 7 of 19 ...
+
+Mon Oct 25 12:21:42 CDT 2021 Making column 8 of 19 ...
+
+Mon Oct 25 12:21:50 CDT 2021 Making column 9 of 19 ...
+
+Mon Oct 25 12:22:01 CDT 2021 Making column 10 of 19 ...
+
+Mon Oct 25 12:22:10 CDT 2021 Making column 11 of 19 ...
+
+Mon Oct 25 12:22:17 CDT 2021 Making column 12 of 19 ...
+
+Mon Oct 25 12:22:24 CDT 2021 Making column 13 of 19 ...
+slurmstepd: error: *** JOB 50639 ON hpcc11 CANCELLED AT 2021-10-25T12:22:45 ***
