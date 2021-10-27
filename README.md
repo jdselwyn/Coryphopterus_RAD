@@ -982,12 +982,16 @@ Changes for F.
   - can incorporate into a later filter with p-values adjusted so as to not whily nilly remove all the loci
 - add final filter for missing data in individuals @ 30%
 
+Changes for G.
+- Increase stringency of first missing data filter for individuals (85 to 75) to get rid of them right at the beginning so maybe save some on loci on the back
+- Increase stingency of second missing data filter for loci (50 to 60) to get rid of more which became NA when individuals were set to NA with fewer than 3 loci
+
 ```
 sbatch scripts/fltrVCF.sbatch \
 	fltrVCF_MiSeq_CHYA \
 	mkVCF_MiSeq_CHYA/TotalRawSNPs.2.1.vcf \
-	config_files/fltrVCF_chya_F.config \
-	chyaF
+	config_files/fltrVCF_chya_G.config \
+	chyaG
 50683
 
 ls fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaF*MostInformativeSNP.vcf
