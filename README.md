@@ -986,6 +986,10 @@ Changes for G.
 - Increase stringency of first missing data filter for individuals (85 to 75) to get rid of them right at the beginning so maybe save some on loci on the back
 - Increase stingency of second missing data filter for loci (50 to 60) to get rid of more which became NA when individuals were set to NA with fewer than 3 loci
 
+Changes for H.
+- Tighten allele balance filter from 0.2/0.8 to 0.375/0.625 to help deal with possible paralogs
+- lower heterozygosity threshold from 0.67 to 0.6 to further help with possible paralogs
+
 ```
 sbatch scripts/fltrVCF.sbatch \
 	fltrVCF_MiSeq_CHYA \
@@ -997,6 +1001,18 @@ sbatch scripts/fltrVCF.sbatch \
 ls fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaG*MostInformativeSNP.vcf
 
 module load R/gcc/64/3.5.1
-
 Rscript scripts/summarizeVCF.R fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaF.2.1.Fltr21.37.MostInformativeSNP.vcf
+
+```
+
+
+```
+sbatch scripts/fltrVCF.sbatch \
+	fltrVCF_MiSeq_CHYA2 \
+	mkVCF_MiSeq_CHYA/TotalRawSNPs.2.1.vcf \
+	config_files/fltrVCF_chya_H.config \
+	chyaH
+50583
+
+mv fltrVCF_MiSeq_CHYA2/* fltrVCF_MiSeq_CHYA/; rmdir fltrVCF_MiSeq_CHYA2
 ```
