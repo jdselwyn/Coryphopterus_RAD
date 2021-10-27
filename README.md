@@ -980,7 +980,7 @@ Changes for E.
 Changes for F.
 - Remove HWE filter - far too restrictive and based solely on p-value (unadjusted)
   - can incorporate into a later filter with p-values adjusted so as to not whily nilly remove all the loci
-- add final filter for missing data in individuals
+- add final filter for missing data in individuals @ 30%
 
 ```
 sbatch scripts/fltrVCF.sbatch \
