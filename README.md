@@ -989,6 +989,7 @@ Changes for G.
 Changes for H.
 - Tighten allele balance filter from 0.2/0.8 to 0.375/0.625 to help deal with possible paralogs
 - lower heterozygosity threshold from 0.67 to 0.6 to further help with possible paralogs
+- Move egg filter (32) ahead of AB filter (06)
 
 ```
 sbatch scripts/fltrVCF.sbatch \
