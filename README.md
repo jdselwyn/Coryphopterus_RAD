@@ -942,21 +942,21 @@ Rscript scripts/summarizeVCF.R fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaC.2.1.Fltr21.30
 ```
 
 Genotyping Stats
-| Metric | [chyaA](config_files/fltrVCF_chya_A.config) | [chyaB](config_files/fltrVCF_chya_B.config) | [chyaC](config_files/fltrVCF_chya_C.config) | [chyaD](config_files/fltrVCF_chya_D.config) | [chyaE](config_files/fltrVCF_chya_E.config) | [chyaF](config_files/fltrVCF_chya_F.config) | [chyaG](config_files/fltrVCF_chya_G.config) | [chyaG](config_files/fltrVCF_chya_H.config) |  |
+| Metric | [chyaA](config_files/fltrVCF_chya_A.config) | [chyaB](config_files/fltrVCF_chya_B.config) | [chyaC](config_files/fltrVCF_chya_C.config) | [chyaD](config_files/fltrVCF_chya_D.config) | [chyaE](config_files/fltrVCF_chya_E.config) | [chyaF](config_files/fltrVCF_chya_F.config) | [chyaG](config_files/fltrVCF_chya_G.config) | [chyaH](config_files/fltrVCF_chya_H.config) |  |
 | --- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- |
 | JobID | [`50250`](SLURM_out/fltrVCF-50250.out) | [`50251`](SLURM_out/fltrVCF-50251.out) | [`50252`](SLURM_out/fltrVCF-50252.out) | [`50665`](SLURM_out/fltrVCF-50665.out) | [`50677`](SLURM_out/fltrVCF-50677.out) | [`50683`](SLURM_out/fltrVCF-50683.out) | [`50694`](SLURM_out/fltrVCF-50694.out) | [`50708`](SLURM_out/fltrVCF-50708.out) |  |
 | Summary Graph | [chyaA](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaA.fltrStats2.plots.pdf) | [chyaB](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaB.fltrStats2.plots.pdf) | [chyaC](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaC.fltrStats2.plots.pdf) | [chyaD](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaD.fltrStats2.plots.pdf) | [chyaE](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaE.fltrStats2.plots.pdf) | [chyaF](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaF.fltrStats2.plots.pdf) | [chyaG](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaG.fltrStats2.plots.pdf) | [chyaH](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaH.fltrStats2.plots.pdf) |  |
-| Number Individuals | 473 | 473 | 490 | 495 | 489 | 458 |  |  |  |
-| Number SNPs | 2,405 | 2,365 | 2,412 | 502 | 513 | 2,371 |  |  |  |
-| Number Contigs | 2,405 | 2,365 | 2,412 | 502 | 513 | 2,371 |  |  |  |
-| Mean Coverage | 54,131 ± 17,251 SD | 53,856 ± 16,843 SD | 52,881 ± 16,676 SD | 49,486 ± 17,499 SD | 48,460 ± 17,991 SD | 45,519 ± 17,242 SD | ±  SD | ±  SD | ±  SD |
-| Range Coverage | 14,423 - 93,710 | 22,233 - 93,587 | 18,516 - 90,213 | 16,809 - 86,397 | 15,491 - 88,578 | 15,341 - 91,224 |  -  |  -  |  -  |
-| Mean PHRED | 311,290 ± 315,927 SD | 311,922 ± 315,777 SD | 308,786 ± 314,114 SD | 347,059 ± 275,062 SD | 340,234 ± 267,528 SD | 339,880 ± 269,139 SD | ±  SD | ±  SD | ±  SD |
-| Range PHRED | 3,708 - 2,196,180 | 5,882 - 2,196,180 | 7,287 - 2,196,180 | 30,008 - 1,563,150 | 24,755 - 1,563,150 | 20,243 - 1,563,150 |  -  |  -  |  -  |
-| Mean Missing (Ind) | 6.5% ± 8.5% | 6.5% ± 8.5% | 8% ± 11% | 5.6% ± 9% | 5.8% ± 9% | 6.0% ± 6.5% | % ± % | % ± % | % ± % |
-| Range Missing (Ind) | 0% - 39% | 0% - 40% | 0% - 49% | 0% - 40% | 0% - 41% | 0% - 30% | % - % | % - % | % - % |
-| Mean Missing (Loci) | 6.5% ± 3.6% | 6.5% ± 3.6% | 8% ± 4% | 5.6% ± 3.7% | 5.8% ± 4% | 6.0% ± 3.9% | % ± % | % ± % | % ± % |
-| Range Missing (Loci) | 0% - 15% | 0% - 15% | 0% - 15% | 0% - 14% | 0% - 15% | 0% - 15% | % - % | % - % | % - % |
+| Number Individuals | 473 | 473 | 490 | 495 | 489 | 458 | 459 | 458 |  |
+| Number SNPs | 2,405 | 2,365 | 2,412 | 502 | 513 | 2,371 | 2,415 | 2,338 |  |
+| Number Contigs | 2,405 | 2,365 | 2,412 | 502 | 513 | 2,371 | 2,415 | 2,338 |  |
+| Mean Coverage | 54,131 ± 17,251 SD | 53,856 ± 16,843 SD | 52,881 ± 16,676 SD | 49,486 ± 17,499 SD | 48,460 ± 17,991 SD | 45,519 ± 17,242 SD | 45,364 ± 17,048 SD | 45,343 ± 17,071 SD | ±  SD |
+| Range Coverage | 14,423 - 93,710 | 22,233 - 93,587 | 18,516 - 90,213 | 16,809 - 86,397 | 15,491 - 88,578 | 15,341 - 91,224 | 15,341 - 88,880 | 15,341 - 88,880 |  -  |
+| Mean PHRED | 311,290 ± 315,927 SD | 311,922 ± 315,777 SD | 308,786 ± 314,114 SD | 347,059 ± 275,062 SD | 340,234 ± 267,528 SD | 339,880 ± 269,139 SD | 339,388 ± 268,217 SD | 338,527 ± 268,288 SD | ±  SD |
+| Range PHRED | 3,708 - 2,196,180 | 5,882 - 2,196,180 | 7,287 - 2,196,180 | 30,008 - 1,563,150 | 24,755 - 1,563,150 | 20,243 - 1,563,150 | 20,243 - 1,563,150 | 24,755 - 1,563,150 |  -  |
+| Mean Missing (Ind) | 6.5% ± 8.5% | 6.5% ± 8.5% | 8% ± 11% | 5.6% ± 9% | 5.8% ± 9% | 6.0% ± 6.5% | 6% ± 6.5% | 6.0% ± 6.5% | % ± % |
+| Range Missing (Ind) | 0% - 39% | 0% - 40% | 0% - 49% | 0% - 40% | 0% - 41% | 0% - 30% | 0% - 31% | 0% - 31% | % - % |
+| Mean Missing (Loci) | 6.5% ± 3.6% | 6.5% ± 3.6% | 8% ± 4% | 5.6% ± 3.7% | 5.8% ± 4% | 6.0% ± 3.9% | 6% ± 3.8% | 6.0% ± 3.8% | % ± % |
+| Range Missing (Loci) | 0% - 15% | 0% - 15% | 0% - 15% | 0% - 14% | 0% - 15% | 0% - 15% | 0% - 15% | 0% - 15% | % - % |
 
 A and B are for all intents and purposes identical. C is better than either. Try going harder earlier on the SNPs?? - but still not keeping as many as I'd like....
 
@@ -999,10 +999,10 @@ sbatch scripts/fltrVCF.sbatch \
 	chyaG
 50694
 
-ls fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaG*MostInformativeSNP.vcf
+ls fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaH*MostInformativeSNP.vcf
 
 module load R/gcc/64/3.5.1
-Rscript scripts/summarizeVCF.R fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaF.2.1.Fltr21.37.MostInformativeSNP.vcf
+Rscript scripts/summarizeVCF.R fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaH.2.1.Fltr21.37.MostInformativeSNP.vcf
 
 ```
 
