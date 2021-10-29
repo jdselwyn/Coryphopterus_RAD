@@ -53,7 +53,6 @@ tibble(x = rlnorm(5000, 2.20, 1.52)) %>%
   ggplot(aes(x = x)) +
   geom_histogram()
 
-
 cluster <- new_cluster(4)
 cluster_library(cluster, 'broom')
 
@@ -63,13 +62,45 @@ out <- read_delim('../tmp_dir/meandepthVSvariance', delim = '\t',
   mutate(sd = sqrt(variance)) %>%
   dplyr::select(-variance) %>%
   dplyr::rename(m = mean, s = sd) %>%
-  mutate(l_m = log(m) - 0.5 * log((s/m)^2 + 1),
+  mutate(id = str_c('R', row_number()),
+         l_m = log(m) - 0.5 * log((s/m)^2 + 1),
          l_s = sqrt(log((s/m)^2 + 1))) %>%
   rowwise %>%
   partition(cluster) %>%
-  mutate(n_less = sum(rlnorm(5000, 4.34, 1.27) <= 3),
+  mutate(n_less = sum(rlnorm(5000, l_m, l_s) <= 3),
          tidy(binom.test(x = n_less, n = 5000))) %>%
   collect
+
+out %>%
+  filter(m > 100) %>%
+  ggplot(aes(x = m, y = n_less / 5000)) +
+  geom_point()
+
+library(emmeans)
+library(brms)
+
+library(lme4)
+
+tst <- brm(n_less | trials(5000) ~ m * s + (1 | id),
+           family = 'binomial',
+           data = out)
+
+tst <- glmer(cbind(n_less, 5000 - n_less) ~ m * s + (1 | id),
+           family = 'binomial',
+           data = out)
+
+
+glm(cbind(n_less, 5000 - n_less) ~ m * s, data = out,
+    family = 'binomial') %>%
+  emmeans(., ~ m, by = 's', type = 'response',
+          at=list(m = seq(1, max(out$m), length.out = 100))) %>%
+  tidy(conf.int = TRUE) %>%
+  ggplot(aes(x = m, y = prob, ymin = asymp.LCL, ymax = asymp.UCL)) +
+  geom_ribbon() +
+  geom_line() +
+  theme_classic()
+  
+
 
 out %>%
   arrange(-m) %>%
@@ -79,3 +110,6 @@ out %>%
 
   ggplot(aes(x = m*s, y = estimate)) + 
   geom_point()
+
+
+

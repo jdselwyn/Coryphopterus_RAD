@@ -993,17 +993,20 @@ Changes for H.
 
 Changes for I.
 - Lower egg heterozygosity filter to 0.5
-- 
+
+Changes for J.
+- Really crank up the minimum average read depth to drop the chances of having fish with <3 reads (from 25 to 100) based on `utils/coverage_filter.R`
+- The point of removing the SNPs here is to maybe save some of those individuals from the missing data filter
 
 ```
 sbatch scripts/fltrVCF.sbatch \
 	fltrVCF_MiSeq_CHYA \
 	mkVCF_MiSeq_CHYA/TotalRawSNPs.2.1.vcf \
-	config_files/fltrVCF_chya_G.config \
-	chyaG
-50694
+	config_files/fltrVCF_chya_I.config \
+	chyaI
 
-ls fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaH*MostInformativeSNP.vcf
+
+ls fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaI*MostInformativeSNP.vcf
 
 module load R/gcc/64/3.5.1
 Rscript scripts/summarizeVCF.R fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaH.2.1.Fltr21.37.MostInformativeSNP.vcf
@@ -1015,9 +1018,9 @@ Rscript scripts/summarizeVCF.R fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaH.2.1.Fltr21.37
 sbatch scripts/fltrVCF.sbatch \
 	fltrVCF_MiSeq_CHYA2 \
 	mkVCF_MiSeq_CHYA/TotalRawSNPs.2.1.vcf \
-	config_files/fltrVCF_chya_H.config \
-	chyaH
-50708
+	config_files/fltrVCF_chya_J.config \
+	chyaJ
+
 
 mv fltrVCF_MiSeq_CHYA2/* fltrVCF_MiSeq_CHYA/; rmdir fltrVCF_MiSeq_CHYA2
 ```
