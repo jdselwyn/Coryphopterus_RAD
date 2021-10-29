@@ -991,6 +991,10 @@ Changes for H.
 - lower heterozygosity threshold from 0.67 to 0.6 to further help with possible paralogs
 - Move egg filter (32) ahead of AB filter (06)
 
+Changes for I.
+- Lower egg heterozygosity filter to 0.5
+- 
+
 ```
 sbatch scripts/fltrVCF.sbatch \
 	fltrVCF_MiSeq_CHYA \
