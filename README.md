@@ -1001,15 +1001,21 @@ Changes for J.
 Changes for K.
 - Read filter was too strict but did keep some extra fish. Drop filter from 100 to 50.
 
+Changes for L.
+- Dial back a tad on the minor allele frequency filter to let a bit more through. Change from 0.1 to 0.01 (~5 individuals must have it rather than ~50)
+
+Changes for M.
+- Not quite as much change to MAF as in L only change from 0.1 to 0.05
+
 ```
 sbatch scripts/fltrVCF.sbatch \
 	fltrVCF_MiSeq_CHYA \
 	mkVCF_MiSeq_CHYA/TotalRawSNPs.2.1.vcf \
-	config_files/fltrVCF_chya_K.config \
+	config_files/fltrVCF_chya_L.config \
 	chyaK
 50899
 
-ls fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaK*MostInformativeSNP.vcf
+ls fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaM*MostInformativeSNP.vcf
 
 module load R/gcc/64/3.5.1
 Rscript scripts/summarizeVCF.R fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaK.2.1.Fltr21.37.MostInformativeSNP.vcf
@@ -1021,7 +1027,7 @@ Rscript scripts/summarizeVCF.R fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaK.2.1.Fltr21.37
 sbatch scripts/fltrVCF.sbatch \
 	fltrVCF_MiSeq_CHYA2 \
 	mkVCF_MiSeq_CHYA/TotalRawSNPs.2.1.vcf \
-	config_files/fltrVCF_chya_J.config \
+	config_files/fltrVCF_chya_M.config \
 	chyaJ
 50873
 
