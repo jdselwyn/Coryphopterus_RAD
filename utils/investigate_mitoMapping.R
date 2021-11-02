@@ -95,6 +95,7 @@ prediction_out %>%
                                             number_reads >= 6 & number_reads < 6.5 ~ 6,
                                             number_reads >= 6.5 & number_reads < 7 ~ 7,
                                             number_reads >= 7 ~ 8)) %>%
+                    filter(bins < 8) %>%
                     group_by(bins) %>%
                     summarise(number_reads = (min(number_reads) + max(number_reads)) / 2,
                               n_id = sum(has_id),
@@ -112,7 +113,7 @@ prediction_out %>%
   annotation_logticks(sides = 'b', outside = FALSE) +
   coord_cartesian(clip = "on") +
   labs(x = 'Number of Reads',
-       y = 'Percent Individuals with Mitochondrial Species ID') +
+       y = 'Percent Individuals with\nMitochondrial Species ID') +
   theme_classic() +
   theme(axis.text = element_text(colour = 'black'),
         panel.border = element_rect(colour = 'black', fill = 'transparent'))

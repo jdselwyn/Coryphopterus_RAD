@@ -165,6 +165,31 @@ full_data <- newhybrids_subsetLoci %>%
 
 #### Plot of interesting/disagreements ####
 full_data %>%
+  select(Indiv, Axis1, Axis2, contains('hybrid_type')) %>%
+  mutate(across(starts_with('hybrid_type'), is.na)) %>%
+  pivot_longer(cols = starts_with('hybrid_type')) %>%
+  mutate(order_var = if_else(!value | is.na(value), 1, 2),
+         name = str_remove(name, 'hybrid_type.') %>%
+           str_replace('best', 'Top Fst - 200') %>%
+           str_replace('subset', 'random - 200') %>%
+           str_replace('all', 'all - 1,726') %>%
+           str_to_title()) %>%
+  arrange(order_var) %>%
+  filter(Axis2 > -20) %>%
+  ggplot(aes(x = Axis1, y = Axis2, colour = value, size = value)) +
+  geom_point(show.legend = FALSE) +
+  scale_colour_manual(values = c('TRUE' = 'red', 'FALSE' = 'gray25'), na.value = 'grey75') +
+  scale_size_manual(values = c('TRUE' = 3, 'FALSE' = 1), na.value = 1) +
+  facet_wrap(~name) +
+  theme_classic() +
+  theme(text = element_text(size = 32),
+        axis.text = element_blank(),
+        axis.title = element_blank(),
+        panel.background = element_rect(fill = 'transparent', colour = 'black'),
+        strip.background = element_blank())
+
+
+full_data %>%
   select(Indiv, Axis1, Axis2, nan_all, starts_with('mixup')) %>%
   pivot_longer(cols = c(nan_all, starts_with('mixup'))) %>%
   mutate(order_var = if_else(!value | is.na(value), 1, 2)) %>%
@@ -182,6 +207,45 @@ full_data %>%
 full_data %>%
   filter(mixup_mt_best | mixup_mt_sub | mixup_mt_all) %>%
   select(Indiv, starts_with('hybrid_type'), starts_with('mixup'))
+
+#### Investigate Mismatches ####
+inspect <- full_data %>%
+  select(Indiv, Axis1, Axis2, nan_all, starts_with('mixup')) %>%
+  pivot_longer(cols = c(nan_all, starts_with('mixup'))) %>%
+  mutate(order_var = if_else(!value | is.na(value), 1, 2)) %>%
+  arrange(order_var) %>%
+  filter(Axis2 > -20,
+         str_detect(name, 'mixup'),
+         str_detect(name, 'mt', negate = TRUE)) %>%
+  mutate(name = str_replace_all(name, c('mixup_all_sub' = 'All v Random',
+                                        'mixup_best_all' = 'All v Top Fst',
+                                        'mixup_best_sub' = 'Top Fst v Random'))) %>%
+  filter(value) %>%
+  
+  filter(str_detect(name, 'All', negate = TRUE)) %>%
+  
+  select(Indiv, name) %>%
+  mutate(exisit = 1) %>%
+  pivot_wider(names_from = 'name',
+              values_from = 'exisit') %>%
+  pull(Indiv)
+
+
+full_data %>%
+  filter(Indiv %in% inspect) %>%
+  select(Indiv, ends_with('subset'), ends_with('all'), ends_with('best')) %>%
+  select(-starts_with('Z'), -starts_with('mixup'), -nan_all) %>%
+  pivot_longer(cols = -c(Indiv),
+               names_to = c('.value', "loci"),
+               names_pattern = '(.*)\\.(.*)') %>%
+  pivot_longer(cols = pure_a:b_bx) %>%
+  
+  # filter(Indiv %in% c('COPE_0489', "COPE_0502")) %>%
+  
+  ggplot(aes(x = loci, y = value, fill = name)) +
+  geom_col() +
+  facet_wrap(~ Indiv)
+
 
 #### Plot Hybrid types ####
 full_data %>% 
