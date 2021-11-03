@@ -1038,7 +1038,7 @@ sbatch scripts/fltrVCF.sbatch \
 mv fltrVCF_MiSeq_CHYA2/* fltrVCF_MiSeq_CHYA/; rmdir fltrVCF_MiSeq_CHYA2
 ```
 
-Make alternately filtered with all same settings but haplotype rather than pick single informative SNP
+Make alternately filtered with all same settings but haplotype rather than pick single informative SNP - for Fst
 - Config K
 ```
 sbatch scripts/fltrVCF.sbatch \
