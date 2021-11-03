@@ -103,8 +103,8 @@ sra_info <- ncbi_data %>%
   unnest(files) %>%
   pivot_wider(names_from = 'read',
               values_from = 'file_name') %>%
-  mutate(title = str_c('ddRAD of ', species, ': Caudal fin clip'),
-         library_id = str_c(sample_name, sequencing_type, sep = '.')) %>%
+  mutate(title = str_c('ddRAD of ', species, ' - MspI & EcoRI: Caudal fin clip'),
+         library_id = sequencing_type) %>%
   arrange(sequencing_type, sample_name) %>%
   select(sample_name, library_id, title, r1, r2)
 write_csv(sra_info, 'for_ncbi.csv')
