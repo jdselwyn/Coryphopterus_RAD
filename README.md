@@ -944,7 +944,7 @@ Rscript scripts/summarizeVCF.R fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaC.2.1.Fltr21.30
 Genotyping Stats
 | Metric | [chyaA](config_files/fltrVCF_chya_A.config) | [chyaB](config_files/fltrVCF_chya_B.config) | [chyaC](config_files/fltrVCF_chya_C.config) | [chyaD](config_files/fltrVCF_chya_D.config) | [chyaE](config_files/fltrVCF_chya_E.config) | [chyaF](config_files/fltrVCF_chya_F.config) | [chyaG](config_files/fltrVCF_chya_G.config) | [chyaH](config_files/fltrVCF_chya_H.config) | [chyaI](config_files/fltrVCF_chya_I.config) | [chyaJ](config_files/fltrVCF_chya_J.config) | [chyaK](config_files/fltrVCF_chya_K.config) | [chyaL](config_files/fltrVCF_chya_L.config) | [chyaM](config_files/fltrVCF_chya_M.config) | [chyaN](config_files/fltrVCF_chya_N.config) | [chyaKhaplo](config_files/fltrVCF_chya_K_haplo.config) |  |
 | --- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- |
-| JobID | [`50250`](SLURM_out/fltrVCF-50250.out) | [`50251`](SLURM_out/fltrVCF-50251.out) | [`50252`](SLURM_out/fltrVCF-50252.out) | [`50665`](SLURM_out/fltrVCF-50665.out) | [`50677`](SLURM_out/fltrVCF-50677.out) | [`50683`](SLURM_out/fltrVCF-50683.out) | [`50694`](SLURM_out/fltrVCF-50694.out) | [`50708`](SLURM_out/fltrVCF-50708.out) | [`50872`](SLURM_out/fltrVCF-50872.out) | [`50873`](SLURM_out/fltrVCF-50873.out) | [`50899`](SLURM_out/fltrVCF-50899.out) | [`51063`](SLURM_out/fltrVCF-51063.out) | [`51064`](SLURM_out/fltrVCF-51064.out) | [``](SLURM_out/fltrVCF-.out) | [``](SLURM_out/fltrVCF-.out) |  |
+| JobID | [`50250`](SLURM_out/fltrVCF-50250.out) | [`50251`](SLURM_out/fltrVCF-50251.out) | [`50252`](SLURM_out/fltrVCF-50252.out) | [`50665`](SLURM_out/fltrVCF-50665.out) | [`50677`](SLURM_out/fltrVCF-50677.out) | [`50683`](SLURM_out/fltrVCF-50683.out) | [`50694`](SLURM_out/fltrVCF-50694.out) | [`50708`](SLURM_out/fltrVCF-50708.out) | [`50872`](SLURM_out/fltrVCF-50872.out) | [`50873`](SLURM_out/fltrVCF-50873.out) | [`50899`](SLURM_out/fltrVCF-50899.out) | [`51063`](SLURM_out/fltrVCF-51063.out) | [`51064`](SLURM_out/fltrVCF-51064.out) | [`51073`](SLURM_out/fltrVCF-51073.out) | [`51074`](SLURM_out/fltrVCF-51074.out) |  |
 | Summary Graph | [chyaA](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaA.fltrStats2.plots.pdf) | [chyaB](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaB.fltrStats2.plots.pdf) | [chyaC](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaC.fltrStats2.plots.pdf) | [chyaD](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaD.fltrStats2.plots.pdf) | [chyaE](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaE.fltrStats2.plots.pdf) | [chyaF](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaF.fltrStats2.plots.pdf) | [chyaG](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaG.fltrStats2.plots.pdf) | [chyaH](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaH.fltrStats2.plots.pdf) | [chyaI](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaI.fltrStats2.plots.pdf) | [chyaJ](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaJ.fltrStats2.plots.pdf) | [chyaK](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaK.fltrStats2.plots.pdf) | [chyaL](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaL.fltrStats2.plots.pdf) | [chyaM](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaM.fltrStats2.plots.pdf) | [chyaN](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaN.fltrStats2.plots.pdf) | [chyaKhaplo](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaKhaplo.fltrStats2.plots.pdf) |  |
 | Number Individuals | 473 | 473 | 490 | 495 | 489 | 458 | 459 | 458 | 458 | 483 | 472 | 475 | 475 |  |  |  |
 | Number SNPs | 2,405 | 2,365 | 2,412 | 502 | 513 | 2,371 | 2,415 | 2,338 | 2,339 | 588 | 1,941 | 1,436 | 1,340 |  |  |  |
@@ -1017,7 +1017,7 @@ sbatch scripts/fltrVCF.sbatch \
 	mkVCF_MiSeq_CHYA/TotalRawSNPs.2.1.vcf \
 	config_files/fltrVCF_chya_N.config \
 	chyaN
-51063
+51073
 
 ls fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaM*MostInformativeSNP.vcf
 
@@ -1033,7 +1033,6 @@ sbatch scripts/fltrVCF.sbatch \
 	mkVCF_MiSeq_CHYA/TotalRawSNPs.2.1.vcf \
 	config_files/fltrVCF_chya_M.config \
 	chyaM
-51064
 
 mv fltrVCF_MiSeq_CHYA2/* fltrVCF_MiSeq_CHYA/; rmdir fltrVCF_MiSeq_CHYA2
 ```
@@ -1046,7 +1045,7 @@ sbatch scripts/fltrVCF.sbatch \
 	mkVCF_MiSeq_CHYA/TotalRawSNPs.2.1.vcf \
 	config_files/fltrVCF_chya_K_haplo.config \
 	chyaKhaplo
-
+51074
 
 mv fltrVCF_MiSeq_CHYA2/* fltrVCF_MiSeq_CHYA/; rmdir fltrVCF_MiSeq_CHYA2
 ```
