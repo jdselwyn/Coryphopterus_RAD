@@ -11,9 +11,7 @@
 - NovaSeq only - Finished
 
 ## ToDo
-- Delete NCBI data - need to change species IDs post ADMIXTURE & NewHybrids
 - Upload data to NCBI
-- Rerun SNP filtering
 
 ## Step 1.  Demultiplex Sequences
 ```
@@ -946,17 +944,17 @@ Genotyping Stats
 | --- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- |
 | JobID | [`50250`](SLURM_out/fltrVCF-50250.out) | [`50251`](SLURM_out/fltrVCF-50251.out) | [`50252`](SLURM_out/fltrVCF-50252.out) | [`50665`](SLURM_out/fltrVCF-50665.out) | [`50677`](SLURM_out/fltrVCF-50677.out) | [`50683`](SLURM_out/fltrVCF-50683.out) | [`50694`](SLURM_out/fltrVCF-50694.out) | [`50708`](SLURM_out/fltrVCF-50708.out) | [`50872`](SLURM_out/fltrVCF-50872.out) | [`50873`](SLURM_out/fltrVCF-50873.out) | [`50899`](SLURM_out/fltrVCF-50899.out) | [`51063`](SLURM_out/fltrVCF-51063.out) | [`51064`](SLURM_out/fltrVCF-51064.out) | [`51073`](SLURM_out/fltrVCF-51073.out) | [`51074`](SLURM_out/fltrVCF-51074.out) |  |
 | Summary Graph | [chyaA](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaA.fltrStats2.plots.pdf) | [chyaB](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaB.fltrStats2.plots.pdf) | [chyaC](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaC.fltrStats2.plots.pdf) | [chyaD](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaD.fltrStats2.plots.pdf) | [chyaE](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaE.fltrStats2.plots.pdf) | [chyaF](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaF.fltrStats2.plots.pdf) | [chyaG](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaG.fltrStats2.plots.pdf) | [chyaH](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaH.fltrStats2.plots.pdf) | [chyaI](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaI.fltrStats2.plots.pdf) | [chyaJ](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaJ.fltrStats2.plots.pdf) | [chyaK](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaK.fltrStats2.plots.pdf) | [chyaL](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaL.fltrStats2.plots.pdf) | [chyaM](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaM.fltrStats2.plots.pdf) | [chyaN](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaN.fltrStats2.plots.pdf) | [chyaKhaplo](fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaKhaplo.fltrStats2.plots.pdf) |  |
-| Number Individuals | 473 | 473 | 490 | 495 | 489 | 458 | 459 | 458 | 458 | 483 | 472 | 475 | 475 |  |  |  |
-| Number SNPs | 2,405 | 2,365 | 2,412 | 502 | 513 | 2,371 | 2,415 | 2,338 | 2,339 | 588 | 1,941 | 1,436 | 1,340 |  |  |  |
-| Number Contigs | 2,405 | 2,365 | 2,412 | 502 | 513 | 2,371 | 2,415 | 2,338 | 2,339 | 588 | 1,941 | 1,436 | 1,340 |  |  |  |
-| Mean Coverage | 54,131 ± 17,251 SD | 53,856 ± 16,843 SD | 52,881 ± 16,676 SD | 49,486 ± 17,499 SD | 48,460 ± 17,991 SD | 45,519 ± 17,242 SD | 45,364 ± 17,048 SD | 45,343 ± 17,071 SD | 45,313 ± 17,046 SD | 71,576 ± 8,296 SD | 50,241 ± 15,312 SD | 50,646 ± 15,351 SD | 50,328 ± 14,034 SD |  ±  SD |  ±  SD |  ±  SD |
-| Range Coverage | 14,423 - 93,710 | 22,233 - 93,587 | 18,516 - 90,213 | 16,809 - 86,397 | 15,491 - 88,578 | 15,341 - 91,224 | 15,341 - 88,880 | 15,341 - 88,880 | 15,341 - 88,880 | 59,322 - 89,132 | 29,697 - 89,132 | 29,700 - 89,611 | 29,700 - 86,474 |  -  |  -  |  -  |
-| Mean PHRED | 311,290 ± 315,927 SD | 311,922 ± 315,777 SD | 308,786 ± 314,114 SD | 347,059 ± 275,062 SD | 340,234 ± 267,528 SD | 339,880 ± 269,139 SD | 339,388 ± 268,217 SD | 338,527 ± 268,288 SD | 338,166 ± 268,682 SD | 526,634 ± 359,840 SD | 374,627 ± 282,275 SD | 298,739 ± 292,638 SD | 298,872 ± 288,697 SD |  ±  SD |  ±  SD |  ±  SD |
-| Range PHRED | 3,708 - 2,196,180 | 5,882 - 2,196,180 | 7,287 - 2,196,180 | 30,008 - 1,563,150 | 24,755 - 1,563,150 | 20,243 - 1,563,150 | 20,243 - 1,563,150 | 24,755 - 1,563,150 | 24,755 - 1,563,150 | 66,616 - 1,771,370 | 30,349 - 1,771,370 | 6,178 - 1,568,720 | 6,178 - 1,525,090 |  -  |  -  |  -  |
-| Mean Missing (Ind) | 6.5% ± 8.5% | 6.5% ± 8.5% | 8% ± 11% | 5.6% ± 9% | 5.8% ± 9% | 6.0% ± 6.5% | 6% ± 6.5% | 6.0% ± 6.5% | 6.0% ± 6.5% | 5.0% ± 7% | 5.8% ± 6.8% | 5.2% ± 6.7% | 5.1% ± 6.7% | % ± % | % ± % | % ± % |
-| Range Missing (Ind) | 0% - 39% | 0% - 40% | 0% - 49% | 0% - 40% | 0% - 41% | 0% - 30% | 0% - 31% | 0% - 31% | 0% - 31% | 0% - 30% | 0% - 32% | 0% - 29% | 0% - 29% | % - % | % - % | % - % |
-| Mean Missing (Loci) | 6.5% ± 3.6% | 6.5% ± 3.6% | 8% ± 4% | 5.6% ± 3.7% | 5.8% ± 4% | 6.0% ± 3.9% | 6% ± 3.8% | 6.0% ± 3.8% | 6.0% ± 3.9% | 5.0% ± 4% | 5.8% ± 3.8% | 5.2% ± 3.6% | 5.1% ± 3.6% | % ± % | % ± % | % ± % |
-| Range Missing (Loci) | 0% - 15% | 0% - 15% | 0% - 15% | 0% - 14% | 0% - 15% | 0% - 15% | 0% - 15% | 0% - 15% | 0% - 15% | 0% - 15% | 0% - 15% | 0% - 15% | 0% - 14% | % - % | % - % | % - % |
+| Number Individuals | 473 | 473 | 490 | 495 | 489 | 458 | 459 | 458 | 458 | 483 | 472 | 475 | 475 | 471 | 472 |  |
+| Number SNPs | 2,405 | 2,365 | 2,412 | 502 | 513 | 2,371 | 2,415 | 2,338 | 2,339 | 588 | 1,941 | 1,436 | 1,340 | 1,241 | 3,965 |  |
+| Number Contigs | 2,405 | 2,365 | 2,412 | 502 | 513 | 2,371 | 2,415 | 2,338 | 2,339 | 588 | 1,941 | 1,436 | 1,340 | 1,241 | 1,794 |  |
+| Mean Coverage | 54,131 ± 17,251 SD | 53,856 ± 16,843 SD | 52,881 ± 16,676 SD | 49,486 ± 17,499 SD | 48,460 ± 17,991 SD | 45,519 ± 17,242 SD | 45,364 ± 17,048 SD | 45,343 ± 17,071 SD | 45,313 ± 17,046 SD | 71,576 ± 8,296 SD | 50,241 ± 15,312 SD | 50,646 ± 15,351 SD | 50,328 ± 14,034 SD | 50,562 ± 14,031 SD | 50,783 ± 15,189 SD |  ±  SD |
+| Range Coverage | 14,423 - 93,710 | 22,233 - 93,587 | 18,516 - 90,213 | 16,809 - 86,397 | 15,491 - 88,578 | 15,341 - 91,224 | 15,341 - 88,880 | 15,341 - 88,880 | 15,341 - 88,880 | 59,322 - 89,132 | 29,697 - 89,132 | 29,700 - 89,611 | 29,700 - 86,474 | 29,789 - 87,545 | 29,697 - 89,355 |  -  |
+| Mean PHRED | 311,290 ± 315,927 SD | 311,922 ± 315,777 SD | 308,786 ± 314,114 SD | 347,059 ± 275,062 SD | 340,234 ± 267,528 SD | 339,880 ± 269,139 SD | 339,388 ± 268,217 SD | 338,527 ± 268,288 SD | 338,166 ± 268,682 SD | 526,634 ± 359,840 SD | 374,627 ± 282,275 SD | 298,739 ± 292,638 SD | 298,872 ± 288,697 SD | 449,693 ± 239,821 SD | 338,772 ± 305,868 SD |  ±  SD |
+| Range PHRED | 3,708 - 2,196,180 | 5,882 - 2,196,180 | 7,287 - 2,196,180 | 30,008 - 1,563,150 | 24,755 - 1,563,150 | 20,243 - 1,563,150 | 20,243 - 1,563,150 | 24,755 - 1,563,150 | 24,755 - 1,563,150 | 66,616 - 1,771,370 | 30,349 - 1,771,370 | 6,178 - 1,568,720 | 6,178 - 1,525,090 | 85,079 - 1,378,050 | 303,349 - 1,794,740 |  -  |
+| Mean Missing (Ind) | 6.5% ± 8.5% | 6.5% ± 8.5% | 8% ± 11% | 5.6% ± 9% | 5.8% ± 9% | 6.0% ± 6.5% | 6% ± 6.5% | 6.0% ± 6.5% | 6.0% ± 6.5% | 5.0% ± 7% | 5.8% ± 6.8% | 5.2% ± 6.7% | 5.1% ± 6.7% | 5.6% ± 6.5% | 7.2% ± 7.6% | % ± % |
+| Range Missing (Ind) | 0% - 39% | 0% - 40% | 0% - 49% | 0% - 40% | 0% - 41% | 0% - 30% | 0% - 31% | 0% - 31% | 0% - 31% | 0% - 30% | 0% - 32% | 0% - 29% | 0% - 29% | 0% - 31% | 0% - 35% | % - % |
+| Mean Missing (Loci) | 6.5% ± 3.6% | 6.5% ± 3.6% | 8% ± 4% | 5.6% ± 3.7% | 5.8% ± 4% | 6.0% ± 3.9% | 6% ± 3.8% | 6.0% ± 3.8% | 6.0% ± 3.9% | 5.0% ± 4% | 5.8% ± 3.8% | 5.2% ± 3.6% | 5.1% ± 3.6% | 5.6% ± 3.8% | 7.2% ± 4.1% | % ± % |
+| Range Missing (Loci) | 0% - 15% | 0% - 15% | 0% - 15% | 0% - 14% | 0% - 15% | 0% - 15% | 0% - 15% | 0% - 15% | 0% - 15% | 0% - 15% | 0% - 15% | 0% - 15% | 0% - 14% | 0% - 15% | 0% - 19% | % - % |
 
 A and B are for all intents and purposes identical. C is better than either. Try going harder earlier on the SNPs?? - but still not keeping as many as I'd like....
 
@@ -1019,10 +1017,10 @@ sbatch scripts/fltrVCF.sbatch \
 	chyaN
 51073
 
-ls fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaM*MostInformativeSNP.vcf
+ls fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaN*MostInformativeSNP.vcf
 
 module load R/gcc/64/3.5.1
-Rscript scripts/summarizeVCF.R fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaM.2.1.Fltr21.37.MostInformativeSNP.vcf
+Rscript scripts/summarizeVCF.R fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaN.2.1.Fltr21.37.MostInformativeSNP.vcf
 
 ```
 
@@ -1048,4 +1046,19 @@ sbatch scripts/fltrVCF.sbatch \
 51074
 
 mv fltrVCF_MiSeq_CHYA2/* fltrVCF_MiSeq_CHYA/; rmdir fltrVCF_MiSeq_CHYA2
+
+module load R/gcc/64/3.5.1
+Rscript scripts/summarizeVCF.R fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaKhaplo.2.1.Fltr19.Haplotyped.vcf
+```
+
+Run from the end of K excluding the informative SNP and instead haplotype
+```
+sbatch scripts/fltrVCF.sbatch \
+	fltrVCF_MiSeq_CHYA \
+	fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaK.2.1.Fltr01.36.recode.vcf \
+	config_files/fltrVCF_chya_K_onlyHaplo.config \
+	chyaKonlyHaplo
+
+module load R/gcc/64/3.5.1
+Rscript scripts/summarizeVCF.R fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaKhaplo.2.1.Fltr19.Haplotyped.vcf
 ```
