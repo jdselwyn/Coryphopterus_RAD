@@ -750,7 +750,7 @@ This is a helpful page: https://meschedl.github.io/MESPutnam_Open_Lab_Notebook/S
   3. Follow NCBI instructions
   ```
   cd NCBI_upload
-  sshpass -p PWORD sftp UID@SFTP
+  sshpass -p PWORD sftp USERNAME@sLINK #Keep s before "LINK"
 
   cd THEIR_FOLDER
   mkdir coryphopterus_upload
@@ -1058,7 +1058,52 @@ sbatch scripts/fltrVCF.sbatch \
 	fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaK.2.1.Fltr01.36.recode.vcf \
 	config_files/fltrVCF_chya_K_onlyHaplo.config \
 	chyaKonlyHaplo
-
+51711
 module load R/gcc/64/3.5.1
 Rscript scripts/summarizeVCF.R fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaKhaplo.2.1.Fltr19.Haplotyped.vcf
+```
+
+Run from end of K (excluding all tail filtering for loci/sample missingness) for haplotypes
+
+```
+sbatch -p cbirdq scripts/fltrVCF.sbatch \
+	fltrVCF_MiSeq_CHYA \
+	fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaK.2.1.Fltr041.22.vcf \
+	config_files/fltrVCF_chya_K_onlyHaplo.config \
+	chyaKonlyHaplo
+52175
+module load R/gcc/64/3.5.1
+Rscript scripts/summarizeVCF.R fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaKhaplo.2.1.Fltr19.Haplotyped.vcf
+```
+
+
+### Calculate Relatedness
+Transfer files from HPC to CloudStation system and then run this on Gawain
+```
+Rscript ~/Documents/Coryphopterus/Bioinformatics/Coryphopterus_RAD/scripts/calculateRelatedness.R \
+  ~/Documents/Coryphopterus/Bioinformatics/Coryphopterus_RAD/fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaK.2.1.Fltr041.22.vcf \
+  ~/Documents/Coryphopterus/Dispersal/Data/relatedness_results \
+  1000 \
+  1000
+
+#
+export R_PROGRESSR_ENABLE=TRUE
+Rscript ~/Documents/Coryphopterus/Bioinformatics/Coryphopterus_RAD/scripts/calculateRelatedness.R \
+  ~/Documents/Coryphopterus/Bioinformatics/Coryphopterus_RAD/fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaK.2.1.Fltr041.22.vcf \
+  /tmp/relatedness_results \
+  1000 \
+  1000 \
+  100
+```
+
+Run on HPC
+```
+cd $WORK
+cd Coryphopterus_RAD
+Rscript scripts/calculateRelatedness.R \
+  fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaK.2.1.Fltr041.22.vcf \
+  relatedness_results \
+  1000 \
+  1000 \
+  100
 ```
