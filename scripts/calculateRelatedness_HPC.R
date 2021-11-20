@@ -321,7 +321,7 @@ send_to_node <- function(in_pairs){
                  .export = c("gds_file", 'UNREL', 'BOOT'), 
                  .packages = c('magrittr'),
                  .combine = 'rbind',
-                 .inorder = FALSE) %dopar% {
+                 .inorder = FALSE) %dorng% {
                    
                    out <- calculate_relatedness_pair(ind1 = x, 
                                                      ind2 = y, 
