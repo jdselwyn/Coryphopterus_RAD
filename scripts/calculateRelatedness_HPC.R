@@ -3,7 +3,7 @@
 ## For each pair bootstrap the loci (after filtering out those with missing data) and calculate relatedness for BS interval
 ## Write rds file with relatedness, unrel simulation, and bootstrap.
 
-##TODO - many issues with accumulating memory - issue with how parallelized??m
+##TODO - progress bar doesnt work
 
 
 if(!interactive()){
@@ -47,8 +47,8 @@ library(batchtools)
 
 
 dir.create(gds_path, showWarnings = FALSE, recursive = TRUE)
-storage_dir <- purrr::map_lgl(paste(gds_path, c('unrel_sim', 'boot_rel'), sep = '/'), 
-                       ~dir.create(.x, showWarnings = FALSE, recursive = TRUE))
+# storage_dir <- purrr::map_lgl(paste(gds_path, c('unrel_sim', 'boot_rel'), sep = '/'), 
+#                        ~dir.create(.x, showWarnings = FALSE, recursive = TRUE))
 
 
 # filter_steps <- tibble(filter = c(41, 16, 5, 16, 5, 16, 5, 16, 5, 16, 21),
@@ -120,77 +120,88 @@ relatedness_genotypes <- function(geno_pair, snps, rel_method, allele_freq){
                 coeff.correct = FALSE,
                 method = rel_method,
                 verbose = FALSE) %>%
-    # dplyr::mutate(kinship = (1 - k0 - k1) * 0.5 + k1 * 0.25) %>%
+    dplyr::mutate(kinship = (1 - k0 - k1) * 0.5 + k1 * 0.25) %>%
     dplyr::mutate(number_loci = sum(rowSums(is.na(geno_pair)) == 0))
 }
 
-sim_ind <- function(genos, parents, snps){
-  p0 <- SNPRelate::snpgdsGetGeno(genos, sample.id = parents, snp.id = snps, snpfirstdim = TRUE, verbose = FALSE) 
-  
-  p1 <- matrix(c(as.integer(!p0[, 1] %in% c(0, 1)), 
-                 as.integer(p0[, 1] %in% c(1, 2))),
-               ncol = 2)
-  p1[which(is.na(p0[,1])), ] <- NA
-  
-  
-  p2 <- matrix(c(as.integer(!p0[, 2] %in% c(0, 1)), 
-                 as.integer(p0[, 2] %in% c(1, 2))),
-               ncol = 2)
-  p2[which(is.na(p0[,2])), ] <- NA
-  
-  p1_allele <- sample(c(1,2), nrow(p1), replace = TRUE)
-  p2_allele <- sample(c(1,2), nrow(p1), replace = TRUE)
-  
-  cbind(p1[cbind(seq_along(p1_allele), p1_allele)], 
-        p2[cbind(seq_along(p2_allele), p2_allele)]) %>%
-    rowSums()
-  
-}
+# sim_ind <- function(genos, parents, snps){
+#   p0 <- SNPRelate::snpgdsGetGeno(genos, sample.id = parents, snp.id = snps, snpfirstdim = TRUE, verbose = FALSE) 
+#   
+#   p1 <- matrix(c(as.integer(!p0[, 1] %in% c(0, 1)), 
+#                  as.integer(p0[, 1] %in% c(1, 2))),
+#                ncol = 2)
+#   p1[which(is.na(p0[,1])), ] <- NA
+#   
+#   
+#   p2 <- matrix(c(as.integer(!p0[, 2] %in% c(0, 1)), 
+#                  as.integer(p0[, 2] %in% c(1, 2))),
+#                ncol = 2)
+#   p2[which(is.na(p0[,2])), ] <- NA
+#   
+#   p1_allele <- sample(c(1,2), nrow(p1), replace = TRUE)
+#   p2_allele <- sample(c(1,2), nrow(p1), replace = TRUE)
+#   
+#   cbind(p1[cbind(seq_along(p1_allele), p1_allele)], 
+#         p2[cbind(seq_along(p2_allele), p2_allele)]) %>%
+#     rowSums()
+#   
+# }
+# 
+# sim_dyad <- function(genos, ids, snps, relationship = 'UR', af){
+#   # af <- snpgdsSNPRateFreq(genos, snp.id = snps, with.id = TRUE)$AlleleFreq
+#   
+#   parents1 <- sample(ids, 2)
+#   
+#   if(relationship == 'UR'){
+#     parents2 <- sample(ids[!ids %in% parents1], 2)
+#   } else if(relationship == 'PO'){
+#     1+1 #don't need 2 parents for the PO relationship
+#     
+#   } else if(relationship == 'FS'){
+#     parents2 <- parents1
+#     
+#   } else if(relationship == 'HS'){
+#     parents2 <- c(sample(parents1, 1), sample(ids[!ids %in% parents1], 1))
+#     
+#   } else {
+#     print('Only PO/FS/HS/UR relationships are implemented')
+#     break
+#   }
+#   
+#   o1 <- sim_ind(genos, parents1, snps)
+#   
+#   if(relationship != 'PO'){
+#     o2 <- sim_ind(genos, parents2, snps)
+#   } else {
+#     o2 <- snpgdsGetGeno(genos, sample.id = sample(parents1, 1), snp.id = snps, snpfirstdim = TRUE, verbose = FALSE) %>%
+#       as.numeric()
+#   }
+#   
+#   cbind(o1, o2) %>%
+#     relatedness_genotypes(., snps = snps, allele_freq = af, rel_method)
+# }
+# 
+# sim_ur <- function(genos, ids, snps, af, rel_method){
+#   
+#   parents1 <- sample(ids, 2)
+#   parents2 <- sample(ids[!ids %in% parents1], 2)
+#   
+#   o1 <- sim_ind(genos, parents1, snps)
+#   o2 <- sim_ind(genos, parents2, snps)
+#   
+#   cbind(o1, o2) %>%
+#     relatedness_genotypes(., snps = snps, allele_freq = af, rel_method = rel_method)
+# }
 
-sim_dyad <- function(genos, ids, snps, relationship = 'UR', af){
-  # af <- snpgdsSNPRateFreq(genos, snp.id = snps, with.id = TRUE)$AlleleFreq
+simulate_unrelated_pair <- function(af, rel_method){
   
-  parents1 <- sample(ids, 2)
+  ur_pair <- purrr::map(af, ~rbinom(n = 2, size = 2, prob = .x)) %>% 
+    purrr::transpose() %>%
+    purrr::simplify_all() %>%
+    do.call(cbind, .)
   
-  if(relationship == 'UR'){
-    parents2 <- sample(ids[!ids %in% parents1], 2)
-  } else if(relationship == 'PO'){
-    1+1 #don't need 2 parents for the PO relationship
-    
-  } else if(relationship == 'FS'){
-    parents2 <- parents1
-    
-  } else if(relationship == 'HS'){
-    parents2 <- c(sample(parents1, 1), sample(ids[!ids %in% parents1], 1))
-    
-  } else {
-    print('Only PO/FS/HS/UR relationships are implemented')
-    break
-  }
-  
-  o1 <- sim_ind(genos, parents1, snps)
-  
-  if(relationship != 'PO'){
-    o2 <- sim_ind(genos, parents2, snps)
-  } else {
-    o2 <- snpgdsGetGeno(genos, sample.id = sample(parents1, 1), snp.id = snps, snpfirstdim = TRUE, verbose = FALSE) %>%
-      as.numeric()
-  }
-  
-  cbind(o1, o2) %>%
-    relatedness_genotypes(., snps = snps, allele_freq = af, rel_method)
-}
-
-sim_ur <- function(genos, ids, snps, af, rel_method){
-  
-  parents1 <- sample(ids, 2)
-  parents2 <- sample(ids[!ids %in% parents1], 2)
-  
-  o1 <- sim_ind(genos, parents1, snps)
-  o2 <- sim_ind(genos, parents2, snps)
-  
-  cbind(o1, o2) %>%
-    relatedness_genotypes(., snps = snps, allele_freq = af, rel_method = rel_method)
+  relatedness_genotypes(ur_pair, snps = 1:length(af), 
+                        allele_freq = af, rel_method = rel_method)
 }
 
 bootstrap_rel <- function(pair_geno, snps, af, ...){
@@ -238,13 +249,18 @@ calculate_relatedness_pair <- function(ind1, ind2, gds_file, rel_method, N_unrel
         stringr::str_c('/unrel_sim/', ind1, '-', ind2, '-unrel_sim.csv')
       
       unrel_sim <- replicate(N_unrel, 
-                             sim_ur(gds, ids = all_samples, snps = snp_use$snp, af = snp_use$MajorFreq, rel_method = 'EM'), 
+                             simulate_unrelated_pair(af = snp_use$MajorFreq, 
+                                                     rel_method = 'EM'), 
                              simplify = FALSE) %>%
         dplyr::bind_rows() %>%
-        # as_tibble %>%
-        readr::write_csv(unrel_file)
+        tibble::as_tibble()
+        # readr::write_csv(unrel_file)
 
-      out$unrel <- unrel_file
+      # out$unrel <- unrel_file
+      out$unrel <- list(unrel_sim)
+      out$unrel_cutoff_999 <- quantile(unrel_sim$kinship, 0.999, na.rm = TRUE)
+      out$unrel_cutoff_99 <- quantile(unrel_sim$kinship, 0.99, na.rm = TRUE)
+      out$unrel_cutoff_95 <- quantile(unrel_sim$kinship, 0.95, na.rm = TRUE)
     }
     
     if(N_boot > 0){
@@ -252,17 +268,25 @@ calculate_relatedness_pair <- function(ind1, ind2, gds_file, rel_method, N_unrel
         stringr::str_c('/boot_rel/', ind1, '-', ind2, '-bootstrap_relatedness.csv')
       
       boot_rel <- replicate(N_boot, 
-                            bootstrap_rel(t(genotypes[,snp_use$snp]), snps = snp_use$snp, af = snp_use$MajorFreq, rel_method = 'EM'),
+                            bootstrap_rel(t(genotypes[,snp_use$snp]), snps = snp_use$snp, 
+                                          af = snp_use$MajorFreq, rel_method = 'EM'),
                             simplify = FALSE) %>%
         dplyr::bind_rows() %>%
-        # as_tibble %>%
-        readr::write_csv(boot_file)
+        tibble::as_tibble()
+        # readr::write_csv(boot_file)
  
-      out$boot_rel <- boot_file
+      # out$boot_rel <- boot_file
+      out$boot_rel <- list(boot_rel)
+      out$lwr_kinship_95 <- quantile(boot_rel$kinship, 0.025, na.rm = TRUE)
+      out$upr_kinship_95 <- quantile(boot_rel$kinship, 0.975, na.rm = TRUE)
     }
     
   } else {
-    out <- tibble::tibble(k0 = NA_real_, k1 = NA_real_, loglik = NA_real_, niter = NA_integer_, kinship = NA_real_, number_loci = NA_integer_, unrel = NA_character_, boot_rel = NA_character_)
+    out <- tibble::tibble(k0 = NA_real_, k1 = NA_real_, loglik = NA_real_, niter = NA_integer_, kinship = NA_real_, number_loci = NA_integer_, 
+                          unrel = NA_character_, boot_rel = NA_character_,
+                          unrel_cutoff_999 = NA_real_, unrel_cutoff_99 = NA_real_, unrel_cutoff_95 = NA_real_,
+                          lwr_kinship_95 = NA_real_, upr_kinship_95 = NA_real_,
+                          ind1 = ind1, ind2 = ind2)
   }
   
   SNPRelate::snpgdsClose(gds)
@@ -287,7 +311,7 @@ gds <- SNPRelate::snpgdsOpen(gds_file)
 all_pairs <- tidyr::expand_grid(sample1 = get_gds(gds, 'sample.id'), 
             sample2 = get_gds(gds, 'sample.id')) %>%
   dplyr::filter(sample1 < sample2) %>%
-  # dplyr::sample_n(50) %>%
+  dplyr::sample_n(5000) %>%
   identity() %>%
   dplyr::group_by(groupings = dplyr::row_number() %% SUBGROUPS) %>%
   dplyr::group_split()
@@ -312,7 +336,7 @@ send_to_node <- function(in_pairs){
   
   plan('multicore', gc = TRUE)
   
-  handlers(global = TRUE)
+  # handlers(global = TRUE)
   handlers("progress")
   
   run_relatedness <- function(the_pairs){
@@ -335,7 +359,10 @@ send_to_node <- function(in_pairs){
     return(y)
   }
   
-  run_relatedness(in_pairs)
+  with_progress({
+    out <- run_relatedness(in_pairs)
+  })
+  out
 }
 
 batchMap(fun = send_to_node, in_pairs = all_pairs)
@@ -345,8 +372,7 @@ batchExport(list(gds_file = gds_file,
                  SUBGROUPS = SUBGROUPS,
                  get_gds = get_gds, 
                  relatedness_genotypes = relatedness_genotypes,
-                 sim_ind = sim_ind, 
-                 sim_ur = sim_ur, 
+                 simulate_unrelated_pair = simulate_unrelated_pair, 
                  bootstrap_rel = bootstrap_rel,
                  calculate_relatedness_pair = calculate_relatedness_pair))
 
@@ -357,20 +383,25 @@ waitForJobs()
 
 relatedness <- purrr::map_dfr(1:SUBGROUPS, loadResult)
 
-readr::write_csv(relatedness,
+readr::write_rds(relatedness, stringr::str_replace(gds_file, '\\.gds$', '_relatedness.rds'), compress = 'xz')
+
+readr::write_csv(dplyr::select(relatedness, -unrel, -boot_rel), 
                  stringr::str_replace(gds_file, '\\.gds$', '_relatedness.csv'))
 
-#### Read in sim/boot files and output as single rds
+# readr::write_csv(relatedness,
+#                  stringr::str_replace(gds_file, '\\.gds$', '_relatedness.csv'))
 # 
-full_relatedness <- relatedness %>%
-  dplyr::rowwise() %>%
-  dplyr::mutate(dplyr::across(c(unrel, boot_rel), 
-                              ~list(readr::read_csv(., 
-                                                    col_types = readr::cols(k0 = readr::col_double(),
-                                                                            k1 = readr::col_double(),
-                                                                            loglik = readr::col_double(),
-                                                                            niter = readr::col_double(),
-                                                                            number_loci = readr::col_double()))
-                              ))) %>%
-  dplyr::ungroup() %>%
-  readr::write_rds(stringr::str_replace(gds_file, '\\.gds$', '_relatedness.rds'), compress = 'xz')
+# #### Read in sim/boot files and output as single rds
+# # 
+# full_relatedness <- relatedness %>%
+#   dplyr::rowwise() %>%
+#   dplyr::mutate(dplyr::across(c(unrel, boot_rel), 
+#                               ~list(readr::read_csv(., 
+#                                                     col_types = readr::cols(k0 = readr::col_double(),
+#                                                                             k1 = readr::col_double(),
+#                                                                             loglik = readr::col_double(),
+#                                                                             niter = readr::col_double(),
+#                                                                             number_loci = readr::col_double()))
+#                               ))) %>%
+#   dplyr::ungroup() %>%
+#   readr::write_rds(stringr::str_replace(gds_file, '\\.gds$', '_relatedness.rds'), compress = 'xz')

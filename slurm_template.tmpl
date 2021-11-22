@@ -43,4 +43,6 @@ export DEBUGME=<%= Sys.getenv("DEBUGME") %>
 
 ## Run R:
 ## we merge R output with stdout from SLURM, which gets then logged via --output option
+module load R/gcc/64/3.5.1
+export R_PROGRESSR_ENABLE=TRUE
 Rscript -e 'batchtools::doJobCollection("<%= uri %>")'
