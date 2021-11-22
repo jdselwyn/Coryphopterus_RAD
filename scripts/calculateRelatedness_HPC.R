@@ -311,7 +311,7 @@ gds <- SNPRelate::snpgdsOpen(gds_file)
 all_pairs <- tidyr::expand_grid(sample1 = get_gds(gds, 'sample.id'), 
             sample2 = get_gds(gds, 'sample.id')) %>%
   dplyr::filter(sample1 < sample2) %>%
-  dplyr::sample_n(5000) %>%
+  # dplyr::sample_n(5000) %>%
   identity() %>%
   dplyr::group_by(groupings = dplyr::row_number() %% SUBGROUPS) %>%
   dplyr::group_split()
