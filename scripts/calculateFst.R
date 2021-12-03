@@ -5,9 +5,9 @@ if(!interactive()){
   genpop <- args[1]
   metadata <- args[2]
   outDir <- args[3]
-  BOOTS <- args[4]
-  P_CUTOFF <- args[5]
-  MIN_SHOAL <- args[6]
+  BOOTS <- as.integer(args[4])
+  P_CUTOFF <- as.numeric(args[5])
+  MIN_SHOAL <- as.integer(args[6])
   
 } else {
   

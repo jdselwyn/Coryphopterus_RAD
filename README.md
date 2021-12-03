@@ -1111,7 +1111,7 @@ Rscript scripts/calculateRelatedness_HPC.R \
   1000 \
   1000 \
   100
-  
+
 #Run post-haplotyped
 #Should be the same but this would be better since the haplotyped is what I want to use for Fst
 Rscript scripts/calculateRelatedness_HPC.R \
@@ -1121,3 +1121,5 @@ Rscript scripts/calculateRelatedness_HPC.R \
   1000 \
   100
 ```
+
+### Calculate Fst
