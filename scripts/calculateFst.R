@@ -35,7 +35,7 @@ library(hierfstat)
 library(mcreplicate)
 
 #### Functions ####
-read.genepop <- function (file, ncode = 2L, quiet = FALSE){
+read_genepop <- function (file, ncode = 2L, quiet = FALSE){
   if (!toupper(.readExt(file)) %in% c("GEN", "GENEPOP")) 
     stop("File extension .gen expected")
   if (!quiet) 
@@ -111,7 +111,7 @@ pairwise.fst <- function(data, boot = FALSE){
 }
 
 #### Read in Data ####
-genotypes <- read.genepop(genpop, ncode = 3)
+genotypes <- read_genepop(genpop, ncode = 3)
 
 individual_data <- st_read(metadata) %>%
   filter(ID %in% rownames(genotypes@tab))
