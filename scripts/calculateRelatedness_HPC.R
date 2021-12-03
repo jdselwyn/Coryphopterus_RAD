@@ -5,8 +5,6 @@
 
 ##TODO - progress bar doesnt work
 ##TODO - simulate each type of relationship for each pair to see which they each individually fall best within based on both Ks & kinship
-##TODO - fix logliklihood 1) why it says self garunteed and 2) why its different than both calculating normal and what comes out from model
-
 
 if(!interactive()){
   args <- commandArgs(trailingOnly = TRUE)
@@ -506,20 +504,4 @@ readr::write_rds(relatedness, stringr::str_replace(gds_file, '\\.gds$', '_relate
 readr::write_csv(dplyr::select(relatedness, -unrel, -boot_rel, -plot), 
                  stringr::str_replace(gds_file, '\\.gds$', '_relatedness.csv'))
 
-# readr::write_csv(relatedness,
-#                  stringr::str_replace(gds_file, '\\.gds$', '_relatedness.csv'))
-# 
-# #### Read in sim/boot files and output as single rds
-# # 
-# full_relatedness <- relatedness %>%
-#   dplyr::rowwise() %>%
-#   dplyr::mutate(dplyr::across(c(unrel, boot_rel), 
-#                               ~list(readr::read_csv(., 
-#                                                     col_types = readr::cols(k0 = readr::col_double(),
-#                                                                             k1 = readr::col_double(),
-#                                                                             loglik = readr::col_double(),
-#                                                                             niter = readr::col_double(),
-#                                                                             number_loci = readr::col_double()))
-#                               ))) %>%
-#   dplyr::ungroup() %>%
-#   readr::write_rds(stringr::str_replace(gds_file, '\\.gds$', '_relatedness.rds'), compress = 'xz')
+unlink(paste0(gds_path, '/batch_files'), recursive = TRUE)
