@@ -1074,8 +1074,28 @@ sbatch -p cbirdq -t 30-00:00:00 scripts/fltrVCF.sbatch \
 
 52713
 module load R/gcc/64/3.5.1
-Rscript scripts/summarizeVCF.R fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaKhaplo.2.1.Fltr19.Haplotyped.vcf
+Rscript scripts/summarizeVCF.R fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaKonlyHaplo.2.1.Fltr19.Haplotyped.vcf
 ```
+
+Genotyping Stats
+| Metric | [Haplotyping K](config_files/fltrVCF_chya_K_onlyHaplo.config) |  |  |  |
+| --- | ----- | ----- | ----- | ----- |
+| JobID | [`52713`](SLURM_out/fltrVCF-52713.out) |  |  |  |
+| Summary Graph | [Haplotyping K](fltrVCF_MiSeq/MiSeq_Initial.fltrStats2.plots.pdf) |  |  |  |
+| Number Individuals | 593 |  |  |  |
+| Number SNPs | 6,630 |  |  |  |
+| Number Contigs | 3,047 |  |  |  |
+| Mean SNPs/Contig | 2.18 ± 1.45 SD |  ±  SD |  ±  SD  |  ±  SD  |
+| Range SNPs/Contig | 1 - 16 |  -  |  -  |  -  |
+| Mean Coverage | 49,223 ± 14,442 SD |  ±  SD |  ±  SD |  ±  SD |
+| Range Coverage | 29,672 - 89,355 |  -  |  -  |  -  |
+| Mean PHRED | 325,064 ± 298,668 SD |  ±  SD |  ±  SD |  ±  SD |
+| Range PHRED | 28,133 - 1,806,400 |  -  |  -  |  -  |
+| Mean Missing (Ind) | 26% ± 27% | % ± % | % ± % | % ± % |
+| Range Missing (Ind) | 2% - 94% | % - % | % - % | % - % |
+| Mean Missing (Loci) | 26% ± 8% | % ± % | % ± % | % ± % |
+| Range Missing (Loci) | 4% - 44% | % - % | % - % | % - % |
+
 
 ### Calculate Relatedness
 ```
@@ -1083,9 +1103,20 @@ cd $WORK
 cd Coryphopterus_RAD
 module load R/gcc/64/3.5.1
 export R_PROGRESSR_ENABLE=TRUE
+
+#Run pre-haplotyped
 Rscript scripts/calculateRelatedness_HPC.R \
   fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaK.2.1.Fltr041.22.vcf \
   relatedness_results \
+  1000 \
+  1000 \
+  100
+  
+#Run post-haplotyped
+#Should be the same but this would be better since the haplotyped is what I want to use for Fst
+Rscript scripts/calculateRelatedness_HPC.R \
+  fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaKonlyHaplo.2.1.Fltr19.Haplotyped.vcf \
+  relatedness_results2 \
   1000 \
   1000 \
   100

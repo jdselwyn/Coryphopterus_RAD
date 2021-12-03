@@ -4,6 +4,8 @@
 ## Write rds file with relatedness, unrel simulation, and bootstrap.
 
 ##TODO - progress bar doesnt work
+##TODO - simulate each type of relationship for each pair to see which they each individually fall best within based on both Ks & kinship
+##TODO - fix logliklihood 1) why it says self garunteed and 2) why its different than both calculating normal and what comes out from model
 
 
 if(!interactive()){
@@ -47,15 +49,6 @@ library(batchtools)
 
 
 dir.create(gds_path, showWarnings = FALSE, recursive = TRUE)
-# storage_dir <- purrr::map_lgl(paste(gds_path, c('unrel_sim', 'boot_rel'), sep = '/'), 
-#                        ~dir.create(.x, showWarnings = FALSE, recursive = TRUE))
-
-
-# filter_steps <- tibble(filter = c(41, 16, 5, 16, 5, 16, 5, 16, 5, 16, 21),
-#                        step = c(22, 23, 24, 26, 27, 29, 30, 32, 33, 35, 37),
-#                        perc_ind = c(NA_real_, 0.7, NA_real_, 0.6, NA_real_, 0.5, NA_real_, 0.4, NA_real_, 0.3, NA_real_),
-#                        perc_snp = c(NA_real_, NA_real_, 0.7, NA_real_, 0.75, NA_real_, 0.8, NA_real_, 0.85, NA_real_, NA_real_)) %>%
-#   mutate(perc_ind = 1 - perc_ind)
 
 #### Functions ####
 convert_vcf_gds <- function(vcf, out_path){
@@ -211,6 +204,66 @@ bootstrap_rel <- function(pair_geno, snps, af, ...){
   
 }
 
+calc_logLik <- function(geno1, geno2, allele.freq, k0, k1){
+  make_pr_table <- function(g1, g2, p){
+    #recreation of PrIBDTable C++ function
+    
+    q <- 1 - p
+    
+    if(g1 == 0){
+      if(g2 == 0){
+        t2 = q*q; t1 = t2*q; t0 = t1*q
+      }
+      
+      if(g2 == 1){
+        t1 = p*q*q; t0 = 2*t1*q; t2 = 0
+      }
+      
+      if(g2 == 2){
+        t0 = p*p*q*q; t1 = t2 = 0
+      }
+    }
+    
+    if(g1 == 1){
+      if(g2 == 0){
+        t1 = p*q*q; t0 = 2*t1*q; t2 = 0
+      }
+      
+      if(g2 == 1){
+        t1 = p*q; t0 = 4*t1*t1; t2 = 2*t1
+      }
+      
+      if(g2 == 2){
+        t1 = p*p*q; t0 = 2*p*t1; t2 = 0
+      }
+    }
+    
+    if(g1 == 2){
+      if(g2 == 0){
+        t0 = p*p*q*q; t1 = t2 = 0
+      }
+      
+      if(g2 == 1){
+        t1 = p*p*q; t0 = 2*p*t1; t2 = 0
+      }
+      
+      if(g2 == 2){
+        t2 = p*p; t1 = t2*p; t0 = t1*p
+      }
+    }
+    
+    c(t0, t1, t2)
+  }
+  
+  n <- length(geno1)
+  
+  pr_tab <- sapply(1:n, function(x) make_pr_table(geno1[x], geno2[x], allele.freq[x]))
+  k <- c(k0, k1, 1 - k0 - k1)
+  
+  sum(log(t(k) %*% pr_tab))
+}
+
+
 calculate_relatedness_pair <- function(ind1, ind2, gds_file, rel_method, N_unrel = 0, N_boot = 0){
   gds <- SNPRelate::snpgdsOpen(gds_file, readonly = TRUE, allow.duplicate = TRUE, allow.fork = TRUE)
   
@@ -243,6 +296,27 @@ calculate_relatedness_pair <- function(ind1, ind2, gds_file, rel_method, N_unrel
   
   if(nrow(snp_use) > 0){
     out <- relatedness_genotypes(t(genotypes[,snp_use$snp]), snps = snp_use$snp, allele_freq = snp_use$MajorFreq, rel_method = 'EM')
+    
+    #Coefficients from SNPrelate, http://faculty.washington.edu/tathornt/BIOST551/lectures_2012/Lecture7_Coefficients_of_Identity_and_Coancestry.pdf
+    #avuncular is same as halfsib
+    
+    k0 <- c(0, 0.25, 0, 0.5, 0.75, 1, 9/16, 15/16)
+    k1 <- c(0, 0.5, 1, 0.5, 0.25, 0, 6/16, 1/16)
+    relationships <- c("self", "fullsib", "offspring", "halfsib", "cousin", "unrelated", 'double.first.cousin', 'second.cousin')
+    likelihoods <- purrr::map2_dbl(k0, k1,
+                                   ~calc_logLik(geno1 = genotypes[1,snp_use$snp], 
+                                                geno2 = genotypes[2,snp_use$snp],
+                                                allele.freq = snp_use$MajorFreq, 
+                                                k0 = .x, k1 = .y))
+    
+    out <- tibble::tibble(relationship = relationships, likelihood = likelihoods) %>%
+      tidyr::pivot_wider(names_from = 'relationship',
+                         values_from = 'likelihood', 
+                         names_prefix = 'logLik_') %>%
+      dplyr::bind_cols(out, .) %>%
+      dplyr::mutate(dplyr::across(starts_with('logLik_'), ~pchisq(loglik - ., 1, lower.tail = FALSE), .names = '{.col}_pValue'))
+    
+    out$most_likely <- relationships[likelihoods == max(likelihoods)]
     
     if(N_unrel > 0){
       unrel_file <- stringr::str_remove(gds_file, '/[A-Za-z0-9_\\-\\.]+$') %>%
@@ -281,8 +355,35 @@ calculate_relatedness_pair <- function(ind1, ind2, gds_file, rel_method, N_unrel
       out$upr_kinship_95 <- quantile(boot_rel$kinship, 0.975, na.rm = TRUE)
     }
     
+    if(N_boot > 0 & N_unrel > 0){
+      out <- out %>%
+        dplyr::rowwise() %>%
+        dplyr::mutate(plot = list(ggplot2::ggplot() +
+                                    ggplot2::geom_histogram(data = unrel, 
+                                                            ggplot2::aes(x = kinship, 
+                                                                ggplot2::after_stat(count/sum(count))), 
+                                                            bins = 50) +
+                                    ggplot2::geom_histogram(data = boot_rel, 
+                                                            ggplot2::aes(x = kinship, ggplot2::after_stat(count/sum(count))), 
+                                                            bins = 50, fill = 'red') +
+                                    ggplot2::geom_vline(xintercept = c(lwr_kinship_95, 
+                                                                       upr_kinship_95), 
+                                                        linetype = 'dashed') +
+                                    ggplot2::geom_vline(xintercept = kinship) +
+                                    ggplot2::labs(x = 'Kinship',
+                                                  y = 'Percent Simulated Pairs') +
+                                    ggplot2::scale_y_continuous(labels = scales::percent_format()) +
+                                    ggplot2::theme_classic())) %>%
+        dplyr::ungroup()
+    }
+    
   } else {
-    out <- tibble::tibble(k0 = NA_real_, k1 = NA_real_, loglik = NA_real_, niter = NA_integer_, kinship = NA_real_, number_loci = NA_integer_, 
+    out <- tibble::tibble(k0 = NA_real_, k1 = NA_real_, loglik = NA_real_, niter = NA_integer_, 
+                          kinship = NA_real_, number_loci = NA_integer_, 
+                          logLik_self = NA_real_, logLik_fullsib = NA_real_, logLik_offspring = NA_real_, 
+                          logLike_halfsib = NA_real_, logLik_cousin = NA_real_, log_Lik_unrelated = NA_real_, 
+                          logLike_double.first.cousin = NA_real_, logLik_second.cousin = NA_real_,
+                          most_likely = NA_character_,
                           unrel = NA_character_, boot_rel = NA_character_,
                           unrel_cutoff_999 = NA_real_, unrel_cutoff_99 = NA_real_, unrel_cutoff_95 = NA_real_,
                           lwr_kinship_95 = NA_real_, upr_kinship_95 = NA_real_,
@@ -311,30 +412,29 @@ gds <- SNPRelate::snpgdsOpen(gds_file)
 all_pairs <- tidyr::expand_grid(sample1 = get_gds(gds, 'sample.id'), 
             sample2 = get_gds(gds, 'sample.id')) %>%
   dplyr::filter(sample1 < sample2) %>%
-  # dplyr::sample_n(5000) %>%
+  # dplyr::sample_n(50) %>%
   identity() %>%
   dplyr::group_by(groupings = dplyr::row_number() %% SUBGROUPS) %>%
   dplyr::group_split()
 SNPRelate::snpgdsClose(gds)
 
+if(Sys.info()['sysname'] == 'Windows'){
+  all_pairs <- all_pairs[[1]] %>%
+    dplyr::sample_n(50)
+}
+
 #### Set up HPC Jobs ####
-reg <- makeRegistry(file.dir = paste0(gds_path, '/batch_files'), 
-                    packages = c('magrittr', 'future',
-                                 'doFuture', 'doRNG',
-                                 'progressr'))
-
-reg$cluster.functions <- makeClusterFunctionsSlurm(template = "slurm_template.tmpl",
-                                                   array.jobs = TRUE,
-                                                   nodename = "localhost",
-                                                   scheduler.latency = 1,
-                                                   fs.latency = 65)
-
 send_to_node <- function(in_pairs){
   
   registerDoFuture()
   registerDoRNG()
   
-  plan('multicore', gc = TRUE)
+  if(Sys.info()['sysname'] != 'Windows' & !interactive()){
+    plan('multicore', gc = TRUE)
+  } else {
+    plan('multisession', gc = TRUE)
+  }
+  
   
   # handlers(global = TRUE)
   handlers("progress")
@@ -365,27 +465,45 @@ send_to_node <- function(in_pairs){
   out
 }
 
-batchMap(fun = send_to_node, in_pairs = all_pairs)
-batchExport(list(gds_file = gds_file, 
-                 UNREL = UNREL, 
-                 BOOT = BOOT, 
-                 SUBGROUPS = SUBGROUPS,
-                 get_gds = get_gds, 
-                 relatedness_genotypes = relatedness_genotypes,
-                 simulate_unrelated_pair = simulate_unrelated_pair, 
-                 bootstrap_rel = bootstrap_rel,
-                 calculate_relatedness_pair = calculate_relatedness_pair))
-
+if(Sys.info()['sysname'] != 'Windows'){
+  reg <- makeRegistry(file.dir = paste0(gds_path, '/batch_files'), 
+                      packages = c('magrittr', 'future',
+                                   'doFuture', 'doRNG',
+                                   'progressr'))
+  
+  reg$cluster.functions <- makeClusterFunctionsSlurm(template = "slurm_template.tmpl",
+                                                     array.jobs = TRUE,
+                                                     nodename = "localhost",
+                                                     scheduler.latency = 1,
+                                                     fs.latency = 65)
+}
 
 #### Calculate Relatedness ####
-submitJobs(resources = list(max.concurrent.jobs = 20))
-waitForJobs()
+if(Sys.info()['sysname'] != 'Windows'){
+  batchMap(fun = send_to_node, in_pairs = all_pairs)
+  batchExport(list(gds_file = gds_file, 
+                   UNREL = UNREL, 
+                   BOOT = BOOT, 
+                   SUBGROUPS = SUBGROUPS,
+                   get_gds = get_gds, 
+                   relatedness_genotypes = relatedness_genotypes,
+                   simulate_unrelated_pair = simulate_unrelated_pair, 
+                   bootstrap_rel = bootstrap_rel,
+                   calc_logLik = calc_logLik,
+                   calculate_relatedness_pair = calculate_relatedness_pair))
+  
+  submitJobs(resources = list(max.concurrent.jobs = 20))
+  waitForJobs()
+  
+  relatedness <- purrr::map_dfr(1:SUBGROUPS, loadResult)
+} else {
+  relatedness <- send_to_node(all_pairs)
+}
 
-relatedness <- purrr::map_dfr(1:SUBGROUPS, loadResult)
 
 readr::write_rds(relatedness, stringr::str_replace(gds_file, '\\.gds$', '_relatedness.rds'), compress = 'xz')
 
-readr::write_csv(dplyr::select(relatedness, -unrel, -boot_rel), 
+readr::write_csv(dplyr::select(relatedness, -unrel, -boot_rel, -plot), 
                  stringr::str_replace(gds_file, '\\.gds$', '_relatedness.csv'))
 
 # readr::write_csv(relatedness,
