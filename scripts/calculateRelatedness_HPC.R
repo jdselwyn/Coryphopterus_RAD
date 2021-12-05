@@ -501,7 +501,7 @@ if(Sys.info()['sysname'] != 'Windows'){
 
 readr::write_rds(relatedness, stringr::str_replace(gds_file, '\\.gds$', '_relatedness.rds'), compress = 'xz')
 
-readr::write_csv(dplyr::select(relatedness, -unrel, -boot_rel, -plot), 
+readr::write_csv(dplyr::select(relatedness, -unrel, -boot_rel), 
                  stringr::str_replace(gds_file, '\\.gds$', '_relatedness.csv'))
 
 unlink(paste0(gds_path, '/batch_files'), recursive = TRUE)
