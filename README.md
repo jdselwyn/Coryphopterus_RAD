@@ -1116,10 +1116,23 @@ Rscript scripts/calculateRelatedness_HPC.R \
 #Should be the same but this would be better since the haplotyped is what I want to use for Fst
 Rscript scripts/calculateRelatedness_HPC.R \
   fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaKonlyHaplo.2.1.Fltr19.Haplotyped.vcf \
-  relatedness_results2 \
+  relatedness_results \
   1000 \
   1000 \
   100
 ```
 
 ### Calculate Fst
+```
+sbatch -o SLURM_out/fst-%j.out \
+  --job-name=Fst \
+  scripts/runRscript.sbatch \
+  scripts/calculateFst.R \
+    fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaKonlyHaplo.2.1.Fltr19.popmap.2.1.haps.genepop \
+    individual_metadata.shp \
+    fst_results \
+    10000 \
+    0.001 \
+    5
+53140  
+```

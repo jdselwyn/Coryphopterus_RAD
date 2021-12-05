@@ -353,27 +353,27 @@ calculate_relatedness_pair <- function(ind1, ind2, gds_file, rel_method, N_unrel
       out$upr_kinship_95 <- quantile(boot_rel$kinship, 0.975, na.rm = TRUE)
     }
     
-    if(N_boot > 0 & N_unrel > 0){
-      out <- out %>%
-        dplyr::rowwise() %>%
-        dplyr::mutate(plot = list(ggplot2::ggplot() +
-                                    ggplot2::geom_histogram(data = unrel, 
-                                                            ggplot2::aes(x = kinship, 
-                                                                ggplot2::after_stat(count/sum(count))), 
-                                                            bins = 50) +
-                                    ggplot2::geom_histogram(data = boot_rel, 
-                                                            ggplot2::aes(x = kinship, ggplot2::after_stat(count/sum(count))), 
-                                                            bins = 50, fill = 'red') +
-                                    ggplot2::geom_vline(xintercept = c(lwr_kinship_95, 
-                                                                       upr_kinship_95), 
-                                                        linetype = 'dashed') +
-                                    ggplot2::geom_vline(xintercept = kinship) +
-                                    ggplot2::labs(x = 'Kinship',
-                                                  y = 'Percent Simulated Pairs') +
-                                    ggplot2::scale_y_continuous(labels = scales::percent_format()) +
-                                    ggplot2::theme_classic())) %>%
-        dplyr::ungroup()
-    }
+    # if(N_boot > 0 & N_unrel > 0){
+    #   out <- out %>%
+    #     dplyr::rowwise() %>%
+    #     dplyr::mutate(plot = list(ggplot2::ggplot() +
+    #                                 ggplot2::geom_histogram(data = unrel, 
+    #                                                         ggplot2::aes(x = kinship, 
+    #                                                             ggplot2::after_stat(count/sum(count))), 
+    #                                                         bins = 50) +
+    #                                 ggplot2::geom_histogram(data = boot_rel, 
+    #                                                         ggplot2::aes(x = kinship, ggplot2::after_stat(count/sum(count))), 
+    #                                                         bins = 50, fill = 'red') +
+    #                                 ggplot2::geom_vline(xintercept = c(lwr_kinship_95, 
+    #                                                                    upr_kinship_95), 
+    #                                                     linetype = 'dashed') +
+    #                                 ggplot2::geom_vline(xintercept = kinship) +
+    #                                 ggplot2::labs(x = 'Kinship',
+    #                                               y = 'Percent Simulated Pairs') +
+    #                                 ggplot2::scale_y_continuous(labels = scales::percent_format()) +
+    #                                 ggplot2::theme_classic())) %>%
+    #     dplyr::ungroup()
+    # }
     
   } else {
     out <- tibble::tibble(k0 = NA_real_, k1 = NA_real_, loglik = NA_real_, niter = NA_integer_, 
