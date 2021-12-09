@@ -1136,3 +1136,16 @@ sbatch -o SLURM_out/fst-%j.out \
     5
 53553  
 ```
+
+### Calculate PCA dist
+```
+sbatch -o SLURM_out/pca-%j.out \
+  --job-name=PCA \
+  scripts/runRscript.sbatch \
+  scripts/calculatePCA.R \
+    fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaKonlyHaplo.2.1.Fltr19.popmap.2.1.haps.genepop \
+    individual_metadata.shp \
+    pca_results \
+    1000 \
+    0.001
+```

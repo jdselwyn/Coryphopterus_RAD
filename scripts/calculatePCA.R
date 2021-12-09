@@ -6,6 +6,7 @@ if(!interactive()){
   metadata <- args[2]
   outDir <- args[3]
   BOOTS <- as.integer(args[4])
+  P_CUTOFF <- as.numeric(args[5])
   
 } else {
   
