@@ -1131,8 +1131,8 @@ sbatch -o SLURM_out/fst-%j.out \
     fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaKonlyHaplo.2.1.Fltr19.popmap.2.1.haps.genepop \
     individual_metadata.shp \
     fst_results \
-    10000 \
+    1000 \
     0.001 \
     5
-53140  
+53553  
 ```

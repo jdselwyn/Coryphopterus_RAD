@@ -505,3 +505,56 @@ readr::write_csv(dplyr::select(relatedness, -unrel, -boot_rel),
                  stringr::str_replace(gds_file, '\\.gds$', '_relatedness.csv'))
 
 unlink(paste0(gds_path, '/batch_files'), recursive = TRUE)
+
+
+
+#### Make a few plots before closing ####
+library(tidyverse)
+library(patchwork)
+
+make_plot <- function(unrel, boot_rel, kinship, lwr_kinship_95, upr_kinship_95, ind1, ind2){
+  ind1 = str_remove(ind1, '.fp2.repr.2.1')
+  ind2 = str_remove(ind2, '.fp2.repr.2.1')
+  
+  ggplot() +
+    geom_histogram(data = unrel,
+                   aes(x = kinship,
+                       after_stat(count/sum(count))),
+                   bins = 50) +
+    geom_histogram(data = boot_rel,
+                   aes(x = kinship, after_stat(count/sum(count))),
+                   bins = 50, fill = 'red') +
+    geom_vline(xintercept = c(lwr_kinship_95,
+                              upr_kinship_95),
+               linetype = 'dashed') +
+    geom_vline(xintercept = kinship) +
+    labs(title = str_c(ind1, ind2, sep = '-'),
+         x = 'Kinship',
+         y = 'Percent Simulated Pairs') +
+    scale_y_continuous(labels = scales::percent_format()) +
+    theme_classic()
+}
+
+N_samples <- min(table(relatedness$most_likely))
+
+various_plots <- relatedness %>%
+  as_tibble %>%
+  group_by(most_likely) %>%
+  sample_n(N_samples) %>%
+  ungroup %>%
+  
+  # rowwise %>%
+  # mutate(unrel = list(tibble(kinship = rbeta(1000, 1, 10))),
+  #        boot_rel = list(tibble(kinship = rbeta(1000, 1, 3)))) %>%
+  # ungroup %>%
+  
+  select(ind1, ind2, kinship, lwr_kinship_95, upr_kinship_95, most_likely, contains('unrel'), contains('boot_rel')) %>%
+  select(-contains('logLik'), -contains('cutoff')) %>%
+  rowwise %>%
+  mutate(plot = list(make_plot(unrel, boot_rel, kinship, lwr_kinship_95, upr_kinship_95, ind1, ind2))) %>%
+  group_by(most_likely) %>%
+  
+  summarise(group_plots = list(wrap_plots(plot) + plot_annotation(title = most_likely))) %>%
+  mutate(out_name = str_c(str_remove(gds_file, '\\.gds$'), most_likely, 'plots.png', sep = '_'))
+
+walk2(various_plots$group_plots, various_plots$out_name, ~ggsave(.y, plot = .x, height = 10, width = 10))

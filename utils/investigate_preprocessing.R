@@ -35,6 +35,28 @@ contamination_data <- list.files(path = '..', pattern = "screen.txt$", recursive
             read_tsv(file, skip = 1, col_types = cols(.default = col_double(), Genome = col_character()), n_max = 12),
             .groups = 'drop')
 
+
+preprocess_data %>%
+  filter(preprocess_step %in% c('demultiplexed_seqs', 'fq_fp1_fp2_fqscrn_repaired')) %>%
+  group_by(sequencing_type, preprocess_step) %>%
+  summarise(total_reads = sum(number_reads),
+            .groups = 'drop') %>%
+  pivot_wider(names_from = preprocess_step,
+              values_from = total_reads) %>%
+  mutate(pct_after = fq_fp1_fp2_fqscrn_repaired / demultiplexed_seqs * 100)
+
+
+preprocess_data %>%
+  filter(preprocess_step %in% c('fq_fp1_fp2_fqscrn_repaired')) %>%
+  filter(number_reads > 10000,
+         str_detect(sample, 'Blank', negate = TRUE)) %>%
+  group_by(sequencing_type) %>%
+  summarise(n = n(),
+            mean_reads = mean(number_reads),
+            sd_reads = sd(number_reads),
+            se_reads = sd_reads / sqrt(n))
+
+
 #### Both Sequencing Types alone ####
 model_out <- preprocess_data %>%
   select(-file) %>%
