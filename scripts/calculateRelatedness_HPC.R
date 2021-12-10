@@ -24,8 +24,8 @@ if(!interactive()){
     gds_path <- '~/../Desktop/tmp_relatedness'
   }
   
-  UNREL <- 100
-  BOOT <- 100
+  UNREL <- 10
+  BOOT <- 10
   SUBGROUPS <- 10
 }
 
@@ -198,8 +198,10 @@ simulate_unrelated_pair <- function(af, rel_method){
 bootstrap_rel <- function(pair_geno, snps, af, ...){
   boot_snps <- sort(sample(length(snps), size = length(snps), replace = TRUE))
   
-  relatedness_genotypes(pair_geno[boot_snps,], snps = snps[boot_snps], allele_freq = af[boot_snps], rel_method = 'EM')
+  boot_val <- relatedness_genotypes(pair_geno[boot_snps,], snps = snps[boot_snps], allele_freq = af[boot_snps], rel_method = 'EM')
   
+  boot_val <- dplyr::bind_cols(boot_val, calc_likelihoods(pair_geno[boot_snps,], af = af[boot_snps], logLik = boot_val$loglik))
+  boot_val
 }
 
 calc_logLik <- function(geno1, geno2, allele.freq, k0, k1){
@@ -261,6 +263,30 @@ calc_logLik <- function(geno1, geno2, allele.freq, k0, k1){
   sum(log(t(k) %*% pr_tab))
 }
 
+calc_likelihoods <- function(genos, af, logLik){
+  
+  #Coefficients from SNPrelate, http://faculty.washington.edu/tathornt/BIOST551/lectures_2012/Lecture7_Coefficients_of_Identity_and_Coancestry.pdf
+  #avuncular is same as halfsib
+  
+  k0 <- c(0, 0.25, 0, 0.5, 0.75, 1, 9/16, 15/16)
+  k1 <- c(0, 0.5, 1, 0.5, 0.25, 0, 6/16, 1/16)
+  relationships <- c("self", "fullsib", "offspring", "halfsib", "cousin", "unrelated", 'double.first.cousin', 'second.cousin')
+  
+  likelihoods <- purrr::map2_dbl(k0, k1,
+                                 ~calc_logLik(geno1 = genos[, 1], 
+                                              geno2 = genos[, 2],
+                                              allele.freq = af, 
+                                              k0 = .x, k1 = .y)) %>%
+    magrittr::set_names(stringr::str_c('logLik', relationships, sep = '_'))
+  
+  p_values <- pchisq(logLik - likelihoods, 1, lower.tail = FALSE) %>%
+    magrittr::set_names(stringr::str_c('logLik', relationships, 'pValue', sep = '_'))
+  
+  lik_out <- dplyr::bind_rows(c(likelihoods, p_values))
+  
+  lik_out$most_likely <- relationships[likelihoods == max(likelihoods)]
+  lik_out
+}
 
 calculate_relatedness_pair <- function(ind1, ind2, gds_file, rel_method, N_unrel = 0, N_boot = 0){
   gds <- SNPRelate::snpgdsOpen(gds_file, readonly = TRUE, allow.duplicate = TRUE, allow.fork = TRUE)
@@ -294,27 +320,8 @@ calculate_relatedness_pair <- function(ind1, ind2, gds_file, rel_method, N_unrel
   
   if(nrow(snp_use) > 0){
     out <- relatedness_genotypes(t(genotypes[,snp_use$snp]), snps = snp_use$snp, allele_freq = snp_use$MajorFreq, rel_method = 'EM')
-    
-    #Coefficients from SNPrelate, http://faculty.washington.edu/tathornt/BIOST551/lectures_2012/Lecture7_Coefficients_of_Identity_and_Coancestry.pdf
-    #avuncular is same as halfsib
-    
-    k0 <- c(0, 0.25, 0, 0.5, 0.75, 1, 9/16, 15/16)
-    k1 <- c(0, 0.5, 1, 0.5, 0.25, 0, 6/16, 1/16)
-    relationships <- c("self", "fullsib", "offspring", "halfsib", "cousin", "unrelated", 'double.first.cousin', 'second.cousin')
-    likelihoods <- purrr::map2_dbl(k0, k1,
-                                   ~calc_logLik(geno1 = genotypes[1,snp_use$snp], 
-                                                geno2 = genotypes[2,snp_use$snp],
-                                                allele.freq = snp_use$MajorFreq, 
-                                                k0 = .x, k1 = .y))
-    
-    out <- tibble::tibble(relationship = relationships, likelihood = likelihoods) %>%
-      tidyr::pivot_wider(names_from = 'relationship',
-                         values_from = 'likelihood', 
-                         names_prefix = 'logLik_') %>%
-      dplyr::bind_cols(out, .) %>%
-      dplyr::mutate(dplyr::across(starts_with('logLik_'), ~pchisq(loglik - ., 1, lower.tail = FALSE), .names = '{.col}_pValue'))
-    
-    out$most_likely <- relationships[likelihoods == max(likelihoods)]
+  
+    out <- dplyr::bind_cols(out, calc_likelihoods(t(genotypes[,snp_use$snp]), af = snp_use$MajorFreq, logLik = out$loglik))
     
     if(N_unrel > 0){
       unrel_file <- stringr::str_remove(gds_file, '/[A-Za-z0-9_\\-\\.]+$') %>%
@@ -351,6 +358,17 @@ calculate_relatedness_pair <- function(ind1, ind2, gds_file, rel_method, N_unrel
       out$boot_rel <- list(boot_rel)
       out$lwr_kinship_95 <- quantile(boot_rel$kinship, 0.025, na.rm = TRUE)
       out$upr_kinship_95 <- quantile(boot_rel$kinship, 0.975, na.rm = TRUE)
+      
+      pct_boot_types <- (table(c(boot_rel$most_likely, "self", "fullsib", 
+               "offspring", "halfsib", "cousin", "unrelated", 
+               'double.first.cousin', 'second.cousin')) - 1) / N_boot
+      
+      pct_boot_types <- set_names(pct_boot_types, stringr::str_c('pctBoot_', names(pct_boot_types))) %>%
+        rbind()
+      
+      out <- cbind(out, pct_boot_types)
+      
+      
     }
     
     # if(N_boot > 0 & N_unrel > 0){
@@ -385,7 +403,10 @@ calculate_relatedness_pair <- function(ind1, ind2, gds_file, rel_method, N_unrel
                           unrel = NA_character_, boot_rel = NA_character_,
                           unrel_cutoff_999 = NA_real_, unrel_cutoff_99 = NA_real_, unrel_cutoff_95 = NA_real_,
                           lwr_kinship_95 = NA_real_, upr_kinship_95 = NA_real_,
-                          ind1 = ind1, ind2 = ind2)
+                          ind1 = ind1, ind2 = ind2,
+                          pctBoot_cousin = NA_real_, pctBoot_double.first.cousin = NA_real_,
+                          pctBoot_fullsib = NA_real_, pctBoot_halfsib = NA_real_, pctBoot_offspring = NA_real_, 
+                          pctBoot_second.cousin = NA_real_, pctBoot_self = NA_real_, pctBoot_unrelated = NA_real_)
   }
   
   SNPRelate::snpgdsClose(gds)
@@ -398,7 +419,7 @@ calculate_relatedness_pair <- function(ind1, ind2, gds_file, rel_method, N_unrel
   # rm(list = ls())
   gc(verbose = FALSE)
   
-  out
+  dplyr::select(out, ind1, ind2, dplyr::everything())
   # list(k0 = out$k0, k1 = out$k1, loglik = out$loglik, niter = out$niter, kinship = out$kinship, number_loci = out$number_loci, unrel = out$unrel, boot_rel = out$boot_rel)
 }
 
@@ -488,6 +509,7 @@ if(Sys.info()['sysname'] != 'Windows'){
                    simulate_unrelated_pair = simulate_unrelated_pair, 
                    bootstrap_rel = bootstrap_rel,
                    calc_logLik = calc_logLik,
+                   calc_likelihoods = calc_likelihoods,
                    calculate_relatedness_pair = calculate_relatedness_pair))
   
   submitJobs(resources = list(max.concurrent.jobs = 20))
