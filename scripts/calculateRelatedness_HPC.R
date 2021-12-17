@@ -4,7 +4,6 @@
 ## Write rds file with relatedness, unrel simulation, and bootstrap.
 
 ##TODO - progress bar doesnt work
-##TODO - simulate each type of relationship for each pair to see which they each individually fall best within based on both Ks & kinship
 
 if(!interactive()){
   args <- commandArgs(trailingOnly = TRUE)
@@ -12,7 +11,8 @@ if(!interactive()){
   gds_path <- args[2]
   UNREL <- as.integer(args[3])
   BOOT <- as.integer(args[4])
-  SUBGROUPS <- as.integer(args[5])
+  NSIM <- as.integer(args[5])
+  SUBGROUPS <- as.integer(args[6])
   
 } else {
   
@@ -26,6 +26,7 @@ if(!interactive()){
   
   UNREL <- 10
   BOOT <- 10
+  NSIM <- 10
   SUBGROUPS <- 10
 }
 
@@ -70,41 +71,7 @@ get_gds <- function(gds, column){
     gdsfmt::read.gdsn()
 }
 
-# summarize_gds <- function(gds_file){
-#   gds <- snpgdsOpen(gds_file)
-#   
-#   genotypes <- get_gds(gds, 'genotype')
-#   
-#   ind_df <- tibble(sample = get_gds(gds, 'sample.id'),
-#                    percent_missing = rowMeans(genotypes == 3))
-#   
-#   snp_df <- tibble(snp = get_gds(gds, 'snp.id'),
-#                    contig = get_gds(gds, 'snp.chromosome'),
-#                    # percent_missing = colMeans(genotypes == 3),
-#                    # p = (2 * colSums(genotypes == 0) + colSums(genotypes == 1)) / (2 * colSums(genotypes != 3)),
-#                    # q = (2 * colSums(genotypes == 2) + colSums(genotypes == 1)) / (2 * colSums(genotypes != 3)),
-#                    hwe_p = snpgdsHWE(gds, with.id = FALSE)) %>%
-#     bind_cols(snpgdsSNPRateFreq(gds) %>%
-#                 bind_cols()) %>%
-#     rename(MajorFreq = AlleleFreq)
-#   
-#   snpgdsClose(gds)
-#   
-#   rownames(genotypes) <- ind_df$sample
-#   
-#   tibble(n_ind = nrow(ind_df), n_snp = nrow(snp_df), 
-#          n_contig = n_distinct(snp_df$contig),
-#          individuals = list(ind_df), loci = list(snp_df),
-#          genotypes = list(genotypes))
-# }
-# 
-# shared_missing <- function(geno, inds, loci){
-#   geno_sub <- geno[rownames(geno) %in% inds,loci]
-#   
-#   1 - ((geno_sub != 3) %*% t(geno_sub != 3)) / ncol(geno_sub)
-# }
-
-relatedness_genotypes <- function(geno_pair, snps, rel_method, allele_freq){
+relatedness_genotypes <- function(geno_pair, allele_freq, rel_method){
   SNPRelate::snpgdsPairIBD(geno1 = geno_pair[,1],
                 geno2 = geno_pair[,2],
                 allele.freq = allele_freq,
@@ -115,75 +82,6 @@ relatedness_genotypes <- function(geno_pair, snps, rel_method, allele_freq){
     dplyr::mutate(number_loci = sum(rowSums(is.na(geno_pair)) == 0))
 }
 
-# sim_ind <- function(genos, parents, snps){
-#   p0 <- SNPRelate::snpgdsGetGeno(genos, sample.id = parents, snp.id = snps, snpfirstdim = TRUE, verbose = FALSE) 
-#   
-#   p1 <- matrix(c(as.integer(!p0[, 1] %in% c(0, 1)), 
-#                  as.integer(p0[, 1] %in% c(1, 2))),
-#                ncol = 2)
-#   p1[which(is.na(p0[,1])), ] <- NA
-#   
-#   
-#   p2 <- matrix(c(as.integer(!p0[, 2] %in% c(0, 1)), 
-#                  as.integer(p0[, 2] %in% c(1, 2))),
-#                ncol = 2)
-#   p2[which(is.na(p0[,2])), ] <- NA
-#   
-#   p1_allele <- sample(c(1,2), nrow(p1), replace = TRUE)
-#   p2_allele <- sample(c(1,2), nrow(p1), replace = TRUE)
-#   
-#   cbind(p1[cbind(seq_along(p1_allele), p1_allele)], 
-#         p2[cbind(seq_along(p2_allele), p2_allele)]) %>%
-#     rowSums()
-#   
-# }
-# 
-# sim_dyad <- function(genos, ids, snps, relationship = 'UR', af){
-#   # af <- snpgdsSNPRateFreq(genos, snp.id = snps, with.id = TRUE)$AlleleFreq
-#   
-#   parents1 <- sample(ids, 2)
-#   
-#   if(relationship == 'UR'){
-#     parents2 <- sample(ids[!ids %in% parents1], 2)
-#   } else if(relationship == 'PO'){
-#     1+1 #don't need 2 parents for the PO relationship
-#     
-#   } else if(relationship == 'FS'){
-#     parents2 <- parents1
-#     
-#   } else if(relationship == 'HS'){
-#     parents2 <- c(sample(parents1, 1), sample(ids[!ids %in% parents1], 1))
-#     
-#   } else {
-#     print('Only PO/FS/HS/UR relationships are implemented')
-#     break
-#   }
-#   
-#   o1 <- sim_ind(genos, parents1, snps)
-#   
-#   if(relationship != 'PO'){
-#     o2 <- sim_ind(genos, parents2, snps)
-#   } else {
-#     o2 <- snpgdsGetGeno(genos, sample.id = sample(parents1, 1), snp.id = snps, snpfirstdim = TRUE, verbose = FALSE) %>%
-#       as.numeric()
-#   }
-#   
-#   cbind(o1, o2) %>%
-#     relatedness_genotypes(., snps = snps, allele_freq = af, rel_method)
-# }
-# 
-# sim_ur <- function(genos, ids, snps, af, rel_method){
-#   
-#   parents1 <- sample(ids, 2)
-#   parents2 <- sample(ids[!ids %in% parents1], 2)
-#   
-#   o1 <- sim_ind(genos, parents1, snps)
-#   o2 <- sim_ind(genos, parents2, snps)
-#   
-#   cbind(o1, o2) %>%
-#     relatedness_genotypes(., snps = snps, allele_freq = af, rel_method = rel_method)
-# }
-
 simulate_unrelated_pair <- function(af, rel_method){
   
   ur_pair <- purrr::map(af, ~rbinom(n = 2, size = 2, prob = .x)) %>% 
@@ -191,14 +89,13 @@ simulate_unrelated_pair <- function(af, rel_method){
     purrr::simplify_all() %>%
     do.call(cbind, .)
   
-  relatedness_genotypes(ur_pair, snps = 1:length(af), 
-                        allele_freq = af, rel_method = rel_method)
+  relatedness_genotypes(ur_pair, allele_freq = af, rel_method = rel_method)
 }
 
 bootstrap_rel <- function(pair_geno, snps, af, ...){
   boot_snps <- sort(sample(length(snps), size = length(snps), replace = TRUE))
   
-  boot_val <- relatedness_genotypes(pair_geno[boot_snps,], snps = snps[boot_snps], allele_freq = af[boot_snps], rel_method = 'EM')
+  boot_val <- relatedness_genotypes(pair_geno[boot_snps,], allele_freq = af[boot_snps], rel_method = 'EM')
   
   boot_val <- dplyr::bind_cols(boot_val, calc_likelihoods(pair_geno[boot_snps,], af = af[boot_snps], logLik = boot_val$loglik))
   boot_val
@@ -319,7 +216,7 @@ calculate_relatedness_pair <- function(ind1, ind2, gds_file, rel_method, N_unrel
     dplyr::arrange(snp)
   
   if(nrow(snp_use) > 0){
-    out <- relatedness_genotypes(t(genotypes[,snp_use$snp]), snps = snp_use$snp, allele_freq = snp_use$MajorFreq, rel_method = 'EM')
+    out <- relatedness_genotypes(t(genotypes[,snp_use$snp]), allele_freq = snp_use$MajorFreq, rel_method = 'EM')
   
     out <- dplyr::bind_cols(out, calc_likelihoods(t(genotypes[,snp_use$snp]), af = snp_use$MajorFreq, logLik = out$loglik))
     
@@ -423,8 +320,93 @@ calculate_relatedness_pair <- function(ind1, ind2, gds_file, rel_method, N_unrel
   # list(k0 = out$k0, k1 = out$k1, loglik = out$loglik, niter = out$niter, kinship = out$kinship, number_loci = out$number_loci, unrel = out$unrel, boot_rel = out$boot_rel)
 }
 
+create_individual <- function(gds){
+  
+  tibble::tibble(snp = get_gds(gds, 'snp.id'),
+                 contig = get_gds(gds, 'snp.chromosome')) %>%
+    dplyr::bind_cols(SNPRelate::snpgdsSNPRateFreq(gds) %>%
+                       dplyr::bind_cols()) %>%
+    dplyr::rename(MajorFreq = AlleleFreq) %>%
+    dplyr::rowwise() %>%
+    dplyr::mutate(genotype = rbinom(1, 2, MajorFreq)) %>%
+    dplyr::ungroup() %>%
+    dplyr::select(snp, contig, MajorFreq, genotype)
+  
+}
 
-#### Get summary stats about each vcf ####
+create_offspring <- function(parent_genotypes){
+  p0 <- parent_genotypes
+  
+  p1 <- matrix(c(as.integer(!p0[, 1] %in% c(0, 1)),
+                 as.integer(p0[, 1] %in% c(1, 2))),
+               ncol = 2)
+  p1[which(is.na(p0[,1])), ] <- NA
+  
+  
+  p2 <- matrix(c(as.integer(!p0[, 2] %in% c(0, 1)),
+                 as.integer(p0[, 2] %in% c(1, 2))),
+               ncol = 2)
+  p2[which(is.na(p0[,2])), ] <- NA
+  
+  p1_allele <- sample(c(1,2), nrow(p1), replace = TRUE)
+  p2_allele <- sample(c(1,2), nrow(p1), replace = TRUE)
+  
+  cbind(p1[cbind(seq_along(p1_allele), p1_allele)],
+        p2[cbind(seq_along(p2_allele), p2_allele)]) %>%
+    rowSums()
+}
+
+simulate_relationship <- function(gds_file, n_loci, relationship, rel_method){
+  
+  gds <- SNPRelate::snpgdsOpen(gds_file, readonly = TRUE, allow.duplicate = TRUE, allow.fork = TRUE)
+  
+  parents <- dplyr::full_join(create_individual(gds),
+                              create_individual(gds),
+                              by = c('snp', 'contig', 'MajorFreq')) %>%
+    dplyr::group_by(contig) %>%
+    dplyr::sample_n(1) %>%
+    dplyr::ungroup() %>%
+    dplyr::sample_n(n_loci) %>%
+    dplyr::mutate(genos = cbind(genotype.x, genotype.y)) %>%
+    dplyr::select(-genotype.x, -genotype.y)
+  
+  if(relationship == 'UR'){
+    sim_genotypes <- parents$genos
+    
+  } else if(relationship == 'PO'){
+    
+    parent <- parents$genos[,sample(2, 1)]
+    offspring <- create_offspring(parents$genos)
+    
+    sim_genotypes <- cbind(parent, offspring)
+    
+  } else if(relationship == 'FS'){
+    
+    sim_genotypes <- cbind(create_offspring(parents$genos), create_offspring(parents$genos))
+    
+  } else if(relationship == 'HS'){
+    
+    trio <- dplyr::inner_join(parents, create_individual(gds), 
+                              by = c('snp', 'contig', 'MajorFreq')) %>%
+      dplyr::mutate(genos = cbind(genos, genotype)) %>%
+      dplyr::select(-genotype)
+    
+    set1 <- sample(3, 2)
+    set2 <- c(which(!1:3 %in% set1), sample(set1, 1))
+    
+    sim_genotypes <- cbind(create_offspring(trio$genos[,set1]), create_offspring(trio$genos[,set2]))
+    
+  } else {
+    print('Only PO/FS/HS/UR relationships are implemented')
+    break
+  }
+  
+  sim_rel <- relatedness_genotypes(sim_genotypes, parents$MajorFreq, rel_method = rel_method)
+  sim_rel <- dplyr::bind_cols(sim_rel, calc_likelihoods(sim_genotypes, af = parents$MajorFreq, logLik = sim_rel$loglik))
+  sim_rel
+}
+
+#### Initialize Data ####
 gds_file <- convert_vcf_gds(vcf_file, gds_path)
 
 gds <- SNPRelate::snpgdsOpen(gds_file)
@@ -438,12 +420,12 @@ all_pairs <- tidyr::expand_grid(sample1 = get_gds(gds, 'sample.id'),
 SNPRelate::snpgdsClose(gds)
 
 if(Sys.info()['sysname'] == 'Windows'){
-  all_pairs <- all_pairs[[1]] %>%
+  all_pairs <- all_pairs[[sample(length(all_pairs), 1)]] %>%
     dplyr::sample_n(50)
 }
 
 #### Set up HPC Jobs ####
-send_to_node <- function(in_pairs){
+relatedness_to_node <- function(in_pairs){
   
   registerDoFuture()
   registerDoRNG()
@@ -484,6 +466,55 @@ send_to_node <- function(in_pairs){
   out
 }
 
+sims_to_node <- function(param_set){
+  
+  registerDoFuture()
+  registerDoRNG()
+  
+  if(Sys.info()['sysname'] != 'Windows' & !interactive()){
+    plan('multicore', gc = TRUE)
+  } else {
+    plan('multisession', gc = TRUE)
+  }
+  
+  
+  # handlers(global = TRUE)
+  handlers("progress")
+  
+  n_loci <- param_set$n_loci
+  relationship <- param_set$relationship
+  rel_method <- param_set$rel_method
+  
+  run_simulation <- function(NSIM){
+    p <- progressor(steps = NSIM)
+    
+    
+    
+    y <- foreach(x = 1:NSIM, 
+                 .export = c("gds_file", 'n_loci', 'relationship', 'rel_method'), 
+                 .packages = c('magrittr'),
+                 .combine = 'rbind',
+                 .inorder = FALSE) %dorng% {
+                   
+                   out <- simulate_relationship(gds_file = gds_file, 
+                                                n_loci, 
+                                                relationship, 
+                                                rel_method)
+                   p()
+                   out
+                 }
+    return(y)
+  }
+  
+  with_progress({
+    out <- run_simulation(NSIM)
+  })
+  
+  cbind(param_set, out)
+  
+}
+
+
 if(Sys.info()['sysname'] != 'Windows'){
   reg <- makeRegistry(file.dir = paste0(gds_path, '/batch_files'), 
                       packages = c('magrittr', 'future',
@@ -497,9 +528,51 @@ if(Sys.info()['sysname'] != 'Windows'){
                                                      fs.latency = 65)
 }
 
+#### Simulate Relatedness ####
+simulation_settings <- tidyr::expand_grid(relationship = c('PO', 'FS', 'HS', 'UR'),
+                                          rel_method = c('EM', 'MoM'),
+                                          n_loci = c(100, 500, 1000, 1500, 2000)) %>%
+  dplyr::group_by(groupings = dplyr::row_number()) %>%
+  dplyr::group_split()
+
+if(Sys.info()['sysname'] != 'Windows'){
+  batchMap(fun = sims_to_node, in_pairs = simulation_settings)
+  batchExport(list(gds_file = gds_file, 
+                   get_gds = get_gds, 
+                   relatedness_genotypes = relatedness_genotypes,
+                   calc_logLik = calc_logLik,
+                   calc_likelihoods = calc_likelihoods,
+                   create_individual = create_individual,
+                   create_offspring = create_offspring,
+                   simulate_relationship = simulate_relationship))
+  
+  submitJobs(resources = list(max.concurrent.jobs = 20))
+  waitForJobs()
+  
+  simulated_relatedness <- purrr::map_dfr(1:length(simulation_settings), loadResult)
+} else {
+  simulated_relatedness <- purrr::map_dfr(simulation_settings, sims_to_node)
+}
+
+readr::write_csv(simulated_relatedness, stringr::str_replace(gds_file, '\\.gds$', '_simulated_relationships.csv'))
+
+simulation_plot <- simulated_relatedness %>%
+  tibble::as_tibble() %>%
+  ggplot2::ggplot(ggplot2::aes(x = n_loci, y = kinship, colour = rel_method, 
+                               group = interaction(n_loci, rel_method))) +
+  ggplot2::geom_hline(data = tibble::tibble(relationship = c('PO', 'FS', 'HS', 'UR'),
+                                            mean_rel = c(0.5, 0.5, 0.25, 0) / 2),
+                      ggplot2::aes(yintercept = mean_rel)) +
+  ggplot2::geom_boxplot() +
+  ggplot2::facet_wrap(~relationship) +
+  ggplot2::theme_classic()
+
+ggplot2::ggsave(stringr::str_replace(gds_file, '\\.gds$', '_simulated_relationships.png'), 
+                plot = simulation_plot, height = 7, width = 7)
+
 #### Calculate Relatedness ####
 if(Sys.info()['sysname'] != 'Windows'){
-  batchMap(fun = send_to_node, in_pairs = all_pairs)
+  batchMap(fun = relatedness_to_node, in_pairs = all_pairs)
   batchExport(list(gds_file = gds_file, 
                    UNREL = UNREL, 
                    BOOT = BOOT, 
@@ -517,7 +590,7 @@ if(Sys.info()['sysname'] != 'Windows'){
   
   relatedness <- purrr::map_dfr(1:SUBGROUPS, loadResult)
 } else {
-  relatedness <- send_to_node(all_pairs)
+  relatedness <- relatedness_to_node(all_pairs)
 }
 
 

@@ -1104,21 +1104,12 @@ cd Coryphopterus_RAD
 module load R/gcc/64/3.5.1
 export R_PROGRESSR_ENABLE=TRUE
 
-#Run pre-haplotyped
-Rscript scripts/calculateRelatedness_HPC.R \
-  fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaK.2.1.Fltr041.22.vcf \
-  relatedness_results \
-  1000 \
-  1000 \
-  100
-
-#Run post-haplotyped
-#Should be the same but this would be better since the haplotyped is what I want to use for Fst
 Rscript scripts/calculateRelatedness_HPC.R \
   fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaKonlyHaplo.2.1.Fltr19.Haplotyped.vcf \
   relatedness_results \
   1000 \
   1000 \
+  10000 \
   100
 ```
 
