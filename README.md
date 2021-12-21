@@ -1077,11 +1077,21 @@ module load R/gcc/64/3.5.1
 Rscript scripts/summarizeVCF.R fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaKonlyHaplo.2.1.Fltr19.Haplotyped.vcf
 ```
 
+Decided I've filtered too much diversity while working to ensure no missing data. Relaxing stringency somewhat to allow more diversity through.
+
+```
+sbatch -p cbirdq -t 30-00:00:00 scripts/fltrVCF.sbatch \
+	fltrVCF_MiSeq_CHYA \
+  mkVCF_MiSeq_CHYA/TotalRawSNPs.2.1.vcf \
+  config_files/fltrVCF_chya_O.config \
+  chyaO
+```
+
 Genotyping Stats
-| Metric | [Haplotyping K](config_files/fltrVCF_chya_K_onlyHaplo.config) |  |  |  |
+| Metric | [Haplotyping K](config_files/fltrVCF_chya_K_onlyHaplo.config) | [chyaO](config_files/fltrVCF_chya_O.config) |  |  |
 | --- | ----- | ----- | ----- | ----- |
-| JobID | [`52713`](SLURM_out/fltrVCF-52713.out) |  |  |  |
-| Summary Graph | [Haplotyping K](fltrVCF_MiSeq/MiSeq_Initial.fltrStats2.plots.pdf) |  |  |  |
+| JobID | [`52713`](SLURM_out/fltrVCF-52713.out) | [``](SLURM_out/fltrVCF-.out) |  |  |
+| Summary Graph | [Haplotyping K](fltrVCF_MiSeq/MiSeq_Initial.fltrStats2.plots.pdf) | [chyaO](fltrVCF_MiSeq/MiSeq_CHYA_chyaO.fltrStats2.plots.pdf) |  |  |
 | Number Individuals | 593 |  |  |  |
 | Number SNPs | 6,630 |  |  |  |
 | Number Contigs | 3,047 |  |  |  |

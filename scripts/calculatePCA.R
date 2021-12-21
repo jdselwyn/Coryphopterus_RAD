@@ -7,6 +7,7 @@ if(!interactive()){
   outDir <- args[3]
   BOOTS <- as.integer(args[4])
   P_CUTOFF <- as.numeric(args[5])
+  max_missing <- as.numeric(args[6])
   
 } else {
   
@@ -18,8 +19,9 @@ if(!interactive()){
     metadata <- '~/Coryphopterus/Bioinformatics/Coryphopterus_RAD/individual_metadata.shp'
     outDir <- '~/Coryphopterus/Bioinformatics/Coryphopterus_RAD/tmp_dir'
     
-    BOOTS <- 10
+    BOOTS <- 0
     P_CUTOFF <- 0.001
+    max_missing <- 0.75
   }
 }
 
@@ -112,15 +114,22 @@ strata(genotypes) <- strata(genotypes, formula = ~site/shoal, combine = FALSE)
 hw_test <- pegas::hw.test(genotypes, B = BOOTS)
 loci_hwe <- as_tibble(hw_test, rownames = 'locus') %>%
   janitor::clean_names() %>%
+  # rename(pr_exact = pr_chi_2) %>%
   mutate(pr_exact = p.adjust(pr_exact, method = 'holm')) %>%
   filter(pr_exact > P_CUTOFF) %>%
   pull(locus)
 
 message('Using ', length(loci_hwe), ' loci')
 
+individual_use <- propTyped(genotypes[, loc = loci_hwe], by = 'ind')  %>%
+  enframe(name = 'ID', value = 'prop_typed') %>%
+  filter(prop_typed > max_missing) %>%
+  pull(ID)
+
+message('Using ', length(individual_use), ' individuals')
 
 #### Calculate PCA Distance ####
-full_pca <- scaleGen(genotypes, center = TRUE, scale = TRUE, NA.method = "mean") %>%
+full_pca <- scaleGen(genotypes[individual_use, loc = loci_hwe, drop = TRUE], center = TRUE, scale = TRUE, NA.method = "mean") %>%
   dudi.pca(., center = FALSE, scale = FALSE, scannf = FALSE, nf = min(dim(.)))
 
 
