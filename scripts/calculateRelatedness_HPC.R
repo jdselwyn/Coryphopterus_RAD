@@ -3,7 +3,30 @@
 ## For each pair bootstrap the loci (after filtering out those with missing data) and calculate relatedness for BS interval
 ## Write rds file with relatedness, unrel simulation, and bootstrap.
 
-##TODO
+##TODO - figure out better test of similarity of simulations to expected value of relatedness pair
+# - probably highest density interval (nonsemetric) and see what is contained - or similar
+##TODO - Figure out issue that led to some errors in simulations: see below
+
+#Two jobs failed:
+# with this error:
+
+# 1: Error in { : task 1291 failed - "bad generic call environment"
+# 2: Error in { : task 8329 failed - "bad generic call environment"
+
+
+# [[1]]$param_set
+# # A tibble: 1 × 4
+# relationship rel_method n_loci groupings
+# <chr>        <chr>       <dbl>     <int>
+#   1 UR           MoM           215        33
+# 
+# 
+# [[2]]
+# [[2]]$param_set
+# # A tibble: 1 × 4
+# relationship rel_method n_loci groupings
+# <chr>        <chr>       <dbl>     <int>
+#   1 C1           MoM            25        57
 
 if(!interactive()){
   args <- commandArgs(trailingOnly = TRUE)
@@ -638,7 +661,28 @@ if(Sys.info()['sysname'] != 'Windows'){
   submitJobs(resources = list(max.concurrent.jobs = 20))
   waitForJobs()
   
-  simulated_relatedness <- purrr::map_dfr(1:length(simulation_settings), loadResult)
+  
+  successful_jobs <- dplyr::as_tibble(getJobTable()) %>%
+    dplyr::filter(is.na(error)) %>%
+    dplyr::pull(job.id)
+  
+  message(length(successful_jobs), ' successful jobs\n',
+          nrow(getJobTable()) - length(successful_jobs), ' failed jobs')
+  
+  if(nrow(getJobTable()) - length(successful_jobs) > 0){
+    message('Failure Reasons:')
+    dplyr::as_tibble(getErrorMessages()) %>%
+      dplyr::select(job.id, message)
+    
+    message('Failure Parameter Sets:')
+    dplyr::as_tibble(getJobTable()) %>%
+      dplyr::filter(!is.na(error)) %>%
+      dplyr::select(job.id, job.pars) %>%
+      tidyr::unnest(job.pars) %>%
+      tidyr::unnest(job.pars) 
+  }
+  
+  simulated_relatedness <- purrr::map_dfr(successful_jobs, loadResult)
   
   clearRegistry()
 } else {
@@ -681,7 +725,6 @@ pointwise_equivilence <- simulated_relatedness %>%
 
 readr::write_csv(pointwise_equivilence, stringr::str_replace(gds_file, '\\.gds$', '_relatedness_pointwise_equivilence.csv'))
 
-
 simulation_plot <- simulated_relatedness %>%
   tibble::as_tibble() %>%
   # sample_frac(0.1) %>%
@@ -694,7 +737,7 @@ simulation_plot <- simulated_relatedness %>%
                       ggplot2::aes(yintercept = mean_rel)) +
   # ggbeeswarm::geom_beeswarm() +
   # ggplot2::geom_boxplot(position = ggplot2::position_dodge(5)) +
-  ggplot2::stat_summary(position = ggplot2::position_dodge(5), fun.data = mean_se) +
+  ggplot2::stat_summary(position = ggplot2::position_dodge(5), fun.data = median_hilow) +
   ggplot2::geom_text(data = pointwise_equivilence %>%
                        dplyr::mutate(p.adj = p.adjust(p.value, method = 'holm')) %>%
                        dplyr::filter(p.adj < 0.05) %>%

@@ -1107,10 +1107,10 @@ Rscript scripts/summarizeVCF.R fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaO.2.1.Fltr19.Ha
 ```
 
 Genotyping Stats
-| Metric | [Haplotyping K](config_files/fltrVCF_chya_K_onlyHaplo.config) | [chyaO](config_files/fltrVCF_chya_O.config) |  |  |
+| Metric | [Haplotyping K](config_files/fltrVCF_chya_K_onlyHaplo.config) | [chyaO](config_files/fltrVCF_chya_O.config) | [chyaP](config_files/fltrVCF_chya_P.config) |  |
 | --- | ----- | ----- | ----- | ----- |
-| JobID | [`52713`](SLURM_out/fltrVCF-52713.out) | [`54670`](SLURM_out/fltrVCF-54670.out) |  |  |
-| Summary Graph | [Haplotyping K](fltrVCF_MiSeq/MiSeq_Initial.fltrStats2.plots.pdf) | [chyaO](fltrVCF_MiSeq/MiSeq_CHYA_chyaO.fltrStats2.plots.pdf) |  |  |
+| JobID | [`52713`](SLURM_out/fltrVCF-52713.out) | [`54670`](SLURM_out/fltrVCF-54670.out) | [`55151`](SLURM_out/fltrVCF-55151.out) |  |
+| Summary Graph | [Haplotyping K](fltrVCF_MiSeq/MiSeq_Initial.fltrStats2.plots.pdf) | [chyaO](fltrVCF_MiSeq/MiSeq_CHYA_chyaO.fltrStats2.plots.pdf) | [chyaP](fltrVCF_MiSeq/MiSeq_CHYA_chyaP.fltrStats2.plots.pdf) |  |
 | Number Individuals | 593 | 496 |  |  |
 | Number SNPs | 6,630 | 6,705 |  |  |
 | Number Contigs | 3,047 | 1,138 |  |  |
