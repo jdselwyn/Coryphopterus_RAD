@@ -672,14 +672,16 @@ if(Sys.info()['sysname'] != 'Windows'){
   if(nrow(getJobTable()) - length(successful_jobs) > 0){
     message('Failure Reasons:')
     dplyr::as_tibble(getErrorMessages()) %>%
-      dplyr::select(job.id, message)
+      dplyr::select(job.id, message) %>%
+      print()
     
     message('Failure Parameter Sets:')
     dplyr::as_tibble(getJobTable()) %>%
       dplyr::filter(!is.na(error)) %>%
       dplyr::select(job.id, job.pars) %>%
       tidyr::unnest(job.pars) %>%
-      tidyr::unnest(job.pars) 
+      tidyr::unnest(job.pars) %>%
+      print()
   }
   
   simulated_relatedness <- purrr::map_dfr(successful_jobs, loadResult)
@@ -725,6 +727,7 @@ pointwise_equivilence <- simulated_relatedness %>%
 
 readr::write_csv(pointwise_equivilence, stringr::str_replace(gds_file, '\\.gds$', '_relatedness_pointwise_equivilence.csv'))
 
+
 simulation_plot <- simulated_relatedness %>%
   tibble::as_tibble() %>%
   # sample_frac(0.1) %>%
@@ -737,7 +740,7 @@ simulation_plot <- simulated_relatedness %>%
                       ggplot2::aes(yintercept = mean_rel)) +
   # ggbeeswarm::geom_beeswarm() +
   # ggplot2::geom_boxplot(position = ggplot2::position_dodge(5)) +
-  ggplot2::stat_summary(position = ggplot2::position_dodge(5), fun.data = median_hilow) +
+  ggplot2::stat_summary(position = ggplot2::position_dodge(5), fun.data = ggplot2::median_hilow) + #
   ggplot2::geom_text(data = pointwise_equivilence %>%
                        dplyr::mutate(p.adj = p.adjust(p.value, method = 'holm')) %>%
                        dplyr::filter(p.adj < 0.05) %>%
