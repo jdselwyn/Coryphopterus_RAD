@@ -1085,7 +1085,19 @@ sbatch -p cbirdq -t 30-00:00:00 scripts/fltrVCF.sbatch \
   mkVCF_MiSeq_CHYA/TotalRawSNPs.2.1.vcf \
   config_files/fltrVCF_chya_O.config \
   chyaO
+
+sbatch -p cbirdq -t 30-00:00:00 scripts/fltrVCF.sbatch \
+	fltrVCF_MiSeq_CHYA \
+  mkVCF_MiSeq_CHYA/TotalRawSNPs.2.1.vcf \
+  config_files/fltrVCF_chya_P.config \
+  chyaP
 ```
+
+- changes to O
+  1. Increase rule 04 from 2:10 to 10:20 - not removing many and very lax
+  2. Remove step 86 after step 06 - removes a shitload of Contigs
+  3.
+
 
 ```
 module load R/gcc/64/3.5.1
@@ -1130,7 +1142,7 @@ module load R/gcc/64/3.5.1
 export R_PROGRESSR_ENABLE=TRUE
 
 Rscript scripts/calculateRelatedness_HPC.R \
-  fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaKonlyHaplo.2.1.Fltr19.Haplotyped.vcf \
+  fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaO.2.1.Fltr19.Haplotyped.vcf \
   relatedness_results \
   1000 \
   1000 \
@@ -1163,6 +1175,7 @@ sbatch -o SLURM_out/pca-%j.out \
     individual_metadata.shp \
     pca_results \
     1000 \
-    0.001
-55074
+    0.001 \
+    0.5
+55095
 ```

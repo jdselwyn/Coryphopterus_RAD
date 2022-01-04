@@ -747,8 +747,8 @@ unlink(paste0(gds_path, '/batch_files'), recursive = TRUE)
 
 
 #### Make a few plots before closing ####
-library(tidyverse)
-library(patchwork)
+suppressMessages(library(tidyverse))
+suppressMessages(library(patchwork))
 
 make_plot <- function(unrel, boot_rel, kinship, lwr_kinship_95, upr_kinship_95, ind1, ind2){
   ind1 = str_remove(ind1, '.fp2.repr.2.1')
