@@ -3,8 +3,7 @@
 ## For each pair bootstrap the loci (after filtering out those with missing data) and calculate relatedness for BS interval
 ## Write rds file with relatedness, unrel simulation, and bootstrap.
 
-##TODO - progress bar doesnt work
-##TODO - bootstrap pointwise intervals instead of t-tests for point significance away from theoretical value
+##TODO
 
 if(!interactive()){
   args <- commandArgs(trailingOnly = TRUE)
@@ -349,21 +348,21 @@ simulate_relationship <- function(gds_file, n_loci, relationship, rel_method){
     dplyr::mutate(genos = cbind(genotype.x, genotype.y)) %>%
     dplyr::select(-genotype.x, -genotype.y)
   
-  if(relationship == 'UR'){
+  if(relationship == 'UR'){ #unrelated
     sim_genotypes <- parents$genos
     
-  } else if(relationship == 'PO'){
+  } else if(relationship == 'PO'){ #parent-offspring
     
     parent <- parents$genos[,sample(2, 1)]
     offspring <- create_offspring(parents$genos)
     
     sim_genotypes <- cbind(parent, offspring)
     
-  } else if(relationship == 'FS'){
+  } else if(relationship == 'FS'){ #full sib
     
     sim_genotypes <- cbind(create_offspring(parents$genos), create_offspring(parents$genos))
     
-  } else if(relationship == 'HS'){
+  } else if(relationship == 'HS'){ #half sib
     
     trio <- dplyr::inner_join(parents, create_individual(gds), 
                               by = c('snp', 'contig', 'MajorFreq')) %>%
@@ -375,8 +374,110 @@ simulate_relationship <- function(gds_file, n_loci, relationship, rel_method){
     
     sim_genotypes <- cbind(create_offspring(trio$genos[,set1]), create_offspring(trio$genos[,set2]))
     
+  } else if(relationship == 'GG'){ #Grandparent-grandchild
+    
+    #two pairs of grandparents
+    grandparents <- dplyr::inner_join(dplyr::rename(parents, gp1 = genos), 
+                                      dplyr::full_join(create_individual(gds),
+                                                       create_individual(gds),
+                                                       by = c('snp', 'contig', 'MajorFreq')), 
+                                      by = c('snp', 'contig', 'MajorFreq')) %>%
+      dplyr::mutate(gp2 = cbind(genotype.x, genotype.y)) %>%
+      dplyr::select(-genotype.x, -genotype.y)
+    
+    #one offspring each = parents
+    parent1 <- create_offspring(grandparents$gp1)
+    parent2 <- create_offspring(grandparents$gp2)
+    
+    #one kid
+    kid <- create_offspring(cbind(parent1, parent2))
+    
+    #relatedness of random grandparent and the kid
+    sim_genotypes <- cbind(cbind(grandparents$gp1, grandparents$gp2)[,sample(4, 1)], kid)
+    
+  } else if(relationship == 'AV'){ #Avuncular
+    
+    #two pairs of grandparents
+    grandparents <- dplyr::inner_join(dplyr::rename(parents, gp1 = genos), 
+                                      dplyr::full_join(create_individual(gds),
+                                                       create_individual(gds),
+                                                       by = c('snp', 'contig', 'MajorFreq')), 
+                                      by = c('snp', 'contig', 'MajorFreq')) %>%
+      dplyr::mutate(gp2 = cbind(genotype.x, genotype.y)) %>%
+      dplyr::select(-genotype.x, -genotype.y)
+    
+    
+    #one offspring one pair, two offspring one pair
+    parent1 <- create_offspring(grandparents$gp1)
+    parent2 <- create_offspring(grandparents$gp2)
+    aunt_uncle <- cbind(create_offspring(grandparents$gp1), 
+                        create_offspring(grandparents$gp2))[,sample(2, 1)]
+    
+    #one kid
+    kid <- create_offspring(cbind(parent1, parent2))
+    
+    #relatedness btw non-parent & kid
+    sim_genotypes <- cbind(aunt_uncle, kid)
+    
+  } else if(relationship == 'C1'){ #First Cousins
+    
+    #3 pairs of grandparents
+    grandparents <- dplyr::inner_join(dplyr::rename(parents, gp1 = genos), 
+                                      dplyr::full_join(create_individual(gds),
+                                                       create_individual(gds),
+                                                       by = c('snp', 'contig', 'MajorFreq')), 
+                                      by = c('snp', 'contig', 'MajorFreq')) %>%
+      dplyr::mutate(gp2 = cbind(genotype.x, genotype.y)) %>%
+      dplyr::select(-genotype.x, -genotype.y) %>%
+      dplyr::inner_join(dplyr::full_join(create_individual(gds),
+                                         create_individual(gds),
+                                         by = c('snp', 'contig', 'MajorFreq')), 
+                        by = c('snp', 'contig', 'MajorFreq')) %>%
+      dplyr::mutate(gp3 = cbind(genotype.x, genotype.y)) %>%
+      dplyr::select(-genotype.x, -genotype.y) 
+    
+    #one with 2 kids, two with one kid each
+    parent1 <- create_offspring(grandparents$gp1)
+    
+    parent2 <- create_offspring(grandparents$gp2)
+    parent3 <- create_offspring(grandparents$gp2)
+    
+    parent4 <- create_offspring(grandparents$gp3)
+    
+    #one kid from each non-inbred pair
+    kid1 <- create_offspring(cbind(parent1, parent2))
+    kid2 <- create_offspring(cbind(parent3, parent4))
+    
+    #relatedness btw two kids
+    sim_genotypes <- cbind(kid1, kid2)
+    
+  } else if(relationship == 'C2'){ #Double First Cousins
+    
+    #two pairs of grandparents
+    grandparents <- dplyr::inner_join(dplyr::rename(parents, gp1 = genos), 
+                                      dplyr::full_join(create_individual(gds),
+                                                       create_individual(gds),
+                                                       by = c('snp', 'contig', 'MajorFreq')), 
+                                      by = c('snp', 'contig', 'MajorFreq')) %>%
+      dplyr::mutate(gp2 = cbind(genotype.x, genotype.y)) %>%
+      dplyr::select(-genotype.x, -genotype.y)
+    
+    #two pairs of kids each
+    parent1 <- create_offspring(grandparents$gp1)
+    parent2 <- create_offspring(grandparents$gp1)
+    
+    parent3 <- create_offspring(grandparents$gp2)
+    parent4 <- create_offspring(grandparents$gp2)
+    
+    #cross the families and produce two kids
+    kid1 <- create_offspring(cbind(parent1, parent3))
+    kid2 <- create_offspring(cbind(parent2, parent4))
+    
+    #relatedness btw two kids
+    sim_genotypes <- cbind(kid1, kid2)
+    
   } else {
-    print('Only PO/FS/HS/UR relationships are implemented')
+    message('Only PO/FS/HS/UR relationships are implemented')
     break
   }
   
@@ -511,13 +612,14 @@ if(Sys.info()['sysname'] != 'Windows'){
 }
 
 #### Simulate Relatedness ####
-simulation_settings <- tidyr::expand_grid(relationship = c('PO', 'FS', 'HS', 'UR'),
+simulation_settings <- tidyr::expand_grid(relationship = c('PO', 'FS', 'HS', 'UR',
+                                                           'GG', 'AV', 'C1', 'C2'),
                                           rel_method = c('EM', 'MoM'),
                                           n_loci = unique(c(floor(seq(1, 100, length.out = 5)),
                                                             round(seq(100, max_loci, 
                                                                       length.out = 10))))) %>%
   dplyr::mutate(n_loci = dplyr::if_else(n_loci == 1, 2, n_loci)) %>%
-  dplyr::sample_frac(1) %>%
+  dplyr::sample_frac(ifelse(Sys.info()['sysname'] == 'Windows', 0.05, 1)) %>%
   dplyr::group_by(groupings = dplyr::row_number()) %>%
   dplyr::group_split()
 
@@ -545,10 +647,11 @@ if(Sys.info()['sysname'] != 'Windows'){
 
 readr::write_csv(simulated_relatedness, stringr::str_replace(gds_file, '\\.gds$', '_simulated_relationships.csv'))
 
-
 method_comparison <- simulated_relatedness %>%
-  dplyr::left_join(tibble::tibble(relationship = c('PO', 'FS', 'HS', 'UR'),
-                                  mean_rel = c(0.5, 0.5, 0.25, 0) / 2),
+  dplyr::left_join(tibble::tibble(relationship = c('PO', 'FS', 'HS', 'UR',
+                                                   'GG', 'AV', 'C1', 'C2'),
+                                  mean_rel = c(0.5, 0.5, 0.25, 0,
+                                               0.25, 0.25, 0.125, 0.25) / 2),
                    by = 'relationship') %>%
   dplyr::group_by(rel_method, n_loci) %>%
   dplyr::summarise(correlation = cor(mean_rel, kinship),
@@ -567,8 +670,10 @@ readr::write_csv(method_comparison, stringr::str_replace(gds_file, '\\.gds$', '_
 
 
 pointwise_equivilence <- simulated_relatedness %>%
-  dplyr::left_join(tibble::tibble(relationship = c('PO', 'FS', 'HS', 'UR'),
-                                  mean_rel = c(0.5, 0.5, 0.25, 0) / 2),
+  dplyr::left_join(tibble::tibble(relationship = c('PO', 'FS', 'HS', 'UR',
+                                                   'GG', 'AV', 'C1', 'C2'),
+                                  mean_rel = c(0.5, 0.5, 0.25, 0,
+                                               0.25, 0.25, 0.125, 0.25) / 2),
                    by = 'relationship') %>%
   dplyr::group_by(relationship, rel_method, n_loci) %>%
   dplyr::summarise(broom::tidy(t.test(kinship, mu = unique(mean_rel))),
@@ -582,23 +687,29 @@ simulation_plot <- simulated_relatedness %>%
   # sample_frac(0.1) %>%
   ggplot2::ggplot(ggplot2::aes(x = n_loci, y = kinship, colour = rel_method, 
                                group = interaction(n_loci, rel_method))) +
-  ggplot2::geom_hline(data = tibble::tibble(relationship = c('PO', 'FS', 'HS', 'UR'),
-                                            mean_rel = c(0.5, 0.5, 0.25, 0) / 2),
+  ggplot2::geom_hline(data = tibble::tibble(relationship = c('PO', 'FS', 'HS', 'UR',
+                                                             'GG', 'AV', 'C1', 'C2'),
+                                            mean_rel = c(0.5, 0.5, 0.25, 0,
+                                                         0.25, 0.25, 0.125, 0.25) / 2),
                       ggplot2::aes(yintercept = mean_rel)) +
   # ggbeeswarm::geom_beeswarm() +
   # ggplot2::geom_boxplot(position = ggplot2::position_dodge(5)) +
-  ggplot2::stat_summary(position = ggplot2::position_dodge(5)) +
+  ggplot2::stat_summary(position = ggplot2::position_dodge(5), fun.data = mean_se) +
   ggplot2::geom_text(data = pointwise_equivilence %>%
                        dplyr::mutate(p.adj = p.adjust(p.value, method = 'holm')) %>%
                        dplyr::filter(p.adj < 0.05) %>%
-                       dplyr::mutate(y = dplyr::if_else(rel_method == 'EM', 0.5, -0.5)),
-                     aes(y = y, label = '*'), show.legend = FALSE) +
+                       dplyr::mutate(y = dplyr::if_else(rel_method == 'EM', 0.5, -Inf)),
+                     ggplot2::aes(y = y, label = '*'), show.legend = FALSE) +
+  ggplot2::scale_y_continuous(limits = c(0, 0.5)) +
+  ggplot2::labs(x = 'Number of Loci Shared',
+                y = 'Kinship Coefficient',
+                colour = 'Relatedness\nMethod') +
   ggplot2::facet_wrap(~relationship) +
   ggplot2::theme_classic()
 
 
 ggplot2::ggsave(stringr::str_replace(gds_file, '\\.gds$', '_simulated_relationships.png'), 
-                plot = simulation_plot, height = 7, width = 7)
+                plot = simulation_plot, height = 15, width = 15)
 
 #### Calculate Relatedness ####
 if(Sys.info()['sysname'] != 'Windows'){

@@ -1087,25 +1087,40 @@ sbatch -p cbirdq -t 30-00:00:00 scripts/fltrVCF.sbatch \
   chyaO
 ```
 
+```
+module load R/gcc/64/3.5.1
+Rscript scripts/summarizeVCF.R fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaO.2.1.Fltr19.Haplotyped.vcf
+
+
+```
+
 Genotyping Stats
 | Metric | [Haplotyping K](config_files/fltrVCF_chya_K_onlyHaplo.config) | [chyaO](config_files/fltrVCF_chya_O.config) |  |  |
 | --- | ----- | ----- | ----- | ----- |
-| JobID | [`52713`](SLURM_out/fltrVCF-52713.out) | [``](SLURM_out/fltrVCF-.out) |  |  |
+| JobID | [`52713`](SLURM_out/fltrVCF-52713.out) | [`54670`](SLURM_out/fltrVCF-54670.out) |  |  |
 | Summary Graph | [Haplotyping K](fltrVCF_MiSeq/MiSeq_Initial.fltrStats2.plots.pdf) | [chyaO](fltrVCF_MiSeq/MiSeq_CHYA_chyaO.fltrStats2.plots.pdf) |  |  |
-| Number Individuals | 593 |  |  |  |
-| Number SNPs | 6,630 |  |  |  |
-| Number Contigs | 3,047 |  |  |  |
-| Mean SNPs/Contig | 2.18 ± 1.45 SD |  ±  SD |  ±  SD  |  ±  SD  |
-| Range SNPs/Contig | 1 - 16 |  -  |  -  |  -  |
-| Mean Coverage | 49,223 ± 14,442 SD |  ±  SD |  ±  SD |  ±  SD |
-| Range Coverage | 29,672 - 89,355 |  -  |  -  |  -  |
-| Mean PHRED | 325,064 ± 298,668 SD |  ±  SD |  ±  SD |  ±  SD |
-| Range PHRED | 28,133 - 1,806,400 |  -  |  -  |  -  |
-| Mean Missing (Ind) | 26% ± 27% | % ± % | % ± % | % ± % |
-| Range Missing (Ind) | 2% - 94% | % - % | % - % | % - % |
-| Mean Missing (Loci) | 26% ± 8% | % ± % | % ± % | % ± % |
-| Range Missing (Loci) | 4% - 44% | % - % | % - % | % - % |
+| Number Individuals | 593 | 496 |  |  |
+| Number SNPs | 6,630 | 6,705 |  |  |
+| Number Contigs | 3,047 | 1,138 |  |  |
+| Mean SNPs/Contig | 2.18 ± 1.45 SD | 5.89 ± 3.69 SD |  ±  SD  |  ±  SD  |
+| Range SNPs/Contig | 1 - 16 | 1 - 20 |  -  |  -  |
+| Mean Coverage | 49,223 ± 14,442 SD | 45,505 ± 18,334 SD |  ±  SD |  ±  SD |
+| Range Coverage | 29,672 - 89,355 | 8,325 - 88,282 |  -  |  -  |
+| Mean PHRED | 325,064 ± 298,668 SD | 115,429 ± 238,334 SD |  ±  SD |  ±  SD |
+| Range PHRED | 28,133 - 1,806,400 | 2,408 - 1,994,840 |  -  |  -  |
+| Mean Missing (Ind) | 26% ± 27% | 14% ± 13% | % ± % | % ± % |
+| Range Missing (Ind) | 2% - 94% | 1% - 62% | % - % | % - % |
+| Mean Missing (Loci) | 26% ± 8% | 14% ± 9% | % ± % | % ± % |
+| Range Missing (Loci) | 4% - 44% | 0.5% - 36% | % - % | % - % |
 
+
+```
+fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaKonlyHaplo.2.1.Fltr19.Haplotyped.vcf
+fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaKonlyHaplo.2.1.Fltr19.popmap.2.1.haps.genepop
+
+fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaO.2.1.Fltr19.Haplotyped.vcf
+fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaO.2.1.Fltr19.popmap.2.1.haps.genepop
+```
 
 ### Calculate Relatedness
 ```
@@ -1129,13 +1144,13 @@ sbatch -o SLURM_out/fst-%j.out \
   --job-name=Fst \
   scripts/runRscript.sbatch \
   scripts/calculateFst.R \
-    fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaKonlyHaplo.2.1.Fltr19.popmap.2.1.haps.genepop \
+    fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaO.2.1.Fltr19.popmap.2.1.haps.genepop \
     individual_metadata.shp \
     fst_results \
     1000 \
     0.001 \
     5
-53553  
+55073  
 ```
 
 ### Calculate PCA dist
@@ -1144,9 +1159,10 @@ sbatch -o SLURM_out/pca-%j.out \
   --job-name=PCA \
   scripts/runRscript.sbatch \
   scripts/calculatePCA.R \
-    fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaKonlyHaplo.2.1.Fltr19.popmap.2.1.haps.genepop \
+    fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaO.2.1.Fltr19.popmap.2.1.haps.genepop \
     individual_metadata.shp \
     pca_results \
     1000 \
     0.001
+55074
 ```
