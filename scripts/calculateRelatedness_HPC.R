@@ -48,7 +48,7 @@ if(!interactive()){
   }
   
   UNREL <- 10
-  BOOT <- 10
+  BOOT <- 50
   NSIM <- 500
   SUBGROUPS <- 10
 }
@@ -499,7 +499,44 @@ simulate_relationship <- function(gds_file, n_loci, relationship, rel_method){
     #relatedness btw two kids
     sim_genotypes <- cbind(kid1, kid2)
     
-  } else {
+  } else if(relationship == 'SC'){
+    
+    great_grand_parents <- parents
+    
+    
+    grandparent0 <- dplyr::inner_join(dplyr::select(great_grand_parents, -genos),
+                                      create_individual(gds),
+                                      by = c('snp', 'contig', 'MajorFreq')) %>%
+      dplyr::pull(genotype)
+    grandparent1 <- create_offspring(great_grand_parents$genos)
+    grandparent2 <- create_offspring(great_grand_parents$genos)
+    grandparent3 <- dplyr::inner_join(dplyr::select(great_grand_parents, -genos),
+                                      create_individual(gds),
+                                      by = c('snp', 'contig', 'MajorFreq')) %>%
+      dplyr::pull(genotype)
+    
+    
+    
+    parent0 <- dplyr::inner_join(dplyr::select(great_grand_parents, -genos),
+                                 create_individual(gds),
+                                 by = c('snp', 'contig', 'MajorFreq')) %>%
+      dplyr::pull(genotype)
+    parent1 <- create_offspring(cbind(grandparent0, grandparent1))
+    parent2 <- create_offspring(cbind(grandparent2, grandparent3))
+    parent3 <- dplyr::inner_join(dplyr::select(great_grand_parents, -genos),
+                                 create_individual(gds),
+                                 by = c('snp', 'contig', 'MajorFreq')) %>%
+      dplyr::pull(genotype)
+    
+    kid1 <- create_offspring(cbind(parent0, parent1))
+    kid2 <- create_offspring(cbind(parent2, parent3))
+    
+    
+    #relatedness btw two kids
+    sim_genotypes <- cbind(kid1, kid2)
+    
+    
+    } else {
     message('Only PO/FS/HS/UR relationships are implemented')
     break
   }
@@ -527,7 +564,7 @@ SNPRelate::snpgdsClose(gds)
 
 if(Sys.info()['sysname'] == 'Windows'){
   all_pairs <- all_pairs[[sample(length(all_pairs), 1)]] %>%
-    dplyr::sample_n(50)
+    dplyr::sample_n(500)
 }
 
 #### Set up HPC Jobs ####
@@ -636,7 +673,8 @@ if(Sys.info()['sysname'] != 'Windows'){
 
 #### Simulate Relatedness ####
 simulation_settings <- tidyr::expand_grid(relationship = c('PO', 'FS', 'HS', 'UR',
-                                                           'GG', 'AV', 'C1', 'C2'),
+                                                           'GG', 'AV', 'C1', 'C2',
+                                                           'SC'),
                                           rel_method = c('EM', 'MoM'),
                                           n_loci = unique(c(floor(seq(1, 100, length.out = 5)),
                                                             round(seq(100, max_loci, 
@@ -693,16 +731,27 @@ if(Sys.info()['sysname'] != 'Windows'){
 
 readr::write_csv(simulated_relatedness, stringr::str_replace(gds_file, '\\.gds$', '_simulated_relationships.csv'))
 
-method_comparison <- simulated_relatedness %>%
+# Correlation between simulation and expectation
+method_comparison_initial <- simulated_relatedness %>%
   dplyr::left_join(tibble::tibble(relationship = c('PO', 'FS', 'HS', 'UR',
-                                                   'GG', 'AV', 'C1', 'C2'),
+                                                   'GG', 'AV', 'C1', 'C2',
+                                                   'SC'),
                                   mean_rel = c(0.5, 0.5, 0.25, 0,
-                                               0.25, 0.25, 0.125, 0.25) / 2),
+                                               0.25, 0.25, 0.125, 0.25,
+                                               0.03125) / 2),
                    by = 'relationship') %>%
   dplyr::group_by(rel_method, n_loci) %>%
-  dplyr::summarise(correlation = cor(mean_rel, kinship),
+  dplyr::summarise(broom::tidy(cor.test(mean_rel, kinship)),
                    n = dplyr::n(),
                    .groups = 'drop') %>%
+  dplyr::rename(correlation = estimate)
+
+readr::write_csv(method_comparison_initial, stringr::str_replace(gds_file, '\\.gds$', '_relatedness_method_comparison_intervals.csv'))
+
+
+method_comparison <- method_comparison_initial %>%
+  dplyr::select(-statistic:-alternative) %>%
+  
   tidyr::pivot_wider(names_from = 'rel_method',
                      values_from = 'correlation') %>%
   
@@ -710,19 +759,39 @@ method_comparison <- simulated_relatedness %>%
   dplyr::mutate(dplyr::across(c(EM, MoM), ~0.5 * log((1 + .) / (1 - .)), .names = '{.col}_prime'),
                 S = sqrt(2 * (1 / (n - 3))),
                 z = (EM_prime - MoM_prime) / S,
-                p = 2 * pnorm(abs(z), lower.tail = FALSE))
+                p = 2 * pnorm(abs(z), lower.tail = FALSE),
+                p_adj = p.adjust(p, 'holm'))
 
 readr::write_csv(method_comparison, stringr::str_replace(gds_file, '\\.gds$', '_relatedness_method_comparison.csv'))
 
 
+correlation_plot <- ggplot2::ggplot(method_comparison_initial, 
+                ggplot2::aes(x = n_loci, y = correlation, ymin = conf.low, ymax = conf.high, colour = rel_method)) +
+  ggplot2::geom_pointrange() +
+  ggplot2::geom_text(data = dplyr::filter(method_comparison, p_adj < 0.05), colour = 'black', y = 1,
+                     ggplot2::aes(x = n_loci, label = '*'), inherit.aes = FALSE) +
+  ggplot2::scale_y_continuous(limits = c(0, 1)) +
+  ggplot2::labs(x = 'Number of Loci Shared',
+                y = 'Pearson Correlation Coefficient',
+                colour = 'Relatedness\nMethod') +
+  ggplot2::theme_classic()
+
+ggplot2::ggsave(stringr::str_replace(gds_file, '\\.gds$', '_correlation_plot.png'), 
+                plot = correlation_plot, height = 15, width = 15)
+
+
+# Distingish Relationship Types
 pointwise_equivilence <- simulated_relatedness %>%
   dplyr::left_join(tibble::tibble(relationship = c('PO', 'FS', 'HS', 'UR',
-                                                   'GG', 'AV', 'C1', 'C2'),
+                                                   'GG', 'AV', 'C1', 'C2',
+                                                   'SC'),
                                   mean_rel = c(0.5, 0.5, 0.25, 0,
-                                               0.25, 0.25, 0.125, 0.25) / 2),
+                                               0.25, 0.25, 0.125, 0.25,
+                                               0.03125) / 2),
                    by = 'relationship') %>%
-  dplyr::group_by(relationship, rel_method, n_loci) %>%
+  dplyr::group_by(relationship, rel_method, n_loci, mean_rel) %>%
   dplyr::summarise(broom::tidy(t.test(kinship, mu = unique(mean_rel))),
+                   dplyr::bind_rows(fitdistrplus::fitdist(kinship + 1e-15, 'beta')$estimate),
                    .groups = 'drop')
 
 readr::write_csv(pointwise_equivilence, stringr::str_replace(gds_file, '\\.gds$', '_relatedness_pointwise_equivilence.csv'))
@@ -734,9 +803,11 @@ simulation_plot <- simulated_relatedness %>%
   ggplot2::ggplot(ggplot2::aes(x = n_loci, y = kinship, colour = rel_method, 
                                group = interaction(n_loci, rel_method))) +
   ggplot2::geom_hline(data = tibble::tibble(relationship = c('PO', 'FS', 'HS', 'UR',
-                                                             'GG', 'AV', 'C1', 'C2'),
+                                                             'GG', 'AV', 'C1', 'C2',
+                                                             'SC'),
                                             mean_rel = c(0.5, 0.5, 0.25, 0,
-                                                         0.25, 0.25, 0.125, 0.25) / 2),
+                                                         0.25, 0.25, 0.125, 0.25,
+                                                         0.03125) / 2),
                       ggplot2::aes(yintercept = mean_rel)) +
   # ggbeeswarm::geom_beeswarm() +
   # ggplot2::geom_boxplot(position = ggplot2::position_dodge(5)) +
@@ -756,6 +827,93 @@ simulation_plot <- simulated_relatedness %>%
 
 ggplot2::ggsave(stringr::str_replace(gds_file, '\\.gds$', '_simulated_relationships.png'), 
                 plot = simulation_plot, height = 15, width = 15)
+
+
+simulation_plot_beta <- pointwise_equivilence %>%
+  dplyr::mutate(relationship = forcats::fct_reorder(relationship, -mean_rel),
+                p_adj = p.adjust(p.value, 'holm')) %>%
+  dplyr::mutate(lwr = qbeta(0.025, shape1, shape2),
+                upr = qbeta(0.975, shape1, shape2)) %>%
+  ggplot2::ggplot(ggplot2::aes(x = n_loci, y = estimate, ymin = lwr, ymax = upr, colour = rel_method)) +
+  ggplot2::geom_pointrange() +
+  ggplot2::geom_hline(ggplot2::aes(yintercept = mean_rel)) +
+  ggplot2::geom_text(ggplot2::aes(y = 1, label = if_else(p_adj < 0.05, '*', "")), show.legend = FALSE) +
+  ggplot2::facet_grid(relationship ~ rel_method) +
+  ggplot2::scale_y_continuous(limits = c(0, 1)) +
+  ggplot2::labs(x = 'Number of Loci Shared',
+                y = 'Kinship Coefficient',
+                colour = 'Relatedness\nMethod') +
+  ggplot2::theme_classic()
+
+ggplot2::ggsave(stringr::str_replace(gds_file, '\\.gds$', '_simulated_relationships_beta.png'), 
+                plot = simulation_plot_beta, height = 15, width = 15)
+
+#Unrelated Miscalssification
+ur_miscategorization <- simulated_relatedness %>%
+  dplyr::group_by(relationship, rel_method, n_loci) %>%
+  dplyr::summarise(kinship = list(kinship),
+                   .groups = 'drop') %>%
+  tidyr::pivot_wider(names_from = 'relationship',
+                     values_from = 'kinship') %>%
+  dplyr::rowwise(rel_method, n_loci) %>%
+  dplyr::summarise(dplyr:::across(tidyselect:::where(is.list), ~sum(UR >= quantile(., 0.025)) / NSIM), 
+                   .groups = 'drop') %>%
+  dplyr::select(-UR) %>%
+  tidyr::pivot_longer(cols = -rel_method:-n_loci,
+                      names_to = 'relationship',
+                      values_to = 'percent_ur_misidentified')
+
+readr::write_csv(ur_miscategorization, stringr::str_replace(gds_file, '\\.gds$', '_unrelated_miscategorization.csv'))
+
+
+## Find cutoff loci
+gam_model <- mgcv::gam(percent_ur_misidentified ~ relationship + rel_method + 
+                         s(n_loci, interaction(relationship, rel_method), bs = 'fs', 
+                           k = dplyr::n_distinct(ur_miscategorization$n_loci) - 1),
+                       family = 'betar',
+                       data = ur_miscategorization)
+
+predictions <- tidyr::expand_grid(relationship = unique(ur_miscategorization$relationship),
+                                  rel_method = unique(ur_miscategorization$rel_method),
+                                  n_loci = modelr::seq_range(ur_miscategorization$n_loci, 1000)) %>%
+  predict(gam_model, newdata = ., se.fit = TRUE) %>%
+  purrr::map(as.numeric) %>%
+  dplyr::bind_cols() %>%
+  dplyr::bind_cols(tidyr::expand_grid(relationship = unique(ur_miscategorization$relationship),
+                                      rel_method = unique(ur_miscategorization$rel_method),
+                                      n_loci = modelr::seq_range(ur_miscategorization$n_loci, 1000)), 
+                   .) %>%
+  dplyr::mutate(lwr = fit - se.fit,
+                upr = fit + se.fit) %>%
+  dplyr::mutate(dplyr:::across(c(fit, lwr, upr), ~binomial()$linkinv(.)))
+
+ur_miscategorization_graph <- ur_miscategorization %>%
+  dplyr::mutate(relationship = forcats::fct_reorder(relationship, percent_ur_misidentified)) %>%
+  ggplot2::ggplot(ggplot2::aes(x = n_loci, y = percent_ur_misidentified, colour = rel_method)) +
+  ggplot2::geom_point() +
+  ggplot2::geom_ribbon(data = predictions, ggplot2::aes(y = fit, ymin = lwr, ymax = upr, fill = rel_method), 
+              alpha = 0.5, colour = NA, show.legend = FALSE) +
+  ggplot2::geom_line(data = predictions, ggplot2::aes(y = fit)) +
+  ggplot2::facet_wrap(~relationship) +
+  ggplot2::scale_y_continuous(limits = c(0, 1), labels = scales::percent_format(1)) +
+  ggplot2::labs(x = 'Number of Loci Shared',
+                y = 'Percent Unrelated Simulations in 95% CI',
+                colour = 'Relatedness\nMethod') +
+  ggplot2::theme_classic()
+
+ggplot2::ggsave(stringr::str_replace(gds_file, '\\.gds$', '_unrelated_miscategorization.png'), 
+                plot = ur_miscategorization_graph, height = 15, width = 15)
+
+cutoff_n_loci <- predictions %>%
+  dplyr::bind_rows(dplyr::distinct(predictions, relationship, rel_method) %>%
+                     dplyr::mutate(fit = 0.01,
+                                   n_loci = Inf)) %>%
+  dplyr::group_by(relationship, rel_method) %>%
+  dplyr::filter(fit < 0.05) %>%
+  dplyr::filter(n_loci == min(n_loci)) %>%
+  dplyr::ungroup()
+
+readr::write_csv(cutoff_n_loci, stringr::str_replace(gds_file, '\\.gds$', '_min_number_loci.csv'))
 
 #### Calculate Relatedness ####
 if(Sys.info()['sysname'] != 'Windows'){
