@@ -28,6 +28,7 @@ if(!interactive()){
 dir.create(outDir, showWarnings = FALSE, recursive = TRUE)
 
 #### Libraries ####
+library(vcfR)
 library(sf)
 library(tidyverse)
 library(adegenet)
@@ -100,7 +101,15 @@ read_genepop <- function (file, ncode = 2L, quiet = FALSE){
 }
 
 #### Read in Data ####
-genotypes <- read_genepop(genpop, ncode = 3)
+if(str_detect(genpop, 'vcf$')){
+  genotypes <- read.vcfR(genpop) %>%
+    vcfR2genind()
+  rownames(genotypes@tab) <- str_c(rownames(genotypes@tab), '2.1', sep = '.')
+  
+} else {
+  genotypes <- read_genepop(genpop, ncode = 3)
+}
+
 
 individual_data <- st_read(metadata) %>%
   filter(ID %in% rownames(genotypes@tab))

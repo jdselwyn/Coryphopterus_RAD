@@ -19,7 +19,7 @@ if(!interactive()){
     metadata <- '~/Coryphopterus/Bioinformatics/Coryphopterus_RAD/individual_metadata.shp'
     outDir <- '~/Coryphopterus/Bioinformatics/Coryphopterus_RAD/tmp_dir'
   }
-  BOOTS <- 100
+  BOOTS <- 0
   P_CUTOFF <- 0.001
   MIN_SHOAL <- 5
   
@@ -28,6 +28,7 @@ if(!interactive()){
 dir.create(outDir, showWarnings = FALSE, recursive = TRUE)
 
 #### Libraries ####
+library(vcfR)
 library(sf)
 library(tidyverse)
 library(adegenet)
@@ -111,7 +112,15 @@ pairwise.fst <- function(data, boot = FALSE){
 }
 
 #### Read in Data ####
-genotypes <- read_genepop(genpop, ncode = 3)
+if(str_detect(genpop, 'vcf$')){
+  genotypes <- read.vcfR(genpop) %>%
+    vcfR2genind()
+  rownames(genotypes@tab) <- str_c(rownames(genotypes@tab), '2.1', sep = '.')
+  
+} else {
+  genotypes <- read_genepop(genpop, ncode = 3)
+}
+
 
 individual_data <- st_read(metadata) %>%
   filter(ID %in% rownames(genotypes@tab))
@@ -123,6 +132,7 @@ strata(genotypes) <- strata(genotypes, formula = ~site/shoal, combine = FALSE)
 hw_test <- pegas::hw.test(genotypes, B = BOOTS)
 loci_hwe <- as_tibble(hw_test, rownames = 'locus') %>%
   janitor::clean_names() %>%
+  # rename(pr_exact = pr_chi_2) %>%
   mutate(pr_exact = p.adjust(pr_exact, method = 'holm')) %>%
   filter(pr_exact > P_CUTOFF) %>%
   pull(locus)
