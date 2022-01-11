@@ -15,7 +15,7 @@
 
 
 # [[1]]$param_set
-# # A tibble: 1 × 4
+# # A tibble: 1 ? 4
 # relationship rel_method n_loci groupings
 # <chr>        <chr>       <dbl>     <int>
 #   1 UR           MoM           215        33
@@ -23,7 +23,7 @@
 # 
 # [[2]]
 # [[2]]$param_set
-# # A tibble: 1 × 4
+# # A tibble: 1 ? 4
 # relationship rel_method n_loci groupings
 # <chr>        <chr>       <dbl>     <int>
 #   1 C1           MoM            25        57
@@ -714,17 +714,63 @@ if(Sys.info()['sysname'] != 'Windows'){
       print()
     
     message('Failure Parameter Sets:')
-    dplyr::as_tibble(getJobTable()) %>%
+    failed_jobs <- dplyr::as_tibble(getJobTable()) %>%
       dplyr::filter(!is.na(error)) %>%
       dplyr::select(job.id, job.pars) %>%
       tidyr::unnest(job.pars) %>%
-      tidyr::unnest(job.pars) %>%
-      print()
+      tidyr::unnest(job.pars) 
+    
+    print(failed_jobs)
   }
   
   simulated_relatedness <- purrr::map_dfr(successful_jobs, loadResult)
   
   clearRegistry()
+  
+  z <- 0
+  while(length(simulation_settings) != length(successful_jobs)){
+    z <- z + 1
+    message('Rerunning failed jobs round ', z)
+    
+    simulation_settings2 <- dplyr::bind_rows(simulation_settings) %>%
+      dplyr::filter(groupings %in% failed_jobs$groupings) %>%
+      dplyr::group_by(groupings) %>%
+      dplyr::group_split()
+    
+    batchMap(fun = sims_to_node, param_set = simulation_settings2)
+    batchExport(list(gds_file = gds_file, 
+                     get_gds = get_gds, 
+                     relatedness_genotypes = relatedness_genotypes,
+                     calc_logLik = calc_logLik,
+                     calc_likelihoods = calc_likelihoods,
+                     create_individual = create_individual,
+                     create_offspring = create_offspring,
+                     simulate_relationship = simulate_relationship,
+                     NSIM = NSIM))
+    
+    submitJobs(resources = list(max.concurrent.jobs = 20))
+    waitForJobs()
+    
+    successful_jobs2 <- dplyr::as_tibble(getJobTable()) %>%
+      dplyr::filter(is.na(error)) %>%
+      dplyr::pull(job.id)
+    
+    failed_jobs <- dplyr::as_tibble(getJobTable()) %>%
+      dplyr::filter(!is.na(error)) %>%
+      dplyr::select(job.id, job.pars) %>%
+      tidyr::unnest(job.pars) %>%
+      tidyr::unnest(job.pars) 
+    
+    message('Jobs failed after refitting round ', z, ' = ', length(simulation_settings) - length(successful_jobs) - length(successful_jobs2))
+    
+    simulated_relatedness2 <- purrr::map_dfr(successful_jobs2, loadResult)
+    simulated_relatedness <- dplyr::bind_rows(simulated_relatedness, simulated_relatedness2)
+    
+    clearRegistry()
+    
+    successful_jobs <- c(successful_jobs, successful_jobs2)
+  }
+  
 } else {
   simulated_relatedness <- purrr::map_dfr(simulation_settings, sims_to_node)
 }
@@ -837,7 +883,7 @@ simulation_plot_beta <- pointwise_equivilence %>%
   ggplot2::ggplot(ggplot2::aes(x = n_loci, y = estimate, ymin = lwr, ymax = upr, colour = rel_method)) +
   ggplot2::geom_pointrange() +
   ggplot2::geom_hline(ggplot2::aes(yintercept = mean_rel)) +
-  ggplot2::geom_text(ggplot2::aes(y = 1, label = if_else(p_adj < 0.05, '*', "")), show.legend = FALSE) +
+  ggplot2::geom_text(ggplot2::aes(y = 1, label = dplyr::if_else(p_adj < 0.05, '*', "")), show.legend = FALSE) +
   ggplot2::facet_grid(relationship ~ rel_method) +
   ggplot2::scale_y_continuous(limits = c(0, 1)) +
   ggplot2::labs(x = 'Number of Loci Shared',
