@@ -115,14 +115,15 @@ pairwise.fst <- function(data, boot = FALSE){
 if(str_detect(genpop, 'vcf$')){
   genotypes <- read.vcfR(genpop) %>%
     vcfR2genind()
-  rownames(genotypes@tab) <- str_c(rownames(genotypes@tab), '2.1', sep = '.')
   
 } else {
   genotypes <- read_genepop(genpop, ncode = 3)
 }
 
+rownames(genotypes@tab) <- str_extract(rownames(genotypes@tab), 'COPE.*repr')
 
 individual_data <- st_read(metadata) %>%
+  mutate(ID = str_extract(ID, 'COPE.*repr')) %>%
   filter(ID %in% rownames(genotypes@tab))
 
 strata(genotypes) <- individual_data
