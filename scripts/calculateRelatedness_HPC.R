@@ -755,12 +755,14 @@ if(Sys.info()['sysname'] != 'Windows'){
       dplyr::filter(is.na(error)) %>%
       dplyr::pull(job.id)
     
-    failed_jobs <- dplyr::as_tibble(getJobTable()) %>%
-      dplyr::filter(!is.na(error)) %>%
-      dplyr::select(job.id, job.pars) %>%
-      tidyr::unnest(job.pars) %>%
-      tidyr::unnest(job.pars) 
-    
+    if(length(successful_jobs2) != nrow(dplyr::as_tibble(getJobTable()))){
+      failed_jobs <- dplyr::as_tibble(getJobTable()) %>%
+        dplyr::filter(!is.na(error)) %>%
+        dplyr::select(job.id, job.pars) %>%
+        tidyr::unnest(job.pars) %>%
+        tidyr::unnest(job.pars) 
+    }
+
     message('Jobs failed after refitting round ', z, ' = ', length(simulation_settings) - length(successful_jobs) - length(successful_jobs2))
     
     simulated_relatedness2 <- purrr::map_dfr(successful_jobs2, loadResult)

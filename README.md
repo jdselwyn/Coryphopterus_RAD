@@ -1132,6 +1132,8 @@ fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaKonlyHaplo.2.1.Fltr19.popmap.2.1.haps.genepop
 
 fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaO.2.1.Fltr19.Haplotyped.vcf
 fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaO.2.1.Fltr19.popmap.2.1.haps.genepop
+
+fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaP.2.1.Fltr01.25.recode.vcf.1.vcf
 ```
 
 ### Calculate Relatedness
@@ -1142,7 +1144,7 @@ module load R/gcc/64/3.5.1
 export R_PROGRESSR_ENABLE=TRUE
 
 Rscript scripts/calculateRelatedness_HPC.R \
-  fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaO.2.1.Fltr19.Haplotyped.vcf \
+  fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaP.2.1.Fltr01.25.recode.vcf.1.vcf \
   relatedness_results \
   1000 \
   1000 \
@@ -1156,13 +1158,13 @@ sbatch -o SLURM_out/fst-%j.out \
   --job-name=Fst \
   scripts/runRscript.sbatch \
   scripts/calculateFst.R \
-    fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaO.2.1.Fltr19.popmap.2.1.haps.genepop \
+    fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaP.2.1.Fltr01.25.recode.vcf.1.vcf \
     individual_metadata.shp \
     fst_results \
     1000 \
     0.001 \
     5
-55073  
+56156
 ```
 
 ### Calculate PCA dist
@@ -1171,11 +1173,11 @@ sbatch -o SLURM_out/pca-%j.out \
   --job-name=PCA \
   scripts/runRscript.sbatch \
   scripts/calculatePCA.R \
-    fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaO.2.1.Fltr19.popmap.2.1.haps.genepop \
+    fltrVCF_MiSeq_CHYA/MiSeq_CHYA_chyaP.2.1.Fltr01.25.recode.vcf.1.vcf \
     individual_metadata.shp \
     pca_results \
     1000 \
     0.001 \
     0.5
-55095
+56157
 ```
