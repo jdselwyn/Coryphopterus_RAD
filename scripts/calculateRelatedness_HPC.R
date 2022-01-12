@@ -75,8 +75,8 @@ dir.create(gds_path, showWarnings = FALSE, recursive = TRUE)
 #### Functions ####
 convert_vcf_gds <- function(vcf, out_path){
   
-  out_file <- stringr::str_extract(vcf, '/[A-Za-z0-9\\._]+vcf') %>%
-    stringr::str_replace('vcf', 'gds') %>%
+  out_file <- stringr::str_extract(vcf, '/[A-Za-z0-9\\._]+vcf$') %>%
+    stringr::str_replace('vcf$', 'gds') %>%
     stringr::str_c(out_path, ., sep = '')
   
   if(!file.exists(out_file)){

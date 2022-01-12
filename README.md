@@ -1164,7 +1164,7 @@ sbatch -o SLURM_out/fst-%j.out \
     1000 \
     0.001 \
     5
-56156
+57230
 ```
 
 ### Calculate PCA dist
@@ -1179,5 +1179,5 @@ sbatch -o SLURM_out/pca-%j.out \
     1000 \
     0.001 \
     0.5
-56157
+57231
 ```
