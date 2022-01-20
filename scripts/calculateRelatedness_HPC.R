@@ -246,7 +246,7 @@ calculate_relatedness_pair <- function(ind1, ind2, gds_file, rel_method, N_unrel
   
   #Step 1 - Filter to only loci both have
   snp_use <- tibble::tibble(snp = get_gds(gds, 'snp.id'),
-                   contig = get_gds(gds, 'snp.chromosome')) %>%
+                            contig = get_gds(gds, 'snp.chromosome')) %>%
     dplyr::bind_cols(SNPRelate::snpgdsSNPRateFreq(gds) %>%
                        dplyr::bind_cols()) %>%
     dplyr::rename(MajorFreq = AlleleFreq) %>%
@@ -267,7 +267,7 @@ calculate_relatedness_pair <- function(ind1, ind2, gds_file, rel_method, N_unrel
   
   if(nrow(snp_use) > 0){
     out <- relatedness_genotypes(t(genotypes[,snp_use$snp]), allele_freq = snp_use$MajorFreq, rel_method = 'EM')
-  
+    
     out <- dplyr::bind_cols(out, calc_likelihoods(t(genotypes[,snp_use$snp]), af = snp_use$MajorFreq, logLik = out$loglik))
     
     if(N_unrel > 0){
@@ -280,8 +280,8 @@ calculate_relatedness_pair <- function(ind1, ind2, gds_file, rel_method, N_unrel
                              simplify = FALSE) %>%
         dplyr::bind_rows() %>%
         tibble::as_tibble()
-        # readr::write_csv(unrel_file)
-
+      # readr::write_csv(unrel_file)
+      
       # out$unrel <- unrel_file
       out$unrel <- list(unrel_sim)
       out$unrel_cutoff_999 <- quantile(unrel_sim$kinship, 0.999, na.rm = TRUE)
@@ -299,21 +299,27 @@ calculate_relatedness_pair <- function(ind1, ind2, gds_file, rel_method, N_unrel
                             simplify = FALSE) %>%
         dplyr::bind_rows() %>%
         tibble::as_tibble()
-        # readr::write_csv(boot_file)
- 
+      # readr::write_csv(boot_file)
+      
       # out$boot_rel <- boot_file
       out$boot_rel <- list(boot_rel)
       out$lwr_kinship_95 <- quantile(boot_rel$kinship, 0.025, na.rm = TRUE)
       out$upr_kinship_95 <- quantile(boot_rel$kinship, 0.975, na.rm = TRUE)
       
       pct_boot_types <- (table(c(boot_rel$most_likely, "self", "fullsib", 
-               "offspring", "halfsib", "cousin", "unrelated", 
-               'double.first.cousin', 'second.cousin')) - 1) / N_boot
+                                 "offspring", "halfsib", "cousin", "unrelated", 
+                                 'double.first.cousin', 'second.cousin')) - 1) / N_boot
       
       pct_boot_types <- set_names(pct_boot_types, stringr::str_c('pctBoot_', names(pct_boot_types))) %>%
         rbind()
       
       out <- cbind(out, pct_boot_types)
+    } 
+    
+    if(N_boot > 0 & N_unrel > 0 & N_boot == N_unrel){
+      out <- cbind(out, 
+                   permutation_EMD_pvalue(out$unrel[[1]]$kinship, out$boot_rel[[1]]$kinship, 10000),
+                   permute_ks(out$unrel[[1]]$kinship, out$boot_rel[[1]]$kinship, 10000))
     }
     
   } else {
