@@ -3,31 +3,6 @@
 ## For each pair bootstrap the loci (after filtering out those with missing data) and calculate relatedness for BS interval
 ## Write rds file with relatedness, unrel simulation, and bootstrap.
 
-##TODO - figure out better test of similarity of simulations to expected value of relatedness pair
-# - probably highest density interval (nonsemetric) and see what is contained - or similar
-##TODO - Figure out issue that led to some errors in simulations: see below
-
-#Two jobs failed:
-# with this error:
-
-# 1: Error in { : task 1291 failed - "bad generic call environment"
-# 2: Error in { : task 8329 failed - "bad generic call environment"
-
-
-# [[1]]$param_set
-# # A tibble: 1 ? 4
-# relationship rel_method n_loci groupings
-# <chr>        <chr>       <dbl>     <int>
-#   1 UR           MoM           215        33
-# 
-# 
-# [[2]]
-# [[2]]$param_set
-# # A tibble: 1 ? 4
-# relationship rel_method n_loci groupings
-# <chr>        <chr>       <dbl>     <int>
-#   1 C1           MoM            25        57
-
 if(!interactive()){
   args <- commandArgs(trailingOnly = TRUE)
   vcf_file <- args[1]
@@ -208,6 +183,58 @@ calc_likelihoods <- function(genos, af, logLik){
   lik_out
 }
 
+permutation_EMD_pvalue<- function(x, y, N_permutation = 1000){
+  #https://divingintogeneticsandgenomics.rbind.io/post/how-to-test-if-two-distributions-are-different/
+  
+  permutation_EMD<- function(d){
+    d$group<- sample(d$group)
+    calculate_EMD(d)
+  }
+  
+  calculate_EMD <- function(df){
+    
+    #My input to theirs
+    
+    num<- 1:nrow(df)
+    exp_data<- df$value
+    names(exp_data)<- glue::glue("sample_{num}")
+    labels<- df$group
+    names(labels)<- names(exp_data)
+    
+    EMDomics:::calculate_emd_gene(exp_data, labels, names(exp_data))
+  }
+  
+  
+  dat <- tibble::tibble(x = x, y = y) %>%
+    tidyr::pivot_longer(cols = 1:2, names_to = "group", values_to = "value")
+  
+  obs <- calculate_EMD(dat)
+  
+  permutation_EMDs<- replicate(N_permutation - 1, permutation_EMD(dat))
+  
+  ### p-value
+  p <- mean(obs <= c(permutation_EMDs, obs))
+  tibble::tibble(emd_stat = obs, emd_p = p)
+}
+
+permute_ks <- function(x, y, N_permutation){
+  ind_permutation <- function(d){
+    d$group<- sample(d$group)
+    ks.test(d$value[d$group == 'x'], d$value[d$group == 'y'])$statistic
+  }
+  
+  dat <- tibble::tibble(x = x, y = y) %>%
+    tidyr::pivot_longer(cols = 1:2, names_to = "group", values_to = "value")
+  
+  obs <- ks.test(dat$value[dat$group == 'x'], dat$value[dat$group == 'y'])$statistic
+  
+  permutation_ks<- replicate(N_permutation - 1, ind_permutation(dat))
+  
+  ### p-value
+  p <- mean(obs <= c(permutation_ks, obs))
+  tibble::tibble(ks_stat = obs, ks_p = p)
+}
+
 calculate_relatedness_pair <- function(ind1, ind2, gds_file, rel_method, N_unrel = 0, N_boot = 0){
   gds <- SNPRelate::snpgdsOpen(gds_file, readonly = TRUE, allow.duplicate = TRUE, allow.fork = TRUE)
   
@@ -287,8 +314,6 @@ calculate_relatedness_pair <- function(ind1, ind2, gds_file, rel_method, N_unrel
         rbind()
       
       out <- cbind(out, pct_boot_types)
-      
-      
     }
     
   } else {
@@ -677,8 +702,9 @@ simulation_settings <- tidyr::expand_grid(relationship = c('PO', 'FS', 'HS', 'UR
                                                            'SC'),
                                           rel_method = c('EM', 'MoM'),
                                           n_loci = unique(c(floor(seq(1, 100, length.out = 5)),
-                                                            round(seq(100, max_loci, 
-                                                                      length.out = 10))))) %>%
+                                                            floor(seq(100, 1000, length.out = 5)),
+                                                            round(seq(1000, max_loci, 
+                                                                      length.out = 5))))) %>%
   dplyr::mutate(n_loci = dplyr::if_else(n_loci == 1, 2, n_loci)) %>%
   dplyr::sample_frac(ifelse(Sys.info()['sysname'] == 'Windows', 0.05, 1)) %>%
   dplyr::group_by(groupings = dplyr::row_number()) %>%
@@ -815,17 +841,25 @@ readr::write_csv(method_comparison, stringr::str_replace(gds_file, '\\.gds$', '_
 
 correlation_plot <- ggplot2::ggplot(method_comparison_initial, 
                 ggplot2::aes(x = n_loci, y = correlation, ymin = conf.low, ymax = conf.high, colour = rel_method)) +
-  ggplot2::geom_pointrange() +
+  # ggplot2::geom_line(show.legend = FALSE) +
+  ggplot2::geom_point() +
   ggplot2::geom_text(data = dplyr::filter(method_comparison, p_adj < 0.05), colour = 'black', y = 1,
                      ggplot2::aes(x = n_loci, label = '*'), inherit.aes = FALSE) +
   ggplot2::scale_y_continuous(limits = c(0, 1)) +
+  ggplot2::scale_colour_discrete(labels = c('EM' = 'ML', 'MoM')) +
+  # ggplot2::scale_x_log10() +
   ggplot2::labs(x = 'Number of Loci Shared',
                 y = 'Pearson Correlation Coefficient',
                 colour = 'Relatedness\nMethod') +
-  ggplot2::theme_classic()
+  ggplot2::theme_classic() +
+  ggplot2::theme(legend.position = c(1, 0),
+                 legend.justification = c(1,0))
+
+ggplot2::ggsave(stringr::str_replace(gds_file, '\\.gds$', '_correlation_plot.svg'), 
+                plot = correlation_plot, height = 7, width = 7)
 
 ggplot2::ggsave(stringr::str_replace(gds_file, '\\.gds$', '_correlation_plot.png'), 
-                plot = correlation_plot, height = 15, width = 15)
+                plot = correlation_plot, height = 7, width = 7)
 
 
 # Distingish Relationship Types
@@ -909,22 +943,41 @@ ur_miscategorization <- simulated_relatedness %>%
   dplyr::select(-UR) %>%
   tidyr::pivot_longer(cols = -rel_method:-n_loci,
                       names_to = 'relationship',
-                      values_to = 'percent_ur_misidentified')
+                      values_to = 'percent_ur_misidentified') %>%
+  dplyr::mutate(relationship = stringr::str_replace_all(relationship, c('AV' = 'Avuncular',
+                                                                        'C1' = 'First Cousin',
+                                                                        'C2' = 'Double First Cousin',
+                                                                        'FS' = 'Full-sib',
+                                                                        'GG' = 'Grandparent - Grandchild',
+                                                                        'HS' = 'Half-sib',
+                                                                        'PO' = 'Parent - Offspring',
+                                                                        'SC' = 'Second Cousin'))) %>%
+  dplyr::mutate(relationship = forcats::fct_reorder(relationship, percent_ur_misidentified)) 
 
 readr::write_csv(ur_miscategorization, stringr::str_replace(gds_file, '\\.gds$', '_unrelated_miscategorization.csv'))
 
 
 ## Find cutoff loci
 gam_model <- mgcv::gam(percent_ur_misidentified ~ relationship + rel_method + 
-                         s(n_loci, interaction(relationship, rel_method), bs = 'fs', 
+                             s(n_loci, interaction(relationship, rel_method), bs = 'fs', 
+                               k = dplyr::n_distinct(ur_miscategorization$n_loci) - 1),
+                           family = 'betar',
+                           data = ur_miscategorization)
+
+gam_model_log <- mgcv::gam(percent_ur_misidentified ~ relationship + rel_method + 
+                         s(log(n_loci, base = 10), interaction(relationship, rel_method), bs = 'fs', 
                            k = dplyr::n_distinct(ur_miscategorization$n_loci) - 1),
                        family = 'betar',
                        data = ur_miscategorization)
 
+the_aic <- AIC(gam_model, gam_model_log)
+
+gam_model_use <- list(gam_model, gam_model_log)[[which.min(the_aic$AIC)]]
+
 predictions <- tidyr::expand_grid(relationship = unique(ur_miscategorization$relationship),
                                   rel_method = unique(ur_miscategorization$rel_method),
                                   n_loci = modelr::seq_range(ur_miscategorization$n_loci, 1000)) %>%
-  predict(gam_model, newdata = ., se.fit = TRUE) %>%
+  predict(gam_model_use, newdata = ., se.fit = TRUE) %>%
   purrr::map(as.numeric) %>%
   dplyr::bind_cols() %>%
   dplyr::bind_cols(tidyr::expand_grid(relationship = unique(ur_miscategorization$relationship),
@@ -935,8 +988,7 @@ predictions <- tidyr::expand_grid(relationship = unique(ur_miscategorization$rel
                 upr = fit + se.fit) %>%
   dplyr::mutate(dplyr:::across(c(fit, lwr, upr), ~binomial()$linkinv(.)))
 
-ur_miscategorization_graph <- ur_miscategorization %>%
-  dplyr::mutate(relationship = forcats::fct_reorder(relationship, percent_ur_misidentified)) %>%
+ur_miscategorization_graph <- ur_miscategorization%>%
   ggplot2::ggplot(ggplot2::aes(x = n_loci, y = percent_ur_misidentified, colour = rel_method)) +
   ggplot2::geom_point() +
   ggplot2::geom_ribbon(data = predictions, ggplot2::aes(y = fit, ymin = lwr, ymax = upr, fill = rel_method), 
@@ -944,13 +996,19 @@ ur_miscategorization_graph <- ur_miscategorization %>%
   ggplot2::geom_line(data = predictions, ggplot2::aes(y = fit)) +
   ggplot2::facet_wrap(~relationship) +
   ggplot2::scale_y_continuous(limits = c(0, 1), labels = scales::percent_format(1)) +
+  ggplot2::scale_colour_discrete(labels = c('EM' = 'ML', 'MoM')) +
   ggplot2::labs(x = 'Number of Loci Shared',
                 y = 'Percent Unrelated Simulations in 95% CI',
                 colour = 'Relatedness\nMethod') +
-  ggplot2::theme_classic()
+  ggplot2::theme_classic() +
+  ggplot2::theme(legend.position = c(1, 0),
+                 legend.justification = c(1, 0))
+
+ggplot2::ggsave(stringr::str_replace(gds_file, '\\.gds$', '_unrelated_miscategorization.svg'), 
+                plot = ur_miscategorization_graph, height = 7, width = 7)
 
 ggplot2::ggsave(stringr::str_replace(gds_file, '\\.gds$', '_unrelated_miscategorization.png'), 
-                plot = ur_miscategorization_graph, height = 15, width = 15)
+                plot = ur_miscategorization_graph, height = 7, width = 7)
 
 cutoff_n_loci <- predictions %>%
   dplyr::bind_rows(dplyr::distinct(predictions, relationship, rel_method) %>%
@@ -976,6 +1034,7 @@ if(Sys.info()['sysname'] != 'Windows'){
                    bootstrap_rel = bootstrap_rel,
                    calc_logLik = calc_logLik,
                    calc_likelihoods = calc_likelihoods,
+                   permutation_EMD_pvalue = permutation_EMD_pvalue,
                    calculate_relatedness_pair = calculate_relatedness_pair))
   
   submitJobs(resources = list(max.concurrent.jobs = 20))
