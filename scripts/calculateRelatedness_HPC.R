@@ -9,7 +9,7 @@ if(!interactive()){
   gds_path <- args[2]
   UNREL <- as.integer(args[3])
   BOOT <- as.integer(args[4])
-  SUBGROUPS <- as.integer(args[6])
+  SUBGROUPS <- as.integer(args[5])
   
 } else {
   
