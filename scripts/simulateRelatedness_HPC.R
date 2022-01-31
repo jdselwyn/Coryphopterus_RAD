@@ -655,14 +655,20 @@ if(Sys.info()['sysname'] != 'Windows'){
 
 
 #### Simulate Relatedness ####
+# n_loci = unique(c(floor(seq(1, 100, length.out = 5)),
+#                   floor(seq(100, 1000, length.out = 5)),
+#                   round(seq(1000, max_loci, 
+#                             length.out = 5))))
+
+
+
 simulation_settings <- tidyr::expand_grid(relationship = c('PO', 'FS', 'HS', 'UR',
                                                            'GG', 'AV', 'C1', 'C2',
                                                            'SC'),
                                           rel_method = c('EM', 'MoM'),
-                                          n_loci = unique(c(floor(seq(1, 100, length.out = 5)),
-                                                            floor(seq(100, 1000, length.out = 5)),
-                                                            round(seq(1000, max_loci, 
-                                                                      length.out = 5))))) %>%
+                                          n_loci = unique(c(round(seq(1, 2000, length.out = 45)),
+                                                            floor(seq(2000, max_loci, length.out = 5))))) %>%
+  
   dplyr::mutate(n_loci = dplyr::if_else(n_loci == 1, 2, n_loci)) %>%
   dplyr::sample_frac(ifelse(Sys.info()['sysname'] == 'Windows', 0.05, 1)) %>%
   dplyr::group_by(groupings = dplyr::row_number()) %>%
