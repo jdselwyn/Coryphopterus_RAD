@@ -4,6 +4,7 @@ if(!interactive()){
   vcf_file <- args[1]
   gds_path <- args[2]
   NSIM <- as.integer(args[3])
+  SUBGROUPS <- as.integer(args[4])
   
 } else {
   
